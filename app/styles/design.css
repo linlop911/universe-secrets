@@ -289,3 +289,24 @@ html body.chapter-experience .official-sound { background: rgba(9, 22, 36, .8); 
   html body.chapter-experience .chapter-intro { top: 104px; }
   html body.chapter-experience .guide-evidence { top: 46%; }
 }
+
+/* Language switch: three compact links at the end of the control toolbar. */
+html body.chapter-experience .system-controls { flex-wrap: wrap; row-gap: 6px; }
+html body.chapter-experience .language-switch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 8px;
+}
+html body.chapter-experience .language-switch a {
+  color: var(--faint);
+  font-size: 11px;
+  letter-spacing: .08em;
+  padding: 2px 6px;
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+}
+html body.chapter-experience .language-switch a.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}

@@ -1,6 +1,6 @@
 # NASA等专题联动实施与验收
 
-报告日期：2026-11-07（Asia/Shanghai）。本轮完成仓库分层、视觉系统 v2、不等距六幕叙事与验收链复检。自动检查共 255 项，通过 255 项，失败 0 项；套件总结论：全部通过。
+报告日期：2026-11-08（Asia/Shanghai）。本轮完成仓库分层、视觉系统 v2、不等距六幕叙事、三语版本与验收链复检。语言覆盖：zh：6 章 × 36 幕；en：6 章 × 36 幕，156 条界面词典；ja：6 章 × 36 幕，156 条界面词典。自动检查共 258 项，通过 257 项，失败 1 项；套件总结论：存在失败或未通过套件。
 
 [导览审阅页](导览审阅.html) · [六章分镜与逐幕旁白](docs/六章分镜与旁白稿.md) · [参数与科学映射](docs/参数与科学映射.md) · [已知问题与复测记录](docs/已知问题与复测记录.md)
 
@@ -50,12 +50,15 @@
 | --- | --- | --- | --- |
 | 原有完整回归 | file | 99 / 0 | [test-results.json](evidence/test-results.json) |
 | 原有完整回归 | HTTP | 99 / 0 | [test-results-http.json](evidence/test-results-http.json) |
-| 专题与导览 | file | 25 / 0 | [experience-results-file.json](evidence/experience-results-file.json) |
-| 专题与导览 | HTTP | 25 / 0 | [experience-results-http.json](evidence/experience-results-http.json) |
+| 专题与导览 | file | 26 / 0 | [experience-results-file.json](evidence/experience-results-file.json) |
+| 专题与导览 | HTTP | 26 / 0 | [experience-results-http.json](evidence/experience-results-http.json) |
 | 单次音效 | Edge | 3 / 0 | [audio-event-results.json](evidence/audio-event-results.json) |
 | 故障自检 | Edge | 4 / 0 | [runner-failure-results.json](evidence/runner-failure-results.json) |
+| 性能对照 | Edge | 0 / 1 | [upgrade-performance.json](evidence/upgrade-performance.json) |
 
-本次无失败项。报告在存在失败时也会生成，并保留失败明细。
+| 套件 | 模式 | 页面 | 检查项 | 错误 |
+| --- | --- | --- | --- | --- |
+| 性能对照 | Edge | suite | report-level failure | report.passed=false without per-item failure flags |
 
 ## 来源核对
 
@@ -85,7 +88,7 @@ PDF 首页实测证明：Extracted first-page text contains Bardeen, ROTATING; m
 
 ## 实现与性能
 
-阈值：单组 P95 回退超过 1 ms 或长帧数增加即判定不通过；当前 7 / 24 组 P95 高于基线，超阈值 0 组，性能套件状态为通过。数据为绘制加同步 1 像素回读的墙钟耗时，不等于纯 GPU 时间或完整显示帧率。
+阈值：单组 P95 回退超过 1 ms 或长帧数增加即判定不通过；当前 7 / 24 组 P95 高于基线，超阈值 2 组，性能套件状态为未通过。数据为绘制加同步 1 像素回读的墙钟耗时，不等于纯 GPU 时间或完整显示帧率。
 
 ## 已知问题与历史告警
 
@@ -96,10 +99,11 @@ PDF 首页实测证明：Extracted first-page text contains Bardeen, ROTATING; m
 | evidence/asset-preparation.log | 2 | {"id":"paper","status":202,"url":"https://scixplorer.org/abs/1988AmJPh..56..395M/abstract"}；{"id":"eht","status":404,"url":"https://eventhorizontelescope.org/sgra","title":"Page not found  /  Event Horizon Telescope"} |
 | evidence/credit-inspection.log | 1 | sgra  8 months ago 6 min read La NASA refuerza Artemis: añade una misión y perfecciona su arquitectura general article 8 months ago APOD Science APOD APOD: 2022 May 13 – The... Today's APOD Archive Submissions Index Search Calendar RSS Education About Discuss &nbsp; APOD Astronomy Picture of the Day Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer. The Milky Way&#039;s Black Hole Explanation: There's a black hole at the center of the Milky Way. Stars are observed to orbit a very massive and compact object there known as Sgr A* (say “sadge-ay-star” ). But this just released radio image (inset) from planet Earth's Event Horizon Telescope is the first direct evidence of the Milky Way's central black hole. As predicted by Einstein's Theory of General Relativity, the four million solar mass black hole's strong gravity is bending light and creating a shadow-like dark central region surrounded by a bright ring-like structure. Supporting observations made by space-based telescopes and ground-based observatories provide a wider view of the galactic center's dynamic environment and an important context for the Event Horizon Telescope's black hole image. The main panel image shows the X-ray data from Chandra and infrared data from Hubble. While the main panel is about 7 light-years across, the Event Horizon Telescope inset image itself spans a mere 10 light- minutes at the center of our galaxy, some 27,000 light-years away . Date May 13, 2022 Credit Image Credit: X-ray - NASA/CXC/SAO , IR - NASA/HST/STScI ; Inset: Radio - Event Horizon Telescope Collaboration Authors &amp; editors: Robert Nemiroff ( MTU ) &amp; Jerry Bonnell ( UMCP ) A service of: ASD at NASA / GSFC , NASA Science Activation &amp; Michigan Tech. U. Random APOD Generator Yesterday&#039;s Image APOD: 2022 May 12 &#8211; Young Stars of NGC 346 Tomorrow&#039;s Image APOD: 2022 May 14 &#8211; Ice Halos by Moonlight National Aeronautics and Space Administration NASA explores the unknown in air and space, innovates for the benefit of humanity, and inspires the world through discovery. About NASA&#039;s Mission Join Us Home News &amp; Events Multimedia NASA+ Missions Humans in Space Earth The Sola |
 | evidence/pdf-source-check.log | 1 | warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead. |
-| evidence/upgrade-performance-first-run.json | 1 | bigbang 1280×720 high P95 +1.80 ms; passed=false |
+| evidence/upgrade-performance-run2.json | 1 | index 360×800 high P95 +1.80 ms; passed=false |
+| evidence/upgrade-performance-run3.json | 2 | index 1280×720 low P95 +1.60 ms; passed=false；cosmicweb 1280×720 low P95 +1.60 ms; passed=false |
 
 完整说明与复测方式见[已知问题与复测记录](docs/已知问题与复测记录.md)。报告不再只呈现当前全绿结果。
 
 ## 用户审阅范围
 
-自动验收覆盖本机 Edge 及四种模拟视口；没有实体手机、其他浏览器、屏幕阅读器设备或人工试听记录。叙事节奏、听感与「震撼」程度由用户观看审阅。录屏包含本项目合成声景；中文旁白以文本随导览逐幕显示，未合成口播音轨。
+自动验收覆盖本机 Edge 及四种模拟视口；没有实体手机、其他浏览器、屏幕阅读器设备或人工试听记录。叙事节奏、听感与「震撼」程度由用户观看审阅。录屏包含本项目合成声景；中文旁白以文本随导览逐幕显示，未合成口播音轨。英日文界面与逐幕旁白为文本，录屏为中文版。

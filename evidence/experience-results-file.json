@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-07",
+  "date": "2026-11-08",
   "mode": "file",
   "results": [
     {
@@ -20,6 +20,61 @@
         "duration": 44,
         "bytes": 1742178
       }
+    },
+    {
+      "page": "all",
+      "name": "English and Japanese on every chapter page",
+      "passed": true,
+      "evidence": [
+        {
+          "page": "index",
+          "lang": "en"
+        },
+        {
+          "page": "index",
+          "lang": "ja"
+        },
+        {
+          "page": "bigbang",
+          "lang": "en"
+        },
+        {
+          "page": "bigbang",
+          "lang": "ja"
+        },
+        {
+          "page": "cosmicweb",
+          "lang": "en"
+        },
+        {
+          "page": "cosmicweb",
+          "lang": "ja"
+        },
+        {
+          "page": "stellar",
+          "lang": "en"
+        },
+        {
+          "page": "stellar",
+          "lang": "ja"
+        },
+        {
+          "page": "wormhole",
+          "lang": "en"
+        },
+        {
+          "page": "wormhole",
+          "lang": "ja"
+        },
+        {
+          "page": "heatdeath",
+          "lang": "en"
+        },
+        {
+          "page": "heatdeath",
+          "lang": "ja"
+        }
+      ]
     },
     {
       "page": "index",
@@ -106,10 +161,10 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.1395,
+        "pausedTime": 0.1271999999999998,
         "uncaught": 0,
         "externalRequests": 0,
-        "navigationScope": 1
+        "navigationScope": 13
       }
     },
     {
@@ -197,10 +252,10 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.1273000000000002,
+        "pausedTime": 0.1274000000000001,
         "uncaught": 0,
         "externalRequests": 0,
-        "navigationScope": 2
+        "navigationScope": 14
       }
     },
     {
@@ -288,10 +343,10 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.12119999999999982,
+        "pausedTime": 0.13339999999999985,
         "uncaught": 0,
         "externalRequests": 0,
-        "navigationScope": 3
+        "navigationScope": 15
       }
     },
     {
@@ -386,10 +441,10 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.12729999999999972,
+        "pausedTime": 0.13359999999999986,
         "uncaught": 0,
         "externalRequests": 0,
-        "navigationScope": 4
+        "navigationScope": 16
       }
     },
     {
@@ -477,10 +532,10 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.12120000000000028,
+        "pausedTime": 0.12720000000000004,
         "uncaught": 0,
         "externalRequests": 0,
-        "navigationScope": 5
+        "navigationScope": 17
       }
     },
     {
@@ -568,16 +623,16 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.12720000000000029,
+        "pausedTime": 0.1333999999999998,
         "uncaught": 0,
         "externalRequests": 0,
-        "navigationScope": 6
+        "navigationScope": 18
       }
     }
   ],
   "passed": true,
   "counts": {
-    "passed": 25,
+    "passed": 26,
     "failed": 0
   }
 }

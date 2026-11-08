@@ -1,0 +1,178 @@
+{
+  "chapters": {
+    "index": {
+      "eyebrow": "The edge of light",
+      "question": "Not even light can escape.\nSo how can we see a black hole?",
+      "intro": "The darkness itself emits nothing. Light that passes near it reveals the shape of spacetime. Orbit the scene and look for the glow behind the disk.",
+      "coreLabel": "Change the spin and watch the ring and the inner disk",
+      "coreUnit": "a*",
+      "kind": "Procedural simulation",
+      "sourceLabel": "Explore NASA's black hole pages",
+      "evidence": "This ring was reconstructed from EHT radio interferometry. It constrains the radiation and shadow around the black hole; the procedural disk on the left illustrates light bending, and the two images are not pixel-aligned.",
+      "related": [{ "label": "EHT: the first image of the Milky Way's black hole" }, { "label": "NASA: black hole data sonification and pitch shifting" }],
+      "officialSound": {
+        "title": "Perseus black hole: NASA data sonification",
+        "description": "NASA shifted gas-pressure waves observed by Chandra far into the audible range. The original page provides the official sonification and method notes; this page's synthetic black-hole soundscape has its own play button."
+      },
+      "frames": [
+        { "title": "Approach the heart of the galaxy", "text": "Start far out. Bright matter orbits the dark; the black hole betrays itself through its surroundings." },
+        { "title": "Light is how we find the dark", "text": "Accreting matter radiates, and some of that light bends toward us. The central shadow and the ring together form the structure we need to explain." },
+        { "title": "Light from the far side can still reach you", "text": "Move close to the disk plane. Strong gravity changes the light path, so the far side can appear where you do not expect it." },
+        { "title": "Change one variable yourself", "text": "Drag the spin slider and compare the inner edge, brightness and theoretical geometry readouts. The image here is an empirical lensing demonstration." },
+        { "title": "The ring is not the horizon", "text": "We have not photographed light escaping from inside the horizon. The observation records radiation shaped by strong gravity around it." },
+        { "title": "Hand imagination back to observation", "text": "This is the EHT reconstruction of Sagittarius A*. Together with the simulation it asks one question: how does light reveal spacetime we cannot see?" }
+      ]
+    },
+    "bigbang": {
+      "eyebrow": "The oldest light",
+      "question": "The universe's oldest glow\nis still arriving now.",
+      "intro": "From a hot, opaque early universe to the moment light began to travel freely. That mottled sky holds clues to how structure formed.",
+      "coreLabel": "Advance the epoch: from heat to structure",
+      "coreUnit": "Stage",
+      "kind": "Procedural simulation",
+      "sourceLabel": "Visit ESA's CMB pages",
+      "evidence": "Warm and cool colours show tiny CMB temperature differences, not stellar colours. This is Planck's all-sky projection; the procedural particles illustrate expansion and structure formation and do not reproduce the map's data.",
+      "related": [{ "label": "ESA: Planck 2018 all-sky temperature map" }],
+      "frames": [
+        { "title": "Before light could travel far", "text": "Imagine the early conditions with a hot procedural scene. This stage illustrates the concept; quantum gravity is not computed." },
+        { "title": "Space itself is changing", "text": "Particles separate rapidly in the demonstration. Inflation is a theoretical model for the early universe." },
+        { "title": "Expansion also means cooling", "text": "Matter and radiation change state as the universe evolves. Continuous transitions connect these stages." },
+        { "title": "Light can travel freely at last", "text": "The early universe becomes transparent and radiation travels far. The CMB we detect today preserves clues from that time." },
+        { "title": "Small differences, vast structure", "text": "Change the epoch and watch the procedural field turn into a web. Real structure formation also involves gravity and complex matter processes." },
+        { "title": "The oldest light fills the sky", "text": "Look at Planck's all-sky temperature map. Those tiny irregularities help scientists study how galaxies and clusters later formed." }
+      ]
+    },
+    "cosmicweb": {
+      "eyebrow": "The invisible weight",
+      "question": "Why might the heaviest thing\nbe precisely the one we cannot see?",
+      "intro": "Light records stars, X-rays reveal hot gas, and gravitational lensing helps infer mass. Overlay these views, and something unexpected appears.",
+      "coreLabel": "Change the gas lag and compare mass distributions",
+      "coreUnit": "Schematic factor",
+      "kind": "Procedural simulation",
+      "sourceLabel": "View Chandra's Bullet Cluster",
+      "evidence": "Pink comes from X-ray hot gas, blue from lensing-inferred mass, and the background points and galaxies from optical observations. The separation between gas and the main mass is the key evidence here.",
+      "related": [{ "label": "NASA: dark matter evidence from the Bullet Cluster" }],
+      "frames": [
+        { "title": "The universe is not evenly sprinkled with galaxies", "text": "Start with a procedural web. Nodes and filaments form a rotatable, scannable spatial sketch." },
+        { "title": "Optical: where the glowing galaxies are", "text": "Switch to the galaxy layer and keep only luminous objects. They show just the part of the system that optical light can identify." },
+        { "title": "X-ray: hot gas leaves a trace", "text": "Add the gas layer. In real cluster collisions, gas interacts and can separate from the galaxies." },
+        { "title": "Mass: inferred from bent light paths", "text": "Switch to the lensing style. Mass in observations is reconstructed from lensing and other data, not photographed as blue matter." },
+        { "title": "Change the gas lag and look for separation", "text": "Drag the gas-lag parameter and compare component positions in the procedural field. This explains a relationship; it does not compute a real collision." },
+        { "title": "The real clue lies between images", "text": "Now look at the multi-source Bullet Cluster composite. The separation between pink hot gas and the blue mass layer supports dark matter research." }
+      ]
+    },
+    "stellar": {
+      "eyebrow": "A star's life and echo",
+      "question": "How does a star write its life story\nacross the universe?",
+      "intro": "Pass through a nebula and witness glowing, swelling and explosion. The remnants left behind still tell the past in light and pulses.",
+      "coreLabel": "Advance the life stage and watch the form change",
+      "coreUnit": "Stage",
+      "kind": "Procedural simulation",
+      "sourceLabel": "Explore NASA's Cosmic Cliffs",
+      "evidence": "The Cosmic Cliffs reveal a star-forming region in infrared; the Crab Nebula shows a supernova remnant. They are observations of different objects that help explain different physical stages.",
+      "related": [{ "label": "NASA Hubble: the Crab Nebula" }, { "label": "NASA Webb: official image sonifications" }],
+      "officialSound": {
+        "title": "Cosmic Cliffs: NASA Webb image sonification",
+        "description": "The official sonification maps properties of the Webb image to sound so listeners can explore its structure. Open the original page to listen and read the mapping method; this page also provides synthetic pulses scheduled by input frequency."
+      },
+      "frames": [
+        { "title": "Begin with the detail of a nebula", "text": "Interstellar gas and dust form the environment of star birth. Change the view and let fine structure emerge from the dark." },
+        { "title": "Let gravity and pressure face each other", "text": "The procedural field contracts into a bright body. The change of form introduces energy generation and support inside a star." },
+        { "title": "A luminous life also changes shape", "text": "Enter the swelling stage. Different forms organise the teaching sequence; a real star's path depends on its initial conditions." },
+        { "title": "Keep the explosion in memory", "text": "Matter expands outward and leaves a more complex remnant. Watch the expanding structure instead of using frequent white flashes." },
+        { "title": "At last, a rotating lighthouse", "text": "The pulsar's beamed radiation and rotation give the signal a rhythm. The visual rotation is slowed; audio beats follow the input frequency." },
+        { "title": "Different objects, different processes", "text": "Compare NASA's nebula and remnant images. They provide real observational detail, not a continuous recording of one star's life." }
+      ]
+    },
+    "wormhole": {
+      "eyebrow": "Another possibility for spacetime",
+      "question": "If spacetime connected distant places,\nwhat would you see on the other side?",
+      "intro": "First understand a throat, then walk toward its other end. Build intuition with geometry, and let one continuous transition open an unfamiliar sky.",
+      "coreLabel": "Change the throat radius and watch the entrance",
+      "coreUnit": "Arbitrary units",
+      "kind": "Theoretical construct · Procedural simulation",
+      "sourceLabel": "Read Caltech's wormhole theory",
+      "evidence": "This spatial section was drawn by this project from the cited theoretical geometry. The narrow throat connecting two ends is a teaching sketch: it is neither an astronomical photograph nor proof that a traversable wormhole exists.",
+      "related": [{ "label": "Morris–Thorne: the authors' original publication list" }],
+      "frames": [
+        { "title": "Start from a geometry question", "text": "Theory lets us study different spacetime structures. First look at the spatial section and identify the two ends and the throat between them." },
+        { "title": "The narrowest place is the throat", "text": "Change the throat radius and watch the visual entrance change. Arbitrary units are used here to build spatial intuition." },
+        { "title": "Light paths turn the sky", "text": "Move sideways and watch the procedural sky rearranged by empirical bending. A change of form is not a four-dimensional geodesic solution." },
+        { "title": "Approach the two connected ends", "text": "Now give your attention to the throat. What follows is one continuous hypothetical crossing; the sky will switch only once." },
+        { "title": "On the other side, the sky has changed", "text": "Pass through the procedural entrance into another sky. Camera motion and colour together express the inversion of space." },
+        { "title": "Ground imagination in theoretical conditions", "text": "Traversable wormholes are theoretical objects. The original paper discusses matter conditions, stability and causality; this image is only a starting point." }
+      ]
+    },
+    "heatdeath": {
+      "eyebrow": "When the last light goes out",
+      "question": "After the stars go out,\nwhat will the universe leave behind?",
+      "intro": "Push time into the distant future. Compare hypotheses and let light give way to emptiness; finally, use today's observations to rethink the future.",
+      "coreLabel": "Push into the distant future and watch the afterglow fade",
+      "coreUnit": "Hypothesis stage",
+      "kind": "Theoretical scenario · Procedural simulation",
+      "sourceLabel": "Explore NASA's dark energy pages",
+      "evidence": "A constant-w perfect fluid obeys ρ(a)/ρ(1)=a^[−3(1+w)]. This chart compares density against scale factor; mapping density to visual size is a teaching choice, not a calculation of the universe's fate.",
+      "related": [{ "label": "Carroll: review of cosmological constant theory" }],
+      "frames": [
+        { "title": "Begin with a universe still shining", "text": "Remember this bright galaxy structure. We will push the demonstration into the distant future and compare how the light fades." },
+        { "title": "The age of stars will not stay the same", "text": "Let luminous bodies thin out and cool. Time labels are scenario presets; this shows the concept of the process." },
+        { "title": "The future depends on physical conditions", "text": "Proton stability affects some far-future scenarios. This stage is a hypothesis; observations have not settled whether it happens." },
+        { "title": "Leave attention for the last afterglow", "text": "Black hole evaporation and the very distant future are theoretical studies. Drag the afterglow coefficient and watch the illustrative light fade." },
+        { "title": "Let emptiness and silence close the scene", "text": "The last procedural afterglow fades. Today's confirmed accelerating expansion is a starting point for future research, not an answer to everything." },
+        { "title": "What we know, and what we imagine", "text": "Compare the density relations of three constant-w models, then open NASA's dark energy pages. We know the present through evidence and discuss the future through explicit assumptions." }
+      ]
+    }
+  },
+  "voices": {
+    "index": ["First, pull back beyond the galaxy. Darkness emits no light of its own.", "Yet around it, a ring of matter is glowing.", "Drop toward the disk plane; light from the far side bends into view.", "Now change the spin yourself.", "The ring is not the horizon. It is radiation bent by gravity.", "This is the EHT reconstruction of Sagittarius A*. What we see is always light."],
+    "bigbang": ["Before light could travel, the universe was hot and opaque.", "Space itself was stretching; the scale was pulled open.", "Expansion also means cooling.", "At some point, light could finally travel across space.", "The tiny irregularities of that time later grew into structure.", "This mottled sky is the oldest light we can see."],
+    "cosmicweb": ["Galaxies weave a web. Yet its heaviest part may be invisible.", "Optical images record only what glows.", "X-rays light up hot gas; the collision leaves it behind.", "Distant light bends, and mass leaves a position.", "Move the gas, then compare it with the mass map.", "The evidence is not in one image, but in the separation between several."],
+    "stellar": ["A star's story begins in a cloud of gas and dust.", "Gravity pulls inward, energy pushes outward; a brief balance appears.", "Form changes, and time is written into light.", "The explosion returns matter to the universe.", "The lighthouse that remains still sends a rhythm through its spin.", "Different objects are chapters of the same life story."],
+    "wormhole": ["First, think of spacetime as a geometry we can study.", "The narrowest place between the two ends is the throat.", "Change it, and the distant sky changes with it.", "Move closer; leave only one continuous crossing.", "Another sky opens. This is a program, not an observation.", "Imagination stops here. The rest belongs to theoretical conditions."],
+    "heatdeath": ["First, remember this universe that still shines.", "Time moves on; the luminous era will slowly change.", "The distant future depends on physics not yet settled.", "Leave your attention for the last afterglow.", "Then emptiness, then silence.", "Use observation to know the present, and explicit assumptions to discuss the future."]
+  },
+  "assets": {
+    "sgra-eht": {
+      "title": "Sagittarius A*: EHT reconstructed image",
+      "contentType": "Observation",
+      "processing": "Original released colours; scaled to fit, not registered to the simulation. Local file encoded as WebP, max width 1600 px.",
+      "supportsClaim": "The millimetre-wave emission around the black hole was reconstructed by interferometry; the dark region and bright ring are not a naked-eye photograph."
+    },
+    "planck-cmb": {
+      "title": "Planck: all-sky CMB temperature map",
+      "contentType": "Observation",
+      "processing": "Original temperature colours and all-sky projection; scaled. Local file encoded as WebP, max width 1600 px.",
+      "supportsClaim": "Warm and cool colours show tiny temperature differences: the 2018 Planck Legacy CMB anisotropy, not a visible-light photo of stars or galaxies."
+    },
+    "bullet-composite": {
+      "title": "Bullet Cluster: separation of gas and mass",
+      "contentType": "Observation and inferred mass map",
+      "processing": "Institutional multi-source composite; pink is X-ray hot gas, blue is lensing-inferred mass; not registered to the procedural field. Local file encoded as WebP, max width 1600 px.",
+      "supportsClaim": "The separation between hot gas and lensing-inferred mass after the collision provides observational evidence for dark matter research."
+    },
+    "cosmic-cliffs": {
+      "title": "Cosmic Cliffs: NGC 3324 star-forming region",
+      "contentType": "Observation",
+      "processing": "Official infrared colour mapping; scaled, not human-visible colour. Local file encoded as WebP, max width 1600 px.",
+      "supportsClaim": "Infrared observations reveal the structure of a star-forming region; radiation and winds from young stars shape the gas cavities."
+    },
+    "crab-nebula": {
+      "title": "Crab Nebula: optical mosaic of a supernova remnant",
+      "contentType": "Observation",
+      "processing": "Original released band composite and mosaic; scaled. Local file encoded as WebP, max width 1600 px.",
+      "supportsClaim": "The Crab Nebula is a supernova remnant; it is a different object from the Cosmic Cliffs, not a photo record of one star's growth."
+    },
+    "wormhole-section": {
+      "title": "Hypothetical wormhole: spatial section connecting two ends",
+      "contentType": "Theoretical construct",
+      "processing": "Native SVG drawing; coordinates are for teaching.",
+      "supportsClaim": "The embedded section helps explain the throat; it does not represent an observed or buildable wormhole."
+    },
+    "dark-energy-model": {
+      "title": "Density relations of three constant-w models",
+      "contentType": "Theoretical construct",
+      "processing": "Native SVG drawing; coordinates are for teaching.",
+      "supportsClaim": "A constant-w fluid's density changes with scale factor; the chart does not solve the universe's fate."
+    }
+  }
+}

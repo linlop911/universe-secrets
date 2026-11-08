@@ -27,5 +27,7 @@ for (const page of paths.pages) {
 }
 
 fs.writeFileSync(paths.app('content.js'), source.contentScript(), 'utf8');
-fs.writeFileSync(paths.docs('六章分镜与旁白稿.md'), source.storyboard(), 'utf8');
-console.log('Generated app/content.js and docs/六章分镜与旁白稿.md from data/. No source file was rewritten.');
+fs.writeFileSync(paths.docs('六章分镜与旁白稿.md'), source.storyboard('zh'), 'utf8');
+fs.writeFileSync(paths.docs('storyboard.en.md'), source.storyboard('en'), 'utf8');
+fs.writeFileSync(paths.docs('storyboard.ja.md'), source.storyboard('ja'), 'utf8');
+console.log('Generated app/content.js (zh/en/ja) and three storyboards from data/. No source file was rewritten.');

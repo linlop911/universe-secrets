@@ -5,28 +5,28 @@
       "fault": "browser",
       "exit": 1,
       "failed": 1,
-      "milliseconds": 227,
+      "milliseconds": 303,
       "leakedProfiles": 0
     },
     {
       "fault": "navigation",
       "exit": 1,
       "failed": 1,
-      "milliseconds": 4026,
+      "milliseconds": 4332,
       "leakedProfiles": 0
     },
     {
       "fault": "shader",
       "exit": 1,
       "failed": 1,
-      "milliseconds": 4877,
+      "milliseconds": 5502,
       "leakedProfiles": 0
     },
     {
       "fault": "stale",
       "exit": 1,
       "failed": 2,
-      "milliseconds": 102,
+      "milliseconds": 150,
       "leakedProfiles": 0
     }
   ]

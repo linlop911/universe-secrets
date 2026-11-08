@@ -1,8 +1,10 @@
 /* One shared chapter experience. Timing is driven by Cosmos's existing RAF. */
 (() => {
   'use strict';
+  const query=new URLSearchParams(location.search).get('lang'),preferred=String(navigator.language||'').toLowerCase();
+  const LANG=['zh','en','ja'].includes(query)?query:preferred.startsWith('ja')?'ja':preferred.startsWith('en')?'en':'zh';
   document.addEventListener('DOMContentLoaded',()=>{
-    const id=document.body.dataset.chapter,data=CosmicContent.chapters[id],duration=CosmicContent.duration;
+    const id=document.body.dataset.chapter,data=CosmicContent.languages[LANG].chapters[id],duration=CosmicContent.duration;
     const hud=document.getElementById('hud-layer'),canvas=document.getElementById('glcanvas');
     document.documentElement.style.setProperty('--chapter-accent',data.accent);
     document.body.classList.add('chapter-experience');
@@ -21,7 +23,7 @@
     const actions=el('div','chapter-actions'),source=link(data.sourceLabel,data.sourceUrl);source.id='chapter-source';
     const compare=el('button','observation-button',id==='wormhole'||id==='heatdeath'?'查看理论图解':'打开观测对照');compare.id='open-observatory';actions.append(compare,source);intro.append(actions,el('p','scene-kind',data.kind));hud.append(intro);
 
-    const assets=data.assets.map(assetId=>CosmicContent.assets.find(a=>a.id===assetId));
+    const assets=data.assets.map(assetId=>CosmicContent.languages[LANG].assets.find(a=>a.id===assetId));
     const evidence=el('figure','guide-evidence interactive');evidence.hidden=true;
     const evidenceImage=el('img');evidenceImage.src=assets[0].localPath;evidenceImage.alt=assets[0].title;
     const evidenceCaption=el('figcaption'),evidenceTag=el('span','asset-kind',assets[0].contentType),evidenceTitle=el('strong','',assets[0].title);
@@ -58,7 +60,8 @@
     syncCore();document.addEventListener('input',event=>{if(event.target===core)syncCore();if(!applying&&event.isTrusted&&event.target.matches('input[id^="param-"]')){Cosmos.setSceneLevel(1);if(status==='playing')pauseGuide();}});
     Cosmos.events.addEventListener('modelchange',syncCore);
     document.addEventListener('click',event=>{if(event.isTrusted&&status==='playing'&&event.target.closest('.mode-btn,.epoch-btn,.spectral-btn,#btn-director,#btn-autoplay,#btn-traverse,#btn-rebirth'))pauseGuide();});
-    function syncTransport(){progress.value=time;counter.textContent=String(Math.floor(time)).padStart(2,'0')+' / '+duration;play.textContent=status==='playing'?'暂停导览':status==='paused'?'继续导览':status==='reading'?'阅读当前一幕':status==='complete'?'重播导览':'开始 '+duration+' 秒导览';play.setAttribute('aria-pressed',String(status==='playing'));}
+    let lastSecond=-1,lastPlay='';
+    function syncTransport(){progress.value=time;const second=Math.floor(time);if(second!==lastSecond){lastSecond=second;counter.textContent=String(second).padStart(2,'0')+' / '+duration;}const label=status==='playing'?'暂停导览':status==='paused'?'继续导览':status==='reading'?'阅读当前一幕':status==='complete'?'重播导览':'开始 '+duration+' 秒导览';if(label!==lastPlay){lastPlay=label;play.textContent=label;}play.setAttribute('aria-pressed',String(status==='playing'));}
     function applyFrame(second,actionsEnabled){
       time=Math.max(0,Math.min(duration,second));let index=0;while(index<frames.length-1&&time>=frames[index+1].at)index++;
       const frame=frames[index],end=frames[Math.min(index+1,frames.length-1)],fraction=end===frame?0:(time-frame.at)/(end.at-frame.at),smooth=fraction*fraction*(3-2*fraction);

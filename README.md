@@ -7,8 +7,8 @@
 | 目录 / 文件 | 职责 |
 | --- | --- |
 | 六个章节 HTML、`导览审阅.html` | 交付入口；`file://` 相对引用 `app/` |
-| `app/` | 运行时：`runtime.js`、`math.js`、`common.js`、`content.js`（生成物）、`experience.js`；`styles/` 含 `base`、`common`、`experience`、`design`；`chapters/` 六章模型；`assets/` 观测图与理论图解 |
-| `data/` | 唯一内容源：`chapter-content.json`、`voiceover.json`、`science-content.json`、`asset-manifest.json`、`math-conversion.json`、`acceptance-manifest.json` |
+| `app/` | 运行时：`runtime.js`、`math.js`、`common.js`、`content.js`（生成物）、`experience.js`、`i18n.js`；`styles/` 含 `base`、`common`、`experience`、`design`；`chapters/` 六章模型；`assets/` 观测图与理论图解 |
+| `data/` | 唯一内容源：`chapter-content.json`、`voiceover.json`、`science-content.json`、`asset-manifest.json`、`math-conversion.json`、`acceptance-manifest.json`；`languages/` 英日译文，`i18n/` 英日界面词典 |
 | `tools/` | 生成与验收脚本；`paths.cjs` 是唯一路径来源，`content-source.cjs` 是唯一内容生成逻辑 |
 | `docs/` | 审核提示词、[参数与科学映射](docs/参数与科学映射.md)、[分镜与逐幕旁白](docs/六章分镜与旁白稿.md)、[已知问题与复测记录](docs/已知问题与复测记录.md)、[复检与整改报告](docs/复检与整改报告.md) |
 | `evidence/` | 结果 JSON 与执行日志；报告中的计数由这些原始文件汇总 |
@@ -17,6 +17,19 @@
 | 根目录三份报告 | [完整验收报告](完整验收报告.md)、[NASA专题联动实施与验收](NASA专题联动实施与验收.md)、[执行进度](执行进度.md)，由 `tools/build_acceptance_report.cjs` 生成 |
 
 `node tools/build_content.cjs` 是**单向生成**：`data/` → `app/content.js` + `docs/六章分镜与旁白稿.md`，不回写 HTML、章节脚本或科学账本。修改源数据后必须重跑；完整回归与体验专项都有生成物新鲜度断言，忘记重跑会直接失败。
+
+## 语言
+
+页面支持中文、English、日本語三种界面与六章内容。语言由 `?lang=zh|en|ja` 决定；没有参数时按浏览器语言选择，默认中文。顶栏右侧的「中 / EN / 日」切换器会重载当前页并保留语言，六章导航也会带上当前语言。
+
+- 内容源：`data/chapter-content.json`、`data/voiceover.json`、`data/asset-manifest.json` 为中文；`data/languages/en.json`、`data/languages/ja.json` 提供译文，构建时与中文合并。
+- 界面文案：`data/i18n/en.json`、`data/i18n/ja.json` 以中文原文为键，`app/i18n.js` 在运行时替换文本节点与 `aria-label` / `title` / `alt` 等属性，并处理动态创建的界面。
+- 分镜稿：`docs/六章分镜与旁白稿.md`、`docs/storyboard.en.md`、`docs/storyboard.ja.md`。
+- 录屏仍为中文版；英日文为页面文本与逐幕旁白，未录制配音音轨。
+
+```powershell
+node tools/build_content.cjs
+```
 
 ## 视觉与叙事
 

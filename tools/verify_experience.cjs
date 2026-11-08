@@ -31,6 +31,24 @@ async function check(page,name,fn){try{report.results.push({page,name,passed:tru
   return{chapters:Object.keys(chapters).length,assets:manifest.assets.length,beats,duration:source.duration,bytes:manifest.assets.reduce((n,a)=>n+a.bytes,0)};
  });
  b=await browserSession(paths.root,http);
+ await check('all','English and Japanese on every chapter page',async()=>{
+  const samples=[];
+  for(const page of Object.keys(chapters)){
+   for(const lang of ['en','ja']){
+    await b.load(page+'.html','?lang='+lang+'&seed=20261106');await delay(150);
+    const pack=source.load(lang).chapters[page];
+    const sample=await b.evaluate(`(()=>({lang:document.documentElement.lang,question:document.getElementById('chapter-question').textContent,voice:document.getElementById('guide-voice').textContent,source:document.getElementById('chapter-source').textContent,switchText:document.querySelector('.language-switch .active').textContent,title:document.title}))()`);
+    assert.equal(sample.lang,lang,page+': html lang');
+    assert.equal(sample.question,pack.question,page+': translated question');
+    assert.equal(sample.voice,pack.frames[0].voice,page+': translated first voice');
+    assert.ok(sample.source.includes(pack.sourceLabel),page+': translated source label');
+    assert.equal(sample.switchText,lang==='en'?'EN':'日',page+': active language link');
+    assert.ok(lang==='en'?sample.title.includes('The Secrets of the Universe'):sample.title.includes('宇宙の秘密'),page+': translated title');
+    samples.push({page,lang});
+   }
+  }
+  return samples;
+ });
  for(const [page,chapter]of Object.entries(chapters)){
   await b.viewport(1280,720);await b.load(page+'.html');await b.evaluate(`Cosmos.setReduced(false);Cosmos.setQuality('high');Cosmos.pause();Cosmos.setVolume(0)`);
   await check(page,'native official link and every local comparison',async()=>{

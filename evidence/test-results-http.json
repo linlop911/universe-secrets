@@ -1,8 +1,8 @@
 {
-  "date": "2026-11-07",
+  "date": "2026-11-08",
   "mode": "http",
   "profile": "full",
-  "started": "2026-11-07T05:00:26.204Z",
+  "started": "2026-11-08T06:09:55.604Z",
   "results": [
     {
       "page": "project",
@@ -195,12 +195,12 @@
       "passed": true,
       "evidence": {
         "links": [
-          "index.html",
-          "bigbang.html",
-          "cosmicweb.html",
-          "stellar.html",
-          "wormhole.html",
-          "heatdeath.html"
+          "http://127.0.0.1:58910/index.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:58910/index.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:58910/index.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:58910/index.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:58910/index.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:58910/index.html?seed=20261106&lang=zh"
         ],
         "active": 1,
         "open": true,
@@ -215,11 +215,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.8604868,
+          "yaw": 0.8650552,
           "radius": 14
         },
         "dragged": {
-          "yaw": 1.1604868
+          "yaw": 1.1650552
         },
         "pinched": {
           "radius": 9.625
@@ -307,8 +307,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 200.20000000000033,
-        "resumedElapsed": 291.50000000000006
+        "hiddenElapsed": 248.50000000000037,
+        "resumedElapsed": 351.6000000000007
       }
     },
     {
@@ -317,7 +317,7 @@
       "passed": true,
       "evidence": {
         "peak": 0.31121203303337097,
-        "rms": 0.1478582814291923,
+        "rms": 0.1501844237991012,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 6,
@@ -358,11 +358,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 6.700000001117587,
-          "p95": 15.099999999627471,
-          "max": 30.700000001117587,
+          "p50": 6.5,
+          "p95": 15.800000011920929,
+          "max": 37.30000001192093,
           "longFrames": 0,
-          "frameCount": 672,
+          "frameCount": 677,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -404,11 +404,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.5,
-          "p95": 5,
-          "max": 6.099999999627471,
+          "p50": 4.200000002980232,
+          "p95": 8.200000002980232,
+          "max": 11.400000005960464,
           "longFrames": 0,
-          "frameCount": 697,
+          "frameCount": 702,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -450,11 +450,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 6.699999999254942,
-          "p95": 15.200000001117587,
-          "max": 15.400000000372529,
+          "p50": 8.5,
+          "p95": 17.799999997019768,
+          "max": 19.899999991059303,
           "longFrames": 0,
-          "frameCount": 722,
+          "frameCount": 727,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -496,11 +496,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.599999999627471,
-          "p95": 4.900000000372529,
-          "max": 6.5,
+          "p50": 4.4000000059604645,
+          "p95": 7.300000011920929,
+          "max": 7.4000000059604645,
           "longFrames": 0,
-          "frameCount": 747,
+          "frameCount": 752,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -787,12 +787,12 @@
       "passed": true,
       "evidence": {
         "links": [
-          "index.html",
-          "bigbang.html",
-          "cosmicweb.html",
-          "stellar.html",
-          "wormhole.html",
-          "heatdeath.html"
+          "http://127.0.0.1:57346/bigbang.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:57346/bigbang.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:57346/bigbang.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:57346/bigbang.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:57346/bigbang.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:57346/bigbang.html?seed=20261106&lang=zh"
         ],
         "active": 1,
         "open": true,
@@ -807,11 +807,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.609819,
+          "yaw": 0.614211,
           "radius": 26
         },
         "dragged": {
-          "yaw": 0.9098189999999999
+          "yaw": 0.9142109999999999
         },
         "pinched": {
           "radius": 17.875
@@ -899,8 +899,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 212.0000000000001,
-        "resumedElapsed": 309.0000000000001
+        "hiddenElapsed": 272.9999999999999,
+        "resumedElapsed": 376.10000000000025
       }
     },
     {
@@ -908,8 +908,8 @@
       "name": "audio signal, mute, repeat toggle and bounded nodes",
       "passed": true,
       "evidence": {
-        "peak": 0.1415363997220993,
-        "rms": 0.08702110193475962,
+        "peak": 0.14153635501861572,
+        "rms": 0.08222384101594737,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 4,
@@ -949,11 +949,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.900000000372529,
-          "p95": 28.09999999962747,
-          "max": 44.20000000111759,
-          "longFrames": 0,
-          "frameCount": 672,
+          "p50": 3.0999999940395355,
+          "p95": 9.699999988079071,
+          "max": 69.59999999403954,
+          "longFrames": 1,
+          "frameCount": 677,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -994,11 +994,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.100000001490116,
-          "p95": 3,
-          "max": 5.700000001117587,
+          "p50": 2.3999999910593033,
+          "p95": 7,
+          "max": 7.5,
           "longFrames": 0,
-          "frameCount": 697,
+          "frameCount": 702,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -1039,11 +1039,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 3.599999999627471,
-          "p95": 14.599999999627471,
-          "max": 19.299999998882413,
+          "p50": 4.199999988079071,
+          "p95": 11.5,
+          "max": 14.600000008940697,
           "longFrames": 0,
-          "frameCount": 722,
+          "frameCount": 727,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -1084,11 +1084,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.200000001117587,
-          "p95": 33.79999999888241,
-          "max": 34.19999999925494,
+          "p50": 2.7999999970197678,
+          "p95": 8.899999991059303,
+          "max": 15.899999991059303,
           "longFrames": 0,
-          "frameCount": 747,
+          "frameCount": 752,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -1135,7 +1135,7 @@
             "lensVal": 1.5,
             "synapseActive": 1,
             "showScan": 1,
-            "scanPos": 0.015281999999999974,
+            "scanPos": 0.04037399999999999,
             "directorMode": false,
             "camRadius": 32,
             "camTheta": 0.25,
@@ -1297,12 +1297,12 @@
       "passed": true,
       "evidence": {
         "links": [
-          "index.html",
-          "bigbang.html",
-          "cosmicweb.html",
-          "stellar.html",
-          "wormhole.html",
-          "heatdeath.html"
+          "http://127.0.0.1:60004/cosmicweb.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:60004/cosmicweb.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:60004/cosmicweb.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:60004/cosmicweb.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:60004/cosmicweb.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:60004/cosmicweb.html?seed=20261106&lang=zh"
         ],
         "active": 1,
         "open": true,
@@ -1317,11 +1317,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.7539311999999999,
+          "yaw": 0.7659263999999999,
           "radius": 32
         },
         "dragged": {
-          "yaw": 1.0539311999999998
+          "yaw": 1.0659264
         },
         "pinched": {
           "radius": 22
@@ -1409,8 +1409,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 163.6999999999999,
-        "resumedElapsed": 260.89999999999975
+        "hiddenElapsed": 336.4000000000003,
+        "resumedElapsed": 439.60000000000014
       }
     },
     {
@@ -1418,8 +1418,8 @@
       "name": "audio signal, mute, repeat toggle and bounded nodes",
       "passed": true,
       "evidence": {
-        "peak": 0.009377132169902325,
-        "rms": 0.005515943669018781,
+        "peak": 0.008535031229257584,
+        "rms": 0.004501946199638675,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 2,
@@ -1459,14 +1459,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "lastScanTrigger": 2834.6000000000004
+            "lastScanTrigger": 3031.2000000000007
           },
           "frames": 24,
-          "p50": 3.299999998882413,
-          "p95": 11.099999999627471,
-          "max": 48,
-          "longFrames": 0,
-          "frameCount": 677,
+          "p50": 3.7000000029802322,
+          "p95": 8.899999991059303,
+          "max": 65.5,
+          "longFrames": 1,
+          "frameCount": 672,
           "programCount": 2,
           "resourceCount": 11,
           "timerCount": 0,
@@ -1507,14 +1507,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "lastScanTrigger": 2834.6000000000004
+            "lastScanTrigger": 3031.2000000000007
           },
           "frames": 24,
-          "p50": 1.699999999254942,
-          "p95": 3.599999999627471,
-          "max": 3.800000000745058,
+          "p50": 2.300000011920929,
+          "p95": 6.299999997019768,
+          "max": 11.200000002980232,
           "longFrames": 0,
-          "frameCount": 702,
+          "frameCount": 697,
           "programCount": 2,
           "resourceCount": 11,
           "timerCount": 0,
@@ -1555,14 +1555,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "lastScanTrigger": 2834.6000000000004
+            "lastScanTrigger": 3031.2000000000007
           },
           "frames": 24,
-          "p50": 3,
-          "p95": 13.5,
-          "max": 13.900000000372529,
+          "p50": 2.2000000029802322,
+          "p95": 13.099999994039536,
+          "max": 15,
           "longFrames": 0,
-          "frameCount": 727,
+          "frameCount": 722,
           "programCount": 2,
           "resourceCount": 11,
           "timerCount": 0,
@@ -1603,14 +1603,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "lastScanTrigger": 2834.6000000000004
+            "lastScanTrigger": 3031.2000000000007
           },
           "frames": 24,
-          "p50": 1.700000001117587,
-          "p95": 2.5,
-          "max": 3.400000000372529,
+          "p50": 1.7000000029802322,
+          "p95": 3.9000000059604645,
+          "max": 5.399999991059303,
           "longFrames": 0,
-          "frameCount": 752,
+          "frameCount": 747,
           "programCount": 2,
           "resourceCount": 11,
           "timerCount": 0,
@@ -1877,12 +1877,12 @@
       "passed": true,
       "evidence": {
         "links": [
-          "index.html",
-          "bigbang.html",
-          "cosmicweb.html",
-          "stellar.html",
-          "wormhole.html",
-          "heatdeath.html"
+          "http://127.0.0.1:64987/stellar.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64987/stellar.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64987/stellar.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64987/stellar.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64987/stellar.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64987/stellar.html?seed=20261106&lang=zh"
         ],
         "active": 1,
         "open": true,
@@ -1897,11 +1897,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.757641,
+          "yaw": 0.7729139999999999,
           "radius": 38
         },
         "dragged": {
-          "yaw": 1.057641
+          "yaw": 1.072914
         },
         "pinched": {
           "radius": 26.125
@@ -1989,8 +1989,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 187.89999999999998,
-        "resumedElapsed": 290.9
+        "hiddenElapsed": 369.6999999999995,
+        "resumedElapsed": 472.79999999999893
       }
     },
     {
@@ -1999,19 +1999,19 @@
       "passed": true,
       "evidence": {
         "peak": 0.03363329917192459,
-        "rms": 0.006320097745187038,
+        "rms": 0.006322745650870594,
         "schedule": [
           {
             "hz": 10,
             "pulses": 5,
             "maxIntervalError": 8.326672684688674e-17,
-            "lookahead": 0.09333333333333438
+            "lookahead": 0.09866666666666846
           },
           {
             "hz": 40,
-            "pulses": 20,
+            "pulses": 21,
             "maxIntervalError": 9.020562075079397e-17,
-            "lookahead": 0.09833333333333494
+            "lookahead": 0.09933333333333505
           }
         ],
         "recordingBytes": 8024,
@@ -2050,14 +2050,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "nextPulseTime": 4.432000000000001
+            "nextPulseTime": 4.490666666666668
           },
           "frames": 24,
-          "p50": 2.799999998882413,
-          "p95": 26.40000000037253,
-          "max": 45.09999999962747,
+          "p50": 3.7999999970197678,
+          "p95": 10.5,
+          "max": 11.200000002980232,
           "longFrames": 0,
-          "frameCount": 840,
+          "frameCount": 855,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -2096,14 +2096,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "nextPulseTime": 4.432000000000001
+            "nextPulseTime": 4.490666666666668
           },
           "frames": 24,
-          "p50": 1.599999999627471,
-          "p95": 7.400000000372529,
-          "max": 7.699999999254942,
+          "p50": 2.5,
+          "p95": 4.4000000059604645,
+          "max": 9.900000005960464,
           "longFrames": 0,
-          "frameCount": 865,
+          "frameCount": 880,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -2142,14 +2142,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "nextPulseTime": 4.432000000000001
+            "nextPulseTime": 4.490666666666668
           },
           "frames": 24,
-          "p50": 3.600000001490116,
-          "p95": 14.200000001117587,
-          "max": 20.5,
+          "p50": 4.0999999940395355,
+          "p95": 8.400000005960464,
+          "max": 17.899999991059303,
           "longFrames": 0,
-          "frameCount": 890,
+          "frameCount": 905,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -2188,14 +2188,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "nextPulseTime": 4.432000000000001
+            "nextPulseTime": 4.490666666666668
           },
           "frames": 24,
-          "p50": 2.400000000372529,
-          "p95": 6.399999998509884,
-          "max": 7.699999999254942,
-          "longFrames": 0,
-          "frameCount": 915,
+          "p50": 2.4000000059604645,
+          "p95": 6.299999997019768,
+          "max": 59.099999994039536,
+          "longFrames": 1,
+          "frameCount": 930,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -2383,12 +2383,12 @@
       "passed": true,
       "evidence": {
         "links": [
-          "index.html",
-          "bigbang.html",
-          "cosmicweb.html",
-          "stellar.html",
-          "wormhole.html",
-          "heatdeath.html"
+          "http://127.0.0.1:62871/wormhole.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:62871/wormhole.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:62871/wormhole.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:62871/wormhole.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:62871/wormhole.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:62871/wormhole.html?seed=20261106&lang=zh"
         ],
         "active": 1,
         "open": true,
@@ -2403,11 +2403,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.8557242159999999,
+          "yaw": 0.8611348,
           "radius": 9.5
         },
         "dragged": {
-          "yaw": 1.1557242159999999
+          "yaw": 1.1611348
         },
         "pinched": {
           "radius": 6.53125
@@ -2495,8 +2495,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 168.20200000000028,
-        "resumedElapsed": 271.6020000000004
+        "hiddenElapsed": 206.1,
+        "resumedElapsed": 297.0000000000001
       }
     },
     {
@@ -2504,8 +2504,8 @@
       "name": "audio signal, mute, repeat toggle and bounded nodes",
       "passed": true,
       "evidence": {
-        "peak": 0.28088948130607605,
-        "rms": 0.18732361140141315,
+        "peak": 0.28088992834091187,
+        "rms": 0.1942883821437605,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 5,
@@ -2549,11 +2549,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 5,
-          "p95": 10.200000001117587,
-          "max": 11.599999999627471,
+          "p50": 5.5999999940395355,
+          "p95": 13.200000002980232,
+          "max": 26.5,
           "longFrames": 0,
-          "frameCount": 673,
+          "frameCount": 671,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -2598,11 +2598,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.899999998509884,
-          "p95": 8.699999999254942,
-          "max": 8.700000001117587,
+          "p50": 2.4000000059604645,
+          "p95": 5.4000000059604645,
+          "max": 6.800000011920929,
           "longFrames": 0,
-          "frameCount": 698,
+          "frameCount": 696,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -2647,11 +2647,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 4.900000000372529,
-          "p95": 15.599999999627471,
-          "max": 19.699999999254942,
+          "p50": 5,
+          "p95": 14.599999994039536,
+          "max": 15.200000002980232,
           "longFrames": 0,
-          "frameCount": 723,
+          "frameCount": 721,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -2696,11 +2696,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.700000001117587,
-          "p95": 6.099999999627471,
-          "max": 6.400000000372529,
+          "p50": 2.5,
+          "p95": 6.600000008940697,
+          "max": 7.0999999940395355,
           "longFrames": 0,
-          "frameCount": 748,
+          "frameCount": 746,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -2959,12 +2959,12 @@
       "passed": true,
       "evidence": {
         "links": [
-          "index.html",
-          "bigbang.html",
-          "cosmicweb.html",
-          "stellar.html",
-          "wormhole.html",
-          "heatdeath.html"
+          "http://127.0.0.1:64901/heatdeath.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64901/heatdeath.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64901/heatdeath.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64901/heatdeath.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64901/heatdeath.html?seed=20261106&lang=zh",
+          "http://127.0.0.1:64901/heatdeath.html?seed=20261106&lang=zh"
         ],
         "active": 1,
         "open": true,
@@ -2979,11 +2979,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.7587210000000001,
+          "yaw": 0.7680089999999999,
           "radius": 36
         },
         "dragged": {
-          "yaw": 1.058721
+          "yaw": 1.068009
         },
         "pinched": {
           "radius": 24.75
@@ -3071,8 +3071,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 212.09999999999982,
-        "resumedElapsed": 309.0999999999998
+        "hiddenElapsed": 321.4000000000002,
+        "resumedElapsed": 424.6
       }
     },
     {
@@ -3080,8 +3080,8 @@
       "name": "audio signal, mute, repeat toggle and bounded nodes",
       "passed": true,
       "evidence": {
-        "peak": 0.13024157285690308,
-        "rms": 0.09522627365934465,
+        "peak": 0.13024140894412994,
+        "rms": 0.09488382217339848,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 4,
@@ -3121,11 +3121,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.899999998509884,
-          "p95": 25.800000000745058,
-          "max": 50.80000000074506,
+          "p50": 3.9000000059604645,
+          "p95": 10.799999997019768,
+          "max": 54.29999999701977,
           "longFrames": 1,
-          "frameCount": 676,
+          "frameCount": 683,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -3166,11 +3166,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2,
-          "p95": 5.5,
-          "max": 6.5,
+          "p50": 2.5999999940395355,
+          "p95": 10,
+          "max": 12.899999991059303,
           "longFrames": 0,
-          "frameCount": 701,
+          "frameCount": 708,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -3211,11 +3211,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 3.799999998882413,
-          "p95": 14.099999999627471,
-          "max": 15.099999999627471,
+          "p50": 3.2000000029802322,
+          "p95": 13.599999994039536,
+          "max": 14.900000005960464,
           "longFrames": 0,
-          "frameCount": 726,
+          "frameCount": 733,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -3256,11 +3256,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.200000001117587,
-          "p95": 35.09999999962747,
-          "max": 45.40000000037253,
-          "longFrames": 0,
-          "frameCount": 751,
+          "p50": 2.4000000059604645,
+          "p95": 8.899999991059303,
+          "max": 51.20000000298023,
+          "longFrames": 1,
+          "frameCount": 758,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -3550,7 +3550,7 @@
     "Physical mobile hardware and human listening are not automated.",
     "Pixel hashes are compared on this browser/GPU; they are not cross-GPU golden images."
   ],
-  "finished": "2026-11-07T05:01:45.403Z",
+  "finished": "2026-11-08T06:11:28.060Z",
   "passed": true,
   "counts": {
     "passed": 99,

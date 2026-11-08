@@ -8,7 +8,7 @@ const at = (...parts) => path.join(root, ...parts);
 
 const pages = ['index.html', 'bigbang.html', 'cosmicweb.html', 'stellar.html', 'wormhole.html', 'heatdeath.html'];
 const runtimeFiles = [
-  'app/runtime.js', 'app/math.js', 'app/common.js', 'app/content.js', 'app/experience.js',
+  'app/runtime.js', 'app/math.js', 'app/common.js', 'app/content.js', 'app/experience.js', 'app/i18n.js',
   'app/styles/base.css', 'app/styles/common.css', 'app/styles/experience.css', 'app/styles/design.css'
 ];
 

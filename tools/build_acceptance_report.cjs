@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const paths = require('./paths.cjs');
+const source = require('./content-source.cjs');
 
 const readEvidence = name => JSON.parse(fs.readFileSync(paths.evidence(name), 'utf8'));
 const readData = name => JSON.parse(fs.readFileSync(paths.data(name), 'utf8'));
@@ -30,14 +31,17 @@ const suites = [
   { name: '专题与导览', mode: 'file', report: expFile, link: 'evidence/experience-results-file.json' },
   { name: '专题与导览', mode: 'HTTP', report: expHttp, link: 'evidence/experience-results-http.json' },
   { name: '单次音效', mode: 'Edge', report: audio, link: 'evidence/audio-event-results.json' },
-  { name: '故障自检', mode: 'Edge', report: faults, link: 'evidence/runner-failure-results.json' }
+  { name: '故障自检', mode: 'Edge', report: faults, link: 'evidence/runner-failure-results.json' },
+  { name: '性能对照', mode: 'Edge', report: perf, link: 'evidence/upgrade-performance.json' }
 ];
 function summary(report) {
   if (report.results.some(item => typeof item.passed === 'boolean')) {
     const passed = report.results.filter(item => item.passed).length;
     return { passed, failed: report.results.length - passed, total: report.results.length };
   }
-  return { passed: report.passed ? report.results.length : 0, failed: report.passed ? 0 : report.results.length, total: report.results.length };
+  return report.passed
+    ? { passed: report.results.length, failed: 0, total: report.results.length }
+    : { passed: 0, failed: 1, total: 1 };
 }
 for (const suite of suites) suite.summary = summary(suite.report);
 const totals = suites.reduce((acc, suite) => ({
@@ -57,6 +61,12 @@ const failures = suites.flatMap(suite => {
 const passedAll = suites.every(suite => suite.report.passed === true)
   && sources.passed === true && tours.passed === true && perf.passed === true;
 const date = (file.started || new Date().toISOString()).slice(0, 10);
+const languages = source.LANGS.map(lang => {
+  const pack = source.load(lang);
+  const ui = lang === 'zh' ? 0 : Object.keys(source.read('i18n/' + lang + '.json').text).length;
+  return { lang, chapters: Object.keys(pack.chapters).length, frames: Object.values(pack.chapters).reduce((n, chapter) => n + chapter.frames.length, 0), ui };
+});
+const languageLine = languages.map(item => `${item.lang}：${item.chapters} 章 × ${item.frames} 幕${item.ui ? '，' + item.ui + ' 条界面词典' : ''}`).join('；');
 
 const testTable = table(['验收入口', '模式', '通过 / 失败', '原始结果'], suites.map(suite => [
   suite.name, suite.mode, `${suite.summary.passed} / ${suite.summary.failed}`, link(suite.link.split('/').pop(), suite.link)
@@ -75,11 +85,10 @@ for (const name of ['asset-preparation.log', 'credit-inspection.log', 'pdf-sourc
   const lines = fs.readFileSync(paths.evidence(name), 'utf8').split(/\r?\n/).filter(line => /404|warning|empty|空|202/.test(line));
   if (lines.length) historical.push({ file: 'evidence/' + name, lines: lines.length, samples: lines.slice(0, 4) });
 }
-const firstRun = paths.evidence('upgrade-performance-first-run.json');
-if (fs.existsSync(firstRun)) {
-  const first = JSON.parse(fs.readFileSync(firstRun, 'utf8'));
-  historical.push({ file: 'evidence/upgrade-performance-first-run.json', lines: first.regressions.length,
-    samples: first.regressions.map(row => `${row.page} ${size(row.viewport)} ${row.quality} P95 +${n(row.deltaP95)} ms; passed=${first.passed}`) });
+for (const name of fs.readdirSync(paths.evidence('')).filter(name => /^upgrade-performance-run.*\.json$/.test(name)).sort()) {
+  const run = JSON.parse(fs.readFileSync(paths.evidence(name), 'utf8'));
+  historical.push({ file: 'evidence/' + name, lines: run.regressions.length,
+    samples: run.regressions.map(row => `${row.page} ${size(row.viewport)} ${row.quality} P95 +${n(row.deltaP95)} ms; passed=${run.passed}`) });
 }
 const historicalTable = historical.length
   ? table(['证据文件', '告警行数', '样例'], historical.map(item => [item.file, item.lines, item.samples.join('；')]))
@@ -144,8 +153,8 @@ const chapterTable = table(['章节 / 开场问题', '看见与理解', '操作�
     link(chapter.sourceLabel, chapter.sourceUrl) + '；' + chapter.assets.map(id => assets.find(asset => asset.id === id).title).join('、')];
 }));
 
-const scope = '自动验收覆盖本机 Edge 及四种模拟视口；没有实体手机、其他浏览器、屏幕阅读器设备或人工试听记录。叙事节奏、听感与「震撼」程度由用户观看审阅。录屏包含本项目合成声景；中文旁白以文本随导览逐幕显示，未合成口播音轨。';
-const overview = `报告日期：${date}（Asia/Shanghai）。本轮完成仓库分层、视觉系统 v2、不等距六幕叙事与验收链复检。自动检查共 ${totals.total} 项，通过 ${totals.passed} 项，失败 ${totals.failed} 项；套件总结论：${passedAll ? '全部通过' : '存在失败或未通过套件'}。`;
+const scope = '自动验收覆盖本机 Edge 及四种模拟视口；没有实体手机、其他浏览器、屏幕阅读器设备或人工试听记录。叙事节奏、听感与「震撼」程度由用户观看审阅。录屏包含本项目合成声景；中文旁白以文本随导览逐幕显示，未合成口播音轨。英日文界面与逐幕旁白为文本，录屏为中文版。';
+const overview = `报告日期：${date}（Asia/Shanghai）。本轮完成仓库分层、视觉系统 v2、不等距六幕叙事、三语版本与验收链复检。语言覆盖：${languageLine}。自动检查共 ${totals.total} 项，通过 ${totals.passed} 项，失败 ${totals.failed} 项；套件总结论：${passedAll ? '全部通过' : '存在失败或未通过套件'}。`;
 const commonLinks = '[导览审阅页](导览审阅.html) · [六章分镜与逐幕旁白](docs/六章分镜与旁白稿.md) · [参数与科学映射](docs/参数与科学映射.md) · [已知问题与复测记录](docs/已知问题与复测记录.md)';
 const knownIssues = `## 已知问题与历史告警\n\n${historicalTable}\n\n完整说明与复测方式见[已知问题与复测记录](docs/已知问题与复测记录.md)。报告不再只呈现当前全绿结果。`;
 
@@ -163,9 +172,9 @@ const hashed = [
   ...fs.readdirSync(paths.tool('')).map(name => 'tools/' + name),
   ...fs.readdirSync(paths.evidence('')).filter(name => name.endsWith('.json')).map(name => 'evidence/' + name),
   ...tours.recordings.flatMap(tour => [tour.path, tour.audio, 'output/tours/' + tour.page + '-poster.jpg'])
-].filter(name => fs.existsSync(paths.at(name))).sort();
+].filter(name => fs.existsSync(paths.at(name)) && fs.statSync(paths.at(name)).isFile()).sort();
 write('evidence/acceptance-evidence.json', JSON.stringify({
-  date, passed: passedAll, counts: totals, suites: suites.map(suite => ({ name: suite.name, mode: suite.mode, ...suite.summary, report: suite.link })),
+  date, passed: passedAll, counts: totals, languages, suites: suites.map(suite => ({ name: suite.name, mode: suite.mode, ...suite.summary, report: suite.link })),
   failures, environment: file.environment, renderer,
   sourceUrls: sources.results.length, scientificReferences: Object.keys(science.sources).length,
   assets: assets.length, tours: tours.recordings.length, performancePairs: perf.results.length,

@@ -1,11 +1,31 @@
 {
-  "date": "2026-11-07",
-  "passed": true,
+  "date": "2026-11-08",
+  "passed": false,
   "counts": {
-    "passed": 255,
-    "failed": 0,
-    "total": 255
+    "passed": 257,
+    "failed": 1,
+    "total": 258
   },
+  "languages": [
+    {
+      "lang": "zh",
+      "chapters": 6,
+      "frames": 36,
+      "ui": 0
+    },
+    {
+      "lang": "en",
+      "chapters": 6,
+      "frames": 36,
+      "ui": 156
+    },
+    {
+      "lang": "ja",
+      "chapters": 6,
+      "frames": 36,
+      "ui": 156
+    }
+  ],
   "suites": [
     {
       "name": "原有完整回归",
@@ -26,17 +46,17 @@
     {
       "name": "专题与导览",
       "mode": "file",
-      "passed": 25,
+      "passed": 26,
       "failed": 0,
-      "total": 25,
+      "total": 26,
       "report": "evidence/experience-results-file.json"
     },
     {
       "name": "专题与导览",
       "mode": "HTTP",
-      "passed": 25,
+      "passed": 26,
       "failed": 0,
-      "total": 25,
+      "total": 26,
       "report": "evidence/experience-results-http.json"
     },
     {
@@ -54,9 +74,25 @@
       "failed": 0,
       "total": 4,
       "report": "evidence/runner-failure-results.json"
+    },
+    {
+      "name": "性能对照",
+      "mode": "Edge",
+      "passed": 0,
+      "failed": 1,
+      "total": 1,
+      "report": "evidence/upgrade-performance.json"
     }
   ],
-  "failures": [],
+  "failures": [
+    {
+      "suite": "性能对照",
+      "mode": "Edge",
+      "page": "suite",
+      "name": "report-level failure",
+      "error": "report.passed=false without per-item failure flags"
+    }
+  ],
   "environment": {
     "node": "v24.14.0",
     "browser": {
@@ -78,7 +114,7 @@
   "performance": {
     "thresholdMs": 1,
     "p95Regressions": 7,
-    "passed": true
+    "passed": false
   },
   "historicalAlerts": [
     {
@@ -122,14 +158,22 @@
       ]
     },
     {
-      "file": "evidence/upgrade-performance-first-run.json",
+      "file": "evidence/upgrade-performance-run2.json",
       "lines": 1,
       "samples": [
-        "bigbang 1280×720 high P95 +1.80 ms; passed=false"
+        "index 360×800 high P95 +1.80 ms; passed=false"
+      ]
+    },
+    {
+      "file": "evidence/upgrade-performance-run3.json",
+      "lines": 2,
+      "samples": [
+        "index 1280×720 low P95 +1.60 ms; passed=false",
+        "cosmicweb 1280×720 low P95 +1.60 ms; passed=false"
       ]
     }
   ],
-  "scope": "自动验收覆盖本机 Edge 及四种模拟视口；没有实体手机、其他浏览器、屏幕阅读器设备或人工试听记录。叙事节奏、听感与「震撼」程度由用户观看审阅。录屏包含本项目合成声景；中文旁白以文本随导览逐幕显示，未合成口播音轨。",
+  "scope": "自动验收覆盖本机 Edge 及四种模拟视口；没有实体手机、其他浏览器、屏幕阅读器设备或人工试听记录。叙事节奏、听感与「震撼」程度由用户观看审阅。录屏包含本项目合成声景；中文旁白以文本随导览逐幕显示，未合成口播音轨。英日文界面与逐幕旁白为文本，录屏为中文版。",
   "hashes": {
     "app/assets/diagrams/dark-energy-model.svg": "c21e340ff4cb342529341471702707553ae7e6f8875c248739c087883265a09e",
     "app/assets/diagrams/wormhole-section.svg": "0c48ecce09cb47d93f910a0cbeece97e417519d7c64607d5e241c23b607a90f2",
@@ -145,36 +189,39 @@
     "app/chapters/stellar.js": "fec6923d611f82aac6961d9afc8f7805f0ee428e20bdceec2d2a0d267b14fbc7",
     "app/chapters/wormhole.js": "77e5c06122b6adaaa45331e2f156698bc541b8a4605741ff57790f5d6eca7490",
     "app/common.js": "767aca30bf1c14af0ad5b13ba17c15716cfa57b3c8a67c43677688ca3008d4b8",
-    "app/content.js": "eb6863f25bc896cf90bc75adce3c6058fc3f65d469152325a9accd3862a09637",
-    "app/experience.js": "4358af41f2ac5662591bcddc7f54f32bdfe51ddaa2e66c35a6895880fe6f2b06",
+    "app/content.js": "be281bfcd06fc9ddcc8f38d51ad720c03f264d19d3f49f9568106721a1d197ed",
+    "app/experience.js": "5a0a5dfd2d325ba4bd99116097e8b69ba4119cfb4156ca0ff1322b8a9e58cf5d",
+    "app/i18n.js": "3dad6409b3c924da0fe32b00f34fd1f0483adee08782b303bfa8e26319cc57d1",
     "app/math.js": "7f22974acff525417b12d0ac51a50453e6d137efe18bad190ed92165bcada94c",
     "app/runtime.js": "07633694b94db2a46439e6eeb7f5bc00e945c65be1cf7202fb809dcf2e7c89c8",
     "app/styles/base.css": "895f04797b8fa718f233df302b403078e8eca9b3fb9c2fa84e654ca6fa7dca48",
     "app/styles/common.css": "2a4d86457bc4bdfb44f3d3502c0c83feacca44a6946f7956d42eda003b893b3d",
-    "app/styles/design.css": "81f69ebdb8e107cf96f906ffd87c659a5314396fe8e0a8d9ba23f6082646f906",
+    "app/styles/design.css": "0b0cd6a9689974228f6f61377fcf67c7b0c94175e66089473f16927ec03e8cc6",
     "app/styles/experience.css": "8dbe26a95028b82d02882df25824f8bfdc0099d60b5d31d9bdfffe7e5bcaaf48",
-    "bigbang.html": "ed6681c5396087c11166ee7cf049e069906f8fa73554701f56af2e49580e57e3",
-    "cosmicweb.html": "767ca4c0dde20b251e440d2d125bad7b218fc620b2bcd449bb38016904652d92",
+    "bigbang.html": "fa06b69cba3e376323a0cf2ebae85453546eba7f9e0762a743fd63eb9371f7a3",
+    "cosmicweb.html": "0c74b6dc89a989c557fe380468cddcc45e185e7bd5d13d9325923bc4210fcdbd",
     "data/acceptance-manifest.json": "623335e591a1316ad68e6e0d9d055c74216defde7cf411f8eaa9ff9b3ecca358",
     "data/asset-manifest.json": "cef276da067048609f9ba2d7ca18b4cbfd4d4bf9df0cbba9ff2f8613a1017990",
     "data/chapter-content.json": "45f5745e68d2db2cfa17231ab3f2b654f21a07b6b03ea0164b51c267376fe1a0",
     "data/math-conversion.json": "745dd014693c507a1155b8acaaeba4c1ceeb0a063370c9826c6de0afd77fd374",
     "data/science-content.json": "b39950dc614a2be2a1a88463d95cdd5a67e9df16f7bb13d058ab65e9bce305a1",
     "data/voiceover.json": "bdb4f3c20fc8b80cd4dc9c54b20ff053469530c113f3e5e73a945e9269a8cfdc",
-    "evidence/acceptance-evidence.json": "dbff9472e8f7294bcb105e608b988481e70a1abc03283b2c6813fa77eda7d8f0",
-    "evidence/audio-event-results.json": "1eaff611ffc8e8aa39cf9989ce9bd5a1403e0d534f99197b6fb03fabff7ce440",
+    "evidence/acceptance-evidence.json": "1f967f7bf739b61943aec4a29490bae1ef06f0736bd6464a21f1924a596e9e5f",
+    "evidence/audio-event-results.json": "bc2721ca890094a59b21683d1d61c58f24a6c5686f85b63fe6c258212cdbeadc",
     "evidence/benchmark-before.json": "d76277fa69328c134bd3733e757ac50e0be6992e27a3dfb1c8ccf50f8ad91c71",
-    "evidence/experience-results-file.json": "6ba35faafb21c52c50781db69e4058d9de2dd0f7ce1a98c65307e3a8b5d5cc71",
-    "evidence/experience-results-http.json": "75c5eb4262d0301e2e738b691191ff4b38cc0b37d5c142b3923f1d350f8e0b6a",
-    "evidence/runner-failure-results.json": "716248afa3854134e5e177d942201f999c2302f499ef2a76fcba2923bbe0885e",
+    "evidence/experience-results-file.json": "a463ccf920f3ab69ae09ba30a853911a1996ca02cd8178861b88cc0fc76914b1",
+    "evidence/experience-results-http.json": "14b6b41c256334b716b3d73d56596e67b2d29b00590f12dd77640fc21fa51bde",
+    "evidence/runner-failure-results.json": "4fe8e10c2075d57cd2a6e2eabe3404a6da51d71df3e0283bf3bab67b1abc507f",
     "evidence/source-audit.json": "00ef2ede01f033463765a954d8180c7ba2e5ca213202be99991f48a3ae8ee0d6",
-    "evidence/test-results-http.json": "ec8e3a0121d283dabb0f8313437d5f18407c6ec97ae346de738d821ceb55e916",
-    "evidence/test-results.json": "55570b4b1286ac91c51baf2f65cae35195797eee7065b61644ecb09c13f53d64",
+    "evidence/test-results-http.json": "eafb5ffc7578382803326e980d628936cee5f5c9d10d706f47979386eb149e0a",
+    "evidence/test-results.json": "ee58a3f6d8aabb3f52aec1ab99724e1dd7371d020e3e8ea1737003ae21c97380",
     "evidence/tour-recordings.json": "a03d33a8324aa2288a1c9543eb47c48961ea3914de4ed8ce6657989051abda56",
     "evidence/upgrade-performance-first-run.json": "532baa260d9a42ec189fb55d1ef84aa5fabb561fe25529791bbc53c194c507f3",
-    "evidence/upgrade-performance.json": "520e6a769313809f9ec564ab57519e62176a3ea09e6f4be6d17f95004fec12e1",
-    "heatdeath.html": "f4f3043b031917827727bd78337789ed431496d3ad3ce1ec4475d8ffb719614c",
-    "index.html": "1d6d208e62e1e68f63a3bc49ddc65fa7797cef59aebcfa5f5df2a6cee033e5ed",
+    "evidence/upgrade-performance-run2.json": "9021c3bf02a2b3b765f0ade15f9049adc20a416811bf65b7e6c6a35218916bdb",
+    "evidence/upgrade-performance-run3.json": "62aac2682e0013916d5db0ef924b1cbad2cc2b6f0d3da4251c1eb5d39e3416f9",
+    "evidence/upgrade-performance.json": "62aac2682e0013916d5db0ef924b1cbad2cc2b6f0d3da4251c1eb5d39e3416f9",
+    "heatdeath.html": "2801b8f74a72e6b0dfc6bc2367ca4c72e8e0cc82e1eb95e192f874f30a2d463d",
+    "index.html": "ad703d5e0d660596ad94d02fa31168a90f6fbcbf09ac208a330661b1cd9aa7c9",
     "output/tours/bigbang-audio.webm": "8ed34a8812ca0aaecaa9d1be2bf4e7c65dce49e53e5aa176e12b54f8b0b0ff7c",
     "output/tours/bigbang-poster.jpg": "de2a571af79130cf81998cbc79f45e3a9d822328bb58627bc4d7c638f3792946",
     "output/tours/bigbang.mp4": "b74677e699e37ee08eda1d2fb2e7800da2619ce63c465ef88200c5b319ed1aa9",
@@ -193,23 +240,23 @@
     "output/tours/wormhole-audio.webm": "5ef7a4b9f4251471f50ed3677d8ff8732af14985ca49129c0a08c47d13996606",
     "output/tours/wormhole-poster.jpg": "60dcdab5e0d22a4f76be3626ec382c73bbdcac62f2628a76bafdc4fbcb58e7ae",
     "output/tours/wormhole.mp4": "97210d773955c1958b684b82bcb47ea209575dfcea3dfbd028e102781b26831a",
-    "stellar.html": "0d30e2f426f8c96f15c7a9868da55a112237d9fb8c05ce4a8356fb89543d0f2b",
+    "stellar.html": "ea48a6596230a055e06634b1629edc387961d25e39820c0b39a4d7bbcc0a1a66",
     "tools/audit_sources.cjs": "d9ff9044e189bc2b8fd7b18e27a2e0404e6e77a2766dacf46b70ba1782e61637",
     "tools/benchmark_before.cjs": "39ee7c558593570175e2c348ecce08dfe452e78fd44e4d83946b1c90b642ec63",
     "tools/benchmark_upgrade.cjs": "d09c169bbdcd228414d312ad83cf76165cc7e366163ed22fec0ed2217327bc15",
-    "tools/build_acceptance_report.cjs": "bfd7b4acc10f2ee0ea617b47fc20012b2e0d0f0982d37b7c9aae4c27fd8aa67f",
-    "tools/build_content.cjs": "6ce4445925c4674340fbee7fbf84407b9d53752a5590323410d4e86579a62548",
-    "tools/build_review.cjs": "1180cce28376b981780251da8c85abc27ee2fb6368a6592dbd945bd0d94b0c9f",
-    "tools/content-source.cjs": "98f487ea86e6fa3fbf01db56d1a98a36b4a5a9b5c15e09b11aa7117466b534d1",
+    "tools/build_acceptance_report.cjs": "2a6a84f26e4357d594cd9e01c1c717accdad1df45896b63d729456c42b2f058a",
+    "tools/build_content.cjs": "22784a07ada3d0abd0be796214be67b2e1d77d89596f43388d2eaed3e08ddd57",
+    "tools/build_review.cjs": "49a89b74d3385260beab2416a9f8da56a4bf6ba1219ade08dcdb054b41772cdf",
+    "tools/content-source.cjs": "cb7e241abe56a88aa949879babd5af70b9a09ee4546bb015123c1f39a81c5795",
     "tools/format_math.cjs": "8794714813ddc4902789729442b8e1d2013f4a988842a0d01d9230c05072682f",
-    "tools/paths.cjs": "a3721e03f0306f1cb298149d480e752a93161f2b4c63f52afcfd72d234004329",
+    "tools/paths.cjs": "f16e936201aa3388ebc73e28b5729881d2cbfd558e23d19b3df6897c711af568",
     "tools/record_tours.cjs": "9cf45f7666621ae135bcb209604414f24efda70d41e66ca14c88455771dfb3a1",
     "tools/test-support.cjs": "9ccc3bccb082a9a0703e1ac0fdccfa9b720e36e12295dd59ee93590158da7d16",
     "tools/verify_all_pages.js": "09ec376e96ca0137110844ad15ad1355ce0f854e9c97cf77f79f1be6c001a644",
     "tools/verify_audio_events.cjs": "021fb0716fc25dbaea87104baa4c4ffc72948a45dfde9024c779f6300a34d0b3",
-    "tools/verify_experience.cjs": "a1228970dae0b4901abcc494c1d5c6103765a1fd8293fb6046699cb0d55247c7",
+    "tools/verify_experience.cjs": "65a25f46182f88d7b8317000436c8f1e3bfec16181f9afe19adc96f97823a593",
     "tools/verify_failure_paths.cjs": "bed96e5f21a3ff0b9e7d4af4e1a546f3ab30bfdb71f8bd9212609dee9d13ea20",
     "tools/verify_pdf_source.py": "09aacde79ac0289990dbd065633f9b767b965446007f2605b7876f2ca521b4c3",
-    "wormhole.html": "f4f8de673713ae0c305babedf3e856f4940f734617521b34e234e3f4b19db811"
+    "wormhole.html": "5ecf7f4fedb64239416cc1124e8145c8ce69f37855ba8898d616b7538ec250c7"
   }
 }
