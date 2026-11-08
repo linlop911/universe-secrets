@@ -15,8 +15,15 @@
 | `output/` | 验收截图、导览录屏、来源快照等生成物 |
 | `archive/` | 历史性能基线 `baseline-20261106`、`baseline-20261107` 与本轮工作前快照 `work-20261107`；其中的 `maintenance/` 为一次性调试脚本，不参与交付 |
 | 根目录三份报告 | [完整验收报告](完整验收报告.md)、[NASA专题联动实施与验收](NASA专题联动实施与验收.md)、[执行进度](执行进度.md)，由 `tools/build_acceptance_report.cjs` 生成 |
+| 根目录配置 | `package.json`（无第三方依赖的脚本入口）、`requirements.txt`（可选 Python 依赖）、`.editorconfig`、`.nvmrc`、`.gitignore`；完整说明见[依赖与环境](docs/依赖与环境.md) |
 
 `node tools/build_content.cjs` 是**单向生成**：`data/` → `app/content.js` + `docs/六章分镜与旁白稿.md`，不回写 HTML、章节脚本或科学账本。修改源数据后必须重跑；完整回归与体验专项都有生成物新鲜度断言，忘记重跑会直接失败。
+
+## 依赖配置
+
+项目没有 npm 运行时依赖：`package.json` 只声明 `engines.node >= 22` 与常用脚本（`npm run build` / `verify` / `report` 等），`requirements.txt` 列出仅重新提取 PDF 时才需要的可选 Python 包，`.editorconfig` 与 `.nvmrc` 固定编码、换行与 Node 版本。
+
+克隆后**无需 `npm install`**，双击 `index.html` 即可离线使用；只有复现全套自动验收才需要 Node 22+ 与 Edge/Chromium。环境变量、FFmpeg、可选 Python 依赖与目录速查见[依赖与环境](docs/依赖与环境.md)。
 
 ## 语言
 

@@ -164,8 +164,9 @@ write('完整验收报告.md', `# 完整验收报告\n\n${overview}\n\n${commonL
 
 write('执行进度.md', `# 执行与验收状态\n\n${overview}\n\n${matrix}\n\n本轮：app/ 运行时分层、data/ 源数据、tools/ 工具、docs/ 文档、evidence/ 结果、archive/ 历史基线；视觉系统 v2；六幕不等距叙事与逐幕旁白；可证伪验收链。\n\n${commonLinks}\n\n${failureTable}\n\n${scope}\n`);
 
+const rootConfigs = ['package.json', 'requirements.txt', '.editorconfig', '.nvmrc', '.gitignore'];
 const hashed = [
-  ...paths.pages, ...paths.runtimeFiles,
+  ...rootConfigs, ...paths.pages, ...paths.runtimeFiles,
   ...fs.readdirSync(paths.chapters('')).map(name => 'app/chapters/' + name),
   ...assets.map(asset => asset.localPath),
   ...fs.readdirSync(paths.data('')).map(name => 'data/' + name),

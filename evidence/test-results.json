@@ -2,7 +2,7 @@
   "date": "2026-11-08",
   "mode": "file",
   "profile": "full",
-  "started": "2026-11-08T06:08:16.818Z",
+  "started": "2026-11-08T06:24:35.293Z",
   "results": [
     {
       "page": "project",
@@ -215,11 +215,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.8735655999999999,
+          "yaw": 0.8631004,
           "radius": 14
         },
         "dragged": {
-          "yaw": 1.1735655999999999
+          "yaw": 1.1631004
         },
         "pinched": {
           "radius": 9.625
@@ -307,8 +307,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 321.2999999999999,
-        "resumedElapsed": 412.2999999999999
+        "hiddenElapsed": 236.39999999999992,
+        "resumedElapsed": 327.3
       }
     },
     {
@@ -316,8 +316,8 @@
       "name": "audio signal, mute, repeat toggle and bounded nodes",
       "passed": true,
       "evidence": {
-        "peak": 0.311212420463562,
-        "rms": 0.14785823750573343,
+        "peak": 0.3112125098705292,
+        "rms": 0.1478582814291923,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 6,
@@ -358,11 +358,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 6.800000011920929,
-          "p95": 12.699999988079071,
-          "max": 44.099999994039536,
+          "p50": 6.299999997019768,
+          "p95": 13.5,
+          "max": 23.200000002980232,
           "longFrames": 0,
-          "frameCount": 672,
+          "frameCount": 684,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -404,11 +404,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 3.7999999970197678,
-          "p95": 6.9000000059604645,
-          "max": 7.4000000059604645,
+          "p50": 2.300000011920929,
+          "p95": 4.799999997019768,
+          "max": 7.600000008940697,
           "longFrames": 0,
-          "frameCount": 697,
+          "frameCount": 709,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -451,10 +451,10 @@
           },
           "frames": 24,
           "p50": 8.200000002980232,
-          "p95": 15.900000005960464,
-          "max": 20.600000008940697,
+          "p95": 14.600000008940697,
+          "max": 15.700000002980232,
           "longFrames": 0,
-          "frameCount": 722,
+          "frameCount": 734,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -496,11 +496,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 4,
-          "p95": 6.199999988079071,
-          "max": 7.200000002980232,
+          "p50": 2.800000011920929,
+          "p95": 5.800000011920929,
+          "max": 5.9000000059604645,
           "longFrames": 0,
-          "frameCount": 747,
+          "frameCount": 759,
           "programCount": 1,
           "resourceCount": 4,
           "timerCount": 0,
@@ -807,11 +807,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.6169109999999999,
+          "yaw": 0.609279,
           "radius": 26
         },
         "dragged": {
-          "yaw": 0.9169109999999998
+          "yaw": 0.909279
         },
         "pinched": {
           "radius": 17.875
@@ -899,8 +899,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 302.90000000000043,
-        "resumedElapsed": 406.10000000000025
+        "hiddenElapsed": 212.30000000000024,
+        "resumedElapsed": 300.176
       }
     },
     {
@@ -908,8 +908,8 @@
       "name": "audio signal, mute, repeat toggle and bounded nodes",
       "passed": true,
       "evidence": {
-        "peak": 0.1415363997220993,
-        "rms": 0.08638513720006297,
+        "peak": 0.14153537154197693,
+        "rms": 0.08205639730704231,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 4,
@@ -949,11 +949,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 3.2000000029802322,
-          "p95": 14.900000005960464,
-          "max": 61.599999994039536,
-          "longFrames": 1,
-          "frameCount": 679,
+          "p50": 3.1000000089406967,
+          "p95": 11.599999994039536,
+          "max": 45.70000000298023,
+          "longFrames": 0,
+          "frameCount": 678,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -994,11 +994,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.699999988079071,
-          "p95": 6,
-          "max": 8.200000002980232,
+          "p50": 1.7999999970197678,
+          "p95": 4.700000002980232,
+          "max": 5,
           "longFrames": 0,
-          "frameCount": 704,
+          "frameCount": 703,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -1039,11 +1039,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 4.799999997019768,
-          "p95": 16.899999991059303,
-          "max": 21.200000002980232,
+          "p50": 5.899999991059303,
+          "p95": 15.200000002980232,
+          "max": 15.5,
           "longFrames": 0,
-          "frameCount": 729,
+          "frameCount": 728,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -1084,11 +1084,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.7000000029802322,
-          "p95": 46.900000005960464,
-          "max": 48.20000000298023,
+          "p50": 2.3999999910593033,
+          "p95": 27.200000002980232,
+          "max": 33.1000000089407,
           "longFrames": 0,
-          "frameCount": 754,
+          "frameCount": 753,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -1135,7 +1135,7 @@
             "lensVal": 1.5,
             "synapseActive": 1,
             "showScan": 1,
-            "scanPos": 0.052379999999999996,
+            "scanPos": 0.054,
             "directorMode": false,
             "camRadius": 32,
             "camTheta": 0.25,
@@ -1317,11 +1317,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.7681439999999999,
+          "yaw": 0.7556664,
           "radius": 32
         },
         "dragged": {
-          "yaw": 1.068144
+          "yaw": 1.0556664
         },
         "pinched": {
           "radius": 22
@@ -1409,8 +1409,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 367.1999999999998,
-        "resumedElapsed": 476.39999999999964
+        "hiddenElapsed": 187.7999999999999,
+        "resumedElapsed": 278.7999999999999
       }
     },
     {
@@ -1418,8 +1418,8 @@
       "name": "audio signal, mute, repeat toggle and bounded nodes",
       "passed": true,
       "evidence": {
-        "peak": 0.009965860284864902,
-        "rms": 0.004837987091311018,
+        "peak": 0.00884181633591652,
+        "rms": 0.005103818103932775,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 2,
@@ -1459,14 +1459,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "lastScanTrigger": 3036.370000000001
+            "lastScanTrigger": 2831.3999999999996
           },
           "frames": 24,
-          "p50": 4.5,
-          "p95": 16.299999997019768,
-          "max": 77.40000000596046,
-          "longFrames": 1,
-          "frameCount": 677,
+          "p50": 2.7000000029802322,
+          "p95": 9.200000002980232,
+          "max": 38.5,
+          "longFrames": 0,
+          "frameCount": 682,
           "programCount": 2,
           "resourceCount": 11,
           "timerCount": 0,
@@ -1507,14 +1507,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "lastScanTrigger": 3036.370000000001
+            "lastScanTrigger": 2831.3999999999996
           },
           "frames": 24,
-          "p50": 2,
-          "p95": 6.600000008940697,
-          "max": 8.900000005960464,
+          "p50": 1.5,
+          "p95": 2.2000000029802322,
+          "max": 2.8999999910593033,
           "longFrames": 0,
-          "frameCount": 702,
+          "frameCount": 707,
           "programCount": 2,
           "resourceCount": 11,
           "timerCount": 0,
@@ -1555,14 +1555,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "lastScanTrigger": 3036.370000000001
+            "lastScanTrigger": 2831.3999999999996
           },
           "frames": 24,
-          "p50": 4.0999999940395355,
-          "p95": 17.900000005960464,
-          "max": 20,
+          "p50": 4.100000008940697,
+          "p95": 10.299999997019768,
+          "max": 11.700000002980232,
           "longFrames": 0,
-          "frameCount": 727,
+          "frameCount": 732,
           "programCount": 2,
           "resourceCount": 11,
           "timerCount": 0,
@@ -1603,14 +1603,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "lastScanTrigger": 3036.370000000001
+            "lastScanTrigger": 2831.3999999999996
           },
           "frames": 24,
-          "p50": 1.8999999910593033,
-          "p95": 6.0999999940395355,
-          "max": 7.600000008940697,
+          "p50": 1.2999999970197678,
+          "p95": 2.8999999910593033,
+          "max": 4.100000008940697,
           "longFrames": 0,
-          "frameCount": 752,
+          "frameCount": 757,
           "programCount": 2,
           "resourceCount": 11,
           "timerCount": 0,
@@ -1897,11 +1897,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.7641749999999999,
+          "yaw": 0.7587210000000001,
           "radius": 38
         },
         "dragged": {
-          "yaw": 1.0641749999999999
+          "yaw": 1.058721
         },
         "pinched": {
           "radius": 26.125
@@ -1989,8 +1989,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 266.5,
-        "resumedElapsed": 372.77599999999984
+        "hiddenElapsed": 199.9,
+        "resumedElapsed": 290.9
       }
     },
     {
@@ -1999,19 +1999,19 @@
       "passed": true,
       "evidence": {
         "peak": 0.03363329917192459,
-        "rms": 0.006320097745187038,
+        "rms": 0.006322745650870594,
         "schedule": [
           {
             "hz": 10,
             "pulses": 5,
             "maxIntervalError": 8.326672684688674e-17,
-            "lookahead": 0.09466666666666801
+            "lookahead": 0.09866666666666846
           },
           {
             "hz": 40,
             "pulses": 20,
             "maxIntervalError": 9.020562075079397e-17,
-            "lookahead": 0.09966666666666857
+            "lookahead": 0.09933333333333505
           }
         ],
         "recordingBytes": 8024,
@@ -2050,14 +2050,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "nextPulseTime": 4.450666666666668
+            "nextPulseTime": 4.490666666666668
           },
           "frames": 24,
-          "p50": 4,
-          "p95": 23.399999991059303,
-          "max": 77,
-          "longFrames": 1,
-          "frameCount": 846,
+          "p50": 2.8999999910593033,
+          "p95": 9.5,
+          "max": 32.599999994039536,
+          "longFrames": 0,
+          "frameCount": 852,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -2096,14 +2096,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "nextPulseTime": 4.450666666666668
+            "nextPulseTime": 4.490666666666668
           },
           "frames": 24,
-          "p50": 2.2999999970197678,
-          "p95": 5.200000002980232,
-          "max": 8.900000005960464,
+          "p50": 1.6000000089406967,
+          "p95": 4,
+          "max": 4.800000011920929,
           "longFrames": 0,
-          "frameCount": 871,
+          "frameCount": 877,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -2142,14 +2142,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "nextPulseTime": 4.450666666666668
+            "nextPulseTime": 4.490666666666668
           },
           "frames": 24,
-          "p50": 3.9000000059604645,
-          "p95": 20.799999997019768,
-          "max": 22.80000001192093,
+          "p50": 6.0999999940395355,
+          "p95": 10.099999994039536,
+          "max": 11,
           "longFrames": 0,
-          "frameCount": 896,
+          "frameCount": 902,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -2188,14 +2188,14 @@
             "lastX": 0,
             "lastY": 0,
             "audioActive": false,
-            "nextPulseTime": 4.450666666666668
+            "nextPulseTime": 4.490666666666668
           },
           "frames": 24,
-          "p50": 2.699999988079071,
-          "p95": 6.799999997019768,
-          "max": 56,
-          "longFrames": 1,
-          "frameCount": 921,
+          "p50": 1.8999999910593033,
+          "p95": 4.299999997019768,
+          "max": 5,
+          "longFrames": 0,
+          "frameCount": 927,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -2403,11 +2403,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.8637483999999999,
+          "yaw": 0.8598172000000001,
           "radius": 9.5
         },
         "dragged": {
-          "yaw": 1.1637483999999998
+          "yaw": 1.1598172
         },
         "pinched": {
           "radius": 6.53125
@@ -2495,8 +2495,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 242.50000000000028,
-        "resumedElapsed": 351.7000000000001
+        "hiddenElapsed": 200.00000000000037,
+        "resumedElapsed": 291.00000000000034
       }
     },
     {
@@ -2505,7 +2505,7 @@
       "passed": true,
       "evidence": {
         "peak": 0.28088992834091187,
-        "rms": 0.1942883821437605,
+        "rms": 0.19632602751251174,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 5,
@@ -2549,9 +2549,9 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 4.600000008940697,
-          "p95": 6.5999999940395355,
-          "max": 7.5999999940395355,
+          "p50": 2.7999999970197678,
+          "p95": 7.200000002980232,
+          "max": 13.299999997019768,
           "longFrames": 0,
           "frameCount": 683,
           "programCount": 1,
@@ -2598,9 +2598,9 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.5,
-          "p95": 6.600000008940697,
-          "max": 7.200000002980232,
+          "p50": 2,
+          "p95": 5.200000002980232,
+          "max": 6.899999991059303,
           "longFrames": 0,
           "frameCount": 708,
           "programCount": 1,
@@ -2647,9 +2647,9 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 4.799999997019768,
-          "p95": 16.099999994039536,
-          "max": 17.100000008940697,
+          "p50": 4,
+          "p95": 10.399999991059303,
+          "max": 10.599999994039536,
           "longFrames": 0,
           "frameCount": 733,
           "programCount": 1,
@@ -2696,9 +2696,9 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.7000000029802322,
-          "p95": 6.800000011920929,
-          "max": 7,
+          "p50": 1.9000000059604645,
+          "p95": 4.399999991059303,
+          "max": 6,
           "longFrames": 0,
           "frameCount": 758,
           "programCount": 1,
@@ -2979,11 +2979,11 @@
       "passed": true,
       "evidence": {
         "initial": {
-          "yaw": 0.7751009999999998,
+          "yaw": 0.7592789999999999,
           "radius": 36
         },
         "dragged": {
-          "yaw": 1.0751009999999999
+          "yaw": 1.0592789999999999
         },
         "pinched": {
           "radius": 24.75
@@ -3071,8 +3071,8 @@
       "passed": true,
       "evidence": {
         "visibility": "deterministic visibilitychange injection",
-        "hiddenElapsed": 388.0999999999998,
-        "resumedElapsed": 491.20000000000016
+        "hiddenElapsed": 212.1,
+        "resumedElapsed": 309.2000000000004
       }
     },
     {
@@ -3080,8 +3080,8 @@
       "name": "audio signal, mute, repeat toggle and bounded nodes",
       "passed": true,
       "evidence": {
-        "peak": 0.13024157285690308,
-        "rms": 0.09505254571859925,
+        "peak": 0.13024140894412994,
+        "rms": 0.09511385765074029,
         "schedule": null,
         "recordingBytes": 8024,
         "beforeNodes": 4,
@@ -3121,11 +3121,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 3.3999999910593033,
-          "p95": 32.599999994039536,
-          "max": 65.70000000298023,
+          "p50": 2.699999988079071,
+          "p95": 28.900000005960464,
+          "max": 52.79999999701977,
           "longFrames": 1,
-          "frameCount": 675,
+          "frameCount": 676,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -3166,11 +3166,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 2.2999999970197678,
-          "p95": 4.800000011920929,
-          "max": 6.5,
+          "p50": 2.2000000029802322,
+          "p95": 6.600000008940697,
+          "max": 9.299999997019768,
           "longFrames": 0,
-          "frameCount": 700,
+          "frameCount": 701,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -3211,11 +3211,11 @@
             "audioActive": false
           },
           "frames": 24,
-          "p50": 3.800000011920929,
-          "p95": 15.5,
-          "max": 26.700000002980232,
+          "p50": 4,
+          "p95": 10.299999997019768,
+          "max": 12.400000005960464,
           "longFrames": 0,
-          "frameCount": 725,
+          "frameCount": 726,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -3257,10 +3257,10 @@
           },
           "frames": 24,
           "p50": 2.3999999910593033,
-          "p95": 8.299999997019768,
-          "max": 68.79999999701977,
-          "longFrames": 1,
-          "frameCount": 750,
+          "p95": 37.400000005960464,
+          "max": 39.599999994039536,
+          "longFrames": 0,
+          "frameCount": 751,
           "programCount": 2,
           "resourceCount": 9,
           "timerCount": 0,
@@ -3550,7 +3550,7 @@
     "Physical mobile hardware and human listening are not automated.",
     "Pixel hashes are compared on this browser/GPU; they are not cross-GPU golden images."
   ],
-  "finished": "2026-11-08T06:09:48.217Z",
+  "finished": "2026-11-08T06:25:44.056Z",
   "passed": true,
   "counts": {
     "passed": 99,

@@ -161,7 +161,7 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.1274000000000001,
+        "pausedTime": 0.12130000000000019,
         "uncaught": 0,
         "externalRequests": 0,
         "navigationScope": 13
@@ -343,7 +343,7 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.13329999999999972,
+        "pausedTime": 0.12720000000000029,
         "uncaught": 0,
         "externalRequests": 0,
         "navigationScope": 15
@@ -441,7 +441,7 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.1274000000000001,
+        "pausedTime": 0.1273000000000002,
         "uncaught": 0,
         "externalRequests": 0,
         "navigationScope": 16
@@ -532,7 +532,7 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.1335,
+        "pausedTime": 0.13950000000000023,
         "uncaught": 0,
         "externalRequests": 0,
         "navigationScope": 17
@@ -623,7 +623,7 @@
       "name": "guide respects runtime pause and evidence screenshot",
       "passed": true,
       "evidence": {
-        "pausedTime": 0.12729999999999994,
+        "pausedTime": 0.1271999999999998,
         "uncaught": 0,
         "externalRequests": 0,
         "navigationScope": 18

@@ -173,7 +173,8 @@ html body.chapter-experience .guide-deck progress::-webkit-progress-bar { backgr
 html body.chapter-experience .guide-deck progress::-webkit-progress-value { background: var(--accent); }
 html body.chapter-experience .guide-beats { display: flex; gap: 6px; margin: 0 0 12px; }
 html body.chapter-experience .guide-beats span {
-  width: 22px;
+  flex-basis: 0;
+  min-width: 12px;
   height: 2px;
   background: rgba(150, 190, 225, .22);
   transition: background .3s, box-shadow .3s;
@@ -309,4 +310,16 @@ html body.chapter-experience .language-switch a {
 html body.chapter-experience .language-switch a.active {
   color: var(--accent);
   border-bottom-color: var(--accent);
+}
+
+html body.chapter-experience :focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  html body.chapter-experience .chapter-intro,
+  html body.chapter-experience .guide-deck.beat-in h3,
+  html body.chapter-experience .guide-deck.beat-in .guide-voice,
+  html body.chapter-experience .guide-deck.beat-in #guide-text,
+  html body.chapter-experience .guide-evidence { animation: none; }
 }

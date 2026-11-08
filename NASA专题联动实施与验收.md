@@ -1,6 +1,6 @@
 # NASA等专题联动实施与验收
 
-报告日期：2026-11-08（Asia/Shanghai）。本轮完成仓库分层、视觉系统 v2、不等距六幕叙事、三语版本与验收链复检。语言覆盖：zh：6 章 × 36 幕；en：6 章 × 36 幕，156 条界面词典；ja：6 章 × 36 幕，156 条界面词典。自动检查共 258 项，通过 257 项，失败 1 项；套件总结论：存在失败或未通过套件。
+报告日期：2026-11-08（Asia/Shanghai）。本轮完成仓库分层、视觉系统 v2、不等距六幕叙事、三语版本与验收链复检。语言覆盖：zh：6 章 × 36 幕；en：6 章 × 36 幕，268 条界面词典；ja：6 章 × 36 幕，268 条界面词典。自动检查共 258 项，通过 257 项，失败 1 项；套件总结论：存在失败或未通过套件。
 
 [导览审阅页](导览审阅.html) · [六章分镜与逐幕旁白](docs/六章分镜与旁白稿.md) · [参数与科学映射](docs/参数与科学映射.md) · [已知问题与复测记录](docs/已知问题与复测记录.md)
 
@@ -88,7 +88,7 @@ PDF 首页实测证明：Extracted first-page text contains Bardeen, ROTATING; m
 
 ## 实现与性能
 
-阈值：单组 P95 回退超过 1 ms 或长帧数增加即判定不通过；当前 7 / 24 组 P95 高于基线，超阈值 2 组，性能套件状态为未通过。数据为绘制加同步 1 像素回读的墙钟耗时，不等于纯 GPU 时间或完整显示帧率。
+阈值：单组 P95 回退超过 1 ms 或长帧数增加即判定不通过；当前 5 / 24 组 P95 高于基线，超阈值 2 组，性能套件状态为未通过。数据为绘制加同步 1 像素回读的墙钟耗时，不等于纯 GPU 时间或完整显示帧率。
 
 ## 已知问题与历史告警
 
@@ -101,6 +101,7 @@ PDF 首页实测证明：Extracted first-page text contains Bardeen, ROTATING; m
 | evidence/pdf-source-check.log | 1 | warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead. |
 | evidence/upgrade-performance-run2.json | 1 | index 360×800 high P95 +1.80 ms; passed=false |
 | evidence/upgrade-performance-run3.json | 2 | index 1280×720 low P95 +1.60 ms; passed=false；cosmicweb 1280×720 low P95 +1.60 ms; passed=false |
+| evidence/upgrade-performance-run4.json | 2 | cosmicweb 1280×720 high P95 +1.40 ms; passed=false；stellar 360×800 low P95 +1.50 ms; passed=false |
 
 完整说明与复测方式见[已知问题与复测记录](docs/已知问题与复测记录.md)。报告不再只呈现当前全绿结果。
 

@@ -1,0 +1,20 @@
+{
+  "name": "universe-secrets",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Six-chapter offline WebGL / Web Audio cosmology essay in Chinese, English and Japanese.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node tools/build_content.cjs",
+    "verify": "node tools/verify_all_pages.js && node tools/verify_experience.cjs",
+    "verify:core": "node tools/verify_all_pages.js",
+    "verify:faults": "node tools/verify_failure_paths.cjs",
+    "verify:audio": "node tools/verify_audio_events.cjs",
+    "benchmark": "node tools/benchmark_upgrade.cjs",
+    "review": "node tools/build_review.cjs",
+    "report": "node tools/build_acceptance_report.cjs",
+    "math": "node tools/format_math.cjs"
+  }
+}

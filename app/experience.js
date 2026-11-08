@@ -33,7 +33,10 @@
     const deck=el('section','guide-deck interactive');deck.setAttribute('aria-label','章节导览');
     const progress=el('progress');progress.id='guide-progress';progress.max=duration;progress.value=0;progress.setAttribute('aria-label','导览进度');
     const beats=el('div','guide-beats');beats.id='guide-beats';beats.setAttribute('aria-hidden','true');
-    for(const frame of data.frames)beats.append(el('span'));
+    for(const [beatIndex,frame]of data.frames.entries()){
+      const next=data.frames[beatIndex+1],span=next?next.at-frame.at:duration-frame.at;
+      const beat=el('span');beat.style.flexGrow=String(span);beat.title=span+'s';beats.append(beat);
+    }
     const guideTitle=el('h3','','先看见，再理解。'),guideVoice=el('p','guide-voice',data.frames[0].voice),guideText=el('p','','点击开始，跟随镜头与关键变量探索这一章；也可以拖动上方滑块，自由比较。');guideTitle.id='guide-title';guideVoice.id='guide-voice';guideText.id='guide-text';
     const transport=el('div','guide-transport'),play=el('button','guide-primary','开始 '+duration+' 秒导览'),next=el('button','','下一幕'),leave=el('button','','自由探索'),counter=el('span','guide-counter','00 / '+duration);
     play.id='guide-play';next.id='guide-next';leave.id='guide-exit';transport.append(play,next,leave,counter);deck.append(progress,beats,guideTitle,guideVoice,guideText,transport);hud.append(deck);

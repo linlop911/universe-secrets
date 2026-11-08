@@ -1,0 +1,8 @@
+# Optional Python dependencies.
+#
+# The shipped verification script tools/verify_pdf_source.py checks the
+# preserved first-page text and needs only the Python standard library.
+# These packages are required only when re-extracting the archived PDF
+# (output/sources/S9.pdf) and exporting its first-page image.
+pypdf>=5,<7
+PyMuPDF>=1.24,<2

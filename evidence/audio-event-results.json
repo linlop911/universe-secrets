@@ -4,24 +4,24 @@
     {
       "page": "index",
       "mutedPeak": 0,
-      "peak": 0.17223535478115082,
-      "rms": 0.11057933045258796,
+      "peak": 0.15805870294570923,
+      "rms": 0.10147526660453349,
       "remainingNodes": 0,
       "contexts": 1
     },
     {
       "page": "wormhole",
       "mutedPeak": 0,
-      "peak": 0.17294296622276306,
-      "rms": 0.09921132430529989,
+      "peak": 0.1708465814590454,
+      "rms": 0.09819780244502001,
       "remainingNodes": 0,
       "contexts": 1
     },
     {
       "page": "heatdeath",
       "mutedPeak": 0,
-      "peak": 0.2188626378774643,
-      "rms": 0.07218236445554549,
+      "peak": 0.16406001150608063,
+      "rms": 0.05979957443227649,
       "remainingNodes": 0,
       "contexts": 1
     }

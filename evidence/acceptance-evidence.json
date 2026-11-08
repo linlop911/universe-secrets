@@ -17,13 +17,13 @@
       "lang": "en",
       "chapters": 6,
       "frames": 36,
-      "ui": 156
+      "ui": 268
     },
     {
       "lang": "ja",
       "chapters": 6,
       "frames": 36,
-      "ui": 156
+      "ui": 268
     }
   ],
   "suites": [
@@ -113,7 +113,7 @@
   "performancePairs": 24,
   "performance": {
     "thresholdMs": 1,
-    "p95Regressions": 7,
+    "p95Regressions": 5,
     "passed": false
   },
   "historicalAlerts": [
@@ -171,6 +171,14 @@
         "index 1280×720 low P95 +1.60 ms; passed=false",
         "cosmicweb 1280×720 low P95 +1.60 ms; passed=false"
       ]
+    },
+    {
+      "file": "evidence/upgrade-performance-run4.json",
+      "lines": 2,
+      "samples": [
+        "cosmicweb 1280×720 high P95 +1.40 ms; passed=false",
+        "stellar 360×800 low P95 +1.50 ms; passed=false"
+      ]
     }
   ],
   "scope": "自动验收覆盖本机 Edge 及四种模拟视口；没有实体手机、其他浏览器、屏幕阅读器设备或人工试听记录。叙事节奏、听感与「震撼」程度由用户观看审阅。录屏包含本项目合成声景；中文旁白以文本随导览逐幕显示，未合成口播音轨。英日文界面与逐幕旁白为文本，录屏为中文版。",
@@ -189,7 +197,7 @@
     "app/chapters/stellar.js": "fec6923d611f82aac6961d9afc8f7805f0ee428e20bdceec2d2a0d267b14fbc7",
     "app/chapters/wormhole.js": "77e5c06122b6adaaa45331e2f156698bc541b8a4605741ff57790f5d6eca7490",
     "app/common.js": "767aca30bf1c14af0ad5b13ba17c15716cfa57b3c8a67c43677688ca3008d4b8",
-    "app/content.js": "be281bfcd06fc9ddcc8f38d51ad720c03f264d19d3f49f9568106721a1d197ed",
+    "app/content.js": "988840f11eee08b9880e3c56235754d2e733bba5480540b1fcf15fade61d7334",
     "app/experience.js": "5a0a5dfd2d325ba4bd99116097e8b69ba4119cfb4156ca0ff1322b8a9e58cf5d",
     "app/i18n.js": "3dad6409b3c924da0fe32b00f34fd1f0483adee08782b303bfa8e26319cc57d1",
     "app/math.js": "7f22974acff525417b12d0ac51a50453e6d137efe18bad190ed92165bcada94c",
@@ -206,20 +214,21 @@
     "data/math-conversion.json": "745dd014693c507a1155b8acaaeba4c1ceeb0a063370c9826c6de0afd77fd374",
     "data/science-content.json": "b39950dc614a2be2a1a88463d95cdd5a67e9df16f7bb13d058ab65e9bce305a1",
     "data/voiceover.json": "bdb4f3c20fc8b80cd4dc9c54b20ff053469530c113f3e5e73a945e9269a8cfdc",
-    "evidence/acceptance-evidence.json": "1f967f7bf739b61943aec4a29490bae1ef06f0736bd6464a21f1924a596e9e5f",
-    "evidence/audio-event-results.json": "bc2721ca890094a59b21683d1d61c58f24a6c5686f85b63fe6c258212cdbeadc",
+    "evidence/acceptance-evidence.json": "de13baf7256e4200c41b0781defba202617ab9af641f3974d0bea1d6716ef1c0",
+    "evidence/audio-event-results.json": "6fc52472b04e1bc29e9b45d22cd0cba29301fdeb5d9ab3de4a4e7c8aa6502d44",
     "evidence/benchmark-before.json": "d76277fa69328c134bd3733e757ac50e0be6992e27a3dfb1c8ccf50f8ad91c71",
-    "evidence/experience-results-file.json": "a463ccf920f3ab69ae09ba30a853911a1996ca02cd8178861b88cc0fc76914b1",
-    "evidence/experience-results-http.json": "14b6b41c256334b716b3d73d56596e67b2d29b00590f12dd77640fc21fa51bde",
-    "evidence/runner-failure-results.json": "4fe8e10c2075d57cd2a6e2eabe3404a6da51d71df3e0283bf3bab67b1abc507f",
+    "evidence/experience-results-file.json": "c789d36c8925ff0c4faf6e3178b321868ac0a87c692ca95bb09b9a5fd01b7212",
+    "evidence/experience-results-http.json": "bdf142b6be4ee1d469c6233db1930320febbd6125b3a6ba7f2eb4f299e1fda53",
+    "evidence/runner-failure-results.json": "6b66aa8f0dda696652bd8092f980c01f4de1472069e02ef17776ae29353cc850",
     "evidence/source-audit.json": "00ef2ede01f033463765a954d8180c7ba2e5ca213202be99991f48a3ae8ee0d6",
-    "evidence/test-results-http.json": "eafb5ffc7578382803326e980d628936cee5f5c9d10d706f47979386eb149e0a",
-    "evidence/test-results.json": "ee58a3f6d8aabb3f52aec1ab99724e1dd7371d020e3e8ea1737003ae21c97380",
+    "evidence/test-results-http.json": "85a44370031d6979a1ea04e9857edcebcb27e1ade60a510e8f6bdd65a10c00ca",
+    "evidence/test-results.json": "ff3eea85d0cfac993c1e48d1ad50719a991b8b6eb43a30c16930d8b39db71ef6",
     "evidence/tour-recordings.json": "a03d33a8324aa2288a1c9543eb47c48961ea3914de4ed8ce6657989051abda56",
     "evidence/upgrade-performance-first-run.json": "532baa260d9a42ec189fb55d1ef84aa5fabb561fe25529791bbc53c194c507f3",
     "evidence/upgrade-performance-run2.json": "9021c3bf02a2b3b765f0ade15f9049adc20a416811bf65b7e6c6a35218916bdb",
     "evidence/upgrade-performance-run3.json": "62aac2682e0013916d5db0ef924b1cbad2cc2b6f0d3da4251c1eb5d39e3416f9",
-    "evidence/upgrade-performance.json": "62aac2682e0013916d5db0ef924b1cbad2cc2b6f0d3da4251c1eb5d39e3416f9",
+    "evidence/upgrade-performance-run4.json": "fb7b5b4a72da161c68ae3d0780d7aa3c8f3dfcd2366452392dfd327ba0acf324",
+    "evidence/upgrade-performance.json": "fb7b5b4a72da161c68ae3d0780d7aa3c8f3dfcd2366452392dfd327ba0acf324",
     "heatdeath.html": "2801b8f74a72e6b0dfc6bc2367ca4c72e8e0cc82e1eb95e192f874f30a2d463d",
     "index.html": "ad703d5e0d660596ad94d02fa31168a90f6fbcbf09ac208a330661b1cd9aa7c9",
     "output/tours/bigbang-audio.webm": "8ed34a8812ca0aaecaa9d1be2bf4e7c65dce49e53e5aa176e12b54f8b0b0ff7c",
