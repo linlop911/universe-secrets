@@ -1,0 +1,134 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+#glcanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+
+/* HUD Overlays */
+    .hud-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      transition: opacity 0.3s;
+    }
+
+.hud-hidden {
+      opacity: 0;
+      pointer-events: none !important;
+    }
+
+.interactive {
+      pointer-events: auto;
+    }
+
+/* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+.nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+.nav-tab {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      text-decoration: none;
+      color: #8faee0;
+      background: rgba(30, 60, 120, 0.35);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      transition: all 0.2s;
+    }
+
+.nav-tab:hover {
+      background: rgba(40, 90, 180, 0.55);
+      color: #fff;
+    }
+
+.top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+@keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+
+.control-item {
+      margin-bottom: 10px;
+    }
+
+.btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+/* Bottom Telemetry Bar */
+    .bottom-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+/* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 16, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+.modal-backdrop.open {
+      display: flex;
+    }
+
+.close-modal:hover {
+      color: #fff;
+    }
+
+.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11.5px;
+    }

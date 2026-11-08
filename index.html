@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇宙的秘密：黑洞引力透镜</title>
+  <script src="app/runtime.js"></script>
+  <script src="app/math.js"></script>
+  <script src="app/common.js"></script>
+  <script src="app/content.js"></script>
+  <script src="app/experience.js"></script>
+  <link rel="stylesheet" href="app/styles/base.css">
+  <style>
+body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e0e8ff;
+    }
+
+.header-title {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 12px;
+      padding: 14px 22px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), inset 0 0 16px rgba(40, 100, 255, 0.15);
+      max-width: 680px;
+    }
+
+.nav-tab.active {
+      background: linear-gradient(135deg, #0d47a1, #00838f);
+      color: #fff;
+      border-color: #4dd0e1;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(0, 131, 143, 0.6);
+    }
+
+.header-title h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.header-title h1 span.badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      background: linear-gradient(135deg, #d50000, #ff1744);
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+.header-title p {
+      font-size: 12px;
+      color: #8fa7df;
+      margin-top: 5px;
+      line-height: 1.45;
+    }
+
+.observatory-tag {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 11.5px;
+      color: #799be4;
+      line-height: 1.5;
+      text-align: right;
+      font-family: "Courier New", monospace;
+    }
+
+.pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00e5ff;
+      box-shadow: 0 0 8px #00e5ff;
+      animation: pulse 1.8s infinite;
+      margin-right: 6px;
+    }
+
+/* Side Panels */
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      margin: 12px 0;
+      pointer-events: none;
+    }
+
+.panel {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.32);
+      border-radius: 12px;
+      padding: 16px;
+      width: 320px;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75);
+    }
+
+.panel h3 {
+      font-size: 13.5px;
+      color: #00e5ff;
+      margin-bottom: 10px;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+.insight-card {
+      background: rgba(16, 28, 56, 0.65);
+      border-left: 3px solid #3d84ff;
+      border-radius: 0 6px 6px 0;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: #b0c4de;
+    }
+
+.insight-card strong {
+      color: #fff;
+    }
+
+.spectral-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+.spectral-btn {
+      background: rgba(20, 40, 80, 0.5);
+      border: 1px solid rgba(80, 160, 255, 0.28);
+      border-radius: 6px;
+      color: #8faee0;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+.spectral-btn:hover {
+      background: rgba(40, 80, 160, 0.65);
+      color: #fff;
+    }
+
+.spectral-btn.active {
+      background: linear-gradient(135deg, #0288d1, #00acc1);
+      color: #fff;
+      border-color: #4dd0e1;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(0, 172, 193, 0.55);
+    }
+
+.control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #8faee0;
+      margin-bottom: 4px;
+    }
+
+.control-label span.val {
+      font-family: monospace;
+      color: #4fc3f7;
+      font-weight: 600;
+    }
+
+input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(80, 130, 220, 0.25);
+      outline: none;
+    }
+
+input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #00e5ff;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00e5ff;
+    }
+
+.btn {
+      background: rgba(20, 50, 100, 0.5);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 6px;
+      color: #d1e0ff;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+.btn:hover {
+      background: rgba(35, 75, 150, 0.7);
+      border-color: #00e5ff;
+      color: #fff;
+    }
+
+.btn.active {
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      border-color: #64b5f6;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(25, 118, 210, 0.6);
+    }
+
+.btn.highlight {
+      background: linear-gradient(135deg, #7b1fa2, #ab47bc);
+      border-color: #ce93d8;
+      color: #fff;
+    }
+
+.audio-box {
+      margin-top: 8px;
+      background: rgba(4, 10, 22, 0.7);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      border-radius: 8px;
+      padding: 6px;
+    }
+
+#audio-canvas {
+      width: 100%;
+      height: 38px;
+      display: block;
+      background: #02050c;
+      border-radius: 4px;
+    }
+
+.telemetry-card {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(80, 140, 255, 0.28);
+      border-radius: 10px;
+      padding: 7px 12px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+
+.telemetry-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #799be4;
+      margin-bottom: 2px;
+    }
+
+.telemetry-val {
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      color: #00e5ff;
+      text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+    }
+
+.telemetry-val span.unit {
+      font-size: 9.5px;
+      color: #90caf9;
+      margin-left: 2px;
+    }
+
+.drag-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #7c9bcf;
+      margin-top: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+.modal-box {
+      background: #081022;
+      border: 1px solid #4fc3f7;
+      border-radius: 14px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 229, 255, 0.25);
+      color: #d0e4ff;
+    }
+
+.modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(80, 140, 255, 0.3);
+      padding-bottom: 10px;
+    }
+
+.modal-header h2 {
+      font-size: 17px;
+      color: #00e5ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.close-modal {
+      background: none;
+      border: none;
+      color: #8faee0;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+.data-table th, .data-table td {
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+.data-table th {
+      background: rgba(30, 60, 120, 0.35);
+      color: #64b5f6;
+    }
+  </style>
+  <link rel="stylesheet" href="app/styles/common.css">
+  <link rel="stylesheet" href="app/styles/experience.css">
+  <link rel="stylesheet" href="app/styles/design.css">
+</head>
+<body data-chapter="index">
+  <canvas id="glcanvas"></canvas>
+
+  <div class="hud-layer" id="hud-layer">
+    <!-- Top Bar -->
+    <div class="top-bar interactive">
+      <div class="header-title">
+        <div class="nav-tabs">
+          <a href="index.html" class="nav-tab active">第一章：黑洞引力透镜</a>
+          <a href="bigbang.html" class="nav-tab">第二章：大爆炸与CMB</a>
+          <a href="cosmicweb.html" class="nav-tab">第三章：宇宙网与暗物质</a>
+          <a href="stellar.html" class="nav-tab">第四章：恒星演化与超新星</a>
+          <a href="wormhole.html" class="nav-tab">第五章：假想虫洞</a>
+          <a href="heatdeath.html" class="nav-tab">第六章：宇宙热寂与重生</a>
+        </div>
+        <h1>
+          🌌 引力深渊与克尔旋转黑洞
+          <span class="badge">程序化科普演示</span>
+        </h1>
+        <p>经验偏折与程序生成吸积盘。几何读数采用克尔黑洞理论中的事件视界和顺行赤道光子轨道公式，显示画面采用归一化尺度；其余视觉系数为演示设定。[S9]</p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="btn-toggle-hud" title="快捷键 H 隐藏/显示 HUD">👁️ 纯净视效</button>
+        <button class="btn highlight" id="btn-modal">🔭 黑洞观测参考</button>
+        <div class="observatory-tag">程序化科普演示<br>观测背景与参考资料见科学说明。</div>
+      </div>
+    </div>
+
+    <!-- Side Panels -->
+    <div class="content-area">
+      <!-- Left: Reviewed science -->
+      <div class="panel interactive"><h3>科学背景与模型范围</h3><div class="insight-card">事件视界望远镜研究人马座 A* 与 M87* 附近的辐射结构。[S1]</div>
+<div class="insight-card">英仙座气体压力波的原始频率远低于人耳听阈；NASA 的可听声化经过频率转换。[S2]</div><div class="insight-card">经验偏折与程序生成吸积盘。几何读数采用克尔黑洞理论中的事件视界和顺行赤道光子轨道公式，显示画面采用归一化尺度；其余视觉系数为演示设定。[S9]</div><div class="insight-card">54、108、162 Hz 振荡器与啁啾声是本项目的合成音效，未导入官方音轨。</div></div>
+
+      <!-- Right: Interactive Control Panel -->
+      <div class="panel controls-panel interactive">
+        <h3>🎛️ 传感器与物理控制台</h3>
+
+        <div style="font-size:11px; color:#8faee0; margin-bottom:5px;">多波段传感器滤镜 (Multi-Spectral Filters)：</div>
+        <div class="spectral-selector">
+          <button class="spectral-btn active" data-spec="0">👁️ 综合可见光波段</button>
+          <button class="spectral-btn" data-spec="1">🔭 红外风格配色</button>
+          <button class="spectral-btn" data-spec="2">⚡ X 射线风格配色</button>
+          <button class="spectral-btn" data-spec="3">🌊 波纹示意配色</button>
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>克尔自旋参数 (<math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="a^* = Jc/GM^2"><mrow><msup><mi>a</mi><mo>*</mo></msup><mo>=</mo><mi>J</mi><mi>c</mi><mo>/</mo><mi>G</mi><msup><mi>M</mi><mn>2</mn></msup></mrow></math>)</span>
+            <span class="val" id="val-spin">0.94</span>
+          </div>
+          <input type="range" id="param-spin" min="0.1" max="0.99" step="0.01" value="0.94">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>黑洞质量（太阳质量；画面按引力半径归一化）</span>
+            <span class="val" id="val-mass">35.0</span>
+          </div>
+          <input type="range" id="param-mass" min="8" max="90" step="1" value="35">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>吸积盘湍流密度与厚度</span>
+            <span class="val" id="val-disk">1.65</span>
+          </div>
+          <input type="range" id="param-disk" min="0.3" max="3.0" step="0.05" value="1.65">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn active" id="btn-doppler">✨ 多普勒集束</button>
+          <button class="btn active" id="btn-spikes">🌟 六芒星光效果</button>
+          <button class="btn" id="btn-penrose">⚡ 彭罗斯能层</button>
+          <button class="btn" id="btn-director">🎥 电影导览视角</button>
+        </div>
+
+        <div class="btn-group" style="margin-top: 6px;">
+          <button class="btn" id="btn-audio">🔊 钱德拉声音化</button>
+          <button class="btn" id="btn-chirp">🌊 合成啁啾声</button>
+        </div>
+
+        <!-- Real-time Audio Visualizer -->
+        <div class="audio-box">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Bar -->
+    <div class="interactive" style="width: 100%;">
+      <div class="telemetry-caption">理论几何读数与演示系数</div><div class="bottom-bar">
+        <div class="telemetry-card">
+          <div class="telemetry-name">克尔事件视界 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="r_+"><mrow><msub><mi>r</mi><mo>+</mo></msub></mrow></math></div>
+          <div class="telemetry-val" id="disp-rs">69.4 <span class="unit">km</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">顺行赤道光子轨道 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="r_{ph}"><mrow><msub><mi>r</mi><mrow><mi>p</mi><mi>h</mi></mrow></msub></mrow></math></div>
+          <div class="telemetry-val" id="disp-rph">112.8 <span class="unit">km</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">引力时间单位 GM/c³</div>
+          <div class="telemetry-val" id="disp-time">172.4 <span class="unit">μs</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">亮暗显示系数（经验预设）</div>
+          <div class="telemetry-val" id="disp-flux">1 : 9.42</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">赤道能层坐标厚度 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="Delta r"><mrow><mi>Δ</mi><mi>r</mi></mrow></math></div>
+          <div class="telemetry-val" id="disp-penrose">51.6 <span class="unit">km</span></div>
+        </div>
+      </div>
+
+      <div class="drag-hint">拖拽旋转 · 双指或滚轮缩放 · 聚焦场景后用方向键与加减键操作 · H 隐藏界面</div>
+    </div>
+  </div>
+
+  <!-- NASA EHT & JWST Scientific Comparison Modal -->
+  <div class="modal-backdrop" id="modal-box">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🔭 EHT 观测背景与本页模型</h2>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+
+      <p class="science-reference">经验偏折与程序生成吸积盘。几何读数采用克尔黑洞理论中的事件视界和顺行赤道光子轨道公式，显示画面采用归一化尺度；其余视觉系数为演示设定。[S9]</p>
+
+      <div class="science-reference"><p>54、108、162 Hz 振荡器与啁啾声是本项目的合成音效，未导入官方音轨。</p><ul><li><a data-source-id="S1" href="https://eventhorizontelescope.org/blog/astronomers-reveal-first-image-black-hole-heart-our-galaxy" target="_blank" rel="noopener noreferrer">S1 · EHT: Sagittarius A*</a></li><li><a data-source-id="S2" href="https://science.nasa.gov/science-research/astrophysics/data-sonifications/" target="_blank" rel="noopener noreferrer">S2 · NASA: Data Sonifications — Black Holes (2022)</a></li><li><a data-source-id="S9" href="https://adsabs.harvard.edu/pdf/1972ApJ...178..347B" target="_blank" rel="noopener noreferrer">S9 · Bardeen, Press &amp; Teukolsky, Astrophysical Journal 178, 347–369 (1972)</a></li><li><a data-source-id="S10" href="https://arxiv.org/abs/1510.07674" target="_blank" rel="noopener noreferrer">S10 · IAU 2015 Resolution B3: nominal conversion constants</a></li></ul></div>
+
+      <div style="background: rgba(16, 32, 64, 0.6); padding: 12px; border-radius: 8px; font-size: 12px; line-height: 1.6;">
+        💡 <strong>致敬前沿科学</strong>：
+        EHT 观测为研究黑洞附近的辐射结构提供约束；本页未导入其成像或偏振数据，示意磁场强度也不是由观测反演得到。[S1]
+      </div>
+    </div>
+  </div>
+
+  <!-- WebGL Vertex Shader -->
+  <script id="vs" type="x-shader/x-vertex">
+    attribute vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.0, 1.0);
+    }
+  </script>
+
+  <!-- WebGL Fragment Shader: Cinema CG Kerr Raymarcher -->
+  <script id="fs" type="x-shader/x-fragment">
+    precision highp float;
+    uniform int u_quality_steps;
+
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform vec3 u_cam_pos;
+    uniform vec3 u_cam_target;
+    uniform float u_spin;
+    uniform float u_disk_density;
+    uniform float u_spectral_mode;
+    uniform int u_doppler;
+    uniform int u_jwst_spikes;
+    uniform int u_penrose_mode;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise2(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    float fbm(vec2 p) {
+      float v = 0.0;
+      float a = 0.5;
+      for (int i = 0; i < 4; i++) {
+        v += a * noise2(p);
+        p = p * 2.1 + vec2(1.5, 7.3);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    // Procedural starry deep nebula sky with Milky Way galactic dust lane
+    vec3 sampleSky(vec3 dir) {
+      float u = atan(dir.z, dir.x) / (2.0 * PI) + 0.5;
+      float v = asin(clamp(dir.y, -1.0, 1.0)) / PI + 0.5;
+
+      float neb = fbm(vec2(u * 5.0, v * 3.0) + u_time * 0.012);
+      float neb2 = fbm(vec2(u * 10.0 + 1.2, v * 6.0 + 3.4));
+      vec3 col = mix(vec3(0.01, 0.015, 0.04), vec3(0.08, 0.02, 0.12), neb);
+      col = mix(col, vec3(0.02, 0.05, 0.1), neb2 * 0.5);
+
+      // Galactic core glow band
+      float band = exp(-abs(dir.y) * 4.2) * 0.45;
+      col += vec3(0.18, 0.14, 0.28) * band;
+
+      // Thousands of sharp stars with twinkle
+      float starGrid1 = pow(hash(floor(vec2(u * 220.0, v * 110.0))), 38.0) * 2.5;
+      float starGrid2 = pow(hash(floor(vec2(u * 440.0, v * 220.0))), 52.0) * 4.0;
+      vec2 starLocal1 = fract(vec2(u * 220.0, v * 110.0)) - 0.5;
+      vec2 starLocal2 = fract(vec2(u * 440.0, v * 220.0)) - 0.5;
+      starGrid1 *= exp(-dot(starLocal1, starLocal1) * 65.0);
+      starGrid2 *= exp(-dot(starLocal2, starLocal2) * 80.0);
+      float twinkle = sin(u_time * 3.0 + u * 100.0) * 0.2 + 0.8;
+      col += vec3(0.75, 0.88, 1.0) * starGrid1 * twinkle;
+      col += vec3(1.0, 0.9, 0.7) * starGrid2;
+
+      return col;
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
+
+      // Camera Ray Basis
+      vec3 camDir = normalize(u_cam_target - u_cam_pos);
+      vec3 camRight = normalize(cross(camDir, vec3(0.0, 1.0, 0.0)));
+      vec3 camUp = cross(camRight, camDir);
+      vec3 rayDir = normalize(uv.x * camRight + uv.y * camUp + 1.35 * camDir);
+
+      vec3 rayPos = u_cam_pos;
+
+      // Kerr Physical Dimensions
+      float rs = 1.35;
+      float r_isco = rs * (1.8 + (1.0 - u_spin) * 0.9);
+      float r_out = rs * 6.2;
+
+      vec3 col = vec3(0.0);
+      float opacity = 0.0;
+      bool absorbed = false;
+
+      // Geodesic raymarching: 140 steps for ultra-clean curvature
+      for (int i = 0; i < 140; i++) {
+        if (i >= u_quality_steps) break;
+        float r = length(rayPos);
+
+        // Event Horizon
+        if (r < rs) {
+          absorbed = true;
+          break;
+        }
+
+        // Adaptive step size
+        float stepSize = clamp(r * 0.04, 0.042, 0.15);
+
+        // General Relativity Bending Vector towards black hole center
+        float bend = (1.55 * rs / (r * r)) * stepSize;
+        rayDir = normalize(rayDir - normalize(rayPos) * bend);
+
+        // Accretion Disk in equatorial plane y ~ 0
+        float diskH = 0.065 + 0.048 * (r / rs);
+        float distY = abs(rayPos.y);
+
+        if (r > r_isco && r < r_out && distY < diskH * 2.2) {
+          float densityY = exp(-0.5 * (distY * distY) / (diskH * diskH));
+          float radialWeight = smoothstep(r_isco, r_isco + 0.35, r) * (1.0 - smoothstep(r_out - 1.4, r_out, r));
+
+          float phi = atan(rayPos.z, rayPos.x);
+          float orbitalSpeed = sqrt(rs / (2.0 * r)) * u_spin;
+          float flowAngle = phi - u_time * (orbitalSpeed * 3.2 + 0.25);
+
+          float turb = fbm(vec2(r * 2.8, flowAngle * 3.2));
+          turb = mix(turb, noise2(vec2(r * 5.5, flowAngle * 6.5)), 0.35);
+
+          // Disk temperature gradient based on Shakura-Sunyaev alpha-disk model: T ~ (r_isco / r)^0.75
+          float temp = pow(r_isco / r, 0.75);
+          vec3 diskBase = vec3(1.0);
+
+          if (u_spectral_mode < 0.5) {
+            // 0. Visible Optical: Blazing gold, white-hot ISCO, ruby edge
+            diskBase = mix(vec3(1.0, 0.22, 0.01), vec3(1.0, 0.86, 0.38), temp);
+            if (temp > 0.62) diskBase = mix(diskBase, vec3(0.85, 0.96, 1.0), (temp - 0.62) * 2.8);
+          } else if (u_spectral_mode < 1.5) {
+            // 1. JWST Infrared: Amber dust, bright infrared ISCO
+            diskBase = mix(vec3(0.85, 0.05, 0.22), vec3(1.0, 0.78, 0.12), temp);
+            if (temp > 0.58) diskBase = mix(diskBase, vec3(1.0, 0.96, 0.82), (temp - 0.58) * 2.5);
+          } else if (u_spectral_mode < 2.5) {
+            // 2. Chandra X-Ray: Cyan-blue high-energy plasma
+            diskBase = mix(vec3(0.1, 0.25, 0.98), vec3(0.0, 0.95, 0.9), temp);
+            if (temp > 0.65) diskBase = mix(diskBase, vec3(0.96, 0.98, 1.0), (temp - 0.65) * 3.0);
+          } else {
+            // 3. LIGO Strain Field
+            diskBase = mix(vec3(0.0, 0.85, 0.45), vec3(0.96, 0.18, 0.88), temp);
+          }
+
+          // Relativistic Doppler Beaming
+          float doppler = 1.0;
+          if (u_doppler == 1) {
+            vec3 orbitV = vec3(-sin(phi), 0.0, cos(phi)) * orbitalSpeed;
+            float betaCos = dot(orbitV, -rayDir);
+            float gamma = 1.0 / sqrt(max(0.02, 1.0 - orbitalSpeed * orbitalSpeed));
+            float D = 1.0 / (gamma * (1.0 - betaCos));
+            doppler = pow(clamp(D, 0.22, 3.4), 2.8);
+
+            if (betaCos > 0.0 && u_spectral_mode < 0.5) {
+              diskBase = mix(diskBase, vec3(0.38, 0.88, 1.0), betaCos * 1.25);
+            }
+          }
+
+          // Gravitational Redshift dimming as r -> rs
+          float gravRedshift = sqrt(max(0.05, 1.0 - rs / r));
+
+          float sampleA = densityY * radialWeight * turb * (0.8 * u_disk_density) * doppler * gravRedshift;
+          col += diskBase * sampleA * (1.0 - opacity);
+          opacity += sampleA * 1.45;
+
+          if (opacity >= 0.98) break;
+        }
+
+        // Razor-sharp Photon Sphere Ring at 1.5 * rs
+        float distPhoton = abs(r - rs * 1.5);
+        if (distPhoton < 0.24 * rs) {
+          float ringGlow = exp(-distPhoton * 17.0) * 0.42;
+          col += vec3(1.0, 0.96, 0.82) * ringGlow * (1.0 - opacity);
+        }
+
+        // Penrose Process Ergosphere (between rs and r_ergo)
+        if (u_penrose_mode == 1) {
+          float cosT = rayPos.y / r;
+          float r_ergo = rs * (1.0 + sqrt(max(0.01, 1.0 - u_spin * u_spin * cosT * cosT)));
+          if (r > rs && r < r_ergo) {
+            col += vec3(0.0, 1.0, 0.5) * 0.045 * (1.0 - opacity);
+          }
+        }
+
+        rayPos += rayDir * stepSize;
+        if (r > 19.0) break;
+      }
+
+      if (absorbed) {
+        // Event Horizon shadow
+        col = col * 0.08;
+      } else {
+        // Background lensed cosmos
+        vec3 bg = sampleSky(rayDir);
+        col = col + bg * (1.0 - clamp(opacity, 0.0, 1.0));
+      }
+
+      // JWST Hexagonal Diffraction Spikes
+      if (u_jwst_spikes == 1) {
+        float bright = max(0.0, col.r * 0.5 + col.g * 0.4 + col.b * 0.1 - 0.7);
+        if (bright > 0.01) {
+          float sp1 = exp(-abs(uv.y) * 45.0);
+          vec2 rot1 = vec2(uv.x * 0.5 - uv.y * 0.866, uv.x * 0.866 + uv.y * 0.5);
+          float sp2 = exp(-abs(rot1.y) * 45.0);
+          vec2 rot2 = vec2(uv.x * 0.5 + uv.y * 0.866, -uv.x * 0.866 + uv.y * 0.5);
+          float sp3 = exp(-abs(rot2.y) * 45.0);
+
+          float totalSp = (sp1 + sp2 + sp3) * 0.25 * bright;
+          col += vec3(0.92, 0.96, 1.0) * totalSp;
+        }
+      }
+
+      // Filmic ACES Tone Mapping
+      col = (col * (2.51 * col + 0.03)) / (col * (2.43 * col + 0.59) + 0.14);
+
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  </script>
+
+  <!-- Application Logic & NASA Chandra Data Sonification Engine -->
+  <script src="app/chapters/index.js"></script>
+</body>
+</html>

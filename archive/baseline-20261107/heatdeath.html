@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇宙的秘密：宇宙终局假设</title>
+  <script src="runtime.js"></script>
+  <script src="math.js"></script>
+  <script src="common.js"></script>
+  <link rel="stylesheet" href="base.css">
+  <style>
+body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #010103;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e0ecff;
+    }
+
+.header-box {
+      background: rgba(10, 10, 25, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(160, 100, 255, 0.35);
+      border-radius: 12px;
+      padding: 14px 22px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), inset 0 0 16px rgba(160, 100, 255, 0.12);
+      max-width: 680px;
+    }
+
+.nav-tab.active {
+      background: linear-gradient(135deg, #4a148c, #7b1fa2);
+      color: #fff;
+      border-color: #ea80fc;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(123, 31, 162, 0.6);
+    }
+
+.header-box h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.header-box h1 span.badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      background: linear-gradient(135deg, #aa00ff, #e040fb);
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+.header-box p {
+      font-size: 12px;
+      color: #ce93d8;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+.observatory-tag {
+      background: rgba(10, 10, 25, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(160, 100, 255, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 11.5px;
+      color: #e1bee7;
+      line-height: 1.5;
+      text-align: right;
+      font-family: "Courier New", monospace;
+    }
+
+.pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e040fb;
+      box-shadow: 0 0 8px #e040fb;
+      animation: pulse 1.6s infinite;
+      margin-right: 6px;
+    }
+
+/* Side Panels */
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      margin: 12px 0;
+      pointer-events: none;
+    }
+
+.panel {
+      background: rgba(10, 10, 25, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(160, 100, 255, 0.32);
+      border-radius: 12px;
+      padding: 16px;
+      color: #d1e0ff;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
+      width: 320px;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+    }
+
+.panel h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ea80fc;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(234, 128, 252, 0.25);
+      padding-bottom: 6px;
+    }
+
+.insight-card {
+      background: rgba(40, 20, 50, 0.5);
+      border-left: 3px solid #e040fb;
+      border-radius: 4px;
+      padding: 8px 10px;
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: #f3e5f5;
+      line-height: 1.5;
+    }
+
+.control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #ce93d8;
+      margin-bottom: 4px;
+    }
+
+.control-label span.val {
+      font-family: monospace;
+      color: #ea80fc;
+      font-weight: 600;
+    }
+
+input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(160, 100, 255, 0.25);
+      outline: none;
+    }
+
+input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #e040fb;
+      cursor: pointer;
+      box-shadow: 0 0 8px #e040fb;
+    }
+
+.btn {
+      background: rgba(55, 25, 75, 0.45);
+      border: 1px solid rgba(160, 100, 255, 0.3);
+      border-radius: 6px;
+      color: #f3e5f5;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+.btn:hover {
+      background: rgba(85, 35, 120, 0.65);
+      color: #fff;
+      border-color: #ea80fc;
+    }
+
+.btn.active {
+      background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+      border-color: #ea80fc;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(170, 0, 255, 0.55);
+    }
+
+.btn.highlight {
+      background: linear-gradient(135deg, #c2185b, #e91e63);
+      border-color: #ff4081;
+      color: #fff;
+    }
+
+.epoch-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin: 8px 0;
+    }
+
+.epoch-btn {
+      background: rgba(45, 20, 60, 0.5);
+      border: 1px solid rgba(160, 100, 255, 0.25);
+      border-radius: 6px;
+      color: #ce93d8;
+      padding: 5px 6px;
+      font-size: 10.5px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+.epoch-btn:hover {
+      background: rgba(75, 30, 100, 0.6);
+      color: #fff;
+    }
+
+.epoch-btn.active {
+      background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+      color: #fff;
+      font-weight: 700;
+      border-color: #ea80fc;
+      box-shadow: 0 0 8px rgba(170, 0, 255, 0.5);
+    }
+
+.audio-box {
+      margin-top: 8px;
+      background: rgba(10, 4, 15, 0.7);
+      border: 1px solid rgba(160, 100, 255, 0.25);
+      border-radius: 8px;
+      padding: 6px;
+    }
+
+#audio-canvas {
+      width: 100%;
+      height: 38px;
+      display: block;
+      background: #06020c;
+      border-radius: 4px;
+    }
+
+.telemetry-card {
+      background: rgba(10, 10, 25, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(160, 100, 255, 0.28);
+      border-radius: 10px;
+      padding: 7px 12px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+
+.telemetry-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #ce93d8;
+      margin-bottom: 2px;
+    }
+
+.telemetry-val {
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      color: #ea80fc;
+      text-shadow: 0 0 8px rgba(234, 128, 252, 0.5);
+    }
+
+.telemetry-val span.unit {
+      font-size: 9.5px;
+      color: #f3e5f5;
+      margin-left: 2px;
+    }
+
+.drag-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #ce93d8;
+      margin-top: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+.modal-box {
+      background: #100618;
+      border: 1px solid #ea80fc;
+      border-radius: 14px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(170, 0, 255, 0.25);
+      color: #f3e5f5;
+    }
+
+.modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(160, 100, 255, 0.3);
+      padding-bottom: 10px;
+    }
+
+.modal-header h2 {
+      font-size: 17px;
+      color: #ea80fc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.close-modal {
+      background: none;
+      border: none;
+      color: #ce93d8;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+.data-table th, .data-table td {
+      border: 1px solid rgba(160, 100, 255, 0.25);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+.data-table th {
+      background: rgba(70, 25, 90, 0.4);
+      color: #ea80fc;
+    }
+  </style>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body>
+  <canvas id="glcanvas"></canvas>
+
+  <div class="hud-layer" id="hud-layer">
+    <!-- Top Bar -->
+    <div class="top-bar interactive">
+      <div class="header-box">
+        <div class="nav-tabs">
+          <a href="index.html" class="nav-tab">第一章：黑洞引力透镜</a>
+          <a href="bigbang.html" class="nav-tab">第二章：大爆炸与CMB</a>
+          <a href="cosmicweb.html" class="nav-tab">第三章：宇宙网与暗物质</a>
+          <a href="stellar.html" class="nav-tab">第四章：恒星演化与超新星</a>
+          <a href="wormhole.html" class="nav-tab">第五章：假想虫洞</a>
+          <a href="heatdeath.html" class="nav-tab active">第六章：宇宙热寂与重生</a>
+        </div>
+        <h1>
+          🌌 时间的尽头、永恒热寂与庞加莱量子重现
+          <span class="badge">程序化科普演示</span>
+        </h1>
+        <p>常数 w 且暗能量主导时，w 小于 −1/3 对应加速。密度比 rho(a)/rho(1)=a^[−3(1+w)] 在 a=2 处映射为视觉尺度。霍金系数调整示意余辉；质子衰变和重生只是假设情景。</p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="btn-toggle-hud" title="快捷键 H 隐藏/显示 HUD">👁️ 纯净视效</button>
+        <button class="btn highlight" id="btn-modal">🔭 暗能量与终局说明</button>
+        <div class="observatory-tag">程序化科普演示<br>观测背景与参考资料见科学说明。</div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Left: Reviewed science -->
+      <div class="panel interactive"><h3>科学背景与模型范围</h3><div class="insight-card">观测表明宇宙膨胀正在加速，但暗能量的基本性质仍有开放问题。[S8]</div><div class="insight-card">常数 w 且暗能量主导时，w 小于 −1/3 对应加速。密度比 rho(a)/rho(1)=a^[−3(1+w)] 在 a=2 处映射为视觉尺度。霍金系数调整示意余辉；质子衰变和重生只是假设情景。</div><div class="insight-card">低音、扫频和重生和弦由振荡器合成。重生动画不代表已观测或必然发生的宇宙事件。</div></div>
+
+      <!-- Right: Controls -->
+      <div class="panel controls-panel interactive">
+        <h3>🎛️ 终局假设与演示阶段控制台</h3>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>演示阶段（0—4，无量纲）</span>
+            <span class="val" id="val-stage">0.0 (恒星繁衍期)</span>
+          </div>
+          <input type="range" id="param-stage" min="0" max="4" step="0.005" value="0">
+        </div>
+
+        <div style="font-size:11px; color:#ce93d8; margin-bottom:5px;">宇宙终局五大超级演化纪元：</div>
+        <div class="epoch-selector">
+          <button class="epoch-btn active" data-step="0">0. 恒星繁衍期 (<math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="10^{10}text{y}"><mrow><msup><mn>10</mn><mrow><mn>10</mn></mrow></msup><mtext>y</mtext></mrow></math>)</button>
+          <button class="epoch-btn" data-step="1">1. 简并枯竭期 (<math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="10^{14}text{y}"><mrow><msup><mn>10</mn><mrow><mn>14</mn></mrow></msup><mtext>y</mtext></mrow></math>)</button>
+          <button class="epoch-btn" data-step="2">2. 质子衰变假设 (<math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="10^{40}text{y}"><mrow><msup><mn>10</mn><mrow><mn>40</mn></mrow></msup><mtext>y</mtext></mrow></math>)</button>
+          <button class="epoch-btn" data-step="3">3. 黑洞蒸发期 (<math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="10^{100}text{y}"><mrow><msup><mn>10</mn><mrow><mn>100</mn></mrow></msup><mtext>y</mtext></mrow></math>)</button>
+          <button class="epoch-btn" data-step="4" style="grid-column: span 2;">4. 德西特真空与假想重生</button>
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>暗能量状态方程参数 (<math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="w"><mrow><mi>w</mi></mrow></math>)</span>
+            <span class="val" id="val-w">-1.03 (假设暗能量主导：加速)</span>
+          </div>
+          <input type="range" id="param-w" min="-1.8" max="-0.5" step="0.01" value="-1.03">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>霍金余辉衰减（示意系数）</span>
+            <span class="val" id="val-hawking">1.60</span>
+          </div>
+          <input type="range" id="param-hawking" min="0.5" max="3.0" step="0.1" value="1.60">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn" id="btn-autoplay">▶️ 演示阶段播放</button>
+          <button class="btn" id="btn-director">🎥 电影导览视角</button>
+          <button class="btn" id="btn-audio">🔊 宇宙沉寂音景</button>
+          <button class="btn highlight" id="btn-rebirth">🔄 假想重生动画</button>
+        </div>
+
+        <div class="audio-box">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Bar -->
+    <div class="interactive" style="width: 100%;">
+      <div class="telemetry-caption">阶段预设示意读数</div><div class="bottom-bar">
+        <div class="telemetry-card">
+          <div class="telemetry-name">全宇宙平均温度</div>
+          <div class="telemetry-val" id="disp-temp">2.725 <span class="unit">K</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">宇宙总熵密度</div>
+          <div class="telemetry-val" id="disp-entropy">10⁹⁰ <span class="unit">k_B</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">存活黑洞总质量</div>
+          <div class="telemetry-val" id="disp-bh">10¹² <span class="unit">M_☉</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">主导实体状态</div>
+          <div class="telemetry-val" id="disp-dom">发光星系与生命</div>
+        </div>
+      </div>
+
+      <div class="drag-hint">拖拽旋转 · 双指或滚轮缩放 · 聚焦场景后用方向键与加减键操作 · H 隐藏界面</div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal-box">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🔭 宇宙终局模型参考</h2>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+
+      <p class="science-reference">常数 w 且暗能量主导时，w 小于 −1/3 对应加速。密度比 rho(a)/rho(1)=a^[−3(1+w)] 在 a=2 处映射为视觉尺度。霍金系数调整示意余辉；质子衰变和重生只是假设情景。</p>
+
+      <div class="science-reference"><p>低音、扫频和重生和弦由振荡器合成。重生动画不代表已观测或必然发生的宇宙事件。</p><ul><li><a data-source-id="S8" href="https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/expand-our-knowledge-of-dark-energy/" target="_blank" rel="noopener noreferrer">S8 · NASA: Expand our Knowledge of Dark Energy</a></li><li><a data-source-id="S11" href="https://arxiv.org/abs/astro-ph/0004075" target="_blank" rel="noopener noreferrer">S11 · Carroll: The Cosmological Constant, Living Reviews in Relativity (2001)</a></li></ul></div>
+    </div>
+  </div>
+
+  <!-- Pass 1: Volumetric De Sitter Vacuum & Quantum Fluctuation Background Shader -->
+  <script id="vs-bg" type="x-shader/x-vertex">
+    attribute vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.999, 1.0);
+    }
+  </script>
+
+  <script id="fs-bg" type="x-shader/x-fragment">
+    precision highp float;
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform float u_stage;
+    uniform float u_rebirth_flash;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    float fbm(vec2 p) {
+      float v = 0.0;
+      float a = 0.5;
+      for (int i = 0; i < 4; i++) {
+        v += a * noise(p);
+        p = p * 2.08 + vec2(2.3, 4.7);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
+      float dist = length(uv);
+
+      vec3 col = vec3(0.012, 0.008, 0.02);
+
+      if (u_stage < 1.0) {
+        // 0. Stelliferous Era: Radiant Galactic Core & Starry Background
+        float t = u_stage;
+        float core = exp(-dist * 3.5) * 1.2;
+        float neb = fbm(uv * 4.5 + u_time * 0.015);
+        vec3 galCol = mix(vec3(0.02, 0.04, 0.1), vec3(0.25, 0.1, 0.35), neb);
+        galCol += vec3(1.0, 0.85, 0.55) * core;
+        col = mix(col, galCol, 0.85 - t * 0.45);
+      } else if (u_stage < 2.0) {
+        // 1. Degenerate Era: Dying embers, dim red-brown cooling glow
+        float t = u_stage - 1.0;
+        float core = exp(-dist * 2.8) * (0.8 - t * 0.5);
+        vec3 ember = vec3(0.35, 0.08, 0.02) * core;
+        col += ember;
+      } else if (u_stage < 3.0) {
+        // 2. Proton Decay Era: Ghostly faint Cherenkov radiation haze
+        float t = u_stage - 2.0;
+        float cherenkov = fbm(uv * 6.0 + u_time * 0.03) * 0.25;
+        vec3 haze = vec3(0.05, 0.12, 0.35) * cherenkov;
+        col += haze;
+      } else if (u_stage < 3.9) {
+        // 3. Black Hole Era: Dark horizon shadows & Hawking Radiation high-energy halos
+        float t = (u_stage - 3.0) / 0.9;
+        float hawkingGlow = exp(-abs(dist - 0.35) * 16.0) * (0.6 + t * 0.8);
+        vec3 hawkCol = mix(vec3(0.0, 0.7, 1.0), vec3(1.0, 0.9, 0.6), t);
+        col += hawkCol * hawkingGlow;
+      } else {
+        // 4. Dark Era & Quantum Vacuum Fluctuations
+        float t = u_stage - 3.9;
+        float vac = noise(uv * 24.0 + u_time * 2.0) * 0.08;
+        col += vec3(0.02, 0.03, 0.08) * vac;
+      }
+
+      // Poincaré Quantum Rebirth Explosive Flash
+      if (u_rebirth_flash > 0.001) {
+        float flash = exp(-dist * (6.0 - u_rebirth_flash * 4.0)) * u_rebirth_flash * 2.5;
+        vec3 rebirthCol = mix(vec3(1.0, 0.4, 0.05), vec3(1.0, 0.95, 0.9), u_rebirth_flash);
+        col += rebirthCol * flash;
+      }
+
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  </script>
+
+  <!-- Pass 2: 140,000 GPU Particles Simulation Shader -->
+  <script id="vs-entropy" type="x-shader/x-vertex">
+    attribute vec3 a_seed;
+    attribute float a_type;
+
+    uniform mat4 u_mvp;
+    uniform float u_stage;
+    uniform float u_time;
+    uniform float u_w;
+    uniform float u_hawking;
+    uniform float u_point_scale;
+    uniform float u_rebirth_flash;
+
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    void main() {
+      float phi = a_seed.x * 2.0 * PI;
+      float theta = acos(clamp(a_seed.y * 2.0 - 1.0, -1.0, 1.0));
+      float baseRad = a_seed.z;
+
+      vec3 dir = vec3(
+        sin(theta) * cos(phi),
+        sin(theta) * sin(phi),
+        cos(theta)
+      );
+
+      vec3 pos = vec3(0.0);
+      vec3 col = vec3(1.0);
+      float ptSize = 3.6;
+      float alpha = 0.85;
+
+      // 0. Stelliferous Era: Brilliant spiral galaxy
+      float arm = phi * 2.5 + pow(baseRad, 0.5) * 6.0;
+      float r0 = baseRad * 18.0 + 1.2;
+      vec3 pos0 = vec3(
+        r0 * cos(arm + u_time * 0.15),
+        (noise(vec2(phi * 4.0, baseRad * 6.0)) - 0.5) * 2.8,
+        r0 * sin(arm + u_time * 0.15)
+      );
+      vec3 col0 = mix(vec3(1.0, 0.85, 0.4), vec3(0.35, 0.75, 1.0), baseRad);
+
+      // 1. Degenerate Era: Scattered white dwarfs and brown dwarfs
+      float r1 = r0 * 1.6;
+      vec3 pos1 = dir * r1;
+      vec3 col1 = mix(vec3(0.65, 0.25, 0.08), vec3(0.45, 0.6, 0.8), baseRad);
+
+      // 2. Proton Decay: Dissolving particles
+      float decayJitter = noise(vec2(phi * 8.0 + u_time, theta * 8.0)) * 6.0;
+      vec3 pos2 = dir * (r1 * 2.2 + decayJitter);
+      vec3 col2 = vec3(0.2, 0.45, 0.95);
+
+      // 3. Black Hole Era: Accretion & Hawking Evaporation
+      float r3 = 5.0 + baseRad * 22.0;
+      vec3 pos3 = dir * r3;
+      vec3 col3 = mix(vec3(0.0, 0.85, 1.0), vec3(1.0, 0.95, 0.8), baseRad);
+
+      // 4. Dark Era: Solitary electrons and positrons drifting apart
+      vec3 pos4 = dir * (baseRad * 48.0);
+      vec3 col4 = vec3(0.4, 0.15, 0.65);
+
+      // Stage interpolation
+      float st = clamp(u_stage, 0.0, 4.0);
+      float typeJitter = (a_type - 0.5) * 0.25;
+      ptSize += typeJitter;
+      if (st < 1.0) {
+        float f = st;
+        pos = mix(pos0, pos1, f);
+        col = mix(col0, col1, f);
+        alpha = mix(0.9, 0.75, f);
+        ptSize = mix(4.0, 3.2, f);
+      } else if (st < 2.0) {
+        float f = st - 1.0;
+        pos = mix(pos1, pos2, f);
+        col = mix(col1, col2, f);
+        alpha = mix(0.75, 0.55, f);
+        ptSize = mix(3.2, 2.6, f);
+      } else if (st < 3.0) {
+        float f = st - 2.0;
+        pos = mix(pos2, pos3, f);
+        col = mix(col2, col3, f);
+        alpha = mix(0.55, 0.45, f);
+        ptSize = mix(2.6, 2.8, f);
+      } else {
+        float f = st - 3.0;
+        pos = mix(pos3, pos4, f);
+        col = mix(col3, col4, f);
+        alpha = mix(0.45, 0.25, f);
+        ptSize = mix(2.8, 2.0, f);
+      }
+
+      // Illustrative density response rho_DE(a)/rho_DE(1) at a=2, not a trajectory solver.
+      float densityRatio = pow(2.0, -3.0 * (1.0 + u_w));
+      pos *= clamp(pow(densityRatio, 0.12), 0.75, 1.35);
+
+      // Poincaré Rebirth Reaction: collapse back into high-energy singularity
+      if (u_rebirth_flash > 0.01) {
+        pos = mix(pos, dir * (baseRad * 4.0), u_rebirth_flash);
+        col = mix(col, vec3(1.0, 0.95, 0.7), u_rebirth_flash);
+        alpha = mix(alpha, 1.0, u_rebirth_flash);
+        ptSize *= (1.0 + u_rebirth_flash * 2.0);
+      }
+
+      // Relative glow decay at the illustrative black-hole stage.
+      alpha *= exp(-u_hawking * max(0.0, u_stage - 2.0) * 0.18);
+      v_color = col;
+      v_alpha = alpha;
+
+      gl_Position = u_mvp * vec4(pos, 1.0);
+      gl_PointSize = clamp(ptSize * (18.0 / gl_Position.w) * u_point_scale, 0.75, 6.0 * u_point_scale);
+    }
+  </script>
+
+  <script id="fs-entropy" type="x-shader/x-fragment">
+    precision highp float;
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    void main() {
+      vec2 coord = gl_PointCoord - vec2(0.5);
+      float distSq = dot(coord, coord);
+      if (distSq > 0.25) discard;
+
+      float glow = exp(-distSq * 8.5);
+      gl_FragColor = vec4(v_color, v_alpha * glow * 0.25);
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script src="chapters/heatdeath.js"></script>
+</body>
+</html>

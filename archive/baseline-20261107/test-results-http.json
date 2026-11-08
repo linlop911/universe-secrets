@@ -1,0 +1,3551 @@
+{
+  "date": "2026-11-06",
+  "mode": "http",
+  "profile": "full",
+  "started": "2026-11-06T10:25:01.087Z",
+  "results": [
+    {
+      "page": "project",
+      "name": "static integrity",
+      "passed": true,
+      "evidence": {
+        "pages": 6,
+        "parameters": 18,
+        "nativeMathML": true
+      }
+    },
+    {
+      "page": "index",
+      "name": "WebGL and deterministic frame",
+      "passed": true,
+      "evidence": {
+        "sample": {
+          "width": 640,
+          "height": 420,
+          "hash": "9cdecb82",
+          "coverage": 1,
+          "saturatedFraction": 0.0009375,
+          "maxBrightness": 762,
+          "meanBrightness": 161.92708333333334,
+          "glError": 0,
+          "state": {
+            "camRadius": 8.2,
+            "camTheta": 0.22,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastMouseX": 0,
+            "lastMouseY": 0,
+            "directorMode": false,
+            "massVal": 35,
+            "spinVal": 0.94,
+            "diskVal": 1.65,
+            "spectralMode": 0,
+            "dopplerActive": 1,
+            "jwstSpikes": 1,
+            "penroseActive": 0,
+            "audioActive": false
+          },
+          "telemetry": [
+            "69.3 km",
+            "73.7 km",
+            "172.4 μs",
+            "1 : 25.00",
+            "34.1 km"
+          ]
+        },
+        "repeat": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "reload": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "page": "index",
+      "name": "all parameter endpoints change their documented model",
+      "passed": true,
+      "evidence": {
+        "param-spin": {
+          "min": 0.1,
+          "default": 0.94,
+          "max": 0.99,
+          "state": "spinVal",
+          "minHash": "4baefb1b",
+          "defaultHash": "9cdecb82",
+          "maxHash": "381aaf7b",
+          "lowMinHash": "6e604ad",
+          "lowMaxHash": "922fd3e2",
+          "effect": "visual"
+        },
+        "param-mass": {
+          "min": 8,
+          "default": 35,
+          "max": 90,
+          "state": "massVal",
+          "minHash": "9cdecb82",
+          "defaultHash": "9cdecb82",
+          "maxHash": "9cdecb82",
+          "lowMinHash": "2c521771",
+          "lowMaxHash": "2c521771",
+          "effect": "physical-readout"
+        },
+        "param-disk": {
+          "min": 0.3,
+          "default": 1.65,
+          "max": 3,
+          "state": "diskVal",
+          "minHash": "26bdef2a",
+          "defaultHash": "9cdecb82",
+          "maxHash": "4e0ac61b",
+          "lowMinHash": "80c9bdba",
+          "lowMaxHash": "81231f52",
+          "effect": "visual"
+        }
+      }
+    },
+    {
+      "page": "index",
+      "name": "chapter mode, stage and toggle buttons",
+      "passed": true,
+      "evidence": [
+        {
+          "button": "👁️ 综合可见光波段",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "button": "🔭 红外风格配色",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "button": "⚡ X 射线风格配色",
+          "expected": 2,
+          "actual": 2
+        },
+        {
+          "button": "🌊 波纹示意配色",
+          "expected": 3,
+          "actual": 3
+        },
+        {
+          "button": "btn-director",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-doppler",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-spikes",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-penrose",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "page": "index",
+      "name": "stages stay visible without additive whiteout",
+      "passed": true,
+      "evidence": [
+        {
+          "quality": "high",
+          "stage": null,
+          "hash": "9cdecb82",
+          "coverage": 1,
+          "mean": 161.92708333333334,
+          "saturated": 0.0009375
+        },
+        {
+          "quality": "low",
+          "stage": null,
+          "hash": "2c521771",
+          "coverage": 1,
+          "mean": 360.87916666666666,
+          "saturated": 0
+        }
+      ]
+    },
+    {
+      "page": "index",
+      "name": "navigation, dialog keyboard, HUD and labels",
+      "passed": true,
+      "evidence": {
+        "links": [
+          "index.html",
+          "bigbang.html",
+          "cosmicweb.html",
+          "stellar.html",
+          "wormhole.html",
+          "heatdeath.html"
+        ],
+        "active": 1,
+        "open": true,
+        "focus": "btn-close-modal",
+        "role": "dialog",
+        "labels": true
+      }
+    },
+    {
+      "page": "index",
+      "name": "pointer, pinch, cancellation and scene keyboard",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "yaw": 0.8604867999999999,
+          "radius": 8.2
+        },
+        "dragged": {
+          "yaw": 1.1604868
+        },
+        "pinched": {
+          "radius": 5.637499999999999
+        }
+      }
+    },
+    {
+      "page": "index",
+      "name": "four viewports and every reachable control",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800,
+          "renderWidth": 720,
+          "renderHeight": 1600,
+          "checkedControls": 7
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "renderWidth": 780,
+          "renderHeight": 1688,
+          "checkedControls": 7
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "renderWidth": 768,
+          "renderHeight": 1024,
+          "checkedControls": 7
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "renderWidth": 1920,
+          "renderHeight": 1080,
+          "checkedControls": 7
+        }
+      ]
+    },
+    {
+      "page": "index",
+      "name": "quality levels, governor hysteresis and reduced motion",
+      "passed": true,
+      "evidence": {
+        "governor": {
+          "before": "high",
+          "after": "medium",
+          "held": "medium",
+          "promoted": "high"
+        },
+        "samples": {
+          "high": {
+            "width": 640,
+            "height": 420,
+            "hash": "9cdecb82"
+          },
+          "medium": {
+            "width": 512,
+            "height": 336,
+            "hash": "7037c2a0"
+          },
+          "low": {
+            "width": 384,
+            "height": 252,
+            "hash": "2c521771"
+          }
+        }
+      }
+    },
+    {
+      "page": "index",
+      "name": "three context losses preserve model and resources",
+      "passed": true,
+      "evidence": {
+        "generations": 3,
+        "programs": 1,
+        "resources": 4
+      }
+    },
+    {
+      "page": "index",
+      "name": "single RAF and background visibility lifecycle",
+      "passed": true,
+      "evidence": {
+        "visibility": "deterministic visibilitychange injection",
+        "hiddenElapsed": 200.19999999999993,
+        "resumedElapsed": 291.29999999999984
+      }
+    },
+    {
+      "page": "index",
+      "name": "audio signal, mute, repeat toggle and bounded nodes",
+      "passed": true,
+      "evidence": {
+        "peak": 0.31121203303337097,
+        "rms": 0.1501844237991012,
+        "schedule": null,
+        "recordingBytes": 8024,
+        "beforeNodes": 6,
+        "afterNodes": 6
+      }
+    },
+    {
+      "page": "index",
+      "name": "measured GPU performance at desktop and phone viewport",
+      "passed": true,
+      "evidence": [
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 1280,
+            "height": 720
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "camRadius": 8.2,
+            "camTheta": 0.22,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastMouseX": 0,
+            "lastMouseY": 0,
+            "directorMode": false,
+            "massVal": 35,
+            "spinVal": 0.94,
+            "diskVal": 1.65,
+            "spectralMode": 0,
+            "dopplerActive": 1,
+            "jwstSpikes": 1,
+            "penroseActive": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 6.899999976158142,
+          "p95": 23.700000047683716,
+          "max": 26.600000023841858,
+          "longFrames": 0,
+          "frameCount": 682,
+          "programCount": 1,
+          "resourceCount": 4,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 6,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 768,
+            "height": 432
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "camRadius": 8.2,
+            "camTheta": 0.22,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastMouseX": 0,
+            "lastMouseY": 0,
+            "directorMode": false,
+            "massVal": 35,
+            "spinVal": 0.94,
+            "diskVal": 1.65,
+            "spectralMode": 0,
+            "dopplerActive": 1,
+            "jwstSpikes": 1,
+            "penroseActive": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 2.6999999284744263,
+          "p95": 4.700000047683716,
+          "max": 5.5,
+          "longFrames": 0,
+          "frameCount": 707,
+          "programCount": 1,
+          "resourceCount": 4,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 6,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 720,
+            "height": 1600
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "camRadius": 8.2,
+            "camTheta": 0.22,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastMouseX": 0,
+            "lastMouseY": 0,
+            "directorMode": false,
+            "massVal": 35,
+            "spinVal": 0.94,
+            "diskVal": 1.65,
+            "spectralMode": 0,
+            "dopplerActive": 1,
+            "jwstSpikes": 1,
+            "penroseActive": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 5.399999976158142,
+          "p95": 20.5,
+          "max": 35.299999952316284,
+          "longFrames": 0,
+          "frameCount": 732,
+          "programCount": 1,
+          "resourceCount": 4,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 6,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 432,
+            "height": 960
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "camRadius": 8.2,
+            "camTheta": 0.22,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastMouseX": 0,
+            "lastMouseY": 0,
+            "directorMode": false,
+            "massVal": 35,
+            "spinVal": 0.94,
+            "diskVal": 1.65,
+            "spectralMode": 0,
+            "dopplerActive": 1,
+            "jwstSpikes": 1,
+            "penroseActive": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 2.8000000715255737,
+          "p95": 4.100000023841858,
+          "max": 5.399999976158142,
+          "longFrames": 0,
+          "frameCount": 757,
+          "programCount": 1,
+          "resourceCount": 4,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 6,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        }
+      ]
+    },
+    {
+      "page": "index",
+      "name": "no external runtime requests or uncaught exceptions",
+      "passed": true,
+      "evidence": {
+        "externalRequests": 0,
+        "uncaught": 0
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "WebGL and deterministic frame",
+      "passed": true,
+      "evidence": {
+        "sample": {
+          "width": 640,
+          "height": 420,
+          "hash": "d8d2d6b3",
+          "coverage": 1,
+          "saturatedFraction": 0.05578125,
+          "maxBrightness": 765,
+          "meanBrightness": 176.43645833333332,
+          "glError": 0,
+          "state": {
+            "currentEpoch": 0,
+            "targetEpoch": 0,
+            "inflationVal": 1.35,
+            "dmVal": 0.27,
+            "showStars": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 26,
+            "camTheta": 0.25,
+            "camPhi": 0.6,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "telemetry": [
+            "0 s",
+            "> 10³² K",
+            "早期条件未建模",
+            "0.000",
+            "量子重力未建模"
+          ]
+        },
+        "repeat": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "reload": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "all parameter endpoints change their documented model",
+      "passed": true,
+      "evidence": {
+        "param-epoch": {
+          "min": 0,
+          "default": 0,
+          "max": 5,
+          "state": "currentEpoch",
+          "minHash": "d8d2d6b3",
+          "defaultHash": "d8d2d6b3",
+          "maxHash": "3d3c12cd",
+          "lowMinHash": "11d98d7",
+          "lowMaxHash": "82e5298a",
+          "effect": "visual"
+        },
+        "param-inflation": {
+          "min": 0.5,
+          "default": 1.35,
+          "max": 3,
+          "state": "inflationVal",
+          "minHash": "df03b368",
+          "defaultHash": "bf947bcf",
+          "maxHash": "b4cc00b4",
+          "lowMinHash": "3e8e4f6c",
+          "lowMaxHash": "39f36366",
+          "effect": "visual"
+        },
+        "param-dm": {
+          "min": 0.05,
+          "default": 0.27,
+          "max": 0.55,
+          "state": "dmVal",
+          "minHash": "b8cbfea9",
+          "defaultHash": "f3e1e684",
+          "maxHash": "e6044495",
+          "lowMinHash": "9326fc6a",
+          "lowMaxHash": "43b56455",
+          "effect": "visual"
+        }
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "chapter mode, stage and toggle buttons",
+      "passed": true,
+      "evidence": [
+        {
+          "button": "0. 普朗克奇点",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "button": "1. 宇宙暴胀激波",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "button": "2. 夸克胶子汤",
+          "expected": 2,
+          "actual": 2
+        },
+        {
+          "button": "3. 38万年 CMB 余晖",
+          "expected": 3,
+          "actual": 3
+        },
+        {
+          "button": "4. 原初星系网络",
+          "expected": 4,
+          "actual": 4
+        },
+        {
+          "button": "5. 暗能量现代宇宙",
+          "expected": 5,
+          "actual": 5
+        },
+        {
+          "button": "btn-director",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-autoplay",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-stars",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "page": "bigbang",
+      "name": "stages stay visible without additive whiteout",
+      "passed": true,
+      "evidence": [
+        {
+          "quality": "high",
+          "stage": 0,
+          "hash": "d8d2d6b3",
+          "coverage": 1,
+          "mean": 176.43645833333332,
+          "saturated": 0.05578125
+        },
+        {
+          "quality": "high",
+          "stage": 1,
+          "hash": "bf947bcf",
+          "coverage": 1,
+          "mean": 336.875,
+          "saturated": 0.1266517857142857
+        },
+        {
+          "quality": "high",
+          "stage": 2,
+          "hash": "28b55489",
+          "coverage": 1,
+          "mean": 321.740625,
+          "saturated": 0
+        },
+        {
+          "quality": "high",
+          "stage": 3,
+          "hash": "41551062",
+          "coverage": 1,
+          "mean": 260.984375,
+          "saturated": 0.000011160714285714286
+        },
+        {
+          "quality": "high",
+          "stage": 4,
+          "hash": "f3e1e684",
+          "coverage": 1,
+          "mean": 72.75625,
+          "saturated": 0.00015625
+        },
+        {
+          "quality": "high",
+          "stage": 5,
+          "hash": "3d3c12cd",
+          "coverage": 1,
+          "mean": 56.76875,
+          "saturated": 0
+        },
+        {
+          "quality": "low",
+          "stage": 0,
+          "hash": "11d98d7",
+          "coverage": 1,
+          "mean": 170.45520833333333,
+          "saturated": 0.03083664021164021
+        },
+        {
+          "quality": "low",
+          "stage": 1,
+          "hash": "650e9d50",
+          "coverage": 1,
+          "mean": 327.57395833333334,
+          "saturated": 0.12514467592592593
+        },
+        {
+          "quality": "low",
+          "stage": 2,
+          "hash": "c5c832a7",
+          "coverage": 1,
+          "mean": 305.85520833333334,
+          "saturated": 0
+        },
+        {
+          "quality": "low",
+          "stage": 3,
+          "hash": "75122e75",
+          "coverage": 1,
+          "mean": 253.99583333333334,
+          "saturated": 0
+        },
+        {
+          "quality": "low",
+          "stage": 4,
+          "hash": "b29f79f5",
+          "coverage": 1,
+          "mean": 63.94375,
+          "saturated": 0.000010333994708994708
+        },
+        {
+          "quality": "low",
+          "stage": 5,
+          "hash": "82e5298a",
+          "coverage": 1,
+          "mean": 56.411458333333336,
+          "saturated": 0.000010333994708994708
+        }
+      ]
+    },
+    {
+      "page": "bigbang",
+      "name": "navigation, dialog keyboard, HUD and labels",
+      "passed": true,
+      "evidence": {
+        "links": [
+          "index.html",
+          "bigbang.html",
+          "cosmicweb.html",
+          "stellar.html",
+          "wormhole.html",
+          "heatdeath.html"
+        ],
+        "active": 1,
+        "open": true,
+        "focus": "btn-close-modal",
+        "role": "dialog",
+        "labels": true
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "pointer, pinch, cancellation and scene keyboard",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "yaw": 0.610908,
+          "radius": 26
+        },
+        "dragged": {
+          "yaw": 0.910908
+        },
+        "pinched": {
+          "radius": 17.875
+        }
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "four viewports and every reachable control",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800,
+          "renderWidth": 720,
+          "renderHeight": 1600,
+          "checkedControls": 7
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "renderWidth": 780,
+          "renderHeight": 1688,
+          "checkedControls": 7
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "renderWidth": 768,
+          "renderHeight": 1024,
+          "checkedControls": 7
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "renderWidth": 1920,
+          "renderHeight": 1080,
+          "checkedControls": 7
+        }
+      ]
+    },
+    {
+      "page": "bigbang",
+      "name": "quality levels, governor hysteresis and reduced motion",
+      "passed": true,
+      "evidence": {
+        "governor": {
+          "before": "high",
+          "after": "medium",
+          "held": "medium",
+          "promoted": "high"
+        },
+        "samples": {
+          "high": {
+            "width": 640,
+            "height": 420,
+            "hash": "d8d2d6b3"
+          },
+          "medium": {
+            "width": 512,
+            "height": 336,
+            "hash": "492a9880"
+          },
+          "low": {
+            "width": 384,
+            "height": 252,
+            "hash": "11d98d7"
+          }
+        }
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "three context losses preserve model and resources",
+      "passed": true,
+      "evidence": {
+        "generations": 3,
+        "programs": 2,
+        "resources": 9
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "single RAF and background visibility lifecycle",
+      "passed": true,
+      "evidence": {
+        "visibility": "deterministic visibilitychange injection",
+        "hiddenElapsed": 230.30000000000035,
+        "resumedElapsed": 321.40000000000026
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "audio signal, mute, repeat toggle and bounded nodes",
+      "passed": true,
+      "evidence": {
+        "peak": 0.14153540134429932,
+        "rms": 0.0869358108389736,
+        "schedule": null,
+        "recordingBytes": 8024,
+        "beforeNodes": 4,
+        "afterNodes": 4
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "measured GPU performance at desktop and phone viewport",
+      "passed": true,
+      "evidence": [
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 1280,
+            "height": 720
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentEpoch": 0,
+            "targetEpoch": 0,
+            "inflationVal": 1.35,
+            "dmVal": 0.27,
+            "showStars": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 26,
+            "camTheta": 0.25,
+            "camPhi": 0.6,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 3.100000023841858,
+          "p95": 24.5,
+          "max": 37.699999928474426,
+          "longFrames": 0,
+          "frameCount": 675,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 4,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 768,
+            "height": 432
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentEpoch": 0,
+            "targetEpoch": 0,
+            "inflationVal": 1.35,
+            "dmVal": 0.27,
+            "showStars": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 26,
+            "camTheta": 0.25,
+            "camPhi": 0.6,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 2.600000023841858,
+          "p95": 4.399999976158142,
+          "max": 4.399999976158142,
+          "longFrames": 0,
+          "frameCount": 700,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 4,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 720,
+            "height": 1600
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentEpoch": 0,
+            "targetEpoch": 0,
+            "inflationVal": 1.35,
+            "dmVal": 0.27,
+            "showStars": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 26,
+            "camTheta": 0.25,
+            "camPhi": 0.6,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 4.099999904632568,
+          "p95": 46.700000047683716,
+          "max": 54.299999952316284,
+          "longFrames": 1,
+          "frameCount": 725,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 4,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 432,
+            "height": 960
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentEpoch": 0,
+            "targetEpoch": 0,
+            "inflationVal": 1.35,
+            "dmVal": 0.27,
+            "showStars": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 26,
+            "camTheta": 0.25,
+            "camPhi": 0.6,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 2.5999999046325684,
+          "p95": 6.199999928474426,
+          "max": 38.799999952316284,
+          "longFrames": 0,
+          "frameCount": 750,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 4,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        }
+      ]
+    },
+    {
+      "page": "bigbang",
+      "name": "no external runtime requests or uncaught exceptions",
+      "passed": true,
+      "evidence": {
+        "externalRequests": 0,
+        "uncaught": 0
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "WebGL and deterministic frame",
+      "passed": true,
+      "evidence": {
+        "sample": {
+          "width": 640,
+          "height": 420,
+          "hash": "ff0f28ba",
+          "coverage": 1,
+          "saturatedFraction": 0.0000074404761904761905,
+          "maxBrightness": 596,
+          "meanBrightness": 92.09583333333333,
+          "glError": 0,
+          "state": {
+            "pIdx": 120000,
+            "currentMode": 0,
+            "dmVal": 1.8,
+            "dragVal": 2.4,
+            "lensVal": 1.5,
+            "synapseActive": 1,
+            "showScan": 1,
+            "scanPos": 0.03817799999999998,
+            "directorMode": false,
+            "camRadius": 32,
+            "camTheta": 0.25,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "lastScanTrigger": 0
+          },
+          "telemetry": [
+            "186 个",
+            "720 kpc",
+            "1.6×10⁸ K",
+            "32.4 arcsec"
+          ]
+        },
+        "repeat": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "reload": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "all parameter endpoints change their documented model",
+      "passed": true,
+      "evidence": {
+        "param-dm": {
+          "min": 0.4,
+          "default": 1.8,
+          "max": 3.5,
+          "state": "dmVal",
+          "minHash": "5800970a",
+          "defaultHash": "ff0f28ba",
+          "maxHash": "6eda8f5c",
+          "lowMinHash": "d967f795",
+          "lowMaxHash": "d21a7212",
+          "effect": "visual"
+        },
+        "param-drag": {
+          "min": 0.2,
+          "default": 2.4,
+          "max": 5,
+          "state": "dragVal",
+          "minHash": "33f240b5",
+          "defaultHash": "a80b3c5",
+          "maxHash": "3694d387",
+          "lowMinHash": "e811ce1f",
+          "lowMaxHash": "ebf369d5",
+          "effect": "visual"
+        },
+        "param-lens": {
+          "min": 0.2,
+          "default": 1.5,
+          "max": 3,
+          "state": "lensVal",
+          "minHash": "ec722cd1",
+          "defaultHash": "db17d9f7",
+          "maxHash": "294bc153",
+          "lowMinHash": "4ab945d4",
+          "lowMaxHash": "a24b2f7f",
+          "effect": "visual"
+        }
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "chapter mode, stage and toggle buttons",
+      "passed": true,
+      "evidence": [
+        {
+          "button": "🌌 综合全景流",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "button": "🔭 JWST 强透镜弧",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "button": "💥 钱德拉子弹星团",
+          "expected": 2,
+          "actual": 2
+        },
+        {
+          "button": "🟣 纯暗物质晕",
+          "expected": 3,
+          "actual": 3
+        },
+        {
+          "button": "🧠 脑神经突触流",
+          "expected": 4,
+          "actual": 4
+        },
+        {
+          "button": "👁️ 仅见光学星系",
+          "expected": 5,
+          "actual": 5
+        },
+        {
+          "button": "btn-director",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-synapse",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-scan",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "page": "cosmicweb",
+      "name": "stages stay visible without additive whiteout",
+      "passed": true,
+      "evidence": [
+        {
+          "quality": "high",
+          "stage": null,
+          "hash": "ff0f28ba",
+          "coverage": 1,
+          "mean": 92.09583333333333,
+          "saturated": 0.0000074404761904761905
+        },
+        {
+          "quality": "low",
+          "stage": null,
+          "hash": "dae544c1",
+          "coverage": 1,
+          "mean": 78.196875,
+          "saturated": 0
+        }
+      ]
+    },
+    {
+      "page": "cosmicweb",
+      "name": "navigation, dialog keyboard, HUD and labels",
+      "passed": true,
+      "evidence": {
+        "links": [
+          "index.html",
+          "bigbang.html",
+          "cosmicweb.html",
+          "stellar.html",
+          "wormhole.html",
+          "heatdeath.html"
+        ],
+        "active": 1,
+        "open": true,
+        "focus": "btn-close-modal",
+        "role": "dialog",
+        "labels": true
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "pointer, pinch, cancellation and scene keyboard",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "yaw": 0.7573943999999997,
+          "radius": 32
+        },
+        "dragged": {
+          "yaw": 1.0573943999999997
+        },
+        "pinched": {
+          "radius": 22
+        }
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "four viewports and every reachable control",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800,
+          "renderWidth": 720,
+          "renderHeight": 1600,
+          "checkedControls": 7
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "renderWidth": 780,
+          "renderHeight": 1688,
+          "checkedControls": 7
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "renderWidth": 768,
+          "renderHeight": 1024,
+          "checkedControls": 7
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "renderWidth": 1920,
+          "renderHeight": 1080,
+          "checkedControls": 7
+        }
+      ]
+    },
+    {
+      "page": "cosmicweb",
+      "name": "quality levels, governor hysteresis and reduced motion",
+      "passed": true,
+      "evidence": {
+        "governor": {
+          "before": "high",
+          "after": "medium",
+          "held": "medium",
+          "promoted": "high"
+        },
+        "samples": {
+          "high": {
+            "width": 640,
+            "height": 420,
+            "hash": "ff0f28ba"
+          },
+          "medium": {
+            "width": 512,
+            "height": 336,
+            "hash": "e44491b4"
+          },
+          "low": {
+            "width": 384,
+            "height": 252,
+            "hash": "dae544c1"
+          }
+        }
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "three context losses preserve model and resources",
+      "passed": true,
+      "evidence": {
+        "generations": 3,
+        "programs": 2,
+        "resources": 11
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "single RAF and background visibility lifecycle",
+      "passed": true,
+      "evidence": {
+        "visibility": "deterministic visibilitychange injection",
+        "hiddenElapsed": 211.79999999999993,
+        "resumedElapsed": 302.79999999999995
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "audio signal, mute, repeat toggle and bounded nodes",
+      "passed": true,
+      "evidence": {
+        "peak": 0.009203517809510231,
+        "rms": 0.00516022791866773,
+        "schedule": null,
+        "recordingBytes": 8024,
+        "beforeNodes": 2,
+        "afterNodes": 2
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "measured GPU performance at desktop and phone viewport",
+      "passed": true,
+      "evidence": [
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 1280,
+            "height": 720
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "pIdx": 120000,
+            "currentMode": 0,
+            "dmVal": 1.8,
+            "dragVal": 2.4,
+            "lensVal": 1.5,
+            "synapseActive": 1,
+            "showScan": 1,
+            "scanPos": 0.42900138,
+            "directorMode": false,
+            "camRadius": 32,
+            "camTheta": 0.25,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "lastScanTrigger": 2853.8020000000006
+          },
+          "frames": 24,
+          "p50": 5.599999904632568,
+          "p95": 28.40000009536743,
+          "max": 29.5,
+          "longFrames": 0,
+          "frameCount": 677,
+          "programCount": 2,
+          "resourceCount": 11,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 2,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 768,
+            "height": 432
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "pIdx": 120000,
+            "currentMode": 0,
+            "dmVal": 1.8,
+            "dragVal": 2.4,
+            "lensVal": 1.5,
+            "synapseActive": 1,
+            "showScan": 1,
+            "scanPos": 0.42900138,
+            "directorMode": false,
+            "camRadius": 32,
+            "camTheta": 0.25,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "lastScanTrigger": 2853.8020000000006
+          },
+          "frames": 24,
+          "p50": 1.7999999523162842,
+          "p95": 2.5,
+          "max": 2.8000000715255737,
+          "longFrames": 0,
+          "frameCount": 702,
+          "programCount": 2,
+          "resourceCount": 11,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 2,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 720,
+            "height": 1600
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "pIdx": 120000,
+            "currentMode": 0,
+            "dmVal": 1.8,
+            "dragVal": 2.4,
+            "lensVal": 1.5,
+            "synapseActive": 1,
+            "showScan": 1,
+            "scanPos": 0.42900138,
+            "directorMode": false,
+            "camRadius": 32,
+            "camTheta": 0.25,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "lastScanTrigger": 2853.8020000000006
+          },
+          "frames": 24,
+          "p50": 8.399999976158142,
+          "p95": 13.399999976158142,
+          "max": 13.899999976158142,
+          "longFrames": 0,
+          "frameCount": 727,
+          "programCount": 2,
+          "resourceCount": 11,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 2,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 432,
+            "height": 960
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "pIdx": 120000,
+            "currentMode": 0,
+            "dmVal": 1.8,
+            "dragVal": 2.4,
+            "lensVal": 1.5,
+            "synapseActive": 1,
+            "showScan": 1,
+            "scanPos": 0.42900138,
+            "directorMode": false,
+            "camRadius": 32,
+            "camTheta": 0.25,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "lastScanTrigger": 2853.8020000000006
+          },
+          "frames": 24,
+          "p50": 1.7000000476837158,
+          "p95": 2.3000000715255737,
+          "max": 3,
+          "longFrames": 0,
+          "frameCount": 752,
+          "programCount": 2,
+          "resourceCount": 11,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 2,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        }
+      ]
+    },
+    {
+      "page": "cosmicweb",
+      "name": "no external runtime requests or uncaught exceptions",
+      "passed": true,
+      "evidence": {
+        "externalRequests": 0,
+        "uncaught": 0
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "WebGL and deterministic frame",
+      "passed": true,
+      "evidence": {
+        "sample": {
+          "width": 640,
+          "height": 420,
+          "hash": "c6a585a0",
+          "coverage": 1,
+          "saturatedFraction": 0.0008333333333333334,
+          "maxBrightness": 660,
+          "meanBrightness": 85.43333333333334,
+          "glError": 0,
+          "state": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "massVal": 25,
+            "spinVal": 30,
+            "showBeam": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 38,
+            "camTheta": 0.22,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "nextPulseTime": 0
+          },
+          "telemetry": [
+            "15 K",
+            "分子云引力坍缩",
+            "1.2×10⁴ Pa",
+            "0.05 G",
+            "未触发"
+          ]
+        },
+        "repeat": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "reload": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "all parameter endpoints change their documented model",
+      "passed": true,
+      "evidence": {
+        "param-stage": {
+          "min": 0,
+          "default": 0,
+          "max": 4,
+          "state": "currentStage",
+          "minHash": "c6a585a0",
+          "defaultHash": "c6a585a0",
+          "maxHash": "15eff1eb",
+          "lowMinHash": "7961451c",
+          "lowMaxHash": "5db86d75",
+          "effect": "visual"
+        },
+        "param-mass": {
+          "min": 8,
+          "default": 25,
+          "max": 60,
+          "state": "massVal",
+          "minHash": "241cd19f",
+          "defaultHash": "c6a585a0",
+          "maxHash": "57d69397",
+          "lowMinHash": "acbc85fd",
+          "lowMaxHash": "5299651b",
+          "effect": "visual"
+        },
+        "param-spin": {
+          "min": 5,
+          "default": 30,
+          "max": 60,
+          "state": "spinVal",
+          "minHash": "c268b02f",
+          "defaultHash": "15eff1eb",
+          "maxHash": "5db3041d",
+          "lowMinHash": "3449b703",
+          "lowMaxHash": "6e10abf6",
+          "effect": "visual"
+        }
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "chapter mode, stage and toggle buttons",
+      "passed": true,
+      "evidence": [
+        {
+          "button": "0. 原恒星分子云",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "button": "1. 主序星蓝超巨",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "button": "2. 红超巨星洋葱壳",
+          "expected": 2,
+          "actual": 2
+        },
+        {
+          "button": "3. 仙后座A超新星",
+          "expected": 3,
+          "actual": 3
+        },
+        {
+          "button": "4. 蟹状星云脉冲星",
+          "expected": 4,
+          "actual": 4
+        },
+        {
+          "button": "btn-director",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-autoplay",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-beam",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "page": "stellar",
+      "name": "stages stay visible without additive whiteout",
+      "passed": true,
+      "evidence": [
+        {
+          "quality": "high",
+          "stage": 0,
+          "hash": "c6a585a0",
+          "coverage": 1,
+          "mean": 85.43333333333334,
+          "saturated": 0.0008333333333333334
+        },
+        {
+          "quality": "high",
+          "stage": 1,
+          "hash": "9ecc3ea5",
+          "coverage": 1,
+          "mean": 277.03333333333336,
+          "saturated": 0.03900297619047619
+        },
+        {
+          "quality": "high",
+          "stage": 2,
+          "hash": "4b33af30",
+          "coverage": 1,
+          "mean": 199.88020833333334,
+          "saturated": 0.009229910714285715
+        },
+        {
+          "quality": "high",
+          "stage": 3,
+          "hash": "f8de0b15",
+          "coverage": 0.496875,
+          "mean": 113.06666666666666,
+          "saturated": 0.06791294642857143
+        },
+        {
+          "quality": "high",
+          "stage": 4,
+          "hash": "15eff1eb",
+          "coverage": 0.9989583333333333,
+          "mean": 115.44270833333333,
+          "saturated": 0.0019382440476190476
+        },
+        {
+          "quality": "low",
+          "stage": 0,
+          "hash": "7961451c",
+          "coverage": 1,
+          "mean": 82.73645833333333,
+          "saturated": 0.0003926917989417989
+        },
+        {
+          "quality": "low",
+          "stage": 1,
+          "hash": "8ba97d05",
+          "coverage": 1,
+          "mean": 277.45520833333336,
+          "saturated": 0.03885582010582011
+        },
+        {
+          "quality": "low",
+          "stage": 2,
+          "hash": "439ca5a4",
+          "coverage": 1,
+          "mean": 179.95,
+          "saturated": 0.001953125
+        },
+        {
+          "quality": "low",
+          "stage": 3,
+          "hash": "8d0e5d11",
+          "coverage": 0.4979166666666667,
+          "mean": 112.61145833333333,
+          "saturated": 0.06708829365079365
+        },
+        {
+          "quality": "low",
+          "stage": 4,
+          "hash": "5db86d75",
+          "coverage": 0.9989583333333333,
+          "mean": 114,
+          "saturated": 0.0010540674603174603
+        }
+      ]
+    },
+    {
+      "page": "stellar",
+      "name": "navigation, dialog keyboard, HUD and labels",
+      "passed": true,
+      "evidence": {
+        "links": [
+          "index.html",
+          "bigbang.html",
+          "cosmicweb.html",
+          "stellar.html",
+          "wormhole.html",
+          "heatdeath.html"
+        ],
+        "active": 1,
+        "open": true,
+        "focus": "btn-close-modal",
+        "role": "dialog",
+        "labels": true
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "pointer, pinch, cancellation and scene keyboard",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "yaw": 0.758172,
+          "radius": 38
+        },
+        "dragged": {
+          "yaw": 1.058172
+        },
+        "pinched": {
+          "radius": 26.125
+        }
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "four viewports and every reachable control",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800,
+          "renderWidth": 720,
+          "renderHeight": 1600,
+          "checkedControls": 7
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "renderWidth": 780,
+          "renderHeight": 1688,
+          "checkedControls": 7
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "renderWidth": 768,
+          "renderHeight": 1024,
+          "checkedControls": 7
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "renderWidth": 1920,
+          "renderHeight": 1080,
+          "checkedControls": 7
+        }
+      ]
+    },
+    {
+      "page": "stellar",
+      "name": "quality levels, governor hysteresis and reduced motion",
+      "passed": true,
+      "evidence": {
+        "governor": {
+          "before": "high",
+          "after": "medium",
+          "held": "medium",
+          "promoted": "high"
+        },
+        "samples": {
+          "high": {
+            "width": 640,
+            "height": 420,
+            "hash": "c6a585a0"
+          },
+          "medium": {
+            "width": 512,
+            "height": 336,
+            "hash": "ad5c1aca"
+          },
+          "low": {
+            "width": 384,
+            "height": 252,
+            "hash": "7961451c"
+          }
+        }
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "three context losses preserve model and resources",
+      "passed": true,
+      "evidence": {
+        "generations": 3,
+        "programs": 2,
+        "resources": 9
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "single RAF and background visibility lifecycle",
+      "passed": true,
+      "evidence": {
+        "visibility": "deterministic visibilitychange injection",
+        "hiddenElapsed": 193.89999999999992,
+        "resumedElapsed": 291.09999999999974
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "audio signal, mute, repeat toggle and bounded nodes",
+      "passed": true,
+      "evidence": {
+        "peak": 0.03363329917192459,
+        "rms": 0.006236520072668238,
+        "schedule": [
+          {
+            "hz": 10,
+            "pulses": 5,
+            "maxIntervalError": 8.326672684688674e-17,
+            "lookahead": 0.09866666666666846
+          },
+          {
+            "hz": 40,
+            "pulses": 19,
+            "maxIntervalError": 9.020562075079397e-17,
+            "lookahead": 0.09933333333333505
+          }
+        ],
+        "recordingBytes": 8024,
+        "beforeNodes": 2,
+        "afterNodes": 2
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "measured GPU performance at desktop and phone viewport",
+      "passed": true,
+      "evidence": [
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 1280,
+            "height": 720
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "massVal": 25,
+            "spinVal": 30,
+            "showBeam": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 38,
+            "camTheta": 0.22,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "nextPulseTime": 4.552000000000001
+          },
+          "frames": 24,
+          "p50": 2.600000023841858,
+          "p95": 14.399999976158142,
+          "max": 17.899999976158142,
+          "longFrames": 0,
+          "frameCount": 862,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 2,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 768,
+            "height": 432
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "massVal": 25,
+            "spinVal": 30,
+            "showBeam": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 38,
+            "camTheta": 0.22,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "nextPulseTime": 4.552000000000001
+          },
+          "frames": 24,
+          "p50": 2,
+          "p95": 4.099999904632568,
+          "max": 8.600000023841858,
+          "longFrames": 0,
+          "frameCount": 887,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 2,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 720,
+            "height": 1600
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "massVal": 25,
+            "spinVal": 30,
+            "showBeam": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 38,
+            "camTheta": 0.22,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "nextPulseTime": 4.552000000000001
+          },
+          "frames": 24,
+          "p50": 3.1999999284744263,
+          "p95": 34.699999928474426,
+          "max": 39.10000002384186,
+          "longFrames": 0,
+          "frameCount": 912,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 2,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 432,
+            "height": 960
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "massVal": 25,
+            "spinVal": 30,
+            "showBeam": 1,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 38,
+            "camTheta": 0.22,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false,
+            "nextPulseTime": 4.552000000000001
+          },
+          "frames": 24,
+          "p50": 2.5,
+          "p95": 40.5,
+          "max": 41.199999928474426,
+          "longFrames": 0,
+          "frameCount": 937,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 2,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        }
+      ]
+    },
+    {
+      "page": "stellar",
+      "name": "no external runtime requests or uncaught exceptions",
+      "passed": true,
+      "evidence": {
+        "externalRequests": 0,
+        "uncaught": 0
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "WebGL and deterministic frame",
+      "passed": true,
+      "evidence": {
+        "sample": {
+          "width": 640,
+          "height": 420,
+          "hash": "46c19b25",
+          "coverage": 1,
+          "saturatedFraction": 0,
+          "maxBrightness": 703,
+          "meanBrightness": 319.64375,
+          "glError": 0,
+          "state": {
+            "traverseStart": 0,
+            "traverseRadius": 9.5,
+            "traverseUniverse": 0,
+            "throatRadius": 2.2,
+            "energyTension": 1.45,
+            "bellFidelity": 0.98,
+            "currentMode": 0,
+            "inUniverseB": 0,
+            "showGlow": 1,
+            "directorMode": false,
+            "camRadius": 9.5,
+            "camTheta": 0.15,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "isTraversing": false,
+            "audioActive": false
+          },
+          "telemetry": [
+            "程序天球 A",
+            "4.40 a.u.",
+            "-1.45 a.u.",
+            "0.98"
+          ]
+        },
+        "repeat": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "reload": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "all parameter endpoints change their documented model",
+      "passed": true,
+      "evidence": {
+        "param-radius": {
+          "min": 0.8,
+          "default": 2.2,
+          "max": 4,
+          "state": "throatRadius",
+          "minHash": "26cabbc1",
+          "defaultHash": "46c19b25",
+          "maxHash": "f1a2c49b",
+          "lowMinHash": "72f58874",
+          "lowMaxHash": "32dac17",
+          "effect": "visual"
+        },
+        "param-tension": {
+          "min": 0.5,
+          "default": 1.45,
+          "max": 3,
+          "state": "energyTension",
+          "minHash": "fe27769c",
+          "defaultHash": "46c19b25",
+          "maxHash": "6d7da019",
+          "lowMinHash": "f56f10c4",
+          "lowMaxHash": "e6b8b36e",
+          "effect": "visual"
+        },
+        "param-fidelity": {
+          "min": 0.5,
+          "default": 0.98,
+          "max": 1,
+          "state": "bellFidelity",
+          "minHash": "c73c26f1",
+          "defaultHash": "46c19b25",
+          "maxHash": "6dea1416",
+          "lowMinHash": "99f7f5f",
+          "lowMaxHash": "4b615087",
+          "effect": "visual"
+        }
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "chapter mode, stage and toggle buttons",
+      "passed": true,
+      "evidence": [
+        {
+          "button": "🌌 综合全景折射",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "button": "⚡ 负能环风格",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "button": "🔗 网格风格",
+          "expected": 2,
+          "actual": 2
+        },
+        {
+          "button": "🌐 曲率网格风格",
+          "expected": 3,
+          "actual": 3
+        },
+        {
+          "button": "btn-director",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "page": "wormhole",
+      "name": "stages stay visible without additive whiteout",
+      "passed": true,
+      "evidence": [
+        {
+          "quality": "high",
+          "stage": null,
+          "hash": "46c19b25",
+          "coverage": 1,
+          "mean": 319.64375,
+          "saturated": 0
+        },
+        {
+          "quality": "low",
+          "stage": null,
+          "hash": "8b4a574e",
+          "coverage": 1,
+          "mean": 184.97708333333333,
+          "saturated": 0
+        }
+      ]
+    },
+    {
+      "page": "wormhole",
+      "name": "navigation, dialog keyboard, HUD and labels",
+      "passed": true,
+      "evidence": {
+        "links": [
+          "index.html",
+          "bigbang.html",
+          "cosmicweb.html",
+          "stellar.html",
+          "wormhole.html",
+          "heatdeath.html"
+        ],
+        "active": 1,
+        "open": true,
+        "focus": "btn-close-modal",
+        "role": "dialog",
+        "labels": true
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "pointer, pinch, cancellation and scene keyboard",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "yaw": 0.8598171999999998,
+          "radius": 9.5
+        },
+        "dragged": {
+          "yaw": 1.1598171999999998
+        },
+        "pinched": {
+          "radius": 6.53125
+        }
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "four viewports and every reachable control",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800,
+          "renderWidth": 720,
+          "renderHeight": 1600,
+          "checkedControls": 7
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "renderWidth": 780,
+          "renderHeight": 1688,
+          "checkedControls": 7
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "renderWidth": 768,
+          "renderHeight": 1024,
+          "checkedControls": 7
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "renderWidth": 1920,
+          "renderHeight": 1080,
+          "checkedControls": 7
+        }
+      ]
+    },
+    {
+      "page": "wormhole",
+      "name": "quality levels, governor hysteresis and reduced motion",
+      "passed": true,
+      "evidence": {
+        "governor": {
+          "before": "high",
+          "after": "medium",
+          "held": "medium",
+          "promoted": "high"
+        },
+        "samples": {
+          "high": {
+            "width": 640,
+            "height": 420,
+            "hash": "fb5f849f"
+          },
+          "medium": {
+            "width": 512,
+            "height": 336,
+            "hash": "77480681"
+          },
+          "low": {
+            "width": 384,
+            "height": 252,
+            "hash": "8b4a574e"
+          }
+        }
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "three context losses preserve model and resources",
+      "passed": true,
+      "evidence": {
+        "generations": 3,
+        "programs": 1,
+        "resources": 4
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "single RAF and background visibility lifecycle",
+      "passed": true,
+      "evidence": {
+        "visibility": "deterministic visibilitychange injection",
+        "hiddenElapsed": 187.80000000000007,
+        "resumedElapsed": 291.0999999999998
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "audio signal, mute, repeat toggle and bounded nodes",
+      "passed": true,
+      "evidence": {
+        "peak": 0.28088992834091187,
+        "rms": 0.19632602751251174,
+        "schedule": null,
+        "recordingBytes": 8024,
+        "beforeNodes": 5,
+        "afterNodes": 5
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "measured GPU performance at desktop and phone viewport",
+      "passed": true,
+      "evidence": [
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 1280,
+            "height": 720
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "traverseStart": 0,
+            "traverseRadius": 9.5,
+            "traverseUniverse": 0,
+            "throatRadius": 2.2,
+            "energyTension": 1.45,
+            "bellFidelity": 0.98,
+            "currentMode": 0,
+            "inUniverseB": 0,
+            "showGlow": 1,
+            "directorMode": false,
+            "camRadius": 9.5,
+            "camTheta": 0.15,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "isTraversing": false,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 6.800000071525574,
+          "p95": 11.700000047683716,
+          "max": 16.199999928474426,
+          "longFrames": 0,
+          "frameCount": 677,
+          "programCount": 1,
+          "resourceCount": 4,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 5,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 768,
+            "height": 432
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "traverseStart": 0,
+            "traverseRadius": 9.5,
+            "traverseUniverse": 0,
+            "throatRadius": 2.2,
+            "energyTension": 1.45,
+            "bellFidelity": 0.98,
+            "currentMode": 0,
+            "inUniverseB": 0,
+            "showGlow": 1,
+            "directorMode": false,
+            "camRadius": 9.5,
+            "camTheta": 0.15,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "isTraversing": false,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 2.799999952316284,
+          "p95": 3.899999976158142,
+          "max": 4.199999928474426,
+          "longFrames": 0,
+          "frameCount": 702,
+          "programCount": 1,
+          "resourceCount": 4,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 5,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 720,
+            "height": 1600
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "traverseStart": 0,
+            "traverseRadius": 9.5,
+            "traverseUniverse": 0,
+            "throatRadius": 2.2,
+            "energyTension": 1.45,
+            "bellFidelity": 0.98,
+            "currentMode": 0,
+            "inUniverseB": 0,
+            "showGlow": 1,
+            "directorMode": false,
+            "camRadius": 9.5,
+            "camTheta": 0.15,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "isTraversing": false,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 5.299999952316284,
+          "p95": 13.5,
+          "max": 14.400000095367432,
+          "longFrames": 0,
+          "frameCount": 727,
+          "programCount": 1,
+          "resourceCount": 4,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 5,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 432,
+            "height": 960
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "traverseStart": 0,
+            "traverseRadius": 9.5,
+            "traverseUniverse": 0,
+            "throatRadius": 2.2,
+            "energyTension": 1.45,
+            "bellFidelity": 0.98,
+            "currentMode": 0,
+            "inUniverseB": 0,
+            "showGlow": 1,
+            "directorMode": false,
+            "camRadius": 9.5,
+            "camTheta": 0.15,
+            "camPhi": 0.85,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "isTraversing": false,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 2.299999952316284,
+          "p95": 5.099999904632568,
+          "max": 5.100000023841858,
+          "longFrames": 0,
+          "frameCount": 752,
+          "programCount": 1,
+          "resourceCount": 4,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 5,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        }
+      ]
+    },
+    {
+      "page": "wormhole",
+      "name": "no external runtime requests or uncaught exceptions",
+      "passed": true,
+      "evidence": {
+        "externalRequests": 0,
+        "uncaught": 0
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "WebGL and deterministic frame",
+      "passed": true,
+      "evidence": {
+        "sample": {
+          "width": 640,
+          "height": 420,
+          "hash": "9d268be1",
+          "coverage": 1,
+          "saturatedFraction": 0.010472470238095237,
+          "maxBrightness": 765,
+          "meanBrightness": 254.71666666666667,
+          "glError": 0,
+          "state": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "wVal": -1.03,
+            "hawkingVal": 1.6,
+            "rebirthFlash": 0,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 36,
+            "camTheta": 0.28,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "telemetry": [
+            "2.725 K",
+            "10⁹⁰ k_B",
+            "10¹² M_☉",
+            "发光星系与生命"
+          ]
+        },
+        "repeat": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "reload": {
+          "exact": true,
+          "maxDelta": 0,
+          "changedPixels": 0,
+          "changedFraction": 0,
+          "tolerance": "<=1/255 per channel on <=0.01% pixels; same browser/GPU"
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "all parameter endpoints change their documented model",
+      "passed": true,
+      "evidence": {
+        "param-stage": {
+          "min": 0,
+          "default": 0,
+          "max": 4,
+          "state": "currentStage",
+          "minHash": "9d268be1",
+          "defaultHash": "9d268be1",
+          "maxHash": "3c161e4a",
+          "lowMinHash": "5bf53c5f",
+          "lowMaxHash": "4429b34b",
+          "effect": "visual"
+        },
+        "param-w": {
+          "min": -1.8,
+          "default": -1.03,
+          "max": -0.5,
+          "state": "wVal",
+          "minHash": "bb037884",
+          "defaultHash": "9d268be1",
+          "maxHash": "9f77c2c6",
+          "lowMinHash": "61118356",
+          "lowMaxHash": "ffeefc53",
+          "effect": "visual"
+        },
+        "param-hawking": {
+          "min": 0.5,
+          "default": 1.6,
+          "max": 3,
+          "state": "hawkingVal",
+          "minHash": "43a29283",
+          "defaultHash": "75080130",
+          "maxHash": "7ce5fd12",
+          "lowMinHash": "dea896e6",
+          "lowMaxHash": "1bcbe572",
+          "effect": "visual"
+        }
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "chapter mode, stage and toggle buttons",
+      "passed": true,
+      "evidence": [
+        {
+          "button": "0. 恒星繁衍期 (1010y)",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "button": "1. 简并枯竭期 (1014y)",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "button": "2. 质子衰变假设 (1040y)",
+          "expected": 2,
+          "actual": 2
+        },
+        {
+          "button": "3. 黑洞蒸发期 (10100y)",
+          "expected": 3,
+          "actual": 3
+        },
+        {
+          "button": "4. 德西特真空与假想重生",
+          "expected": 4,
+          "actual": 4
+        },
+        {
+          "button": "btn-director",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        },
+        {
+          "button": "btn-autoplay",
+          "toggle": true,
+          "changed": true,
+          "restored": true
+        }
+      ]
+    },
+    {
+      "page": "heatdeath",
+      "name": "stages stay visible without additive whiteout",
+      "passed": true,
+      "evidence": [
+        {
+          "quality": "high",
+          "stage": 0,
+          "hash": "9f77c2c6",
+          "coverage": 1,
+          "mean": 251.459375,
+          "saturated": 0.014412202380952381
+        },
+        {
+          "quality": "high",
+          "stage": 1,
+          "hash": "e52f7d9c",
+          "coverage": 1,
+          "mean": 47.45729166666667,
+          "saturated": 0
+        },
+        {
+          "quality": "high",
+          "stage": 2,
+          "hash": "3ae0fcad",
+          "coverage": 0.996875,
+          "mean": 30.070833333333333,
+          "saturated": 0
+        },
+        {
+          "quality": "high",
+          "stage": 3,
+          "hash": "e95f500a",
+          "coverage": 0.6541666666666667,
+          "mean": 61.16979166666667,
+          "saturated": 0
+        },
+        {
+          "quality": "high",
+          "stage": 4,
+          "hash": "109a93df",
+          "coverage": 0.10520833333333333,
+          "mean": 12.107291666666667,
+          "saturated": 0
+        },
+        {
+          "quality": "low",
+          "stage": 0,
+          "hash": "ffeefc53",
+          "coverage": 1,
+          "mean": 241.83958333333334,
+          "saturated": 0.007347470238095238
+        },
+        {
+          "quality": "low",
+          "stage": 1,
+          "hash": "60f332a7",
+          "coverage": 1,
+          "mean": 44.875,
+          "saturated": 0
+        },
+        {
+          "quality": "low",
+          "stage": 2,
+          "hash": "364d7dd",
+          "coverage": 0.9958333333333333,
+          "mean": 29.584375,
+          "saturated": 0
+        },
+        {
+          "quality": "low",
+          "stage": 3,
+          "hash": "8ef68a36",
+          "coverage": 0.65625,
+          "mean": 60.186458333333334,
+          "saturated": 0
+        },
+        {
+          "quality": "low",
+          "stage": 4,
+          "hash": "87299096",
+          "coverage": 0.09583333333333334,
+          "mean": 12.01875,
+          "saturated": 0
+        }
+      ]
+    },
+    {
+      "page": "heatdeath",
+      "name": "navigation, dialog keyboard, HUD and labels",
+      "passed": true,
+      "evidence": {
+        "links": [
+          "index.html",
+          "bigbang.html",
+          "cosmicweb.html",
+          "stellar.html",
+          "wormhole.html",
+          "heatdeath.html"
+        ],
+        "active": 1,
+        "open": true,
+        "focus": "btn-close-modal",
+        "role": "dialog",
+        "labels": true
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "pointer, pinch, cancellation and scene keyboard",
+      "passed": true,
+      "evidence": {
+        "initial": {
+          "yaw": 0.757641,
+          "radius": 36
+        },
+        "dragged": {
+          "yaw": 1.057641
+        },
+        "pinched": {
+          "radius": 24.75
+        }
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "four viewports and every reachable control",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800,
+          "renderWidth": 720,
+          "renderHeight": 1600,
+          "checkedControls": 7
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "renderWidth": 780,
+          "renderHeight": 1688,
+          "checkedControls": 7
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "renderWidth": 768,
+          "renderHeight": 1024,
+          "checkedControls": 7
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "renderWidth": 1920,
+          "renderHeight": 1080,
+          "checkedControls": 7
+        }
+      ]
+    },
+    {
+      "page": "heatdeath",
+      "name": "quality levels, governor hysteresis and reduced motion",
+      "passed": true,
+      "evidence": {
+        "governor": {
+          "before": "high",
+          "after": "medium",
+          "held": "medium",
+          "promoted": "high"
+        },
+        "samples": {
+          "high": {
+            "width": 640,
+            "height": 420,
+            "hash": "9f77c2c6"
+          },
+          "medium": {
+            "width": 512,
+            "height": 336,
+            "hash": "d13a7046"
+          },
+          "low": {
+            "width": 384,
+            "height": 252,
+            "hash": "ffeefc53"
+          }
+        }
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "three context losses preserve model and resources",
+      "passed": true,
+      "evidence": {
+        "generations": 3,
+        "programs": 2,
+        "resources": 9
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "single RAF and background visibility lifecycle",
+      "passed": true,
+      "evidence": {
+        "visibility": "deterministic visibilitychange injection",
+        "hiddenElapsed": 187.9,
+        "resumedElapsed": 291.0999999999998
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "audio signal, mute, repeat toggle and bounded nodes",
+      "passed": true,
+      "evidence": {
+        "peak": 0.13024093210697174,
+        "rms": 0.09523766090545564,
+        "schedule": null,
+        "recordingBytes": 8024,
+        "beforeNodes": 4,
+        "afterNodes": 4
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "measured GPU performance at desktop and phone viewport",
+      "passed": true,
+      "evidence": [
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 1280,
+            "height": 720
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "wVal": -1.03,
+            "hawkingVal": 1.6,
+            "rebirthFlash": 0,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 36,
+            "camTheta": 0.28,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 3.200000047683716,
+          "p95": 12.700000047683716,
+          "max": 18.199999928474426,
+          "longFrames": 0,
+          "frameCount": 673,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 4,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 768,
+            "height": 432
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "wVal": -1.03,
+            "hawkingVal": 1.6,
+            "rebirthFlash": 0,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 36,
+            "camTheta": 0.28,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 2.100000023841858,
+          "p95": 2.8000000715255737,
+          "max": 6.199999928474426,
+          "longFrames": 0,
+          "frameCount": 698,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 4,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "high",
+          "canvas": {
+            "width": 720,
+            "height": 1600
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "wVal": -1.03,
+            "hawkingVal": 1.6,
+            "rebirthFlash": 0,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 36,
+            "camTheta": 0.28,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 3.6999999284744263,
+          "p95": 40.799999952316284,
+          "max": 44.299999952316284,
+          "longFrames": 0,
+          "frameCount": 723,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 4,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        },
+        {
+          "viewport": {
+            "width": 360,
+            "height": 800
+          },
+          "quality": "low",
+          "canvas": {
+            "width": 432,
+            "height": 960
+          },
+          "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+          "model": {
+            "currentStage": 0,
+            "targetStage": 0,
+            "wVal": -1.03,
+            "hawkingVal": 1.6,
+            "rebirthFlash": 0,
+            "autoplay": false,
+            "directorMode": false,
+            "camRadius": 36,
+            "camTheta": 0.28,
+            "camPhi": 0.75,
+            "isDragging": true,
+            "lastX": 0,
+            "lastY": 0,
+            "audioActive": false
+          },
+          "frames": 24,
+          "p50": 2.399999976158142,
+          "p95": 5.399999976158142,
+          "max": 38.200000047683716,
+          "longFrames": 0,
+          "frameCount": 748,
+          "programCount": 2,
+          "resourceCount": 9,
+          "timerCount": 0,
+          "audioContexts": 1,
+          "audioNodes": 4,
+          "audioStates": [
+            "suspended"
+          ],
+          "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "linked": true,
+          "contextLost": false
+        }
+      ]
+    },
+    {
+      "page": "heatdeath",
+      "name": "no external runtime requests or uncaught exceptions",
+      "passed": true,
+      "evidence": {
+        "externalRequests": 0,
+        "uncaught": 0
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "traversal toggles once and reduced motion completes",
+      "passed": true,
+      "evidence": {
+        "initial": 0,
+        "crossed": 1,
+        "returned": 0
+      }
+    },
+    {
+      "page": "project",
+      "name": "sonification geometry and scale",
+      "passed": true,
+      "evidence": {
+        "events": [
+          {
+            "index": 0,
+            "x": 0.5,
+            "y": 0.5,
+            "pan": 0,
+            "frequency": 261.63,
+            "intensity": 0.8
+          },
+          {
+            "index": 1,
+            "x": 0.75,
+            "y": 0.25,
+            "pan": 0.5,
+            "frequency": 392,
+            "intensity": 0.9897969238711173
+          }
+        ],
+        "changed": {
+          "a": [
+            {
+              "index": 0,
+              "x": 0.5,
+              "y": 0.5,
+              "pan": 0,
+              "frequency": 261.63,
+              "intensity": 0.8
+            }
+          ],
+          "b": [
+            {
+              "index": 0,
+              "x": 0.5,
+              "y": 0.09999999999999998,
+              "pan": 0,
+              "frequency": 440,
+              "intensity": 0.8
+            }
+          ],
+          "again": [
+            {
+              "index": 0,
+              "x": 0.5,
+              "y": 0.5,
+              "pan": 0,
+              "frequency": 261.63,
+              "intensity": 0.8
+            }
+          ],
+          "outside": []
+        }
+      }
+    },
+    {
+      "page": "index",
+      "name": "fault injection: WebGL unavailable",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL unavailable",
+        "resources": 0
+      }
+    },
+    {
+      "page": "index",
+      "name": "fault injection: Shader compile",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "Shader compile: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "index",
+      "name": "fault injection: WebGL program link",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL program link: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "fault injection: WebGL unavailable",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL unavailable",
+        "resources": 0
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "fault injection: Shader compile",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "Shader compile: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "fault injection: WebGL program link",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL program link: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "fault injection: WebGL unavailable",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL unavailable",
+        "resources": 0
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "fault injection: Shader compile",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "Shader compile: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "fault injection: WebGL program link",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL program link: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "fault injection: WebGL unavailable",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL unavailable",
+        "resources": 0
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "fault injection: Shader compile",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "Shader compile: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "fault injection: WebGL program link",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL program link: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "fault injection: WebGL unavailable",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL unavailable",
+        "resources": 0
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "fault injection: Shader compile",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "Shader compile: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "fault injection: WebGL program link",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL program link: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "fault injection: WebGL unavailable",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL unavailable",
+        "resources": 0
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "fault injection: Shader compile",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "Shader compile: ",
+        "resources": 0
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "fault injection: WebGL program link",
+      "passed": true,
+      "evidence": {
+        "status": "error",
+        "diagnostic": "WebGL program link: ",
+        "resources": 0
+      }
+    }
+  ],
+  "environment": {
+    "node": "v24.14.0",
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Edg/156.0.4314.58",
+      "revision": "@7806b68d20d1c1273d5b07b4f4de18e8f5852581",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "jsVersion": "15.6.12.10"
+    },
+    "executable": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "chapterIsolation": "independent browser/profile; input emulation isolated across chapter navigation"
+  },
+  "limits": [
+    "Physical mobile hardware and human listening are not automated.",
+    "Pixel hashes are compared on this browser/GPU; they are not cross-GPU golden images."
+  ],
+  "finished": "2026-11-06T10:26:16.951Z",
+  "passed": true,
+  "counts": {
+    "passed": 99,
+    "failed": 0
+  }
+}

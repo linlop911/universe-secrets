@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇宙的秘密：隐形巨网与暗物质骨架 (NASA Chandra Bullet Cluster & JWST SMACS 0723)</title>
+  <script src="common.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020308;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e0ecff;
+    }
+    #glcanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+    /* HUD Overlays */
+    .hud-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      transition: opacity 0.3s;
+    }
+    .hud-hidden {
+      opacity: 0;
+      pointer-events: none !important;
+    }
+    .interactive {
+      pointer-events: auto;
+    }
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .header-box {
+      background: rgba(8, 14, 30, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(100, 160, 255, 0.35);
+      border-radius: 12px;
+      padding: 14px 22px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), inset 0 0 16px rgba(100, 140, 255, 0.12);
+      max-width: 680px;
+    }
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .nav-tab {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      text-decoration: none;
+      color: #8faee0;
+      background: rgba(30, 60, 120, 0.35);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      transition: all 0.2s;
+    }
+    .nav-tab:hover {
+      background: rgba(40, 90, 180, 0.55);
+      color: #fff;
+    }
+    .nav-tab.active {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      border-color: #82b1ff;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(106, 17, 203, 0.6);
+    }
+    .header-box h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-box h1 span.badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      background: linear-gradient(135deg, #7c4dff, #00e5ff);
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .header-box p {
+      font-size: 12px;
+      color: #92aee2;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .observatory-tag {
+      background: rgba(10, 16, 32, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(100, 160, 255, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 11.5px;
+      color: #799be4;
+      line-height: 1.5;
+      text-align: right;
+      font-family: "Courier New", monospace;
+    }
+    .pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #7c4dff;
+      box-shadow: 0 0 8px #7c4dff;
+      animation: pulse 1.6s infinite;
+      margin-right: 6px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+    /* Side Panels */
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      margin: 12px 0;
+      pointer-events: none;
+    }
+    .panel {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(90, 150, 255, 0.32);
+      border-radius: 12px;
+      padding: 16px;
+      color: #d1e0ff;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
+      width: 320px;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+    }
+    .panel h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #b388ff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(179, 136, 255, 0.25);
+      padding-bottom: 6px;
+    }
+    .insight-card {
+      background: rgba(30, 25, 55, 0.5);
+      border-left: 3px solid #7c4dff;
+      border-radius: 4px;
+      padding: 8px 10px;
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: #d1c4e9;
+      line-height: 1.5;
+    }
+    .control-item {
+      margin-bottom: 10px;
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #8faee0;
+      margin-bottom: 4px;
+    }
+    .control-label span.val {
+      font-family: monospace;
+      color: #b388ff;
+      font-weight: 600;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(80, 130, 220, 0.25);
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #7c4dff;
+      cursor: pointer;
+      box-shadow: 0 0 8px #7c4dff;
+    }
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .btn {
+      background: rgba(45, 65, 120, 0.45);
+      border: 1px solid rgba(100, 160, 255, 0.25);
+      border-radius: 6px;
+      color: #cfdfff;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: rgba(70, 45, 130, 0.65);
+      color: #fff;
+      border-color: #b388ff;
+    }
+    .btn.active {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border-color: #82b1ff;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(106, 17, 203, 0.55);
+    }
+    .btn.highlight {
+      background: linear-gradient(135deg, #7b1fa2, #ab47bc);
+      border-color: #ce93d8;
+      color: #fff;
+    }
+    .mode-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin: 8px 0;
+    }
+    .mode-btn {
+      background: rgba(30, 45, 80, 0.5);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      border-radius: 6px;
+      color: #8faee0;
+      padding: 5px 6px;
+      font-size: 10.5px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .mode-btn:hover {
+      background: rgba(60, 40, 110, 0.6);
+      color: #fff;
+    }
+    .mode-btn.active {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      font-weight: 700;
+      border-color: #82b1ff;
+      box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+    }
+    .audio-box {
+      margin-top: 8px;
+      background: rgba(4, 10, 22, 0.7);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      border-radius: 8px;
+      padding: 6px;
+    }
+    #audio-canvas {
+      width: 100%;
+      height: 38px;
+      display: block;
+      background: #02050c;
+      border-radius: 4px;
+    }
+    /* Bottom Telemetry Bar */
+    .bottom-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .telemetry-card {
+      background: rgba(10, 16, 32, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(100, 160, 255, 0.28);
+      border-radius: 10px;
+      padding: 7px 12px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+    .telemetry-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #8faee0;
+      margin-bottom: 2px;
+    }
+    .telemetry-val {
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      color: #b388ff;
+      text-shadow: 0 0 8px rgba(179, 136, 255, 0.5);
+    }
+    .telemetry-val span.unit {
+      font-size: 9.5px;
+      color: #d1c4e9;
+      margin-left: 2px;
+    }
+    .drag-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #7c9bcf;
+      margin-top: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 16, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #081022;
+      border: 1px solid #b388ff;
+      border-radius: 14px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(124, 77, 255, 0.25);
+      color: #d0e4ff;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(179, 136, 255, 0.3);
+      padding-bottom: 10px;
+    }
+    .modal-header h2 {
+      font-size: 17px;
+      color: #b388ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      color: #8faee0;
+      font-size: 22px;
+      cursor: pointer;
+    }
+    .close-modal:hover {
+      color: #fff;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11.5px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid rgba(100, 160, 255, 0.25);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .data-table th {
+      background: rgba(50, 30, 90, 0.35);
+      color: #b388ff;
+    }
+  </style>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body>
+  <canvas id="glcanvas"></canvas>
+
+  <div class="hud-layer" id="hud-layer">
+    <!-- Top Bar -->
+    <div class="top-bar interactive">
+      <div class="header-box">
+        <div class="nav-tabs">
+          <a href="index.html" class="nav-tab">第一章：黑洞引力透镜</a>
+          <a href="bigbang.html" class="nav-tab">第二章：大爆炸与CMB</a>
+          <a href="cosmicweb.html" class="nav-tab active">第三章：宇宙网与暗物质</a>
+          <a href="stellar.html" class="nav-tab">第四章：恒星演化与超新星</a>
+          <a href="wormhole.html" class="nav-tab">第五章：虫洞与量子纠缠</a>
+          <a href="heatdeath.html" class="nav-tab">第六章：宇宙热寂与重生</a>
+        </div>
+        <h1>
+          🕸️ 宇宙巨网、子弹星团与暗物质骨架
+          <span class="badge">NASA Chandra & JWST SMACS</span>
+        </h1>
+        <p>
+          仿真星系际温热介质 (WHIM) 汇流、钱德拉子弹星团撞击气体与暗物质时空剥离，以及宇宙巨网与人脑神经网络突触的惊人数学同构。
+        </p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="btn-toggle-hud" title="快捷键 H 隐藏/显示 HUD">👁️ 纯净视效</button>
+        <button class="btn highlight" id="btn-modal">🔭 宇宙网观测参考</button>
+        <div class="observatory-tag">
+          <span class="pulse-dot"></span><strong>钱德拉子弹星团 1E 0657-558</strong><br>
+          质心分离：$720\ \text{kpc}$ 超前剥离<br>
+          透镜红移：$z = 0.296$ (SMACS 0723)
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Left: Science Insights -->
+      <div class="panel interactive">
+        <h3>🔬 暗物质与引力透镜机制</h3>
+
+        <div class="insight-card" style="border-left-color: #ff4081; color: #ff80ab;">
+          💥 <strong>子弹星系团冲压分离 (Ram-Pressure Stripping)：</strong><br>
+          碰撞时，普通气体在中央相互阻滞加热至上亿度（钱德拉粉红 X 射线）；而暗物质由于无碰撞特性，与星系一同自由穿透，质心超前 720 kpc！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #00e5ff; color: #80d8ff;">
+          🌀 <strong>JWST SMACS 0723 强引力透镜：</strong><br>
+          中心超星系团超强引力弯曲深空背景光，形成数十道扭曲放大的爱因斯坦光弧，将百亿光年外的极早期星系亮度放大数百倍！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #b388ff; color: #d1c4e9;">
+          🧠 <strong>人脑神经元 vs 宇宙巨网同构性：</strong><br>
+          部分研究比较过宇宙网与神经网络的统计特征；相似的视觉图案不意味着两种系统具有相同的动力学机制。
+        </div>
+
+        <div class="insight-card" style="border-left-color: #76ff03; color: #ccff90;">
+          📻 <strong>钱德拉雷达扫频声化 (Universe of Sound)：</strong><br>
+          雷达扫描光带自左向右扫过星系团，垂直 Y 轴映射音高（高处高音），水平 X 轴映射立体声方位，光度映射振幅音量。
+        </div>
+      </div>
+
+      <!-- Right: Controls -->
+      <div class="panel controls-panel interactive">
+        <h3>🎛️ 观测模式与暗物质势阱</h3>
+
+        <div style="font-size:11px; color:#8faee0; margin-bottom:5px;">多维观测图层模式切换：</div>
+        <div class="mode-selector">
+          <button class="mode-btn active" data-mode="0">🌌 综合全景流</button>
+          <button class="mode-btn" data-mode="1">🔭 JWST 强透镜弧</button>
+          <button class="mode-btn" data-mode="2">💥 钱德拉子弹星团</button>
+          <button class="mode-btn" data-mode="3">🟣 纯暗物质晕</button>
+          <button class="mode-btn" data-mode="4">🧠 脑神经突触流</button>
+          <button class="mode-btn" data-mode="5">👁️ 仅见光学星系</button>
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>暗物质势阱引力深度</span>
+            <span class="val" id="val-dm">1.80</span>
+          </div>
+          <input type="range" id="param-dm" min="0.4" max="3.5" step="0.05" value="1.8">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>气体碰撞冲压阻力系数</span>
+            <span class="val" id="val-drag">2.40</span>
+          </div>
+          <input type="range" id="param-drag" min="0.2" max="5.0" step="0.1" value="2.4">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>引力透镜弯曲畸变率</span>
+            <span class="val" id="val-lens">1.50</span>
+          </div>
+          <input type="range" id="param-lens" min="0.2" max="3.0" step="0.05" value="1.5">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn active" id="btn-synapse">⚡ 神经突触电位</button>
+          <button class="btn" id="btn-director">🎥 电影导览视角</button>
+          <button class="btn" id="btn-audio">🔊 钱德拉雷达声化</button>
+          <button class="btn active" id="btn-scan">📡 雷达扫描光带</button>
+        </div>
+
+        <div class="audio-box">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Bar -->
+    <div class="interactive" style="width: 100%;">
+      <div class="bottom-bar">
+        <div class="telemetry-card">
+          <div class="telemetry-name">超星系团节点数</div>
+          <div class="telemetry-val" id="disp-nodes">186 <span class="unit">个</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">子弹星团质量质心分离距</div>
+          <div class="telemetry-val" id="disp-sep">720 <span class="unit">kpc</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">冲压冲击波气体温度</div>
+          <div class="telemetry-val" id="disp-temp">1.6×10⁸ <span class="unit">K</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">爱因斯坦引力透镜环半径</div>
+          <div class="telemetry-val" id="disp-theta">32.4 <span class="unit">arcsec</span></div>
+        </div>
+      </div>
+
+      <div class="drag-hint">
+        🖱️ 鼠标拖拽 360° 穿行宇宙纤维网 | 滚轮无级缩放 | 点击「💥 钱德拉子弹星团」见证粉红撞击气体与青蓝暗物质的幽灵剥离
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal-box">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🔭 星系团与引力透镜参考</h2>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+
+      <p style="line-height: 1.6; font-size: 13px; margin-bottom: 14px;">
+        <strong>子弹星系团 (Bullet Cluster 1E 0657-558)</strong> 是人类天文学史上证明暗物质真实存在的最直接铁证：
+      </p>
+
+      <div class="science-reference"><p>子弹星系团的热气体与引力透镜质量分布为研究暗物质提供证据。</p><p>本页节点、纤维和扫描声音均为程序生成，并未复原观测图或重建质量分布。</p><p>背景资料：<a href="https://chandra.harvard.edu/photo/2006/1e0657/" target="_blank" rel="noopener noreferrer">查看参考来源</a>（需联网）。</p></div>
+    </div>
+  </div>
+
+  <!-- Pass 1: Cosmic Web Gas & Shockwave Volumetric Shader -->
+  <script id="vs-bg" type="x-shader/x-vertex">
+    attribute vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.999, 1.0);
+    }
+  </script>
+
+  <script id="fs-bg" type="x-shader/x-fragment">
+    precision highp float;
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform float u_mode;
+    uniform float u_scan_pos;
+    uniform int u_show_scan;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    float fbm(vec2 p) {
+      float v = 0.0;
+      float a = 0.5;
+      for (int i = 0; i < 4; i++) {
+        v += a * noise(p);
+        p = p * 2.08 + vec2(2.1, 5.3);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
+      float dist = length(uv);
+
+      // Deep Cosmic Background with filament gas glow
+      float neb1 = fbm(uv * 3.5 + vec2(u_time * 0.02, -u_time * 0.015));
+      float neb2 = fbm(uv * 7.0 - vec2(u_time * 0.01));
+
+      vec3 col = mix(vec3(0.01, 0.015, 0.04), vec3(0.04, 0.02, 0.08), neb1);
+
+      if (u_mode > 1.5 && u_mode < 2.5) {
+        // Bullet Cluster Mode: Central pink collision gas & twin cyan dark matter peaks
+        vec2 centerGas = uv - vec2(0.0, 0.0);
+        float gasCone = exp(-length(centerGas * vec2(1.8, 1.0)) * 4.5);
+        vec3 pinkGas = vec3(1.0, 0.2, 0.55) * gasCone * 0.8;
+
+        // Twin Cyan Dark Matter Halos
+        vec2 dmLeft = uv - vec2(-0.55, 0.05);
+        vec2 dmRight = uv - vec2(0.55, -0.05);
+        float dmPeak1 = exp(-length(dmLeft) * 3.8);
+        float dmPeak2 = exp(-length(dmRight) * 3.8);
+        vec3 cyanDm = vec3(0.05, 0.75, 1.0) * (dmPeak1 + dmPeak2) * 0.7;
+
+        col += pinkGas + cyanDm;
+      } else if (u_mode > 0.5 && u_mode < 1.5) {
+        // JWST SMACS 0723 Mode: Golden core glow & concentric lensing arc halo
+        float core = exp(-dist * 4.0) * 0.9;
+        float arcHalo = exp(-abs(dist - 0.42) * 22.0) * 0.5 + exp(-abs(dist - 0.65) * 18.0) * 0.35;
+        col += vec3(1.0, 0.8, 0.35) * core + vec3(0.3, 0.8, 1.0) * arcHalo;
+      } else {
+        // Composite / Filament WHIM Volume Flow
+        float filamentGas = pow(neb1, 2.8) * 0.55;
+        vec3 whimColor = mix(vec3(0.12, 0.4, 0.95), vec3(0.65, 0.25, 0.85), neb2);
+        col += whimColor * filamentGas;
+      }
+
+      // NASA Chandra Radar Sonification Scan Line
+      if (u_show_scan == 1) {
+        float scanX = (gl_FragCoord.x / u_resolution.x);
+        float scanDist = abs(scanX - u_scan_pos);
+        if (scanDist < 0.018) {
+          float scanIntensity = exp(-scanDist * 160.0);
+          col += vec3(0.0, 0.95, 1.0) * scanIntensity * 0.75;
+        }
+      }
+
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  </script>
+
+  <!-- Pass 2: Cosmic Web 120,000 Particles & Filaments -->
+  <script id="vs-web" type="x-shader/x-vertex">
+    attribute vec3 a_position;
+    attribute vec3 a_dir;
+    attribute float a_type;
+    attribute float a_speed;
+
+    uniform mat4 u_mvp;
+    uniform float u_time;
+    uniform float u_mode;
+    uniform float u_dm_pot;
+    uniform float u_drag;
+    uniform float u_lens;
+    uniform float u_synapse;
+
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    void main() {
+      vec3 pos = a_position;
+      float ptSize = 3.6;
+      vec3 col = vec3(0.5, 0.4, 0.9);
+      float alpha = 0.85;
+
+      if (a_type < 0.5) {
+        // WHIM (Warm-Hot Intergalactic Medium) along filaments
+        float flowDist = mod(u_time * 0.45 * a_speed * u_dm_pot, 1.0) - 0.5;
+        pos += a_dir * (flowDist * 4.2);
+
+        if (u_mode < 0.5) {
+          col = mix(vec3(0.42, 0.22, 0.92), vec3(0.12, 0.75, 1.0), sin(a_position.x * 0.25 + u_time) * 0.5 + 0.5);
+          ptSize = 3.2;
+          alpha = 0.8;
+        } else if (u_mode < 1.5) {
+          col = vec3(0.85, 0.6, 0.3);
+          ptSize = 2.4;
+          alpha = 0.5;
+        } else if (u_mode < 2.5) {
+          col = vec3(0.12, 0.7, 1.0);
+          ptSize = 3.8;
+          alpha = 0.88;
+        } else if (u_mode < 3.5) {
+          col = vec3(0.68, 0.42, 1.0);
+          ptSize = 4.0;
+          alpha = 0.92;
+        } else if (u_mode < 4.5) {
+          col = vec3(0.18, 0.92, 0.95);
+          ptSize = 2.8;
+          alpha = 0.7;
+        } else {
+          alpha = 0.0;
+          ptSize = 0.0;
+        }
+      } else if (a_type < 1.5) {
+        // Supercluster Nodes
+        float pulse = sin(u_time * 3.5 + pos.x * 2.5) * 0.25 + 1.0;
+        ptSize = 10.0 * pulse;
+
+        if (u_mode < 0.5) {
+          col = vec3(1.0, 0.95, 0.7);
+          alpha = 1.0;
+        } else if (u_mode < 1.5) {
+          col = vec3(1.0, 0.88, 0.48);
+          ptSize = 13.0 * pulse;
+          alpha = 1.0;
+        } else if (u_mode < 2.5) {
+          col = vec3(1.0, 0.95, 0.85);
+          ptSize = 8.5 * pulse;
+          alpha = 0.95;
+        } else if (u_mode < 3.5) {
+          col = vec3(0.78, 0.58, 1.0);
+          alpha = 0.95;
+        } else if (u_mode < 4.5) {
+          col = vec3(1.0, 0.72, 0.25);
+          ptSize = 11.0 * pulse;
+          alpha = 1.0;
+        } else {
+          col = vec3(1.0, 0.96, 0.88);
+          ptSize = 10.0 * pulse;
+          alpha = 1.0;
+        }
+      } else if (a_type < 2.5) {
+        // Action Potential Pulses
+        float spikePos = mod(u_time * 2.5 * a_speed, 1.0) - 0.5;
+        pos += a_dir * (spikePos * 7.5);
+        if (u_synapse > 0.5) {
+          col = (u_mode > 3.5 && u_mode < 4.5) ? vec3(0.2, 1.0, 0.88) : vec3(0.95, 0.98, 1.0);
+          ptSize = 7.0;
+          alpha = 1.0;
+        } else {
+          alpha = 0.0;
+        }
+      } else {
+        // Bullet Cluster Gas Particles
+        if (u_mode > 1.5 && u_mode < 2.5) {
+          col = vec3(1.0, 0.25, 0.6);
+          ptSize = 4.2;
+          alpha = 0.9;
+        } else {
+          col = vec3(0.5, 0.6, 0.9);
+          ptSize = 2.6;
+          alpha = 0.5;
+        }
+      }
+
+      v_color = col;
+      v_alpha = alpha;
+
+      gl_Position = u_mvp * vec4(pos, 1.0);
+      gl_PointSize = clamp(ptSize * (350.0 / gl_Position.w), 1.5, 24.0);
+    }
+  </script>
+
+  <script id="fs-web" type="x-shader/x-fragment">
+    precision highp float;
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    void main() {
+      vec2 coord = gl_PointCoord - vec2(0.5);
+      float distSq = dot(coord, coord);
+      if (distSq > 0.25) discard;
+
+      float glow = exp(-distSq * 9.0);
+      gl_FragColor = vec4(v_color, v_alpha * glow);
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script>
+    const canvas = document.getElementById('glcanvas');
+    const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+
+    if (!gl) throw new Error('WebGL unavailable');
+
+    function createShader(gl, type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error('Shader compile: ' + gl.getShaderInfoLog(s));
+      return s;
+    }
+
+    // Pass 1: Background
+    const vsBg = createShader(gl, gl.VERTEX_SHADER, document.getElementById('vs-bg').text);
+    const fsBg = createShader(gl, gl.FRAGMENT_SHADER, document.getElementById('fs-bg').text);
+    const progBg = gl.createProgram();
+    gl.attachShader(progBg, vsBg);
+    gl.attachShader(progBg, fsBg);
+    gl.linkProgram(progBg);
+    if (!gl.getProgramParameter(progBg, gl.LINK_STATUS)) throw new Error('WebGL program link: ' + gl.getProgramInfoLog(progBg));
+
+    const quadBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,  1, -1, -1,  1,
+      -1,  1,  1, -1,  1,  1,
+    ]), gl.STATIC_DRAW);
+
+    const bgPosLoc = gl.getAttribLocation(progBg, 'position');
+    const bgResLoc = gl.getUniformLocation(progBg, 'u_resolution');
+    const bgTimeLoc = gl.getUniformLocation(progBg, 'u_time');
+    const bgModeLoc = gl.getUniformLocation(progBg, 'u_mode');
+    const bgScanLoc = gl.getUniformLocation(progBg, 'u_scan_pos');
+    const bgShowScanLoc = gl.getUniformLocation(progBg, 'u_show_scan');
+
+    // Pass 2: Cosmic Web Particles
+    const vsWeb = createShader(gl, gl.VERTEX_SHADER, document.getElementById('vs-web').text);
+    const fsWeb = createShader(gl, gl.FRAGMENT_SHADER, document.getElementById('fs-web').text);
+    const progWeb = gl.createProgram();
+    gl.attachShader(progWeb, vsWeb);
+    gl.attachShader(progWeb, fsWeb);
+    gl.linkProgram(progWeb);
+    if (!gl.getProgramParameter(progWeb, gl.LINK_STATUS)) throw new Error('WebGL program link: ' + gl.getProgramInfoLog(progWeb));
+
+    const PARTICLE_COUNT = Math.floor(120000 * window.cosmosParticleFactor);
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const dirs = new Float32Array(PARTICLE_COUNT * 3);
+    const types = new Float32Array(PARTICLE_COUNT);
+    const speeds = new Float32Array(PARTICLE_COUNT);
+
+    // Generate Hierarchical Cosmic Web with 186 Supercluster Nodes
+    const NODE_COUNT = 186;
+    const nodeCoords = [];
+    for (let n = 0; n < NODE_COUNT; n++) {
+      nodeCoords.push([
+        (Math.random() - 0.5) * 36.0,
+        (Math.random() - 0.5) * 22.0,
+        (Math.random() - 0.5) * 24.0,
+      ]);
+    }
+
+    let pIdx = 0;
+    // Nodes
+    for (let n = 0; n < NODE_COUNT && pIdx < PARTICLE_COUNT; n++) {
+      positions[pIdx * 3 + 0] = nodeCoords[n][0];
+      positions[pIdx * 3 + 1] = nodeCoords[n][1];
+      positions[pIdx * 3 + 2] = nodeCoords[n][2];
+      dirs[pIdx * 3 + 0] = 0; dirs[pIdx * 3 + 1] = 0; dirs[pIdx * 3 + 2] = 0;
+      types[pIdx] = 1.0; // Node
+      speeds[pIdx] = 1.0;
+      pIdx++;
+    }
+
+    // Filaments connecting nearest nodes
+    for (let i = 0; i < NODE_COUNT; i++) {
+      const n1 = nodeCoords[i];
+      // connect to 3 nearest
+      for (let k = 1; k <= 3; k++) {
+        const n2 = nodeCoords[(i + k * 17) % NODE_COUNT];
+        const segCount = 180;
+        for (let s = 0; s < segCount && pIdx < PARTICLE_COUNT; s++) {
+          const frac = s / segCount;
+          const jitter = (Math.random() - 0.5) * 0.75;
+          positions[pIdx * 3 + 0] = n1[0] + (n2[0] - n1[0]) * frac + jitter;
+          positions[pIdx * 3 + 1] = n1[1] + (n2[1] - n1[1]) * frac + jitter;
+          positions[pIdx * 3 + 2] = n1[2] + (n2[2] - n1[2]) * frac + jitter;
+
+          const dx = n2[0] - n1[0], dy = n2[1] - n1[1], dz = n2[2] - n1[2];
+          const len = Math.hypot(dx, dy, dz) || 1;
+          dirs[pIdx * 3 + 0] = dx / len;
+          dirs[pIdx * 3 + 1] = dy / len;
+          dirs[pIdx * 3 + 2] = dz / len;
+
+          types[pIdx] = Math.random() < 0.15 ? 2.0 : 0.0;
+          speeds[pIdx] = 0.5 + Math.random() * 0.8;
+          pIdx++;
+        }
+      }
+    }
+
+    // Fill remaining with Bullet Cluster and background gas
+    while (pIdx < PARTICLE_COUNT) {
+      const isBullet = Math.random() < 0.35;
+      if (isBullet) {
+        positions[pIdx * 3 + 0] = (Math.random() - 0.5) * 14.0;
+        positions[pIdx * 3 + 1] = (Math.random() - 0.5) * 7.0;
+        positions[pIdx * 3 + 2] = (Math.random() - 0.5) * 8.0;
+        types[pIdx] = 3.0; // Bullet gas
+      } else {
+        positions[pIdx * 3 + 0] = (Math.random() - 0.5) * 44.0;
+        positions[pIdx * 3 + 1] = (Math.random() - 0.5) * 28.0;
+        positions[pIdx * 3 + 2] = (Math.random() - 0.5) * 32.0;
+        types[pIdx] = 0.0;
+      }
+      dirs[pIdx * 3 + 0] = (Math.random() - 0.5);
+      dirs[pIdx * 3 + 1] = (Math.random() - 0.5);
+      dirs[pIdx * 3 + 2] = (Math.random() - 0.5);
+      speeds[pIdx] = 0.5 + Math.random() * 0.5;
+      pIdx++;
+    }
+
+    const posBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+    const dirBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, dirBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, dirs, gl.STATIC_DRAW);
+
+    const typeBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, typeBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, types, gl.STATIC_DRAW);
+
+    const speedBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, speedBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, speeds, gl.STATIC_DRAW);
+
+    const webMvpLoc = gl.getUniformLocation(progWeb, 'u_mvp');
+    const webTimeLoc = gl.getUniformLocation(progWeb, 'u_time');
+    const webModeLoc = gl.getUniformLocation(progWeb, 'u_mode');
+    const webDmLoc = gl.getUniformLocation(progWeb, 'u_dm_pot');
+    const webDragLoc = gl.getUniformLocation(progWeb, 'u_drag');
+    const webLensLoc = gl.getUniformLocation(progWeb, 'u_lens');
+    const webSynapseLoc = gl.getUniformLocation(progWeb, 'u_synapse');
+
+    // Controls State
+    let currentMode = 0.0;
+    let dmVal = 1.8;
+    let dragVal = 2.4;
+    let lensVal = 1.5;
+    let synapseActive = 1;
+    let showScan = 1;
+    let scanPos = 0.0;
+    let directorMode = false;
+
+    // Camera
+    let camRadius = 32.0;
+    let camTheta = 0.25;
+    let camPhi = 0.75;
+    let isDragging = false;
+    let lastX = 0, lastY = 0;
+
+    function resize() {
+      if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Mouse / Touch
+    window.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.interactive') || e.target.closest('.modal-backdrop')) return;
+      isDragging = true;
+      directorMode = false;
+      document.getElementById('btn-director').classList.remove('active');
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      camPhi += dx * 0.005;
+      camTheta = Math.max(-1.4, Math.min(1.4, camTheta + dy * 0.005));
+    });
+    window.addEventListener('wheel', (e) => {
+      if (e.target.closest('.interactive') || e.target.closest('.modal-backdrop')) return;
+      camRadius = Math.max(12.0, Math.min(65.0, camRadius + e.deltaY * 0.025));
+    }, { passive: true });
+
+    // Mode Selector
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentMode = parseFloat(e.target.dataset.mode);
+      });
+    });
+
+    // Sliders
+    document.getElementById('param-dm').addEventListener('input', (e) => {
+      dmVal = parseFloat(e.target.value);
+      document.getElementById('val-dm').innerText = dmVal.toFixed(2);
+    });
+    document.getElementById('param-drag').addEventListener('input', (e) => {
+      dragVal = parseFloat(e.target.value);
+      document.getElementById('val-drag').innerText = dragVal.toFixed(2);
+    });
+    document.getElementById('param-lens').addEventListener('input', (e) => {
+      lensVal = parseFloat(e.target.value);
+      document.getElementById('val-lens').innerText = lensVal.toFixed(2);
+    });
+
+    // Buttons
+    const btnSynapse = document.getElementById('btn-synapse');
+    btnSynapse.addEventListener('click', () => {
+      synapseActive = synapseActive ? 0 : 1;
+      btnSynapse.classList.toggle('active', synapseActive === 1);
+    });
+
+    const btnDirector = document.getElementById('btn-director');
+    btnDirector.addEventListener('click', () => {
+      directorMode = !directorMode;
+      btnDirector.classList.toggle('active', directorMode);
+    });
+
+    const btnScan = document.getElementById('btn-scan');
+    btnScan.addEventListener('click', () => {
+      showScan = showScan ? 0 : 1;
+      btnScan.classList.toggle('active', showScan === 1);
+    });
+
+    // HUD Toggle
+    const hudLayer = document.getElementById('hud-layer');
+    const btnToggleHud = document.getElementById('btn-toggle-hud');
+    function toggleHud() { hudLayer.classList.toggle('hud-hidden'); }
+    btnToggleHud.addEventListener('click', toggleHud);
+    window.addEventListener('keydown', (e) => { if (e.key === 'h' || e.key === 'H') toggleHud(); });
+
+    // Modal
+    const modalBox = document.getElementById('modal-box');
+    document.getElementById('btn-modal').addEventListener('click', () => modalBox.classList.add('open'));
+    document.getElementById('btn-close-modal').addEventListener('click', () => modalBox.classList.remove('open'));
+    modalBox.addEventListener('click', (e) => { if (e.target === modalBox) modalBox.classList.remove('open'); });
+
+    // NASA Chandra Radar Sonification Engine (SYSTEM Sounds Algorithm)
+    let audioCtx = null;
+    let masterGain = null;
+    let analyser = null;
+    let audioActive = false;
+    let lastScanTrigger = 0;
+
+    const audioCanvas = document.getElementById('audio-canvas');
+    const actx = audioCanvas.getContext('2d');
+
+    // Pentatonic scale frequencies: C3, D3, E3, G3, A3, C4, D4, E4, G4, A4, C5
+    const pentaScale = [130.81, 146.83, 164.81, 196.00, 220.00, 261.63, 293.66, 329.63, 392.00, 440.00, 523.25];
+
+    const btnAudio = document.getElementById('btn-audio');
+    btnAudio.addEventListener('click', () => {
+      audioActive = !audioActive;
+      btnAudio.classList.toggle('active', audioActive);
+      if (audioActive) {
+        initChandraAudio();
+        btnAudio.innerText = '🔊 雷达声化中...';
+      } else {
+        if (masterGain && audioCtx) masterGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+        btnAudio.innerText = '🔊 钱德拉雷达声化';
+      }
+    });
+
+    function initChandraAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      if (masterGain) { masterGain.gain.cancelScheduledValues(audioCtx.currentTime); masterGain.gain.linearRampToValueAtTime(0.24, audioCtx.currentTime + 0.3); return; }
+
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.24, audioCtx.currentTime);
+      masterGain.connect(analyser);
+      analyser.connect(audioCtx.destination);
+    }
+
+    function triggerChandraBlip(yNorm, panVal) {
+      if (!audioActive || !audioCtx) return;
+      const noteIdx = Math.min(pentaScale.length - 1, Math.floor((1.0 - yNorm) * pentaScale.length));
+      const freq = pentaScale[noteIdx];
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const pan = audioCtx.createStereoPanner ? audioCtx.createStereoPanner() : null;
+      const now = audioCtx.currentTime;
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.12, now + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
+
+      if (pan) {
+        pan.pan.setValueAtTime(Math.max(-1, Math.min(1, panVal)), now);
+        osc.connect(gain);
+        gain.connect(pan);
+        pan.connect(masterGain);
+      } else {
+        osc.connect(gain);
+        gain.connect(masterGain);
+      }
+
+      osc.start(now);
+      osc.stop(now + 0.6);
+    }
+
+    // Audio Visualizer
+    function drawAudioVisualizer() {
+      requestAnimationFrame(drawAudioVisualizer);
+      actx.clearRect(0, 0, audioCanvas.width, audioCanvas.height);
+      if (!audioActive || !analyser) {
+        actx.fillStyle = 'rgba(179, 136, 255, 0.25)';
+        actx.fillRect(0, audioCanvas.height / 2 - 1, audioCanvas.width, 2);
+        return;
+      }
+
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+
+      const barWidth = (audioCanvas.width / bufferLength) * 2.2;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = (dataArray[i] / 255.0) * audioCanvas.height;
+        actx.fillStyle = `rgba(124, 77, 255, ${0.4 + dataArray[i] / 300.0})`;
+        actx.fillRect(x, audioCanvas.height - barHeight, barWidth - 1, barHeight);
+        x += barWidth;
+      }
+    }
+    drawAudioVisualizer();
+
+    // Matrix Math
+    function mat4Perspective(out, fovy, aspect, near, far) {
+      const f = 1.0 / Math.tan(fovy / 2);
+      out[0] = f / aspect; out[1] = 0; out[2] = 0; out[3] = 0;
+      out[4] = 0; out[5] = f; out[6] = 0; out[7] = 0;
+      out[8] = 0; out[9] = 0; out[10] = (far + near) / (near - far); out[11] = -1;
+      out[12] = 0; out[13] = 0; out[14] = (2 * far * near) / (near - far); out[15] = 0;
+      return out;
+    }
+
+    function mat4LookAt(out, eye, center, up) {
+      let z0 = eye[0] - center[0], z1 = eye[1] - center[1], z2 = eye[2] - center[2];
+      let len = 1.0 / Math.hypot(z0, z1, z2);
+      z0 *= len; z1 *= len; z2 *= len;
+
+      let x0 = up[1] * z2 - up[2] * z1, x1 = up[2] * z0 - up[0] * z2, x2 = up[0] * z1 - up[1] * z0;
+      len = 1.0 / Math.hypot(x0, x1, x2);
+      x0 *= len; x1 *= len; x2 *= len;
+
+      let y0 = z1 * x2 - z2 * x1, y1 = z2 * x0 - z0 * x2, y2 = z0 * x1 - z1 * x0;
+
+      out[0] = x0; out[1] = y0; out[2] = z0; out[3] = 0;
+      out[4] = x1; out[5] = y1; out[6] = z1; out[7] = 0;
+      out[8] = x2; out[9] = y2; out[10] = z2; out[11] = 0;
+      out[12] = -(x0 * eye[0] + x1 * eye[1] + x2 * eye[2]);
+      out[13] = -(y0 * eye[0] + y1 * eye[1] + y2 * eye[2]);
+      out[14] = -(z0 * eye[0] + z1 * eye[1] + z2 * eye[2]);
+      out[15] = 1;
+      return out;
+    }
+
+    function mat4Multiply(out, a, b) {
+      let a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
+      let a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
+      let a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+      let a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+
+      let b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
+      out[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+      out[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+      out[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+      out[3] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+      b0 = b[4]; b1 = b[5]; b2 = b[6]; b3 = b[7];
+      out[4] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+      out[5] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+      out[6] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+      out[7] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+      b0 = b[8]; b1 = b[9]; b2 = b[10]; b3 = b[11];
+      out[8] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+      out[9] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+      out[10] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+      out[11] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+      b0 = b[12]; b1 = b[13]; b2 = b[14]; b3 = b[15];
+      out[12] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+      out[13] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+      out[14] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+      out[15] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+      return out;
+    }
+
+    const projMat = new Float32Array(16);
+    const viewMat = new Float32Array(16);
+    const mvpMat = new Float32Array(16);
+
+    let startTime = performance.now();
+    function render(now) {
+      resize();
+
+      const timeSec = (window.cosmosAnimationTime(now) - startTime) * 0.001;
+
+      // Update radar scan position
+      scanPos = (timeSec * 0.18) % 1.0;
+
+      // Director Mode Camera
+      if (directorMode) {
+        camPhi = timeSec * 0.22;
+        camTheta = 0.22 + Math.sin(timeSec * 0.3) * 0.28;
+        camRadius = 30.0 + Math.cos(timeSec * 0.18) * 8.0;
+      } else if (!isDragging) {
+        camPhi += 0.0012;
+      }
+
+      const eye = [
+        camRadius * Math.cos(camTheta) * Math.sin(camPhi),
+        camRadius * Math.sin(camTheta),
+        camRadius * Math.cos(camTheta) * Math.cos(camPhi)
+      ];
+
+      mat4Perspective(projMat, Math.PI / 3.8, canvas.width / canvas.height, 0.1, 200.0);
+      mat4LookAt(viewMat, eye, [0, 0, 0], [0, 1, 0]);
+      mat4Multiply(mvpMat, projMat, viewMat);
+
+      // Sonify the actual projected, procedurally generated supercluster nodes.
+      // Nodes share these world positions with the particle renderer; this is not observational data.
+      if (audioActive && now - lastScanTrigger > 180) {
+        const width = Math.min(0.06, (now - lastScanTrigger) * 0.00018);
+        const candidates = [];
+        for (const [x, y, z] of nodeCoords) {
+          const cw = mvpMat[3] * x + mvpMat[7] * y + mvpMat[11] * z + mvpMat[15];
+          if (cw <= 0) continue;
+          const sx = (mvpMat[0] * x + mvpMat[4] * y + mvpMat[8] * z + mvpMat[12]) / cw * 0.5 + 0.5;
+          const sy = 0.5 - (mvpMat[1] * x + mvpMat[5] * y + mvpMat[9] * z + mvpMat[13]) / cw * 0.5;
+          if (sx >= scanPos - width && sx <= scanPos && sy >= 0 && sy <= 1) candidates.push({ sx, sy });
+        }
+        if (candidates.length) {
+          const hit = candidates[0];
+          triggerChandraBlip(hit.sy, hit.sx * 2 - 1);
+          lastScanTrigger = now;
+        }
+      }
+
+      gl.clearColor(0.01, 0.012, 0.025, 1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+      // Pass 1: Background Gas & Shockwaves
+      gl.disable(gl.DEPTH_TEST);
+      gl.disable(gl.BLEND);
+      gl.useProgram(progBg);
+      gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+      gl.enableVertexAttribArray(bgPosLoc);
+      gl.vertexAttribPointer(bgPosLoc, 2, gl.FLOAT, false, 0, 0);
+
+      gl.uniform2f(bgResLoc, canvas.width, canvas.height);
+      gl.uniform1f(bgTimeLoc, timeSec);
+      gl.uniform1f(bgModeLoc, currentMode);
+      gl.uniform1f(bgScanLoc, scanPos);
+      gl.uniform1i(bgShowScanLoc, showScan);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      // Pass 2: Cosmic Web 120,000 Particles
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+      gl.useProgram(progWeb);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+      const posAttr = gl.getAttribLocation(progWeb, 'a_position');
+      gl.enableVertexAttribArray(posAttr);
+      gl.vertexAttribPointer(posAttr, 3, gl.FLOAT, false, 0, 0);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, dirBuf);
+      const dirAttr = gl.getAttribLocation(progWeb, 'a_dir');
+      gl.enableVertexAttribArray(dirAttr);
+      gl.vertexAttribPointer(dirAttr, 3, gl.FLOAT, false, 0, 0);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, typeBuf);
+      const typeAttr = gl.getAttribLocation(progWeb, 'a_type');
+      gl.enableVertexAttribArray(typeAttr);
+      gl.vertexAttribPointer(typeAttr, 1, gl.FLOAT, false, 0, 0);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, speedBuf);
+      const speedAttr = gl.getAttribLocation(progWeb, 'a_speed');
+      gl.enableVertexAttribArray(speedAttr);
+      gl.vertexAttribPointer(speedAttr, 1, gl.FLOAT, false, 0, 0);
+
+      gl.uniformMatrix4fv(webMvpLoc, false, mvpMat);
+      gl.uniform1f(webTimeLoc, timeSec);
+      gl.uniform1f(webModeLoc, currentMode);
+      gl.uniform1f(webDmLoc, dmVal);
+      gl.uniform1f(webDragLoc, dragVal);
+      gl.uniform1f(webLensLoc, lensVal);
+      gl.uniform1f(webSynapseLoc, synapseActive);
+
+      gl.drawArrays(gl.POINTS, 0, PARTICLE_COUNT);
+
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  </script>
+</body>
+</html>

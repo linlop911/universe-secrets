@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "page": "index",
+      "mutedPeak": 0,
+      "peak": 0.16096152365207672,
+      "rms": 0.10335875927867713,
+      "remainingNodes": 0,
+      "contexts": 1
+    },
+    {
+      "page": "wormhole",
+      "mutedPeak": 0,
+      "peak": 0.17550857365131378,
+      "rms": 0.10072669556709903,
+      "remainingNodes": 0,
+      "contexts": 1
+    },
+    {
+      "page": "heatdeath",
+      "mutedPeak": 0,
+      "peak": 0.16401554644107819,
+      "rms": 0.05974411617072645,
+      "remainingNodes": 0,
+      "contexts": 1
+    }
+  ]
+}

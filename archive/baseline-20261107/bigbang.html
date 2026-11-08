@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇宙的秘密：早期宇宙与微波背景</title>
+  <script src="runtime.js"></script>
+  <script src="math.js"></script>
+  <script src="common.js"></script>
+  <link rel="stylesheet" href="base.css">
+  <style>
+body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020206;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e2edff;
+    }
+
+.header-box {
+      background: rgba(10, 16, 32, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 12px;
+      padding: 14px 22px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      max-width: 680px;
+    }
+
+.nav-tab.active {
+      background: linear-gradient(135deg, #e65100, #ff8f00);
+      color: #fff;
+      border-color: #ffd54f;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(255, 143, 0, 0.6);
+    }
+
+.header-box h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.header-box h1 span.badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      background: linear-gradient(135deg, #ff9100, #ff3d00);
+      border-radius: 4px;
+      color: #fff;
+    }
+
+.header-box p {
+      font-size: 12px;
+      color: #92aee2;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+.observatory-tag {
+      background: rgba(10, 16, 32, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 11.5px;
+      color: #799be4;
+      line-height: 1.5;
+      text-align: right;
+      font-family: "Courier New", monospace;
+    }
+
+.pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffab00;
+      box-shadow: 0 0 8px #ffab00;
+      animation: pulse 1.6s infinite;
+      margin-right: 6px;
+    }
+
+/* Side Panels */
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      margin: 12px 0;
+      pointer-events: none;
+    }
+
+.panel {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(90, 150, 255, 0.32);
+      border-radius: 12px;
+      padding: 16px;
+      color: #d1e0ff;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
+      width: 320px;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+    }
+
+.panel h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffb74d;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255, 183, 77, 0.25);
+      padding-bottom: 6px;
+    }
+
+.insight-card {
+      background: rgba(45, 30, 65, 0.45);
+      border-left: 3px solid #ff4081;
+      border-radius: 4px;
+      padding: 8px 10px;
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: #ff80ab;
+      line-height: 1.5;
+    }
+
+.control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #8faee0;
+      margin-bottom: 4px;
+    }
+
+.control-label span.val {
+      font-family: monospace;
+      color: #ffb74d;
+      font-weight: 600;
+    }
+
+input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(80, 130, 220, 0.25);
+      outline: none;
+    }
+
+input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ff9800;
+      cursor: pointer;
+      box-shadow: 0 0 8px #ff9800;
+    }
+
+.btn {
+      background: rgba(45, 65, 120, 0.45);
+      border: 1px solid rgba(100, 160, 255, 0.25);
+      border-radius: 6px;
+      color: #cfdfff;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+.btn:hover {
+      background: rgba(60, 100, 180, 0.65);
+      color: #fff;
+      border-color: #ffb74d;
+    }
+
+.btn.active {
+      background: linear-gradient(135deg, #e65100, #ff9800);
+      border-color: #ffe082;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(255, 152, 0, 0.55);
+    }
+
+.btn.highlight {
+      background: linear-gradient(135deg, #7b1fa2, #ab47bc);
+      border-color: #ce93d8;
+      color: #fff;
+    }
+
+.epoch-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin: 8px 0;
+    }
+
+.epoch-btn {
+      background: rgba(30, 45, 80, 0.5);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      border-radius: 6px;
+      color: #8faee0;
+      padding: 5px 6px;
+      font-size: 10.5px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+.epoch-btn:hover {
+      background: rgba(50, 90, 160, 0.6);
+      color: #fff;
+    }
+
+.epoch-btn.active {
+      background: linear-gradient(135deg, #e65100, #ff6d00);
+      color: #fff;
+      font-weight: 700;
+      border-color: #ffd180;
+      box-shadow: 0 0 8px rgba(255, 109, 0, 0.5);
+    }
+
+.audio-box {
+      margin-top: 8px;
+      background: rgba(4, 10, 22, 0.7);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      border-radius: 8px;
+      padding: 6px;
+    }
+
+#audio-canvas {
+      width: 100%;
+      height: 38px;
+      display: block;
+      background: #02050c;
+      border-radius: 4px;
+    }
+
+.telemetry-card {
+      background: rgba(10, 16, 32, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(80, 140, 255, 0.28);
+      border-radius: 10px;
+      padding: 7px 12px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+
+.telemetry-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #8faee0;
+      margin-bottom: 2px;
+    }
+
+.telemetry-val {
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      color: #ffb74d;
+      text-shadow: 0 0 8px rgba(255, 183, 77, 0.5);
+    }
+
+.telemetry-val span.unit {
+      font-size: 9.5px;
+      color: #ffe0b2;
+      margin-left: 2px;
+    }
+
+.drag-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #7c9bcf;
+      margin-top: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+.modal-box {
+      background: #081022;
+      border: 1px solid #ffb74d;
+      border-radius: 14px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 152, 0, 0.25);
+      color: #d0e4ff;
+    }
+
+.modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 183, 77, 0.3);
+      padding-bottom: 10px;
+    }
+
+.modal-header h2 {
+      font-size: 17px;
+      color: #ffb74d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.close-modal {
+      background: none;
+      border: none;
+      color: #8faee0;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+.data-table th, .data-table td {
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+.data-table th {
+      background: rgba(30, 60, 120, 0.35);
+      color: #ffb74d;
+    }
+  </style>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body>
+  <canvas id="glcanvas"></canvas>
+
+  <div class="hud-layer" id="hud-layer">
+    <!-- Top Bar -->
+    <div class="top-bar interactive">
+      <div class="header-box">
+        <div class="nav-tabs">
+          <a href="index.html" class="nav-tab">第一章：黑洞引力透镜</a>
+          <a href="bigbang.html" class="nav-tab active">第二章：大爆炸与CMB</a>
+          <a href="cosmicweb.html" class="nav-tab">第三章：宇宙网与暗物质</a>
+          <a href="stellar.html" class="nav-tab">第四章：恒星演化与超新星</a>
+          <a href="wormhole.html" class="nav-tab">第五章：假想虫洞</a>
+          <a href="heatdeath.html" class="nav-tab">第六章：宇宙热寂与重生</a>
+        </div>
+        <h1>
+          💥 宇宙暴胀、微波背景与原初核合成
+          <span class="badge">程序化科普演示</span>
+        </h1>
+        <p>粒子从团聚到弥散的阶段插值和程序化冷热色斑；没有导入 CMB 全天图、角功率谱或真实星系目录。纪元数值和时间标签是概念性阶段预设。</p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="btn-toggle-hud" title="快捷键 H 隐藏/显示 HUD">👁️ 纯净视效</button>
+        <button class="btn highlight" id="btn-modal">🔭 Planck 观测报告</button>
+        <div class="observatory-tag">程序化科普演示<br>观测背景与参考资料见科学说明。</div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Left: Reviewed science -->
+      <div class="panel interactive"><h3>科学背景与模型范围</h3><div class="insight-card">宇宙微波背景是早期宇宙留下的辐射，ESA 的 Planck 任务对其进行了测量。[S3]</div><div class="insight-card">粒子从团聚到弥散的阶段插值和程序化冷热色斑；没有导入 CMB 全天图、角功率谱或真实星系目录。纪元数值和时间标签是概念性阶段预设。</div><div class="insight-card">振荡器音高随演示纪元下降，属于概念性音效，不是对重子声学振荡数据的重建。</div></div>
+
+      <!-- Right: Interactive Controls -->
+      <div class="panel controls-panel interactive">
+        <h3>🎛️ 宇宙学时间轴与场调谐</h3>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>宇宙演化纪元 (Cosmic Epoch)</span>
+            <span class="val" id="val-epoch">0.0 (奇点)</span>
+          </div>
+          <input type="range" id="param-epoch" min="0" max="5" step="0.01" value="0">
+        </div>
+
+        <div style="font-size:11px; color:#8faee0; margin-bottom:5px;">六大宇宙演化标志性阶段快捷跳转：</div>
+        <div class="epoch-selector">
+          <button class="epoch-btn active" data-step="0">0. 普朗克奇点</button>
+          <button class="epoch-btn" data-step="1">1. 宇宙暴胀激波</button>
+          <button class="epoch-btn" data-step="2">2. 夸克胶子汤</button>
+          <button class="epoch-btn" data-step="3">3. 38万年 CMB 余晖</button>
+          <button class="epoch-btn" data-step="4">4. 原初星系网络</button>
+          <button class="epoch-btn" data-step="5">5. 暗能量现代宇宙</button>
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>暴胀强度系数 (<math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="e^{N}"><mrow><msup><mi>e</mi><mrow><mi>N</mi></mrow></msup></mrow></math> 膨胀率)</span>
+            <span class="val" id="val-inflation">1.35</span>
+          </div>
+          <input type="range" id="param-inflation" min="0.5" max="3.0" step="0.05" value="1.35">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>暗物质密度比例 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="Omega_c"><mrow><msub><mi>Ω</mi><mi>c</mi></msub></mrow></math></span>
+            <span class="val" id="val-dm">0.268</span>
+          </div>
+          <input type="range" id="param-dm" min="0.05" max="0.55" step="0.01" value="0.268">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn" id="btn-autoplay">▶️ 纪元自动演进</button>
+          <button class="btn" id="btn-director">🎥 电影导览视角</button>
+          <button class="btn" id="btn-audio">🔊 宇宙大爆炸声化</button>
+          <button class="btn active" id="btn-stars">✨ JWST 原初星系</button>
+        </div>
+
+        <div class="audio-box">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Bar -->
+    <div class="interactive" style="width: 100%;">
+      <div class="telemetry-caption">阶段预设示意读数</div><div class="bottom-bar">
+        <div class="telemetry-card">
+          <div class="telemetry-name">宇宙年龄 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="t"><mrow><mi>t</mi></mrow></math></div>
+          <div class="telemetry-val" id="disp-age">0 <span class="unit">s</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">有效黑体温度 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="T"><mrow><mi>T</mi></mrow></math></div>
+          <div class="telemetry-val" id="disp-temp">&gt; 10³² <span class="unit">K</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">空间几何曲率 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="k"><mrow><mi>k</mi></mrow></math></div>
+          <div class="telemetry-val" id="disp-curv">k = 0 (平直)</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">时空尺度因子 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="a(t)"><mrow><mi>a</mi><mo>(</mo><mi>t</mi><mo>)</mo></mrow></math></div>
+          <div class="telemetry-val" id="disp-scale">0.000</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">主导能量形态</div>
+          <div class="telemetry-val" id="disp-dom">量子重力统一</div>
+        </div>
+      </div>
+
+      <div class="drag-hint">拖拽旋转 · 双指或滚轮缩放 · 聚焦场景后用方向键与加减键操作 · H 隐藏界面</div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal-box">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🔭 NASA / 普朗克 CMB 观测与 <math xmlns="http://www.w3.org/1998/Math/MathML" aria-label="Lambdatext{CDM}"><mrow><mi>Λ</mi><mtext>CDM</mtext></mrow></math> 物理基准</h2>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+
+      <p class="science-reference">粒子从团聚到弥散的阶段插值和程序化冷热色斑；没有导入 CMB 全天图、角功率谱或真实星系目录。纪元数值和时间标签是概念性阶段预设。</p>
+
+      <div class="science-reference"><p>振荡器音高随演示纪元下降，属于概念性音效，不是对重子声学振荡数据的重建。</p><ul><li><a data-source-id="S3" href="https://www.esa.int/Science_Exploration/Space_Science/Cosmic_Microwave_Background_CMB_radiation" target="_blank" rel="noopener noreferrer">S3 · ESA: Cosmic Microwave Background radiation</a></li></ul></div>
+    </div>
+  </div>
+
+  <!-- Background Pass: Fullscreen Primordial Energy Shader -->
+  <script id="vs-bg" type="x-shader/x-vertex">
+    attribute vec2 position;
+    varying vec2 v_uv;
+    void main() {
+      v_uv = position * 0.5 + 0.5;
+      gl_Position = vec4(position, 0.999, 1.0);
+    }
+  </script>
+
+  <script id="fs-bg" type="x-shader/x-fragment">
+    precision highp float;
+    varying vec2 v_uv;
+
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform float u_epoch;
+    uniform float u_inflation;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    float fbm(vec2 p) {
+      float v = 0.0;
+      float a = 0.5;
+      for (int i = 0; i < 4; i++) {
+        v += a * noise(p);
+        p = p * 2.05 + vec2(1.5, 4.3);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
+      float dist = length(uv);
+
+      vec3 col = vec3(0.015, 0.015, 0.035);
+
+      if (u_epoch < 1.0) {
+        // 0. Planck Singularity: Blazing central quantum core with shimmering vacuum foam
+        float t = u_epoch;
+        float core = exp(-dist * (6.0 - t * 3.0)) * 1.8;
+        float foam = fbm(uv * 12.0 + u_time * 0.8) * 0.45;
+        vec3 singCol = mix(vec3(1.0, 0.4, 0.05), vec3(0.3, 0.8, 1.0), foam + dist * 1.5);
+        singCol += vec3(1.0, 0.95, 0.9) * exp(-dist * 14.0);
+        col = mix(col, singCol, clamp(core + foam * 0.5, 0.0, 1.0));
+      } else if (u_epoch < 2.0) {
+        // 1. Cosmic Inflation: Expanding shockwave rings & metric warping
+        float t = u_epoch - 1.0;
+        float shock = abs(dist - (0.35 + t * 0.7));
+        float ring = exp(-shock * 18.0) * 1.4;
+        float warp = fbm(uv * 8.0 - vec2(u_time * 0.4));
+        vec3 inflCol = mix(vec3(0.8, 0.1, 0.9), vec3(1.0, 0.85, 0.2), warp);
+        inflCol += vec3(1.0) * ring;
+        col = mix(vec3(0.04, 0.01, 0.08), inflCol, clamp(ring + warp * 0.6, 0.0, 1.0));
+      } else if (u_epoch < 3.0) {
+        // 2. Quark-Gluon Plasma: High-energy boiling plasma sea
+        float t = u_epoch - 2.0;
+        float qgp = fbm(uv * 6.0 + vec2(u_time * 0.6, -u_time * 0.4));
+        float qgp2 = noise(uv * 14.0 + u_time * 1.2);
+        vec3 plasmaCol = mix(vec3(0.9, 0.15, 0.01), vec3(1.0, 0.75, 0.1), qgp);
+        plasmaCol = mix(plasmaCol, vec3(1.0, 0.95, 0.8), pow(qgp2, 3.0) * 0.8);
+        col = mix(plasmaCol * 0.7, vec3(0.05, 0.01, 0.02), t * 0.5);
+      } else if (u_epoch < 4.0) {
+        // 3. CMB 380,000 Year Surface of Last Scattering (Planck All-Sky Map)
+        float t = u_epoch - 3.0;
+        float cmbNoise = fbm(uv * 7.5 + 2.4);
+        float cmbDetail = noise(uv * 18.0);
+        float normTemp = clamp(cmbNoise * 0.7 + cmbDetail * 0.3, 0.0, 1.0);
+
+        // Planck False Color: cold spots in blue, warm in orange/red
+        vec3 cmbCol = mix(vec3(0.02, 0.18, 0.85), vec3(0.95, 0.35, 0.02), normTemp);
+        if (normTemp > 0.75) cmbCol = mix(cmbCol, vec3(1.0, 0.95, 0.8), (normTemp - 0.75) * 4.0);
+
+        // Acoustic Horizon BAO Rings
+        float acousticRing = sin(dist * 26.0 - u_time * 0.8) * 0.5 + 0.5;
+        cmbCol += vec3(0.15, 0.35, 0.6) * pow(acousticRing, 4.0);
+        col = cmbCol * (0.65 - t * 0.35);
+      } else {
+        // 4 & 5. Deep Universe with Cosmic Web Glow
+        float t = u_epoch - 4.0;
+        float web = fbm(uv * 4.0 + 1.2);
+        vec3 webCol = mix(vec3(0.01, 0.02, 0.06), vec3(0.08, 0.18, 0.45), pow(web, 2.5));
+        col = webCol;
+      }
+
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  </script>
+
+  <!-- WebGL 130,000 GPU Particles Simulation with Spherical Harmonics -->
+  <script id="vs-particles" type="x-shader/x-vertex">
+    attribute vec3 a_seed;
+    attribute float a_type;
+
+    uniform mat4 u_mvp;
+    uniform float u_epoch;
+    uniform float u_time;
+    uniform float u_inflation;
+    uniform float u_dm;
+    uniform float u_point_scale;
+    uniform int u_show_stars;
+
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    void main() {
+      float phi = a_seed.x * 2.0 * PI;
+      float theta = acos(clamp(a_seed.y * 2.0 - 1.0, -1.0, 1.0));
+      float baseRad = a_seed.z;
+
+      vec3 dir = vec3(
+        sin(theta) * cos(phi),
+        sin(theta) * sin(phi),
+        cos(theta)
+      );
+
+      vec3 pos = vec3(0.0);
+      vec3 col = vec3(1.0);
+      float ptSize = 3.6;
+      float alpha = 0.88;
+
+      // 0. Singularity
+      float foam = sin(u_time * 15.0 + phi * 6.0) * cos(u_time * 18.0 + theta * 6.0) * 0.4;
+      float coreR = (pow(baseRad, 0.5) * 3.8 + 0.6) + foam;
+      vec3 pos0 = dir * coreR;
+      vec3 col0 = mix(vec3(1.0, 0.95, 0.8), vec3(0.4, 0.8, 1.0), baseRad);
+      if (baseRad < 0.2) col0 = vec3(1.8, 1.6, 1.4);
+
+      // 1. Cosmic Inflation
+      float inflRad = (pow(baseRad, 0.4) * 11.0 + 4.5) * u_inflation;
+      vec3 pos1 = dir * inflRad;
+      vec3 col1 = mix(vec3(1.0, 0.95, 0.8), vec3(0.85, 0.2, 1.0), baseRad);
+
+      // 2. Quark-Gluon Plasma
+      vec2 uvNoise = vec2(dir.x * 5.0 + u_time * 2.0, dir.y * 5.0 + u_time * 1.8);
+      float turb = noise(uvNoise) * 2.0 - 1.0;
+      float plasmaRad = (baseRad * 12.0 + 4.0) + turb * 1.6;
+      vec3 pos2 = dir * plasmaRad;
+      vec3 col2 = mix(vec3(1.0, 0.22, 0.02), vec3(1.0, 0.85, 0.1), turb * 0.5 + 0.5);
+
+      // 3. CMB Surface
+      float ylm = sin(theta * 3.0) * cos(phi * 3.0) * 0.55 +
+                  sin(theta * 6.0) * sin(phi * 5.0) * 0.35 +
+                  sin(theta * 11.0) * cos(phi * 9.0) * 0.22 +
+                  noise(vec2(phi * 8.0, theta * 8.0)) * 0.25;
+      float cmbRad = 13.5 + ylm * 1.8;
+      vec3 pos3 = dir * cmbRad;
+      float normYlm = clamp(ylm * 0.75 + 0.5, 0.0, 1.0);
+      vec3 col3 = mix(vec3(0.04, 0.25, 0.95), vec3(1.0, 0.45, 0.02), normYlm);
+      if (normYlm > 0.8) col3 = mix(col3, vec3(1.0, 0.95, 0.8), (normYlm - 0.8) * 5.0);
+
+      // 4. Cosmic Web & JWST JADES Earliest Galaxies
+      vec3 cell = fract(dir * (5.5 * (u_dm / 0.268))) - 0.5;
+      float distToAxis = min(min(length(cell.xy), length(cell.yz)), length(cell.xz));
+      vec3 webShift = dir * 15.5 - normalize(cell) * (0.85 - distToAxis) * 3.5;
+      vec3 pos4 = webShift;
+      vec3 col4 = mix(vec3(0.18, 0.5, 0.95), vec3(0.85, 0.3, 0.9), distToAxis * 2.0);
+
+      // 5. Dark Energy Acceleration
+      float deFactor = 1.0 + (a_type > 0.5 ? 0.35 : 0.65) * 1.4;
+      vec3 pos5 = pos4 * deFactor;
+      vec3 col5 = mix(col4, vec3(0.0, 0.95, 0.85), 0.4);
+
+      // Interpolate along continuous epoch
+      float ep = clamp(u_epoch, 0.0, 5.0);
+      if (ep < 1.0) {
+        float f = ep;
+        pos = mix(pos0, pos1, f);
+        col = mix(col0, col1, f);
+        ptSize = mix(4.2, 3.4, f);
+      } else if (ep < 2.0) {
+        float f = ep - 1.0;
+        pos = mix(pos1, pos2, f);
+        col = mix(col1, col2, f);
+        ptSize = mix(3.4, 3.8, f);
+      } else if (ep < 3.0) {
+        float f = ep - 2.0;
+        pos = mix(pos2, pos3, f);
+        col = mix(col2, col3, f);
+        ptSize = mix(3.8, 3.0, f);
+      } else if (ep < 4.0) {
+        float f = ep - 3.0;
+        pos = mix(pos3, pos4, f);
+        col = mix(col3, col4, f);
+        ptSize = mix(3.0, 3.2, f);
+      } else {
+        float f = ep - 4.0;
+        pos = mix(pos4, pos5, f);
+        col = mix(col4, col5, f);
+        ptSize = mix(3.2, 2.8, f);
+      }
+
+      // First Galaxies Sparks
+      if (u_show_stars == 1 && ep > 3.2 && a_type > 0.88) {
+        col = vec3(1.0, 0.95, 0.7);
+        ptSize *= 1.6;
+        alpha = 1.0;
+      }
+
+      v_color = col;
+      v_alpha = alpha;
+
+      gl_Position = u_mvp * vec4(pos, 1.0);
+      gl_PointSize = clamp(ptSize * (18.0 / gl_Position.w) * u_point_scale, 0.75, 6.0 * u_point_scale);
+    }
+  </script>
+
+  <script id="fs-particles" type="x-shader/x-fragment">
+    precision highp float;
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    void main() {
+      vec2 coord = gl_PointCoord - vec2(0.5);
+      float distSq = dot(coord, coord);
+      if (distSq > 0.25) discard;
+
+      // Soft Gaussian glow
+      float glow = exp(-distSq * 10.0);
+      gl_FragColor = vec4(v_color, v_alpha * glow * 0.25);
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script src="chapters/bigbang.js"></script>
+</body>
+</html>

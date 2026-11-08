@@ -1,0 +1,1460 @@
+{
+  "date": "2026-11-06",
+  "passed": true,
+  "reports": {
+    "file": {
+      "passed": 99,
+      "failed": 0
+    },
+    "http": {
+      "passed": 99,
+      "failed": 0
+    },
+    "runnerFaults": 3,
+    "audioEvents": 3
+  },
+  "sourceSHA256": {
+    "runtime.js": "db5316c007e9221014b26424018c8bd1a4cf83d490cbc5bcb387a819f615a7ed",
+    "common.js": "f21000611818b50e56f6da72560f36fa51bb48e615c7f5b86f2fc6c18749fe52",
+    "math.js": "7f22974acff525417b12d0ac51a50453e6d137efe18bad190ed92165bcada94c",
+    "base.css": "895f04797b8fa718f233df302b403078e8eca9b3fb9c2fa84e654ca6fa7dca48",
+    "common.css": "2a4d86457bc4bdfb44f3d3502c0c83feacca44a6946f7956d42eda003b893b3d",
+    "acceptance-manifest.json": "623335e591a1316ad68e6e0d9d055c74216defde7cf411f8eaa9ff9b3ecca358",
+    "science-content.json": "8aafdf171caaf556b6f5550fc0d642820562d0600a32cd27c510ee3177e7a6be",
+    "verify_all_pages.js": "ce1ffe4c056cf2567bf8caecfbcf170c5ca922bc45686b25190ba35048416e0c",
+    "test-support.cjs": "0c9a2f701d16b7aacf9d411f6bc2426c8d0350b631d57e666bc7b2dfab6263e1",
+    "verify_failure_paths.cjs": "1a75ffd61892341897b0ece31e8ef461fc80f7e78bb8f7cf0baaf43c0c7c1fbf",
+    "verify_audio_events.cjs": "97a57d2985d0cd67e78a5dc7ea5d10287dae5fba3d7b4ff2de2afa8051ae23ea",
+    "benchmark_before.cjs": "760c5ae8e780ab9a7a05b3d670f4b5df68e051bedacdd49ce19abf3de576908c",
+    "index.html": "6b268b110b3658b65dbdf834018a1825ec48db66c42e9519bf820937bf3bb18e",
+    "chapters/index.js": "0e339fffacc5932278ff30c02c64727d9e557e9e6a1553e721918ace2edbddd2",
+    "bigbang.html": "9fbda217e25734f8e162329119e71aae2753230b0b37a39cc911cd66426e02bd",
+    "chapters/bigbang.js": "194e9f500400574dbfb897d7e1ed90246336b59d3fe9ba3d14c54443ddf66238",
+    "cosmicweb.html": "4ae975e5e2235dce56ca618e032d2b6c748466c1f4e1c487166b4305b2b43df9",
+    "chapters/cosmicweb.js": "26d3c584b6fcd7aa691448ae60f8931437ec90fb1b9b1a4303a03d71192b4221",
+    "stellar.html": "6f899a883e04c52acf31537e09cb41c9ab5fdf85df7542a63862e64c20873bfd",
+    "chapters/stellar.js": "c7b9bd6614a4c06e1c8fd1b117a5c3e46ab11324266749cf94e53c0ac5e02d0c",
+    "wormhole.html": "280ca6eef8bceb18134461bb07c28c6a8dcf086892344b07584730bf87530562",
+    "chapters/wormhole.js": "ff4b2317e663c2c235588bc1578208653627dd497427670fbc2c08177b17848b",
+    "heatdeath.html": "8dbe90ce4bbdee296356bd6af2bca16187bd22ba399d9a9b0d6ad1e6ad23638d",
+    "chapters/heatdeath.js": "df5c5e5f0a9ccd95d30b735cab51e9ce898226ff3ee7e50dbc72cb2bd17de5a7"
+  },
+  "performance": [
+    {
+      "page": "index",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "before": {
+        "page": "index",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "p50": 3.600000023841858,
+        "p95": 4.400000095367432,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "camRadius": 8.2,
+          "camTheta": 0.22,
+          "camPhi": 0.85,
+          "isDragging": true,
+          "lastMouseX": 0,
+          "lastMouseY": 0,
+          "directorMode": false,
+          "massVal": 35,
+          "spinVal": 0.94,
+          "diskVal": 1.65,
+          "spectralMode": 0,
+          "dopplerActive": 1,
+          "jwstSpikes": 1,
+          "penroseActive": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 7.199999928474426,
+        "p95": 22.800000071525574,
+        "max": 30.100000023841858,
+        "longFrames": 0,
+        "frameCount": 675,
+        "programCount": 1,
+        "resourceCount": 4,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 6,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 768,
+          "height": 432
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "camRadius": 8.2,
+          "camTheta": 0.22,
+          "camPhi": 0.85,
+          "isDragging": true,
+          "lastMouseX": 0,
+          "lastMouseY": 0,
+          "directorMode": false,
+          "massVal": 35,
+          "spinVal": 0.94,
+          "diskVal": 1.65,
+          "spectralMode": 0,
+          "dopplerActive": 1,
+          "jwstSpikes": 1,
+          "penroseActive": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.799999952316284,
+        "p95": 4,
+        "max": 4.100000023841858,
+        "longFrames": 0,
+        "frameCount": 700,
+        "programCount": 1,
+        "resourceCount": 4,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 6,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "index",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "before": {
+        "page": "index",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "p50": 2.299999952316284,
+        "p95": 3.100000023841858,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 360,
+          "height": 800
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 720,
+          "height": 1600
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "camRadius": 8.2,
+          "camTheta": 0.22,
+          "camPhi": 0.85,
+          "isDragging": true,
+          "lastMouseX": 0,
+          "lastMouseY": 0,
+          "directorMode": false,
+          "massVal": 35,
+          "spinVal": 0.94,
+          "diskVal": 1.65,
+          "spectralMode": 0,
+          "dopplerActive": 1,
+          "jwstSpikes": 1,
+          "penroseActive": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 4.899999976158142,
+        "p95": 16.09999990463257,
+        "max": 32.800000071525574,
+        "longFrames": 0,
+        "frameCount": 725,
+        "programCount": 1,
+        "resourceCount": 4,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 6,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 432,
+          "height": 960
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "camRadius": 8.2,
+          "camTheta": 0.22,
+          "camPhi": 0.85,
+          "isDragging": true,
+          "lastMouseX": 0,
+          "lastMouseY": 0,
+          "directorMode": false,
+          "massVal": 35,
+          "spinVal": 0.94,
+          "diskVal": 1.65,
+          "spectralMode": 0,
+          "dopplerActive": 1,
+          "jwstSpikes": 1,
+          "penroseActive": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.899999976158142,
+        "p95": 4.400000095367432,
+        "max": 5.600000023841858,
+        "longFrames": 0,
+        "frameCount": 750,
+        "programCount": 1,
+        "resourceCount": 4,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 6,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "bigbang",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "before": {
+        "page": "bigbang",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "p50": 5.800000071525574,
+        "p95": 6.600000023841858,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentEpoch": 0,
+          "targetEpoch": 0,
+          "inflationVal": 1.35,
+          "dmVal": 0.27,
+          "showStars": 1,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 26,
+          "camTheta": 0.25,
+          "camPhi": 0.6,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.200000047683716,
+        "p95": 11.699999928474426,
+        "max": 20.40000009536743,
+        "longFrames": 0,
+        "frameCount": 681,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 4,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 768,
+          "height": 432
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentEpoch": 0,
+          "targetEpoch": 0,
+          "inflationVal": 1.35,
+          "dmVal": 0.27,
+          "showStars": 1,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 26,
+          "camTheta": 0.25,
+          "camPhi": 0.6,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.4000000953674316,
+        "p95": 5.100000023841858,
+        "max": 5.5,
+        "longFrames": 0,
+        "frameCount": 706,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 4,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "bigbang",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "before": {
+        "page": "bigbang",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "p50": 6.200000047683716,
+        "p95": 6.900000095367432,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 360,
+          "height": 800
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 720,
+          "height": 1600
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentEpoch": 0,
+          "targetEpoch": 0,
+          "inflationVal": 1.35,
+          "dmVal": 0.27,
+          "showStars": 1,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 26,
+          "camTheta": 0.25,
+          "camPhi": 0.6,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 3.799999952316284,
+        "p95": 45.199999928474426,
+        "max": 47.700000047683716,
+        "longFrames": 0,
+        "frameCount": 731,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 4,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 432,
+          "height": 960
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentEpoch": 0,
+          "targetEpoch": 0,
+          "inflationVal": 1.35,
+          "dmVal": 0.27,
+          "showStars": 1,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 26,
+          "camTheta": 0.25,
+          "camPhi": 0.6,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.399999976158142,
+        "p95": 39.799999952316284,
+        "max": 40.700000047683716,
+        "longFrames": 0,
+        "frameCount": 756,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 4,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "before": {
+        "page": "cosmicweb",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "p50": 6.700000047683716,
+        "p95": 7.800000071525574,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "pIdx": 120000,
+          "currentMode": 0,
+          "dmVal": 1.8,
+          "dragVal": 2.4,
+          "lensVal": 1.5,
+          "synapseActive": 1,
+          "showScan": 1,
+          "scanPos": 0.42900138,
+          "directorMode": false,
+          "camRadius": 32,
+          "camTheta": 0.25,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false,
+          "lastScanTrigger": 2866.2019999999993
+        },
+        "frames": 24,
+        "p50": 4.600000023841858,
+        "p95": 21.600000023841858,
+        "max": 29.399999976158142,
+        "longFrames": 0,
+        "frameCount": 678,
+        "programCount": 2,
+        "resourceCount": 11,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 2,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 768,
+          "height": 432
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "pIdx": 120000,
+          "currentMode": 0,
+          "dmVal": 1.8,
+          "dragVal": 2.4,
+          "lensVal": 1.5,
+          "synapseActive": 1,
+          "showScan": 1,
+          "scanPos": 0.42900138,
+          "directorMode": false,
+          "camRadius": 32,
+          "camTheta": 0.25,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false,
+          "lastScanTrigger": 2866.2019999999993
+        },
+        "frames": 24,
+        "p50": 2.1999999284744263,
+        "p95": 3,
+        "max": 4.399999976158142,
+        "longFrames": 0,
+        "frameCount": 703,
+        "programCount": 2,
+        "resourceCount": 11,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 2,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "before": {
+        "page": "cosmicweb",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "p50": 5.300000071525574,
+        "p95": 6,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 360,
+          "height": 800
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 720,
+          "height": 1600
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "pIdx": 120000,
+          "currentMode": 0,
+          "dmVal": 1.8,
+          "dragVal": 2.4,
+          "lensVal": 1.5,
+          "synapseActive": 1,
+          "showScan": 1,
+          "scanPos": 0.42900138,
+          "directorMode": false,
+          "camRadius": 32,
+          "camTheta": 0.25,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false,
+          "lastScanTrigger": 2866.2019999999993
+        },
+        "frames": 24,
+        "p50": 4.799999952316284,
+        "p95": 18.100000023841858,
+        "max": 20.200000047683716,
+        "longFrames": 0,
+        "frameCount": 728,
+        "programCount": 2,
+        "resourceCount": 11,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 2,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 432,
+          "height": 960
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "pIdx": 120000,
+          "currentMode": 0,
+          "dmVal": 1.8,
+          "dragVal": 2.4,
+          "lensVal": 1.5,
+          "synapseActive": 1,
+          "showScan": 1,
+          "scanPos": 0.42900138,
+          "directorMode": false,
+          "camRadius": 32,
+          "camTheta": 0.25,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false,
+          "lastScanTrigger": 2866.2019999999993
+        },
+        "frames": 24,
+        "p50": 1.3000000715255737,
+        "p95": 1.7999999523162842,
+        "max": 2.299999952316284,
+        "longFrames": 0,
+        "frameCount": 753,
+        "programCount": 2,
+        "resourceCount": 11,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 2,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "stellar",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "before": {
+        "page": "stellar",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "p50": 5.600000023841858,
+        "p95": 6.399999976158142,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentStage": 0,
+          "targetStage": 0,
+          "massVal": 25,
+          "spinVal": 30,
+          "showBeam": 1,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 38,
+          "camTheta": 0.22,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false,
+          "nextPulseTime": 4.461333333333334
+        },
+        "frames": 24,
+        "p50": 3.3000000715255737,
+        "p95": 13.899999976158142,
+        "max": 14.5,
+        "longFrames": 0,
+        "frameCount": 851,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 2,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 768,
+          "height": 432
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentStage": 0,
+          "targetStage": 0,
+          "massVal": 25,
+          "spinVal": 30,
+          "showBeam": 1,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 38,
+          "camTheta": 0.22,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false,
+          "nextPulseTime": 4.461333333333334
+        },
+        "frames": 24,
+        "p50": 2,
+        "p95": 4.5,
+        "max": 7.5,
+        "longFrames": 0,
+        "frameCount": 876,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 2,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "stellar",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "before": {
+        "page": "stellar",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "p50": 4.800000071525574,
+        "p95": 5.899999976158142,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 360,
+          "height": 800
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 720,
+          "height": 1600
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentStage": 0,
+          "targetStage": 0,
+          "massVal": 25,
+          "spinVal": 30,
+          "showBeam": 1,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 38,
+          "camTheta": 0.22,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false,
+          "nextPulseTime": 4.461333333333334
+        },
+        "frames": 24,
+        "p50": 3.399999976158142,
+        "p95": 37.200000047683716,
+        "max": 39.39999997615814,
+        "longFrames": 0,
+        "frameCount": 901,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 2,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 432,
+          "height": 960
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentStage": 0,
+          "targetStage": 0,
+          "massVal": 25,
+          "spinVal": 30,
+          "showBeam": 1,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 38,
+          "camTheta": 0.22,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false,
+          "nextPulseTime": 4.461333333333334
+        },
+        "frames": 24,
+        "p50": 2.399999976158142,
+        "p95": 7.100000023841858,
+        "max": 37.699999928474426,
+        "longFrames": 0,
+        "frameCount": 926,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 2,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "wormhole",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "before": {
+        "page": "wormhole",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "p50": 2.299999952316284,
+        "p95": 2.899999976158142,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "traverseStart": 0,
+          "traverseRadius": 9.5,
+          "traverseUniverse": 0,
+          "throatRadius": 2.2,
+          "energyTension": 1.45,
+          "bellFidelity": 0.98,
+          "currentMode": 0,
+          "inUniverseB": 0,
+          "showGlow": 1,
+          "directorMode": false,
+          "camRadius": 9.5,
+          "camTheta": 0.15,
+          "camPhi": 0.85,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "isTraversing": false,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 5.399999976158142,
+        "p95": 10.399999976158142,
+        "max": 20.299999952316284,
+        "longFrames": 0,
+        "frameCount": 683,
+        "programCount": 1,
+        "resourceCount": 4,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 5,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 768,
+          "height": 432
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "traverseStart": 0,
+          "traverseRadius": 9.5,
+          "traverseUniverse": 0,
+          "throatRadius": 2.2,
+          "energyTension": 1.45,
+          "bellFidelity": 0.98,
+          "currentMode": 0,
+          "inUniverseB": 0,
+          "showGlow": 1,
+          "directorMode": false,
+          "camRadius": 9.5,
+          "camTheta": 0.15,
+          "camPhi": 0.85,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "isTraversing": false,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.0999999046325684,
+        "p95": 2.6999999284744263,
+        "max": 4.600000023841858,
+        "longFrames": 0,
+        "frameCount": 708,
+        "programCount": 1,
+        "resourceCount": 4,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 5,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "wormhole",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "before": {
+        "page": "wormhole",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "p50": 1.5,
+        "p95": 2,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 360,
+          "height": 800
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 720,
+          "height": 1600
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "traverseStart": 0,
+          "traverseRadius": 9.5,
+          "traverseUniverse": 0,
+          "throatRadius": 2.2,
+          "energyTension": 1.45,
+          "bellFidelity": 0.98,
+          "currentMode": 0,
+          "inUniverseB": 0,
+          "showGlow": 1,
+          "directorMode": false,
+          "camRadius": 9.5,
+          "camTheta": 0.15,
+          "camPhi": 0.85,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "isTraversing": false,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 6.899999976158142,
+        "p95": 12.699999928474426,
+        "max": 13.600000023841858,
+        "longFrames": 0,
+        "frameCount": 733,
+        "programCount": 1,
+        "resourceCount": 4,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 5,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 432,
+          "height": 960
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "traverseStart": 0,
+          "traverseRadius": 9.5,
+          "traverseUniverse": 0,
+          "throatRadius": 2.2,
+          "energyTension": 1.45,
+          "bellFidelity": 0.98,
+          "currentMode": 0,
+          "inUniverseB": 0,
+          "showGlow": 1,
+          "directorMode": false,
+          "camRadius": 9.5,
+          "camTheta": 0.15,
+          "camPhi": 0.85,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "isTraversing": false,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.5,
+        "p95": 4.399999976158142,
+        "max": 5.399999976158142,
+        "longFrames": 0,
+        "frameCount": 758,
+        "programCount": 1,
+        "resourceCount": 4,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 5,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "heatdeath",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "before": {
+        "page": "heatdeath",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "p50": 6.299999952316284,
+        "p95": 7.799999952316284,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentStage": 0,
+          "targetStage": 0,
+          "wVal": -1.03,
+          "hawkingVal": 1.6,
+          "rebirthFlash": 0,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 36,
+          "camTheta": 0.28,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 3.200000047683716,
+        "p95": 17.600000023841858,
+        "max": 25.600000023841858,
+        "longFrames": 0,
+        "frameCount": 683,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 4,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 768,
+          "height": 432
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentStage": 0,
+          "targetStage": 0,
+          "wVal": -1.03,
+          "hawkingVal": 1.6,
+          "rebirthFlash": 0,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 36,
+          "camTheta": 0.28,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.200000047683716,
+        "p95": 3.5,
+        "max": 6.600000023841858,
+        "longFrames": 0,
+        "frameCount": 708,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 4,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    },
+    {
+      "page": "heatdeath",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "before": {
+        "page": "heatdeath",
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "p50": 4.5,
+        "p95": 5,
+        "frames": 24,
+        "longFrames": 0,
+        "canvas": {
+          "width": 360,
+          "height": 800
+        },
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "glError": 0
+      },
+      "high": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "high",
+        "canvas": {
+          "width": 720,
+          "height": 1600
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentStage": 0,
+          "targetStage": 0,
+          "wVal": -1.03,
+          "hawkingVal": 1.6,
+          "rebirthFlash": 0,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 36,
+          "camTheta": 0.28,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 3.600000023841858,
+        "p95": 36.700000047683716,
+        "max": 40.700000047683716,
+        "longFrames": 0,
+        "frameCount": 733,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 4,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      },
+      "low": {
+        "viewport": {
+          "width": 360,
+          "height": 800
+        },
+        "quality": "low",
+        "canvas": {
+          "width": 432,
+          "height": 960
+        },
+        "method": "default controls/camera; draw + synchronous 1-pixel readback completion barrier; wall time, not GPU timer",
+        "model": {
+          "currentStage": 0,
+          "targetStage": 0,
+          "wVal": -1.03,
+          "hawkingVal": 1.6,
+          "rebirthFlash": 0,
+          "autoplay": false,
+          "directorMode": false,
+          "camRadius": 36,
+          "camTheta": 0.28,
+          "camPhi": 0.75,
+          "isDragging": true,
+          "lastX": 0,
+          "lastY": 0,
+          "audioActive": false
+        },
+        "frames": 24,
+        "p50": 2.5,
+        "p95": 5,
+        "max": 6.299999952316284,
+        "longFrames": 0,
+        "frameCount": 758,
+        "programCount": 2,
+        "resourceCount": 9,
+        "timerCount": 0,
+        "audioContexts": 1,
+        "audioNodes": 4,
+        "audioStates": [
+          "suspended"
+        ],
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "linked": true,
+        "contextLost": false
+      }
+    }
+  ]
+}

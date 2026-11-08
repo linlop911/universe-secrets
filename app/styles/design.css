@@ -1,0 +1,291 @@
+/* Visual system v2. Loaded last: app/styles/design.css.
+   Structure mirrors the repository: pages -> app/styles -> app/chapters -> data -> docs. */
+
+:root {
+  --paper: #eaf3fc;
+  --muted: #a8bcd0;
+  --faint: #7f96ac;
+  --line: rgba(150, 190, 225, .22);
+  --veil: rgba(3, 10, 20, .93);
+  --accent: var(--chapter-accent, #8de2ed);
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
+  --sans: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+html body.chapter-experience {
+  font-family: var(--sans);
+  color: var(--paper);
+  background: #01050d;
+}
+
+html body.chapter-experience .hud-layer::before {
+  background:
+    linear-gradient(90deg, rgba(2, 8, 18, .94) 0%, rgba(2, 8, 18, .58) 32%, rgba(2, 8, 18, .06) 64%, transparent 100%),
+    linear-gradient(0deg, rgba(2, 8, 18, .84), transparent 38%);
+}
+
+@supports (color: color-mix(in srgb, red 10%, transparent)) {
+  html body.chapter-experience .hud-layer::before {
+    background:
+      radial-gradient(ellipse 58% 52% at 76% 44%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 72%),
+      linear-gradient(90deg, rgba(2, 8, 18, .94) 0%, rgba(2, 8, 18, .58) 32%, rgba(2, 8, 18, .06) 64%, transparent 100%),
+      linear-gradient(0deg, rgba(2, 8, 18, .84), transparent 38%);
+  }
+}
+
+@keyframes introRise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes beatRise {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes veilIn {
+  from { opacity: 0; transform: translateY(-50%) scale(.985); }
+  to { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+/* Navigation: a thin rule instead of a block of filled tabs. */
+html body.chapter-experience .chapter-navigation {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 9px !important;
+}
+html body.chapter-experience .nav-tab {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  color: var(--faint);
+  letter-spacing: .07em;
+  padding: 8px 5px;
+}
+html body.chapter-experience .nav-tab.active {
+  background: transparent;
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  box-shadow: none;
+  font-weight: 600;
+}
+html body.chapter-experience .top-actions .btn {
+  background: rgba(5, 14, 26, .7);
+  border-color: var(--line);
+  color: var(--muted);
+  border-radius: 2px;
+}
+
+/* Poster-like opening: one question, one rule, one variable. */
+html body.chapter-experience .chapter-intro {
+  top: clamp(130px, 17vh, 190px);
+  left: clamp(24px, 4vw, 64px);
+  width: min(460px, 34vw);
+  padding-left: 22px;
+  border-left: 1px solid var(--line);
+  animation: introRise .9s cubic-bezier(.2, .7, .2, 1) both;
+}
+html body.chapter-experience .chapter-eyebrow {
+  color: var(--accent);
+  letter-spacing: .34em;
+  font-size: 10px;
+  margin: 0 0 18px;
+}
+html body.chapter-experience .chapter-question {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 2.7vw, 44px);
+  line-height: 1.42;
+  letter-spacing: .045em;
+  color: #f4f9ff;
+  white-space: pre-line;
+  margin: 0 0 18px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, .85);
+}
+html body.chapter-experience .chapter-introduction {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 370px;
+}
+html body.chapter-experience .chapter-core {
+  background: rgba(6, 15, 28, .72);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 14px 16px;
+}
+html body.chapter-experience .chapter-core-value {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+html body.chapter-experience .chapter-core input { accent-color: var(--accent); }
+html body.chapter-experience .scene-kind { color: var(--faint); letter-spacing: .18em; }
+
+.chapter-experience .chapter-actions button,
+.chapter-experience .guide-deck button,
+.chapter-experience .observation-tabs button,
+.chapter-experience .observatory-header button {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--paper);
+  border-radius: 2px;
+  letter-spacing: .04em;
+  transition: border-color .25s, color .25s, background .25s;
+}
+.chapter-experience .chapter-actions button:hover,
+.chapter-experience .guide-deck button:hover,
+.chapter-experience .observation-tabs button:hover,
+.chapter-experience .observatory-header button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+html body.chapter-experience .chapter-actions .source-link {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 6px 0;
+  color: var(--accent);
+}
+
+/* Guide deck: a subtitle bar with a voice line and six visible beats. */
+html body.chapter-experience .guide-deck {
+  bottom: clamp(86px, 12vh, 124px);
+  width: min(820px, calc(100% - 48px));
+  padding: 18px 26px 16px;
+  background: linear-gradient(180deg, rgba(3, 10, 20, .38), rgba(3, 10, 20, .93) 38%, rgba(3, 10, 20, .97));
+  border: 1px solid var(--line);
+  border-top: 0;
+  border-radius: 3px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .6);
+  backdrop-filter: blur(14px);
+}
+html body.chapter-experience .guide-deck progress {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 2px;
+  border: 0;
+  border-radius: 0;
+  appearance: none;
+  background: rgba(150, 190, 225, .16);
+  accent-color: var(--accent);
+}
+html body.chapter-experience .guide-deck progress::-webkit-progress-bar { background: rgba(150, 190, 225, .16); }
+html body.chapter-experience .guide-deck progress::-webkit-progress-value { background: var(--accent); }
+html body.chapter-experience .guide-beats { display: flex; gap: 6px; margin: 0 0 12px; }
+html body.chapter-experience .guide-beats span {
+  width: 22px;
+  height: 2px;
+  background: rgba(150, 190, 225, .22);
+  transition: background .3s, box-shadow .3s;
+}
+html body.chapter-experience .guide-beats span.is-current {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+html body.chapter-experience .guide-deck h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(19px, 1.7vw, 25px);
+  letter-spacing: .05em;
+  color: #f3f9ff;
+  margin: 0 0 6px;
+}
+html body.chapter-experience .guide-deck .guide-voice {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+html body.chapter-experience .guide-deck #guide-text {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin: 0 0 14px;
+  max-width: 720px;
+}
+html body.chapter-experience .guide-deck .guide-primary {
+  background: var(--accent);
+  color: #04111c;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+html body.chapter-experience .guide-counter { color: var(--faint); letter-spacing: .1em; }
+html body.chapter-experience .guide-deck.beat-in h3,
+html body.chapter-experience .guide-deck.beat-in .guide-voice,
+html body.chapter-experience .guide-deck.beat-in #guide-text { animation: beatRise .42s ease-out both; }
+
+/* Observation evidence sits opposite the opening question, like a two-column spread. */
+html body.chapter-experience .guide-evidence {
+  left: auto;
+  right: clamp(24px, 4vw, 64px);
+  top: 36%;
+  transform: translateY(-50%);
+  width: min(420px, 32vw);
+  padding: 10px;
+  background: var(--veil);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .6);
+  backdrop-filter: blur(14px);
+  animation: veilIn .6s ease-out both;
+}
+html body.chapter-experience .guide-evidence > img { border: 1px solid var(--line); }
+html body.chapter-experience .guide-evidence strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* The observatory dialog keeps the same typographic voice. */
+html body.chapter-experience dialog.observatory {
+  background: linear-gradient(160deg, #081524, #040b16);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+html body.chapter-experience .observatory-header { border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+html body.chapter-experience .observatory-header h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: .06em;
+}
+html body.chapter-experience .observation-plate > img { border: 1px solid var(--line); }
+html body.chapter-experience .observation-plate h3 { font-family: var(--serif); font-weight: 400; }
+html body.chapter-experience .observation-tabs .active { border-color: var(--accent); color: var(--accent); }
+html body.chapter-experience .evidence-explanation { border-top-color: var(--line); }
+html body.chapter-experience .official-sound { background: rgba(9, 22, 36, .8); border-color: var(--line); }
+
+@media (max-width: 1100px) and (min-width: 701px) {
+  html body.chapter-experience .chapter-intro { left: 24px; width: 40vw; }
+  html body.chapter-experience .guide-deck { width: min(560px, calc(100% - 32px)); }
+  html body.chapter-experience .guide-evidence { right: 16px; width: 300px; }
+}
+@media (max-width: 700px) {
+  html body.chapter-experience .chapter-intro {
+    top: 140px;
+    left: 14px;
+    width: calc(100% - 28px);
+    padding-left: 14px;
+  }
+  html body.chapter-experience .chapter-question { font-size: 25px; }
+  html body.chapter-experience .chapter-eyebrow { margin-bottom: 10px; }
+  html body.chapter-experience .guide-deck {
+    bottom: 84px;
+    width: calc(100% - 16px);
+    padding: 14px;
+  }
+  html body.chapter-experience .guide-deck h3 { font-size: 16px; }
+  html body.chapter-experience .guide-deck .guide-voice { font-size: 12px; }
+  html body.chapter-experience .guide-deck #guide-text { font-size: 11px; }
+  html body.chapter-experience .guide-evidence {
+    left: 50%;
+    right: auto;
+    top: 42%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 24px);
+  }
+  html body.chapter-experience .observatory-header h2 { font-size: 19px; }
+}
+@media (max-height: 600px) and (min-width: 701px) {
+  html body.chapter-experience .chapter-intro { top: 104px; }
+  html body.chapter-experience .guide-evidence { top: 46%; }
+}

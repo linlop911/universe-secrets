@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇宙的秘密：量子纠缠与时空之桥 (Morris-Thorne Wormhole & ER = EPR)</title>
+  <script src="common.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020205;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e0ecff;
+    }
+    #glcanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+    /* HUD Overlays */
+    .hud-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      transition: opacity 0.3s;
+    }
+    .hud-hidden {
+      opacity: 0;
+      pointer-events: none !important;
+    }
+    .interactive {
+      pointer-events: auto;
+    }
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .header-box {
+      background: rgba(10, 14, 32, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 12px;
+      padding: 14px 22px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), inset 0 0 16px rgba(0, 229, 255, 0.12);
+      max-width: 680px;
+    }
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .nav-tab {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      text-decoration: none;
+      color: #8faee0;
+      background: rgba(30, 60, 120, 0.35);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      transition: all 0.2s;
+    }
+    .nav-tab:hover {
+      background: rgba(40, 90, 180, 0.55);
+      color: #fff;
+    }
+    .nav-tab.active {
+      background: linear-gradient(135deg, #00838f, #00e5ff);
+      color: #002b36;
+      border-color: #80deea;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+    }
+    .header-box h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-box h1 span.badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      background: linear-gradient(135deg, #00b0ff, #00e5ff);
+      border-radius: 4px;
+      color: #002b36;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .header-box p {
+      font-size: 12px;
+      color: #80deea;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .observatory-tag {
+      background: rgba(10, 14, 32, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 229, 255, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 11.5px;
+      color: #b2ebf2;
+      line-height: 1.5;
+      text-align: right;
+      font-family: "Courier New", monospace;
+    }
+    .pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00e5ff;
+      box-shadow: 0 0 8px #00e5ff;
+      animation: pulse 1.6s infinite;
+      margin-right: 6px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+    /* Side Panels */
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      margin: 12px 0;
+      pointer-events: none;
+    }
+    .panel {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 229, 255, 0.32);
+      border-radius: 12px;
+      padding: 16px;
+      color: #d1e0ff;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
+      width: 320px;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+    }
+    .panel h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #00e5ff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.25);
+      padding-bottom: 6px;
+    }
+    .insight-card {
+      background: rgba(10, 30, 45, 0.5);
+      border-left: 3px solid #00e5ff;
+      border-radius: 4px;
+      padding: 8px 10px;
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: #b2ebf2;
+      line-height: 1.5;
+    }
+    .control-item {
+      margin-bottom: 10px;
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #8faee0;
+      margin-bottom: 4px;
+    }
+    .control-label span.val {
+      font-family: monospace;
+      color: #00e5ff;
+      font-weight: 600;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(0, 229, 255, 0.25);
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #00e5ff;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00e5ff;
+    }
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .btn {
+      background: rgba(20, 50, 80, 0.45);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      border-radius: 6px;
+      color: #e0f7fa;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: rgba(0, 150, 180, 0.65);
+      color: #fff;
+      border-color: #00e5ff;
+    }
+    .btn.active {
+      background: linear-gradient(135deg, #00838f, #00acc1);
+      border-color: #80deea;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.55);
+    }
+    .btn.highlight {
+      background: linear-gradient(135deg, #7b1fa2, #ab47bc);
+      border-color: #ce93d8;
+      color: #fff;
+    }
+    .mode-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin: 8px 0;
+    }
+    .mode-btn {
+      background: rgba(20, 45, 65, 0.5);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 6px;
+      color: #8faee0;
+      padding: 5px 6px;
+      font-size: 10.5px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .mode-btn:hover {
+      background: rgba(0, 131, 143, 0.6);
+      color: #fff;
+    }
+    .mode-btn.active {
+      background: linear-gradient(135deg, #00838f, #00acc1);
+      color: #fff;
+      font-weight: 700;
+      border-color: #80deea;
+      box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+    }
+    .audio-box {
+      margin-top: 8px;
+      background: rgba(4, 10, 22, 0.7);
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      border-radius: 8px;
+      padding: 6px;
+    }
+    #audio-canvas {
+      width: 100%;
+      height: 38px;
+      display: block;
+      background: #02050c;
+      border-radius: 4px;
+    }
+    /* Bottom Telemetry Bar */
+    .bottom-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .telemetry-card {
+      background: rgba(10, 14, 32, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(0, 229, 255, 0.28);
+      border-radius: 10px;
+      padding: 7px 12px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+    .telemetry-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #80deea;
+      margin-bottom: 2px;
+    }
+    .telemetry-val {
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      color: #00e5ff;
+      text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+    }
+    .telemetry-val span.unit {
+      font-size: 9.5px;
+      color: #b2ebf2;
+      margin-left: 2px;
+    }
+    .drag-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #80deea;
+      margin-top: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 16, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #04121a;
+      border: 1px solid #00e5ff;
+      border-radius: 14px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 229, 255, 0.25);
+      color: #d0f8ff;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+      padding-bottom: 10px;
+    }
+    .modal-header h2 {
+      font-size: 17px;
+      color: #00e5ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      color: #80deea;
+      font-size: 22px;
+      cursor: pointer;
+    }
+    .close-modal:hover {
+      color: #fff;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11.5px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid rgba(0, 229, 255, 0.25);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .data-table th {
+      background: rgba(0, 131, 143, 0.35);
+      color: #00e5ff;
+    }
+  </style>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body>
+  <canvas id="glcanvas"></canvas>
+
+  <div class="hud-layer" id="hud-layer">
+    <!-- Top Bar -->
+    <div class="top-bar interactive">
+      <div class="header-box">
+        <div class="nav-tabs">
+          <a href="index.html" class="nav-tab">第一章：黑洞引力透镜</a>
+          <a href="bigbang.html" class="nav-tab">第二章：大爆炸与CMB</a>
+          <a href="cosmicweb.html" class="nav-tab">第三章：宇宙网与暗物质</a>
+          <a href="stellar.html" class="nav-tab">第四章：恒星演化与超新星</a>
+          <a href="wormhole.html" class="nav-tab active">第五章：虫洞与量子纠缠</a>
+          <a href="heatdeath.html" class="nav-tab">第六章：宇宙热寂与重生</a>
+        </div>
+        <h1>
+          🌌 莫里斯-索恩可穿越虫洞与 ER = EPR
+          <span class="badge">Caltech Kip Thorne & Princeton</span>
+        </h1>
+        <p>
+          受 Morris–Thorne 虫洞模型启发，以经验偏折与程序生成天球表现假想的虫洞穿越。
+        </p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="btn-toggle-hud" title="快捷键 H 隐藏/显示 HUD">👁️ 纯净视效</button>
+        <button class="btn highlight" id="btn-modal">🔭 虫洞理论参考</button>
+        <div class="observatory-tag">
+          <span class="pulse-dot"></span><strong>加州理工 & 普林斯顿高等研究院</strong><br>
+          度规形式：$ds^2 = -c^2dt^2 + dr^2/(1-b_0^2/r^2) + r^2 d\Omega^2$<br>
+          全息对偶：Maldacena-Susskind AdS/CFT
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Left: Science -->
+      <div class="panel interactive">
+        <h3>🔬 理论物理机制 (Theoretical Physics)</h3>
+
+        <div class="insight-card" style="border-left-color: #00e5ff; color: #80d8ff;">
+          🌀 <strong>莫里斯-索恩球对称度规 (Morris-Thorne Metric)：</strong><br>
+          索恩与莫里斯证明：若虫洞可安全通行，其咽喉处没有奇异奇点与致命潮汐力，但必须依赖具有负能量密度的奇异物质维持喉部张开！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #76ff03; color: #ccff90;">
+          ⚛️ <strong>卡西米尔真空极化负能量张力：</strong><br>
+          量子场论中的卡西米尔效应可在边界间产生负能量密度（$\langle T_{00} \rangle < 0$），破缺类光能量条件 (NEC)，使时空咽喉不发生引力坍缩！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #d500f9; color: #f3e5f5;">
+          🔗 <strong>普林斯顿 ER = EPR 猜想：</strong><br>
+          爱因斯坦-罗森桥（ER 虫洞）在量子物理上等价于微观贝尔量子纠缠对（EPR）。时空本身的平滑连通性，本质是由微观量子纠缠编织而成的全息全景！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #ff9100; color: #ffe0b2;">
+          🪐 <strong>双重天球全反射折射镜：</strong><br>
+          当视线投向虫洞口内部时，光线被喉部度规弯曲导向另一个平行宇宙；而外部边缘则呈现出本宇宙星空的强烈引力透镜环！
+        </div>
+      </div>
+
+      <!-- Right: Controls -->
+      <div class="panel controls-panel interactive">
+        <h3>🎛️ 虫洞几何与量子态调谐</h3>
+
+        <div style="font-size:11px; color:#80deea; margin-bottom:5px;">时空折射显示模式：</div>
+        <div class="mode-selector">
+          <button class="mode-btn active" data-mode="0">🌌 综合全景折射</button>
+          <button class="mode-btn" data-mode="1">⚡ 卡西米尔负能环</button>
+          <button class="mode-btn" data-mode="2">🔗 ER=EPR 纠缠网</button>
+          <button class="mode-btn" data-mode="3">🌐 黎曼曲率张量</button>
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>虫洞喉部咽喉半径 $b_0$</span>
+            <span class="val" id="val-radius">2.20</span>
+          </div>
+          <input type="range" id="param-radius" min="0.8" max="4.0" step="0.05" value="2.2">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>负能量张力密度 $-T_{00}$</span>
+            <span class="val" id="val-tension">1.45</span>
+          </div>
+          <input type="range" id="param-tension" min="0.5" max="3.0" step="0.05" value="1.45">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>贝尔纠缠保真度 (Fidelity)</span>
+            <span class="val" id="val-fidelity">0.98</span>
+          </div>
+          <input type="range" id="param-fidelity" min="0.5" max="1.0" step="0.01" value="0.98">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn highlight" id="btn-traverse" style="grid-column: span 2;">🚀 穿越平行宇宙 (Traverse)</button>
+          <button class="btn" id="btn-director">🎥 电影导览视角</button>
+          <button class="btn" id="btn-audio">🔊 量子隧穿音景</button>
+        </div>
+
+        <div class="audio-box">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Bar -->
+    <div class="interactive" style="width: 100%;">
+      <div class="bottom-bar">
+        <div class="telemetry-card">
+          <div class="telemetry-name">所在平行宇宙</div>
+          <div class="telemetry-val" id="disp-universe">本宇宙 A (银河系)</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">喉部咽喉孔径 $2b_0$</div>
+          <div class="telemetry-val" id="disp-b0">4.40 <span class="unit">km</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">卡西米尔负能量张量</div>
+          <div class="telemetry-val" id="disp-casimir">-1.45×10²⁴ <span class="unit">J/m³</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">全息纠缠熵 (Bekenstein)</div>
+          <div class="telemetry-val" id="disp-entropy">4.8×10⁷⁷ <span class="unit">k_B</span></div>
+        </div>
+      </div>
+
+      <div class="drag-hint">
+        🖱️ 鼠标拖拽 360° 环绕四维虫洞 | 滚轮逼近喉部 | 点击「🚀 穿越平行宇宙」直穿球形咽喉，体验拓扑翻转进入绚丽异界星空！
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal-box">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🔭 虫洞理论参考</h2>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+
+      <p style="line-height: 1.6; font-size: 13px; margin-bottom: 14px;">
+        1988 年加州理工大学理论物理学家 <strong>基普·索恩 (Kip Thorne)</strong> 与迈克尔·莫里斯提出经典广义相对论中完全可穿越的球对称虫洞度规：
+      </p>
+
+      <div class="science-reference"><p>Morris–Thorne 可穿越虫洞是广义相对论中的理论构造，对应解依赖特定物质条件；目前没有虫洞的观测证据。</p><p>本页通过经验光线弯曲和两组程序生成天球构造视觉效果，未数值积分该度规的光线测地线。</p><p>背景资料：<a href="https://doi.org/10.1119/1.15620" target="_blank" rel="noopener noreferrer">查看参考来源</a>（需联网）。</p></div>
+    </div>
+  </div>
+
+  <!-- Full-Screen Morris-Thorne Geodesic Raymarching Shader -->
+  <script id="vs-quad" type="x-shader/x-vertex">
+    attribute vec2 a_pos;
+    void main() {
+      gl_Position = vec4(a_pos, 0.0, 1.0);
+    }
+  </script>
+
+  <script id="fs-wormhole" type="x-shader/x-fragment">
+    precision highp float;
+
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform vec3 u_cam_pos;
+    uniform vec3 u_cam_target;
+    uniform float u_throat_radius;
+    uniform float u_energy_tension;
+    uniform float u_bell_fidelity;
+    uniform float u_mode;
+    uniform int u_in_universe_b;
+    uniform int u_show_glow;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    float fbm(vec2 p) {
+      float v = 0.0;
+      float a = 0.5;
+      for (int i = 0; i < 4; i++) {
+        v += a * noise(p);
+        p = p * 2.1 + vec2(1.5, 4.3);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    // Sky of Universe A (Milky Way Galaxy & Sapphire Deep Space)
+    vec3 sampleUniverseA(vec3 dir) {
+      float u = atan(dir.z, dir.x) / (2.0 * PI) + 0.5;
+      float v = asin(clamp(dir.y, -1.0, 1.0)) / PI + 0.5;
+
+      // Milky Way dust lane
+      float band = exp(-abs(dir.y) * 4.6) * 0.35;
+      vec3 col = vec3(0.015, 0.025, 0.06) + vec3(0.2, 0.28, 0.45) * band;
+
+      // Pinpoint Stars
+      float s = pow(hash(floor(vec2(u * 180.0, v * 90.0))), 38.0) * 2.4;
+      col += vec3(0.75, 0.88, 1.0) * s;
+      return col;
+    }
+
+    // Sky of Universe B (Alien JWST Deep Field Nebula & Emerald/Gold Galaxy Clusters)
+    vec3 sampleUniverseB(vec3 dir) {
+      float u = atan(dir.z, dir.x) / (2.0 * PI) + 0.5;
+      float v = asin(clamp(dir.y, -1.0, 1.0)) / PI + 0.5;
+
+      // Glowing alien gas clouds
+      float neb1 = fbm(vec2(u * 5.0, v * 3.5) + u_time * 0.02);
+      float neb2 = fbm(vec2(u * 9.0 + 3.1, v * 6.0));
+      vec3 col = mix(vec3(0.18, 0.02, 0.15), vec3(0.01, 0.35, 0.3), neb1);
+      col = mix(col, vec3(0.45, 0.2, 0.02), neb2 * 0.5);
+
+      // Gold and Emerald dust filaments
+      float fil = exp(-abs(sin(dir.x * 3.5 + dir.z * 3.5)) * 3.0) * 0.42;
+      col += vec3(1.0, 0.75, 0.25) * fil;
+
+      // Brilliant high-z red and violet Stars
+      float s = pow(hash(floor(vec2(u * 170.0, v * 85.0)) + 3.14), 34.0) * 2.8;
+      col += vec3(1.0, 0.5, 0.85) * s;
+      return col;
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
+
+      // Camera coordinate setup
+      vec3 camDir = normalize(u_cam_target - u_cam_pos);
+      vec3 camRight = normalize(cross(camDir, vec3(0.0, 1.0, 0.0)));
+      vec3 camUp = cross(camRight, camDir);
+      vec3 rayDir = normalize(uv.x * camRight + uv.y * camUp + 1.35 * camDir);
+
+      vec3 rayPos = u_cam_pos;
+      vec3 col = vec3(0.0);
+
+      float b0 = u_throat_radius;
+      bool traversed = false;
+
+      // Raymarch through curved Morris-Thorne metric
+      for (int i = 0; i < 90; i++) {
+        float r = length(rayPos);
+
+        // Ray passes through the spherical throat mouth: enter other universe
+        if (r < b0) {
+          traversed = true;
+          // 4D throat refraction
+          rayDir = normalize(rayDir + normalize(rayPos) * 0.38);
+          break;
+        }
+
+        // Einstein Gravitational Lensing Deflection
+        float bend = (1.8 * b0 * u_energy_tension) / (r * r * r);
+        rayDir = normalize(rayDir - normalize(rayPos) * bend * 0.13);
+
+        rayPos += rayDir * 0.14;
+        if (r > 38.0) break;
+      }
+
+      // Sample celestial spheres
+      if (traversed) {
+        col = (u_in_universe_b == 0) ? sampleUniverseB(rayDir) : sampleUniverseA(rayDir);
+        // Throat inner horizon violet glow
+        col += vec3(0.45, 0.15, 0.9) * 0.3;
+      } else {
+        col = (u_in_universe_b == 0) ? sampleUniverseA(rayDir) : sampleUniverseB(rayDir);
+      }
+
+      // Casimir Negative Energy rim glow at the spherical mouth boundary
+      if (u_show_glow == 1) {
+        float tca = dot(-u_cam_pos, rayDir);
+        float d2 = dot(u_cam_pos, u_cam_pos) - tca * tca;
+        if (d2 < b0 * b0 * 1.65 && d2 > b0 * b0 * 0.72) {
+          float rim = 1.0 - abs(sqrt(d2) - b0) / (b0 * 0.35);
+          vec3 glowCol = vec3(0.0, 0.95, 1.0);
+          if (u_mode > 0.5 && u_mode < 1.5) {
+            glowCol = vec3(0.2, 1.0, 0.4); // Casimir negative energy green
+          } else if (u_mode > 1.5 && u_mode < 2.5) {
+            glowCol = vec3(0.95, 0.2, 0.9); // ER=EPR Bell pink
+          }
+          col += glowCol * pow(clamp(rim, 0.0, 1.0), 3.0) * 0.85;
+        }
+      }
+
+      // Filmic ACES Tone Mapping
+      col = (col * (2.51 * col + 0.03)) / (col * (2.43 * col + 0.59) + 0.14);
+
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script>
+    const canvas = document.getElementById('glcanvas');
+    const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+
+    if (!gl) throw new Error('WebGL unavailable');
+
+    function createShader(gl, type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error('Shader compile: ' + gl.getShaderInfoLog(s));
+      return s;
+    }
+
+    const vsQuad = createShader(gl, gl.VERTEX_SHADER, document.getElementById('vs-quad').text);
+    const fsWormhole = createShader(gl, gl.FRAGMENT_SHADER, document.getElementById('fs-wormhole').text);
+    const prog = gl.createProgram();
+    gl.attachShader(prog, vsQuad);
+    gl.attachShader(prog, fsWormhole);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error('WebGL program link: ' + gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+
+    const quadBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,  1, -1, -1,  1,
+      -1,  1,  1, -1,  1,  1,
+    ]), gl.STATIC_DRAW);
+
+    const posLoc = gl.getAttribLocation(prog, 'a_pos');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const uRes = gl.getUniformLocation(prog, 'u_resolution');
+    const uTime = gl.getUniformLocation(prog, 'u_time');
+    const uCamPos = gl.getUniformLocation(prog, 'u_cam_pos');
+    const uCamTarget = gl.getUniformLocation(prog, 'u_cam_target');
+    const uRadius = gl.getUniformLocation(prog, 'u_throat_radius');
+    const uTension = gl.getUniformLocation(prog, 'u_energy_tension');
+    const uFidelity = gl.getUniformLocation(prog, 'u_bell_fidelity');
+    const uMode = gl.getUniformLocation(prog, 'u_mode');
+    const uInUnivB = gl.getUniformLocation(prog, 'u_in_universe_b');
+    const uShowGlow = gl.getUniformLocation(prog, 'u_show_glow');
+
+    // State Variables
+    let throatRadius = 2.2;
+    let energyTension = 1.45;
+    let bellFidelity = 0.98;
+    let currentMode = 0.0;
+    let inUniverseB = 0;
+    let showGlow = 1;
+    let directorMode = false;
+
+    // Camera
+    let camRadius = 9.5;
+    let camTheta = 0.15;
+    let camPhi = 0.85;
+    let isDragging = false;
+    let lastX = 0, lastY = 0;
+    let isTraversing = false;
+
+    function resize() {
+      if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Mouse / Touch
+    window.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.interactive') || e.target.closest('.modal-backdrop')) return;
+      isDragging = true;
+      directorMode = false;
+      document.getElementById('btn-director').classList.remove('active');
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging || isTraversing) return;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      camPhi += dx * 0.0055;
+      camTheta = Math.max(-1.42, Math.min(1.42, camTheta + dy * 0.0055));
+    });
+    window.addEventListener('wheel', (e) => {
+      if (e.target.closest('.interactive') || e.target.closest('.modal-backdrop') || isTraversing) return;
+      camRadius = Math.max(3.2, Math.min(22.0, camRadius + e.deltaY * 0.012));
+    }, { passive: true });
+
+    // Mode Selector
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentMode = parseFloat(e.target.dataset.mode);
+      });
+    });
+
+    // Sliders
+    document.getElementById('param-radius').addEventListener('input', (e) => {
+      throatRadius = parseFloat(e.target.value);
+      document.getElementById('val-radius').innerText = throatRadius.toFixed(2);
+      document.getElementById('disp-b0').innerHTML = `${(throatRadius * 2).toFixed(2)} <span class="unit">km</span>`;
+    });
+    document.getElementById('param-tension').addEventListener('input', (e) => {
+      energyTension = parseFloat(e.target.value);
+      document.getElementById('val-tension').innerText = energyTension.toFixed(2);
+      document.getElementById('disp-casimir').innerHTML = `-${energyTension.toFixed(2)}×10²⁴ <span class="unit">J/m³</span>`;
+    });
+    document.getElementById('param-fidelity').addEventListener('input', (e) => {
+      bellFidelity = parseFloat(e.target.value);
+      document.getElementById('val-fidelity').innerText = bellFidelity.toFixed(2);
+    });
+
+    // Traverse Button Animation
+    const btnTraverse = document.getElementById('btn-traverse');
+    btnTraverse.addEventListener('click', () => {
+      if (isTraversing) return;
+      isTraversing = true;
+      btnTraverse.disabled = true;
+      btnTraverse.innerText = '🚀 穿越虫洞喉部中...';
+
+      playTraversalWhoosh();
+
+      const startR = camRadius;
+      const startT = performance.now();
+      const duration = 2200;
+
+      function traverseStep(now) {
+        const elapsed = now - startT;
+        const progress = Math.min(1.0, elapsed / duration);
+
+        if (progress < 0.5) {
+          // Plunge towards throat center
+          const f = progress / 0.5;
+          camRadius = startR * (1.0 - f * 0.85);
+        } else {
+          // Flip universe and back out
+          if (progress >= 0.5 && inUniverseB === (progress < 0.55 ? inUniverseB : 1 - inUniverseB)) {
+            inUniverseB = 1 - inUniverseB;
+            document.getElementById('disp-universe').innerText = inUniverseB ? '异界宇宙 B (JWST 深空)' : '本宇宙 A (银河系)';
+          }
+          const f = (progress - 0.5) / 0.5;
+          camRadius = startR * (0.15 + f * 0.85);
+        }
+
+        if (progress < 1.0) {
+          requestAnimationFrame(traverseStep);
+        } else {
+          isTraversing = false;
+          btnTraverse.disabled = false;
+          btnTraverse.innerText = '🚀 穿越平行宇宙 (Traverse)';
+        }
+      }
+      requestAnimationFrame(traverseStep);
+    });
+
+    // Buttons
+    const btnDirector = document.getElementById('btn-director');
+    btnDirector.addEventListener('click', () => {
+      directorMode = !directorMode;
+      btnDirector.classList.toggle('active', directorMode);
+    });
+
+    // HUD Toggle
+    const hudLayer = document.getElementById('hud-layer');
+    const btnToggleHud = document.getElementById('btn-toggle-hud');
+    function toggleHud() { hudLayer.classList.toggle('hud-hidden'); }
+    btnToggleHud.addEventListener('click', toggleHud);
+    window.addEventListener('keydown', (e) => { if (e.key === 'h' || e.key === 'H') toggleHud(); });
+
+    // Modal
+    const modalBox = document.getElementById('modal-box');
+    document.getElementById('btn-modal').addEventListener('click', () => modalBox.classList.add('open'));
+    document.getElementById('btn-close-modal').addEventListener('click', () => modalBox.classList.remove('open'));
+    modalBox.addEventListener('click', (e) => { if (e.target === modalBox) modalBox.classList.remove('open'); });
+
+    // Web Audio API: Quantum Tunneling Drone
+    let audioCtx = null;
+    let masterGain = null;
+    let osc1 = null, osc2 = null;
+    let analyser = null;
+    let audioActive = false;
+
+    const audioCanvas = document.getElementById('audio-canvas');
+    const actx = audioCanvas.getContext('2d');
+
+    const btnAudio = document.getElementById('btn-audio');
+    btnAudio.addEventListener('click', () => {
+      audioActive = !audioActive;
+      btnAudio.classList.toggle('active', audioActive);
+      if (audioActive) {
+        initTunnelingAudio();
+        btnAudio.innerText = '🔊 隧穿声化中...';
+      } else {
+        if (masterGain && audioCtx) masterGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+        btnAudio.innerText = '🔊 量子隧穿音景';
+      }
+    });
+
+    function initTunnelingAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      if (masterGain) { masterGain.gain.cancelScheduledValues(audioCtx.currentTime); masterGain.gain.linearRampToValueAtTime(0.24, audioCtx.currentTime + 0.3); return; }
+
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.24, audioCtx.currentTime);
+      masterGain.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
+      // Binaural Theta Drone: 108 Hz + 114 Hz (6 Hz binaural beat)
+      osc1 = audioCtx.createOscillator();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(108, audioCtx.currentTime);
+
+      osc2 = audioCtx.createOscillator();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(114, audioCtx.currentTime);
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(220, audioCtx.currentTime);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(masterGain);
+
+      osc1.start();
+      osc2.start();
+    }
+
+    function playTraversalWhoosh() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const whooshOsc = audioCtx.createOscillator();
+      const whooshGain = audioCtx.createGain();
+      const now = audioCtx.currentTime;
+
+      whooshOsc.type = 'triangle';
+      whooshOsc.frequency.setValueAtTime(80, now);
+      whooshOsc.frequency.exponentialRampToValueAtTime(620, now + 1.1);
+      whooshOsc.frequency.exponentialRampToValueAtTime(50, now + 2.2);
+
+      whooshGain.gain.setValueAtTime(0.001, now);
+      whooshGain.gain.linearRampToValueAtTime(0.35, now + 1.1);
+      whooshGain.gain.linearRampToValueAtTime(0.0001, now + 2.2);
+
+      whooshOsc.connect(whooshGain);
+      whooshGain.connect(audioCtx.destination);
+
+      whooshOsc.start(now);
+      whooshOsc.stop(now + 2.25);
+    }
+
+    // Audio Visualizer
+    function drawAudioVisualizer() {
+      requestAnimationFrame(drawAudioVisualizer);
+      actx.clearRect(0, 0, audioCanvas.width, audioCanvas.height);
+      if (!audioActive || !analyser) {
+        actx.fillStyle = 'rgba(0, 229, 255, 0.25)';
+        actx.fillRect(0, audioCanvas.height / 2 - 1, audioCanvas.width, 2);
+        return;
+      }
+
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+
+      const barWidth = (audioCanvas.width / bufferLength) * 2.2;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = (dataArray[i] / 255.0) * audioCanvas.height;
+        actx.fillStyle = `rgba(0, 229, 255, ${0.4 + dataArray[i] / 300.0})`;
+        actx.fillRect(x, audioCanvas.height - barHeight, barWidth - 1, barHeight);
+        x += barWidth;
+      }
+    }
+    drawAudioVisualizer();
+
+    let startTime = performance.now();
+    function render(now) {
+      resize();
+
+      const timeSec = (window.cosmosAnimationTime(now) - startTime) * 0.001;
+
+      // Director Mode Camera
+      if (directorMode && !isTraversing) {
+        camPhi = timeSec * 0.3;
+        camTheta = 0.22 + Math.sin(timeSec * 0.4) * 0.3;
+        camRadius = 8.5 + Math.cos(timeSec * 0.25) * 2.5;
+      } else if (!isDragging && !isTraversing) {
+        camPhi += 0.0018;
+      }
+
+      const cx = camRadius * Math.cos(camTheta) * Math.sin(camPhi);
+      const cy = camRadius * Math.sin(camTheta);
+      const cz = camRadius * Math.cos(camTheta) * Math.cos(camPhi);
+
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, timeSec);
+      gl.uniform3f(uCamPos, cx, cy, cz);
+      gl.uniform3f(uCamTarget, 0.0, 0.0, 0.0);
+      gl.uniform1f(uRadius, throatRadius);
+      gl.uniform1f(uTension, energyTension);
+      gl.uniform1f(uFidelity, bellFidelity);
+      gl.uniform1f(uMode, currentMode);
+      gl.uniform1i(uInUnivB, inUniverseB);
+      gl.uniform1i(uShowGlow, showGlow);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  </script>
+</body>
+</html>

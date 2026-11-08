@@ -1,0 +1,90 @@
+{
+  "count": 21,
+  "unknown": [],
+  "expressions": [
+    {
+      "page": "index",
+      "source": "a^* = Jc/GM^2"
+    },
+    {
+      "page": "index",
+      "source": "r_+"
+    },
+    {
+      "page": "index",
+      "source": "r_{ph}"
+    },
+    {
+      "page": "index",
+      "source": "D^3"
+    },
+    {
+      "page": "index",
+      "source": "\\Delta r"
+    },
+    {
+      "page": "bigbang",
+      "source": "e^{N}"
+    },
+    {
+      "page": "bigbang",
+      "source": "\\Omega_c"
+    },
+    {
+      "page": "bigbang",
+      "source": "t"
+    },
+    {
+      "page": "bigbang",
+      "source": "T"
+    },
+    {
+      "page": "bigbang",
+      "source": "k"
+    },
+    {
+      "page": "bigbang",
+      "source": "a(t)"
+    },
+    {
+      "page": "bigbang",
+      "source": "\\Lambda\\text{CDM}"
+    },
+    {
+      "page": "wormhole",
+      "source": "b_0"
+    },
+    {
+      "page": "wormhole",
+      "source": "-T_{00}"
+    },
+    {
+      "page": "wormhole",
+      "source": "2b_0"
+    },
+    {
+      "page": "heatdeath",
+      "source": "\\log_{10} t"
+    },
+    {
+      "page": "heatdeath",
+      "source": "10^{10}\\text{y}"
+    },
+    {
+      "page": "heatdeath",
+      "source": "10^{14}\\text{y}"
+    },
+    {
+      "page": "heatdeath",
+      "source": "10^{40}\\text{y}"
+    },
+    {
+      "page": "heatdeath",
+      "source": "10^{100}\\text{y}"
+    },
+    {
+      "page": "heatdeath",
+      "source": "w"
+    }
+  ]
+}

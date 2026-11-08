@@ -1,0 +1,8 @@
+{
+  "index":{"parameters":{"param-spin":{"state":"spinVal"},"param-mass":{"state":"massVal","effect":"physical-readout"},"param-disk":{"state":"diskVal"}}},
+  "bigbang":{"parameters":{"param-epoch":{"state":"currentEpoch"},"param-inflation":{"state":"inflationVal","controls":{"param-epoch":1}},"param-dm":{"state":"dmVal","controls":{"param-epoch":4}}}},
+  "cosmicweb":{"parameters":{"param-dm":{"state":"dmVal"},"param-drag":{"state":"dragVal","scene":{"currentMode":2}},"param-lens":{"state":"lensVal","scene":{"currentMode":1}}}},
+  "stellar":{"parameters":{"param-stage":{"state":"currentStage"},"param-mass":{"state":"massVal"},"param-spin":{"state":"spinVal","controls":{"param-stage":4}}}},
+  "wormhole":{"parameters":{"param-radius":{"state":"throatRadius"},"param-tension":{"state":"energyTension"},"param-fidelity":{"state":"bellFidelity"}}},
+  "heatdeath":{"parameters":{"param-stage":{"state":"currentStage"},"param-w":{"state":"wVal"},"param-hawking":{"state":"hawkingVal","controls":{"param-stage":3}}}}
+}

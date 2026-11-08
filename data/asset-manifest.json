@@ -1,0 +1,138 @@
+{
+  "checked": "2026-11-07",
+  "assets": [
+    {
+      "id": "sgra-eht",
+      "chapter": "index",
+      "title": "人马座A*：EHT观测重建图像",
+      "institution": "EHT Collaboration",
+      "sourceUrl": "https://eventhorizontelescope.org/blog/astronomers-reveal-first-image-black-hole-heart-our-galaxy",
+      "assetUrl": "https://cdn.eso.org/images/large/eso2208-eht-mwa.jpg",
+      "localPath": "app/assets/observations/sgra-eht.webp",
+      "credit": "EHT Collaboration",
+      "contentType": "观测影像",
+      "processing": "原始发布配色；按容器等比缩放，未配准至模拟。 本地文件编码为 WebP，最大宽度 1600 像素。",
+      "supportsClaim": "黑洞周围的毫米波辐射结构经干涉观测重建；暗区与明亮环的图像结构不是裸眼照片。",
+      "bytes": 32298,
+      "sha256": "2f9d6db36bf1efde773c346076a8bd6a367cc85a12ce31b9dc8acb155c3c0acb",
+      "dimensions": {
+        "width": 1280,
+        "height": 1280
+      }
+    },
+    {
+      "id": "planck-cmb",
+      "chapter": "bigbang",
+      "title": "Planck：宇宙微波背景温差全天图",
+      "institution": "ESA / Planck Collaboration",
+      "sourceUrl": "https://www.esa.int/media/planck-s-view-of-the-cosmic-microwave-background",
+      "assetUrl": "https://media.esa.int/legacy/web/images/esa_multimedia/images/2018/07/planck_s_view_of_the_cosmic_microwave_background/17601794-1-eng-GB/Planck_s_view_of_the_cosmic_microwave_background.jpg",
+      "localPath": "app/assets/observations/planck-cmb.webp",
+      "credit": "ESA/Planck Collaboration · ESA Standard Licence",
+      "contentType": "观测影像",
+      "processing": "原始发布的温差配色与全天投影；等比缩放。 本地文件编码为 WebP，最大宽度 1600 像素。",
+      "supportsClaim": "暖冷色代表微小温度差异；2018 Planck Legacy发布的CMB各向异性，不是恒星或星系的可见光照片。",
+      "bytes": 670704,
+      "sha256": "5becc9902791795f7e1e00995d9d7a75d2ae8c4b4cbe37a994b6ea13736fb34c",
+      "dimensions": {
+        "width": 1600,
+        "height": 808
+      }
+    },
+    {
+      "id": "bullet-composite",
+      "chapter": "cosmicweb",
+      "title": "子弹星系团：气体与质量分布的分离",
+      "institution": "NASA / Chandra / STScI / ESO / Magellan",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2006/1e0657/index.html",
+      "assetUrl": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657.jpg",
+      "localPath": "app/assets/observations/bullet-composite.webp",
+      "credit": "X-ray: NASA/CXC/CfA/M. Markevitch et al.; Optical: NASA/STScI; Magellan/U. Arizona/D. Clowe et al.; Lensing Map: NASA/STScI; ESO WFI; Magellan/U. Arizona/D. Clowe et al.",
+      "contentType": "观测影像与质量推断图",
+      "processing": "使用机构发布的多源合成图；粉色为X射线热气体，蓝色为透镜推断质量；未与程序场配准。 本地文件编码为 WebP，最大宽度 1600 像素。",
+      "supportsClaim": "碰撞后热气体与透镜推断质量的分离，为暗物质研究提供观测证据。",
+      "bytes": 85442,
+      "sha256": "079dbe5f23e40ab02822c4bb39aa21fa5bf033da83127fc360da7b5495029ed7",
+      "dimensions": {
+        "width": 720,
+        "height": 520
+      }
+    },
+    {
+      "id": "cosmic-cliffs",
+      "chapter": "stellar",
+      "title": "宇宙悬崖：NGC 3324恒星形成区",
+      "institution": "NASA / ESA / CSA / STScI",
+      "sourceUrl": "https://science.nasa.gov/missions/webb/nasas-webb-reveals-cosmic-cliffs-glittering-landscape-of-star-birth/",
+      "assetUrl": "https://assets.science.nasa.gov/content/dam/science/missions/webb/science/2022/07/STScI-01GA6KKWG229B16K4Q38CH3BXS.png/jcr:content/renditions/cq5dam.web.1280.1280.png",
+      "localPath": "app/assets/observations/cosmic-cliffs.webp",
+      "credit": "NASA, ESA, CSA, STScI",
+      "contentType": "观测影像",
+      "processing": "沿用官方红外波段映射配色；等比缩放，不表示人眼所见颜色。 本地文件编码为 WebP，最大宽度 1600 像素。",
+      "supportsClaim": "红外观测揭示恒星形成区的结构；年轻恒星的辐射与恒星风塑造气体空腔。",
+      "bytes": 334198,
+      "sha256": "d381f8af9af926e2ee326ab5a864ad32e50fe8d03476314dc6d935b4593ee219",
+      "dimensions": {
+        "width": 1280,
+        "height": 741
+      }
+    },
+    {
+      "id": "crab-nebula",
+      "chapter": "stellar",
+      "title": "蟹状星云：超新星遗迹的光学拼图",
+      "institution": "NASA / ESA / Hubble",
+      "sourceUrl": "https://science.nasa.gov/missions/hubble/the-crab-nebula/",
+      "assetUrl": "https://science.nasa.gov/wp-content/uploads/2023/04/430453main_crabmosaic_hst_big_full-jpg.webp",
+      "localPath": "app/assets/observations/crab-nebula.webp",
+      "credit": "NASA, ESA, J. Hester and A. Loll (Arizona State University)",
+      "contentType": "观测影像",
+      "processing": "原始发布的波段合成配色与拼图；等比缩放。 本地文件编码为 WebP，最大宽度 1600 像素。",
+      "supportsClaim": "蟹状星云是超新星遗迹；与宇宙悬崖是不同天体，不是同一颗恒星的实拍成长记录。",
+      "bytes": 581764,
+      "sha256": "3f7c1121e404c710e038d67d20737016ccc40cf19a8098c19b8545fef68b32ef",
+      "dimensions": {
+        "width": 1600,
+        "height": 1600
+      }
+    },
+    {
+      "id": "wormhole-section",
+      "chapter": "wormhole",
+      "title": "假想虫洞：连接两端的空间截面",
+      "institution": "本项目 · 理论几何/公式绘图",
+      "sourceUrl": "https://authors.library.caltech.edu/records/m644f-tbz27",
+      "localPath": "app/assets/diagrams/wormhole-section.svg",
+      "credit": "本项目根据所引理论绘制",
+      "assetOrigin": "original",
+      "contentType": "理论设想",
+      "processing": "原生SVG绘图；坐标用于教学说明。",
+      "supportsClaim": "嵌入截面帮助理解喉部；不代表已经观测或可实际建造的虫洞。",
+      "bytes": 32896,
+      "sha256": "0c48ecce09cb47d93f910a0cbeece97e417519d7c64607d5e241c23b607a90f2",
+      "dimensions": {
+        "width": 800,
+        "height": 480
+      }
+    },
+    {
+      "id": "dark-energy-model",
+      "chapter": "heatdeath",
+      "title": "三种常数w模型的密度关系",
+      "institution": "本项目 · 理论几何/公式绘图",
+      "sourceUrl": "https://arxiv.org/abs/astro-ph/0004075",
+      "localPath": "app/assets/diagrams/dark-energy-model.svg",
+      "credit": "本项目根据所引理论绘制",
+      "assetOrigin": "original",
+      "contentType": "理论设想",
+      "processing": "原生SVG绘图；坐标用于教学说明。",
+      "supportsClaim": "常数w流体密度随尺度因子变化；图中没有求解宇宙终局。",
+      "bytes": 4876,
+      "sha256": "c21e340ff4cb342529341471702707553ae7e6f8875c248739c087883265a09e",
+      "dimensions": {
+        "width": 800,
+        "height": 480
+      }
+    }
+  ]
+}

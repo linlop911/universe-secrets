@@ -1,0 +1,16 @@
+# Generated screenshots, recordings frames and third-party snapshots
+output/acceptance/
+output/experience/
+output/diagnostics/
+output/sources/
+output/tours/*-frames/
+evidence/*.log
+
+# Local pre-work snapshot and one-off maintenance scripts
+archive/work-20261107/
+archive/baseline-*/maintenance/
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.tmp

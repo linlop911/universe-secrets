@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇宙的秘密：创世裂变与大爆炸演化 (ESA Planck CMB & JWST JADES)</title>
+  <script src="common.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020206;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e2edff;
+    }
+    #glcanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+    /* HUD Overlays */
+    .hud-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      transition: opacity 0.3s;
+    }
+    .hud-hidden {
+      opacity: 0;
+      pointer-events: none !important;
+    }
+    .interactive {
+      pointer-events: auto;
+    }
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .header-box {
+      background: rgba(10, 16, 32, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 12px;
+      padding: 14px 22px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      max-width: 680px;
+    }
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .nav-tab {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      text-decoration: none;
+      color: #8faee0;
+      background: rgba(30, 60, 120, 0.35);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      transition: all 0.2s;
+    }
+    .nav-tab:hover {
+      background: rgba(40, 90, 180, 0.55);
+      color: #fff;
+    }
+    .nav-tab.active {
+      background: linear-gradient(135deg, #e65100, #ff8f00);
+      color: #fff;
+      border-color: #ffd54f;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(255, 143, 0, 0.6);
+    }
+    .header-box h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-box h1 span.badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      background: linear-gradient(135deg, #ff9100, #ff3d00);
+      border-radius: 4px;
+      color: #fff;
+    }
+    .header-box p {
+      font-size: 12px;
+      color: #92aee2;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .observatory-tag {
+      background: rgba(10, 16, 32, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 11.5px;
+      color: #799be4;
+      line-height: 1.5;
+      text-align: right;
+      font-family: "Courier New", monospace;
+    }
+    .pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffab00;
+      box-shadow: 0 0 8px #ffab00;
+      animation: pulse 1.6s infinite;
+      margin-right: 6px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+    /* Side Panels */
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      margin: 12px 0;
+      pointer-events: none;
+    }
+    .panel {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(90, 150, 255, 0.32);
+      border-radius: 12px;
+      padding: 16px;
+      color: #d1e0ff;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
+      width: 320px;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+    }
+    .panel h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffb74d;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255, 183, 77, 0.25);
+      padding-bottom: 6px;
+    }
+    .insight-card {
+      background: rgba(45, 30, 65, 0.45);
+      border-left: 3px solid #ff4081;
+      border-radius: 4px;
+      padding: 8px 10px;
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: #ff80ab;
+      line-height: 1.5;
+    }
+    .control-item {
+      margin-bottom: 10px;
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #8faee0;
+      margin-bottom: 4px;
+    }
+    .control-label span.val {
+      font-family: monospace;
+      color: #ffb74d;
+      font-weight: 600;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(80, 130, 220, 0.25);
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ff9800;
+      cursor: pointer;
+      box-shadow: 0 0 8px #ff9800;
+    }
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .btn {
+      background: rgba(45, 65, 120, 0.45);
+      border: 1px solid rgba(100, 160, 255, 0.25);
+      border-radius: 6px;
+      color: #cfdfff;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: rgba(60, 100, 180, 0.65);
+      color: #fff;
+      border-color: #ffb74d;
+    }
+    .btn.active {
+      background: linear-gradient(135deg, #e65100, #ff9800);
+      border-color: #ffe082;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(255, 152, 0, 0.55);
+    }
+    .btn.highlight {
+      background: linear-gradient(135deg, #7b1fa2, #ab47bc);
+      border-color: #ce93d8;
+      color: #fff;
+    }
+    .epoch-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin: 8px 0;
+    }
+    .epoch-btn {
+      background: rgba(30, 45, 80, 0.5);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      border-radius: 6px;
+      color: #8faee0;
+      padding: 5px 6px;
+      font-size: 10.5px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .epoch-btn:hover {
+      background: rgba(50, 90, 160, 0.6);
+      color: #fff;
+    }
+    .epoch-btn.active {
+      background: linear-gradient(135deg, #e65100, #ff6d00);
+      color: #fff;
+      font-weight: 700;
+      border-color: #ffd180;
+      box-shadow: 0 0 8px rgba(255, 109, 0, 0.5);
+    }
+    .audio-box {
+      margin-top: 8px;
+      background: rgba(4, 10, 22, 0.7);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      border-radius: 8px;
+      padding: 6px;
+    }
+    #audio-canvas {
+      width: 100%;
+      height: 38px;
+      display: block;
+      background: #02050c;
+      border-radius: 4px;
+    }
+    /* Bottom Telemetry Bar */
+    .bottom-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .telemetry-card {
+      background: rgba(10, 16, 32, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(80, 140, 255, 0.28);
+      border-radius: 10px;
+      padding: 7px 12px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+    .telemetry-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #8faee0;
+      margin-bottom: 2px;
+    }
+    .telemetry-val {
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      color: #ffb74d;
+      text-shadow: 0 0 8px rgba(255, 183, 77, 0.5);
+    }
+    .telemetry-val span.unit {
+      font-size: 9.5px;
+      color: #ffe0b2;
+      margin-left: 2px;
+    }
+    .drag-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #7c9bcf;
+      margin-top: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 16, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #081022;
+      border: 1px solid #ffb74d;
+      border-radius: 14px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 152, 0, 0.25);
+      color: #d0e4ff;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 183, 77, 0.3);
+      padding-bottom: 10px;
+    }
+    .modal-header h2 {
+      font-size: 17px;
+      color: #ffb74d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      color: #8faee0;
+      font-size: 22px;
+      cursor: pointer;
+    }
+    .close-modal:hover {
+      color: #fff;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11.5px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .data-table th {
+      background: rgba(30, 60, 120, 0.35);
+      color: #ffb74d;
+    }
+  </style>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body>
+  <canvas id="glcanvas"></canvas>
+
+  <div class="hud-layer" id="hud-layer">
+    <!-- Top Bar -->
+    <div class="top-bar interactive">
+      <div class="header-box">
+        <div class="nav-tabs">
+          <a href="index.html" class="nav-tab">第一章：黑洞引力透镜</a>
+          <a href="bigbang.html" class="nav-tab active">第二章：大爆炸与CMB</a>
+          <a href="cosmicweb.html" class="nav-tab">第三章：宇宙网与暗物质</a>
+          <a href="stellar.html" class="nav-tab">第四章：恒星演化与超新星</a>
+          <a href="wormhole.html" class="nav-tab">第五章：虫洞与量子纠缠</a>
+          <a href="heatdeath.html" class="nav-tab">第六章：宇宙热寂与重生</a>
+        </div>
+        <h1>
+          💥 宇宙暴胀、微波背景与原初核合成
+          <span class="badge">ESA Planck & JWST JADES</span>
+        </h1>
+        <p>
+          从微观普朗克奇点 ($10^{-35}\text{ m}$) 到可观测宇宙视界。仿真真实重子声学振荡 (BAO)、全天空 CMB 球谐温度涨落与首代原初星系冷凝。
+        </p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="btn-toggle-hud" title="快捷键 H 隐藏/显示 HUD">👁️ 纯净视效</button>
+        <button class="btn highlight" id="btn-modal">🔭 Planck 观测报告</button>
+        <div class="observatory-tag">
+          <span class="pulse-dot"></span><strong>ESA 普朗克卫星 2018</strong><br>
+          声学视界：$r_s = 144.4 \pm 0.2\ \text{Mpc}$<br>
+          哈勃常数：$H_0 = 67.4 \pm 0.5\ \text{km/s/Mpc}$
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Left: Cosmology Theory -->
+      <div class="panel interactive">
+        <h3>🔬 $\Lambda\text{CDM}$ 宇宙学机制</h3>
+
+        <div class="insight-card" style="border-left-color: #ff3d00; color: #ffab91;">
+          🌌 <strong>古斯暴胀机制 (Cosmic Inflation)：</strong><br>
+          在 $10^{-36}\sim 10^{-32}\text{ s}$ 内，空间尺度因假真空暴胀场指数级膨胀至少 $10^{26}$ 倍，将微观量子涨落冻结为宇宙巨网的宏观种子！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #29b6f6; color: #b3e5fc;">
+          📡 <strong>微波背景辐射 (CMB Decoupling)：</strong><br>
+          宇宙诞生 38 万年后，温度降至 3000 K，质子俘获电子形成中性氢原子，光子首次自由穿透宇宙，留下弥漫至今的 2.725 K 余晖！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #ab47bc; color: #e1bee7;">
+          🎵 <strong>重子声学振荡 (BAO Sound Horizon)：</strong><br>
+          光子与重子等离子体在引力坍缩与辐射压之间形成声波震颤。华盛顿大学物理学家约翰·克莱默据此合成了宇宙最初 76 万年的真实声学演化。
+        </div>
+
+        <div class="insight-card" style="border-left-color: #00e676; color: #b9f6ca;">
+          🔭 <strong>JWST JADES-GS-z14-0 极早期星系：</strong><br>
+          韦伯望远镜在红移 $z=14.32$（大爆炸仅 2.9 亿年）发现明亮原初星系，改写了人类对早期宇宙恒星形成速度的传统理论！
+        </div>
+      </div>
+
+      <!-- Right: Interactive Controls -->
+      <div class="panel controls-panel interactive">
+        <h3>🎛️ 宇宙学时间轴与场调谐</h3>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>宇宙演化纪元 (Cosmic Epoch)</span>
+            <span class="val" id="val-epoch">0.0 (奇点)</span>
+          </div>
+          <input type="range" id="param-epoch" min="0" max="5" step="0.01" value="0">
+        </div>
+
+        <div style="font-size:11px; color:#8faee0; margin-bottom:5px;">六大宇宙演化标志性阶段快捷跳转：</div>
+        <div class="epoch-selector">
+          <button class="epoch-btn active" data-step="0">0. 普朗克奇点</button>
+          <button class="epoch-btn" data-step="1">1. 宇宙暴胀激波</button>
+          <button class="epoch-btn" data-step="2">2. 夸克胶子汤</button>
+          <button class="epoch-btn" data-step="3">3. 38万年 CMB 余晖</button>
+          <button class="epoch-btn" data-step="4">4. 原初星系网络</button>
+          <button class="epoch-btn" data-step="5">5. 暗能量现代宇宙</button>
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>暴胀强度系数 ($e^{N}$ 膨胀率)</span>
+            <span class="val" id="val-inflation">1.35</span>
+          </div>
+          <input type="range" id="param-inflation" min="0.5" max="3.0" step="0.05" value="1.35">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>暗物质密度比例 $\Omega_c$</span>
+            <span class="val" id="val-dm">0.268</span>
+          </div>
+          <input type="range" id="param-dm" min="0.05" max="0.55" step="0.01" value="0.268">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn" id="btn-autoplay">▶️ 纪元自动演进</button>
+          <button class="btn" id="btn-director">🎥 电影导览视角</button>
+          <button class="btn" id="btn-audio">🔊 宇宙大爆炸声化</button>
+          <button class="btn active" id="btn-stars">✨ JWST 原初星系</button>
+        </div>
+
+        <div class="audio-box">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Bar -->
+    <div class="interactive" style="width: 100%;">
+      <div class="bottom-bar">
+        <div class="telemetry-card">
+          <div class="telemetry-name">宇宙年龄 $t$</div>
+          <div class="telemetry-val" id="disp-age">0 <span class="unit">s</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">有效黑体温度 $T$</div>
+          <div class="telemetry-val" id="disp-temp">&gt; 10³² <span class="unit">K</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">空间几何曲率 $k$</div>
+          <div class="telemetry-val" id="disp-curv">k = 0 (平直)</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">时空尺度因子 $a(t)$</div>
+          <div class="telemetry-val" id="disp-scale">0.000</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">主导能量形态</div>
+          <div class="telemetry-val" id="disp-dom">量子重力统一</div>
+        </div>
+      </div>
+
+      <div class="drag-hint">
+        🖱️ 鼠标拖拽 360° 旋转视角 | 滚轮无级拉近 | 点击「▶️ 纪元自动演进」见证从普朗克尺度到宏观宇宙巨网的震撼史诗
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal-box">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🔭 NASA / 普朗克 CMB 观测与 $\Lambda\text{CDM}$ 物理基准</h2>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+
+      <p style="line-height: 1.6; font-size: 13px; margin-bottom: 14px;">
+        本页受普朗克卫星和 JWST 巡天启发，未导入观测数据，也未进行参数拟合：
+      </p>
+
+      <div class="science-reference"><p>Planck 对宇宙微波背景的观测可用于约束宇宙学模型；JWST 观测早期星系。</p><p>本页用程序生成的粒子和颜色表现早期宇宙，没有使用微波背景全天图或星系测量值。</p><p>背景资料：<a href="https://www.esa.int/Science_Exploration/Space_Science/Planck" target="_blank" rel="noopener noreferrer">查看参考来源</a>（需联网）。</p></div>
+    </div>
+  </div>
+
+  <!-- Background Pass: Fullscreen Primordial Energy Shader -->
+  <script id="vs-bg" type="x-shader/x-vertex">
+    attribute vec2 position;
+    varying vec2 v_uv;
+    void main() {
+      v_uv = position * 0.5 + 0.5;
+      gl_Position = vec4(position, 0.999, 1.0);
+    }
+  </script>
+
+  <script id="fs-bg" type="x-shader/x-fragment">
+    precision highp float;
+    varying vec2 v_uv;
+
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform float u_epoch;
+    uniform float u_inflation;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    float fbm(vec2 p) {
+      float v = 0.0;
+      float a = 0.5;
+      for (int i = 0; i < 4; i++) {
+        v += a * noise(p);
+        p = p * 2.05 + vec2(1.5, 4.3);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
+      float dist = length(uv);
+
+      vec3 col = vec3(0.015, 0.015, 0.035);
+
+      if (u_epoch < 1.0) {
+        // 0. Planck Singularity: Blazing central quantum core with shimmering vacuum foam
+        float t = u_epoch;
+        float core = exp(-dist * (6.0 - t * 3.0)) * 1.8;
+        float foam = fbm(uv * 12.0 + u_time * 0.8) * 0.45;
+        vec3 singCol = mix(vec3(1.0, 0.4, 0.05), vec3(0.3, 0.8, 1.0), foam + dist * 1.5);
+        singCol += vec3(1.0, 0.95, 0.9) * exp(-dist * 14.0);
+        col = mix(col, singCol, clamp(core + foam * 0.5, 0.0, 1.0));
+      } else if (u_epoch < 2.0) {
+        // 1. Cosmic Inflation: Expanding shockwave rings & metric warping
+        float t = u_epoch - 1.0;
+        float shock = abs(dist - (0.35 + t * 0.7));
+        float ring = exp(-shock * 18.0) * 1.4;
+        float warp = fbm(uv * 8.0 - vec2(u_time * 0.4));
+        vec3 inflCol = mix(vec3(0.8, 0.1, 0.9), vec3(1.0, 0.85, 0.2), warp);
+        inflCol += vec3(1.0) * ring;
+        col = mix(vec3(0.04, 0.01, 0.08), inflCol, clamp(ring + warp * 0.6, 0.0, 1.0));
+      } else if (u_epoch < 3.0) {
+        // 2. Quark-Gluon Plasma: High-energy boiling plasma sea
+        float t = u_epoch - 2.0;
+        float qgp = fbm(uv * 6.0 + vec2(u_time * 0.6, -u_time * 0.4));
+        float qgp2 = noise(uv * 14.0 + u_time * 1.2);
+        vec3 plasmaCol = mix(vec3(0.9, 0.15, 0.01), vec3(1.0, 0.75, 0.1), qgp);
+        plasmaCol = mix(plasmaCol, vec3(1.0, 0.95, 0.8), pow(qgp2, 3.0) * 0.8);
+        col = mix(plasmaCol * 0.7, vec3(0.05, 0.01, 0.02), t * 0.5);
+      } else if (u_epoch < 4.0) {
+        // 3. CMB 380,000 Year Surface of Last Scattering (Planck All-Sky Map)
+        float t = u_epoch - 3.0;
+        float cmbNoise = fbm(uv * 7.5 + 2.4);
+        float cmbDetail = noise(uv * 18.0);
+        float normTemp = clamp(cmbNoise * 0.7 + cmbDetail * 0.3, 0.0, 1.0);
+
+        // Planck False Color: cold spots in blue, warm in orange/red
+        vec3 cmbCol = mix(vec3(0.02, 0.18, 0.85), vec3(0.95, 0.35, 0.02), normTemp);
+        if (normTemp > 0.75) cmbCol = mix(cmbCol, vec3(1.0, 0.95, 0.8), (normTemp - 0.75) * 4.0);
+
+        // Acoustic Horizon BAO Rings
+        float acousticRing = sin(dist * 26.0 - u_time * 0.8) * 0.5 + 0.5;
+        cmbCol += vec3(0.15, 0.35, 0.6) * pow(acousticRing, 4.0);
+        col = cmbCol * (0.65 - t * 0.35);
+      } else {
+        // 4 & 5. Deep Universe with Cosmic Web Glow
+        float t = u_epoch - 4.0;
+        float web = fbm(uv * 4.0 + 1.2);
+        vec3 webCol = mix(vec3(0.01, 0.02, 0.06), vec3(0.08, 0.18, 0.45), pow(web, 2.5));
+        col = webCol;
+      }
+
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  </script>
+
+  <!-- WebGL 130,000 GPU Particles Simulation with Spherical Harmonics -->
+  <script id="vs-particles" type="x-shader/x-vertex">
+    attribute vec3 a_seed;
+    attribute float a_type;
+
+    uniform mat4 u_mvp;
+    uniform float u_epoch;
+    uniform float u_time;
+    uniform float u_inflation;
+    uniform float u_dm;
+    uniform int u_show_stars;
+
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    void main() {
+      float phi = a_seed.x * 2.0 * PI;
+      float theta = acos(clamp(a_seed.y * 2.0 - 1.0, -1.0, 1.0));
+      float baseRad = a_seed.z;
+
+      vec3 dir = vec3(
+        sin(theta) * cos(phi),
+        sin(theta) * sin(phi),
+        cos(theta)
+      );
+
+      vec3 pos = vec3(0.0);
+      vec3 col = vec3(1.0);
+      float ptSize = 3.6;
+      float alpha = 0.88;
+
+      // 0. Singularity
+      float foam = sin(u_time * 15.0 + phi * 6.0) * cos(u_time * 18.0 + theta * 6.0) * 0.4;
+      float coreR = (pow(baseRad, 0.5) * 3.8 + 0.6) + foam;
+      vec3 pos0 = dir * coreR;
+      vec3 col0 = mix(vec3(1.0, 0.95, 0.8), vec3(0.4, 0.8, 1.0), baseRad);
+      if (baseRad < 0.2) col0 = vec3(1.8, 1.6, 1.4);
+
+      // 1. Cosmic Inflation
+      float inflRad = (pow(baseRad, 0.4) * 11.0 + 4.5) * u_inflation;
+      vec3 pos1 = dir * inflRad;
+      vec3 col1 = mix(vec3(1.0, 0.95, 0.8), vec3(0.85, 0.2, 1.0), baseRad);
+
+      // 2. Quark-Gluon Plasma
+      vec2 uvNoise = vec2(dir.x * 5.0 + u_time * 2.0, dir.y * 5.0 + u_time * 1.8);
+      float turb = noise(uvNoise) * 2.0 - 1.0;
+      float plasmaRad = (baseRad * 12.0 + 4.0) + turb * 1.6;
+      vec3 pos2 = dir * plasmaRad;
+      vec3 col2 = mix(vec3(1.0, 0.22, 0.02), vec3(1.0, 0.85, 0.1), turb * 0.5 + 0.5);
+
+      // 3. CMB Surface
+      float ylm = sin(theta * 3.0) * cos(phi * 3.0) * 0.55 +
+                  sin(theta * 6.0) * sin(phi * 5.0) * 0.35 +
+                  sin(theta * 11.0) * cos(phi * 9.0) * 0.22 +
+                  noise(vec2(phi * 8.0, theta * 8.0)) * 0.25;
+      float cmbRad = 13.5 + ylm * 1.8;
+      vec3 pos3 = dir * cmbRad;
+      float normYlm = clamp(ylm * 0.75 + 0.5, 0.0, 1.0);
+      vec3 col3 = mix(vec3(0.04, 0.25, 0.95), vec3(1.0, 0.45, 0.02), normYlm);
+      if (normYlm > 0.8) col3 = mix(col3, vec3(1.0, 0.95, 0.8), (normYlm - 0.8) * 5.0);
+
+      // 4. Cosmic Web & JWST JADES Earliest Galaxies
+      vec3 cell = fract(dir * (5.5 * (u_dm / 0.268))) - 0.5;
+      float distToAxis = min(min(length(cell.xy), length(cell.yz)), length(cell.xz));
+      vec3 webShift = dir * 15.5 - normalize(cell) * (0.85 - distToAxis) * 3.5;
+      vec3 pos4 = webShift;
+      vec3 col4 = mix(vec3(0.18, 0.5, 0.95), vec3(0.85, 0.3, 0.9), distToAxis * 2.0);
+
+      // 5. Dark Energy Acceleration
+      float deFactor = 1.0 + (a_type > 0.5 ? 0.35 : 0.65) * 1.4;
+      vec3 pos5 = pos4 * deFactor;
+      vec3 col5 = mix(col4, vec3(0.0, 0.95, 0.85), 0.4);
+
+      // Interpolate along continuous epoch
+      float ep = clamp(u_epoch, 0.0, 5.0);
+      if (ep < 1.0) {
+        float f = ep;
+        pos = mix(pos0, pos1, f);
+        col = mix(col0, col1, f);
+        ptSize = mix(4.2, 3.4, f);
+      } else if (ep < 2.0) {
+        float f = ep - 1.0;
+        pos = mix(pos1, pos2, f);
+        col = mix(col1, col2, f);
+        ptSize = mix(3.4, 3.8, f);
+      } else if (ep < 3.0) {
+        float f = ep - 2.0;
+        pos = mix(pos2, pos3, f);
+        col = mix(col2, col3, f);
+        ptSize = mix(3.8, 3.0, f);
+      } else if (ep < 4.0) {
+        float f = ep - 3.0;
+        pos = mix(pos3, pos4, f);
+        col = mix(col3, col4, f);
+        ptSize = mix(3.0, 3.2, f);
+      } else {
+        float f = ep - 4.0;
+        pos = mix(pos4, pos5, f);
+        col = mix(col4, col5, f);
+        ptSize = mix(3.2, 2.8, f);
+      }
+
+      // First Galaxies Sparks
+      if (u_show_stars == 1 && ep > 3.2 && a_type > 0.88) {
+        col = vec3(1.0, 0.95, 0.7);
+        ptSize *= 1.6;
+        alpha = 1.0;
+      }
+
+      v_color = col;
+      v_alpha = alpha;
+
+      gl_Position = u_mvp * vec4(pos, 1.0);
+      gl_PointSize = clamp(ptSize * (500.0 / gl_Position.w), 1.5, 24.0);
+    }
+  </script>
+
+  <script id="fs-particles" type="x-shader/x-fragment">
+    precision highp float;
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    void main() {
+      vec2 coord = gl_PointCoord - vec2(0.5);
+      float distSq = dot(coord, coord);
+      if (distSq > 0.25) discard;
+
+      // Soft Gaussian glow
+      float glow = exp(-distSq * 10.0);
+      gl_FragColor = vec4(v_color, v_alpha * glow);
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script>
+    const canvas = document.getElementById('glcanvas');
+    const gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+
+    if (!gl) throw new Error('WebGL unavailable');
+
+    function createShader(gl, type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        throw new Error('Shader compile: ' + gl.getShaderInfoLog(s));
+      }
+      return s;
+    }
+
+    // Program 1: Fullscreen Background
+    const vsBg = createShader(gl, gl.VERTEX_SHADER, document.getElementById('vs-bg').text);
+    const fsBg = createShader(gl, gl.FRAGMENT_SHADER, document.getElementById('fs-bg').text);
+    const progBg = gl.createProgram();
+    gl.attachShader(progBg, vsBg);
+    gl.attachShader(progBg, fsBg);
+    gl.linkProgram(progBg);
+    if (!gl.getProgramParameter(progBg, gl.LINK_STATUS)) throw new Error('WebGL program link: ' + gl.getProgramInfoLog(progBg));
+
+    const quadBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,  1, -1, -1,  1,
+      -1,  1,  1, -1,  1,  1,
+    ]), gl.STATIC_DRAW);
+
+    const bgPosLoc = gl.getAttribLocation(progBg, 'position');
+    const bgResLoc = gl.getUniformLocation(progBg, 'u_resolution');
+    const bgTimeLoc = gl.getUniformLocation(progBg, 'u_time');
+    const bgEpochLoc = gl.getUniformLocation(progBg, 'u_epoch');
+    const bgInflLoc = gl.getUniformLocation(progBg, 'u_inflation');
+
+    // Program 2: 130,000 GPU Particles
+    const vsPart = createShader(gl, gl.VERTEX_SHADER, document.getElementById('vs-particles').text);
+    const fsPart = createShader(gl, gl.FRAGMENT_SHADER, document.getElementById('fs-particles').text);
+    const progPart = gl.createProgram();
+    gl.attachShader(progPart, vsPart);
+    gl.attachShader(progPart, fsPart);
+    gl.linkProgram(progPart);
+    if (!gl.getProgramParameter(progPart, gl.LINK_STATUS)) throw new Error('WebGL program link: ' + gl.getProgramInfoLog(progPart));
+
+    const PARTICLE_COUNT = Math.floor(130000 * window.cosmosParticleFactor);
+    const seeds = new Float32Array(PARTICLE_COUNT * 3);
+    const types = new Float32Array(PARTICLE_COUNT);
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      seeds[i * 3 + 0] = Math.random();
+      seeds[i * 3 + 1] = Math.random();
+      seeds[i * 3 + 2] = Math.random();
+      types[i] = Math.random();
+    }
+
+    const seedBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, seedBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, seeds, gl.STATIC_DRAW);
+
+    const typeBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, typeBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, types, gl.STATIC_DRAW);
+
+    const partMvpLoc = gl.getUniformLocation(progPart, 'u_mvp');
+    const partEpochLoc = gl.getUniformLocation(progPart, 'u_epoch');
+    const partTimeLoc = gl.getUniformLocation(progPart, 'u_time');
+    const partInflLoc = gl.getUniformLocation(progPart, 'u_inflation');
+    const partDmLoc = gl.getUniformLocation(progPart, 'u_dm');
+    const partStarsLoc = gl.getUniformLocation(progPart, 'u_show_stars');
+
+    // State Variables
+    let currentEpoch = 0.0;
+    let targetEpoch = 0.0;
+    let inflationVal = 1.35;
+    let dmVal = 0.268;
+    let showStars = 1;
+    let autoplay = false;
+    let directorMode = false;
+
+    // Camera
+    let camRadius = 26.0;
+    let camTheta = 0.25;
+    let camPhi = 0.6;
+    let isDragging = false;
+    let lastX = 0, lastY = 0;
+
+    function resize() {
+      if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Mouse / Touch
+    window.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.interactive') || e.target.closest('.modal-backdrop')) return;
+      isDragging = true;
+      directorMode = false;
+      document.getElementById('btn-director').classList.remove('active');
+      lastX = e.clientX;
+      lastY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+
+      camPhi += dx * 0.005;
+      camTheta = Math.max(-1.4, Math.min(1.4, camTheta + dy * 0.005));
+    });
+    window.addEventListener('wheel', (e) => {
+      if (e.target.closest('.interactive') || e.target.closest('.modal-backdrop')) return;
+      camRadius = Math.max(12.0, Math.min(48.0, camRadius + e.deltaY * 0.02));
+    }, { passive: true });
+
+    // Touch
+    window.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.interactive') || e.touches.length === 0) return;
+      isDragging = true;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+    });
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging || e.touches.length === 0) return;
+      const dx = e.touches[0].clientX - lastX;
+      const dy = e.touches[0].clientY - lastY;
+      lastX = e.touches[0].clientX;
+      lastY = e.touches[0].clientY;
+      camPhi += dx * 0.005;
+      camTheta = Math.max(-1.4, Math.min(1.4, camTheta + dy * 0.005));
+    });
+    window.addEventListener('touchend', () => { isDragging = false; });
+
+    // Epoch Descriptions
+    const epochTelemetry = [
+      { name: "0.0 普朗克奇点", age: "0 s", temp: "> 10³² K", curv: "超低熵奇点", scale: "0.000", dom: "量子重力统一" },
+      { name: "1.0 暴胀激波", age: "10⁻³² s", temp: "10²⁷ K", curv: "k = 0 (暴胀抹平)", scale: "e⁶⁰ 尺度跃迁", dom: "标量场假真空能" },
+      { name: "2.0 夸克胶子汤", age: "10⁻⁶ s", temp: "10¹² K", curv: "平直时空", scale: "0.00001", dom: "相对论辐射主导" },
+      { name: "3.0 CMB 光子退耦", age: "3.8×10⁵ yr", temp: "3000 K", curv: "平直时空", scale: "0.0009", dom: "物质-辐射对等" },
+      { name: "4.0 首代原初星系", age: "2.9×10⁸ yr", temp: "45 K", curv: "平直时空", scale: "0.068", dom: "暗物质引力坍缩" },
+      { name: "5.0 暗能量加速膨胀", age: "13.8 Gyr", temp: "2.725 K", curv: "k = 0", scale: "1.000", dom: "暗能量 (68.5%)" },
+    ];
+
+    function updateTelemetry(ep) {
+      const idx = Math.min(5, Math.floor(ep));
+      const nextIdx = Math.min(5, idx + 1);
+      const frac = ep - idx;
+      const cur = epochTelemetry[idx];
+      const nxt = epochTelemetry[nextIdx];
+
+      document.getElementById('val-epoch').innerText = ep.toFixed(2);
+      document.getElementById('disp-age').innerHTML = frac > 0.5 ? nxt.age : cur.age;
+      document.getElementById('disp-temp').innerHTML = frac > 0.5 ? nxt.temp : cur.temp;
+      document.getElementById('disp-curv').innerHTML = cur.curv;
+      document.getElementById('disp-scale').innerHTML = (idx * 0.2 + frac * 0.2).toFixed(3);
+      document.getElementById('disp-dom').innerHTML = frac > 0.5 ? nxt.dom : cur.dom;
+    }
+
+    // Epoch Slider
+    const paramEpoch = document.getElementById('param-epoch');
+    paramEpoch.addEventListener('input', (e) => {
+      targetEpoch = parseFloat(e.target.value);
+      currentEpoch = targetEpoch;
+      updateTelemetry(currentEpoch);
+      syncEpochButtons(currentEpoch);
+    });
+
+    // Epoch Buttons
+    const epochBtns = document.querySelectorAll('.epoch-btn');
+    function syncEpochButtons(ep) {
+      const roundEp = Math.round(ep);
+      epochBtns.forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.step) === roundEp);
+      });
+    }
+    epochBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        targetEpoch = parseFloat(e.target.dataset.step);
+        paramEpoch.value = targetEpoch;
+        updateTelemetry(targetEpoch);
+        syncEpochButtons(targetEpoch);
+      });
+    });
+
+    // Other Sliders
+    document.getElementById('param-inflation').addEventListener('input', (e) => {
+      inflationVal = parseFloat(e.target.value);
+      document.getElementById('val-inflation').innerText = inflationVal.toFixed(2);
+    });
+
+    document.getElementById('param-dm').addEventListener('input', (e) => {
+      dmVal = parseFloat(e.target.value);
+      document.getElementById('val-dm').innerText = dmVal.toFixed(3);
+    });
+
+    // Buttons
+    const btnAutoplay = document.getElementById('btn-autoplay');
+    btnAutoplay.addEventListener('click', () => {
+      autoplay = !autoplay;
+      btnAutoplay.classList.toggle('active', autoplay);
+      btnAutoplay.innerText = autoplay ? '⏸️ 暂停演化' : '▶️ 纪元自动演进';
+    });
+
+    const btnDirector = document.getElementById('btn-director');
+    btnDirector.addEventListener('click', () => {
+      directorMode = !directorMode;
+      btnDirector.classList.toggle('active', directorMode);
+    });
+
+    const btnStars = document.getElementById('btn-stars');
+    btnStars.addEventListener('click', () => {
+      showStars = showStars ? 0 : 1;
+      btnStars.classList.toggle('active', showStars === 1);
+    });
+
+    // HUD Toggle
+    const hudLayer = document.getElementById('hud-layer');
+    const btnToggleHud = document.getElementById('btn-toggle-hud');
+    function toggleHud() {
+      hudLayer.classList.toggle('hud-hidden');
+    }
+    btnToggleHud.addEventListener('click', toggleHud);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'h' || e.key === 'H') toggleHud();
+    });
+
+    // Modal
+    const modalBox = document.getElementById('modal-box');
+    document.getElementById('btn-modal').addEventListener('click', () => modalBox.classList.add('open'));
+    document.getElementById('btn-close-modal').addEventListener('click', () => modalBox.classList.remove('open'));
+    modalBox.addEventListener('click', (e) => { if (e.target === modalBox) modalBox.classList.remove('open'); });
+
+    // John Cramer's Big Bang Sound Engine (Web Audio API)
+    let audioCtx = null;
+    let masterGain = null;
+    let oscBao = null;
+    let filterBao = null;
+    let analyser = null;
+    let audioActive = false;
+
+    const audioCanvas = document.getElementById('audio-canvas');
+    const actx = audioCanvas.getContext('2d');
+
+    const btnAudio = document.getElementById('btn-audio');
+    btnAudio.addEventListener('click', () => {
+      audioActive = !audioActive;
+      btnAudio.classList.toggle('active', audioActive);
+      if (audioActive) {
+        initBigBangAudio();
+        btnAudio.innerText = '🔊 宇宙声化中...';
+      } else {
+        if (masterGain && audioCtx) masterGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+        btnAudio.innerText = '🔊 宇宙大爆炸声化';
+      }
+    });
+
+    function initBigBangAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      if (masterGain) { masterGain.gain.cancelScheduledValues(audioCtx.currentTime); masterGain.gain.linearRampToValueAtTime(0.28, audioCtx.currentTime + 0.3); return; }
+
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0.28, audioCtx.currentTime + 1.0);
+      masterGain.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
+      // BAO Redshift Downsweep
+      oscBao = audioCtx.createOscillator();
+      oscBao.type = 'triangle';
+      const freq = Math.max(32, 110.0 - currentEpoch * 16.0);
+      oscBao.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      filterBao = audioCtx.createBiquadFilter();
+      filterBao.type = 'lowpass';
+      filterBao.frequency.setValueAtTime(260, audioCtx.currentTime);
+
+      oscBao.connect(filterBao);
+      filterBao.connect(masterGain);
+      oscBao.start();
+    }
+
+    // Audio Visualizer
+    function drawAudioVisualizer() {
+      requestAnimationFrame(drawAudioVisualizer);
+      actx.clearRect(0, 0, audioCanvas.width, audioCanvas.height);
+      if (!audioActive || !analyser) {
+        actx.fillStyle = 'rgba(255, 183, 77, 0.25)';
+        actx.fillRect(0, audioCanvas.height / 2 - 1, audioCanvas.width, 2);
+        return;
+      }
+
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+
+      const barWidth = (audioCanvas.width / bufferLength) * 2.2;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = (dataArray[i] / 255.0) * audioCanvas.height;
+        actx.fillStyle = `rgba(255, 152, 0, ${0.4 + dataArray[i] / 300.0})`;
+        actx.fillRect(x, audioCanvas.height - barHeight, barWidth - 1, barHeight);
+        x += barWidth;
+      }
+    }
+    drawAudioVisualizer();
+
+    // 4x4 Matrix Helpers
+    function mat4Perspective(out, fovy, aspect, near, far) {
+      const f = 1.0 / Math.tan(fovy / 2);
+      out[0] = f / aspect; out[1] = 0; out[2] = 0; out[3] = 0;
+      out[4] = 0; out[5] = f; out[6] = 0; out[7] = 0;
+      out[8] = 0; out[9] = 0; out[10] = (far + near) / (near - far); out[11] = -1;
+      out[12] = 0; out[13] = 0; out[14] = (2 * far * near) / (near - far); out[15] = 0;
+      return out;
+    }
+
+    function mat4LookAt(out, eye, center, up) {
+      let z0 = eye[0] - center[0], z1 = eye[1] - center[1], z2 = eye[2] - center[2];
+      let len = 1.0 / Math.hypot(z0, z1, z2);
+      z0 *= len; z1 *= len; z2 *= len;
+
+      let x0 = up[1] * z2 - up[2] * z1, x1 = up[2] * z0 - up[0] * z2, x2 = up[0] * z1 - up[1] * z0;
+      len = 1.0 / Math.hypot(x0, x1, x2);
+      x0 *= len; x1 *= len; x2 *= len;
+
+      let y0 = z1 * x2 - z2 * x1, y1 = z2 * x0 - z0 * x2, y2 = z0 * x1 - z1 * x0;
+
+      out[0] = x0; out[1] = y0; out[2] = z0; out[3] = 0;
+      out[4] = x1; out[5] = y1; out[6] = z1; out[7] = 0;
+      out[8] = x2; out[9] = y2; out[10] = z2; out[11] = 0;
+      out[12] = -(x0 * eye[0] + x1 * eye[1] + x2 * eye[2]);
+      out[13] = -(y0 * eye[0] + y1 * eye[1] + y2 * eye[2]);
+      out[14] = -(z0 * eye[0] + z1 * eye[1] + z2 * eye[2]);
+      out[15] = 1;
+      return out;
+    }
+
+    function mat4Multiply(out, a, b) {
+      let a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3];
+      let a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7];
+      let a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11];
+      let a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+
+      let b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
+      out[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+      out[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+      out[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+      out[3] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+      b0 = b[4]; b1 = b[5]; b2 = b[6]; b3 = b[7];
+      out[4] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+      out[5] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+      out[6] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+      out[7] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+      b0 = b[8]; b1 = b[9]; b2 = b[10]; b3 = b[11];
+      out[8] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+      out[9] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+      out[10] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+      out[11] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+
+      b0 = b[12]; b1 = b[13]; b2 = b[14]; b3 = b[15];
+      out[12] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+      out[13] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+      out[14] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+      out[15] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+      return out;
+    }
+
+    const projMat = new Float32Array(16);
+    const viewMat = new Float32Array(16);
+    const mvpMat = new Float32Array(16);
+
+    let startTime = performance.now();
+    function render(now) {
+      resize();
+
+      const timeSec = (window.cosmosAnimationTime(now) - startTime) * 0.001;
+
+      // Autoplay Epoch Evolution
+      if (autoplay) {
+        currentEpoch = (currentEpoch + 0.006) % 5.05;
+        targetEpoch = currentEpoch;
+        paramEpoch.value = currentEpoch;
+        updateTelemetry(currentEpoch);
+        syncEpochButtons(currentEpoch);
+
+        // Update sound frequency with redshift
+        if (oscBao && audioCtx) {
+          const freq = Math.max(32, 110.0 - currentEpoch * 16.0);
+          oscBao.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        }
+      } else {
+        currentEpoch += (targetEpoch - currentEpoch) * 0.08;
+      }
+
+      // Director Mode Camera
+      if (directorMode) {
+        camPhi = timeSec * 0.25;
+        camTheta = 0.2 + Math.sin(timeSec * 0.35) * 0.3;
+        camRadius = 24.0 + Math.cos(timeSec * 0.2) * 6.0;
+      } else if (!isDragging) {
+        camPhi += 0.0015;
+      }
+
+      const eye = [
+        camRadius * Math.cos(camTheta) * Math.sin(camPhi),
+        camRadius * Math.sin(camTheta),
+        camRadius * Math.cos(camTheta) * Math.cos(camPhi)
+      ];
+
+      mat4Perspective(projMat, Math.PI / 3.8, canvas.width / canvas.height, 0.1, 200.0);
+      mat4LookAt(viewMat, eye, [0, 0, 0], [0, 1, 0]);
+      mat4Multiply(mvpMat, projMat, viewMat);
+
+      gl.clearColor(0.01, 0.01, 0.02, 1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+      // Pass 1: Fullscreen Primordial Energy Background
+      gl.disable(gl.DEPTH_TEST);
+      gl.disable(gl.BLEND);
+      gl.useProgram(progBg);
+      gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+      gl.enableVertexAttribArray(bgPosLoc);
+      gl.vertexAttribPointer(bgPosLoc, 2, gl.FLOAT, false, 0, 0);
+
+      gl.uniform2f(bgResLoc, canvas.width, canvas.height);
+      gl.uniform1f(bgTimeLoc, timeSec);
+      gl.uniform1f(bgEpochLoc, currentEpoch);
+      gl.uniform1f(bgInflLoc, inflationVal);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      // Pass 2: 130,000 Additive GPU Particles
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+      gl.useProgram(progPart);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, seedBuf);
+      const posAttr = gl.getAttribLocation(progPart, 'a_seed');
+      gl.enableVertexAttribArray(posAttr);
+      gl.vertexAttribPointer(posAttr, 3, gl.FLOAT, false, 0, 0);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, typeBuf);
+      const typeAttr = gl.getAttribLocation(progPart, 'a_type');
+      gl.enableVertexAttribArray(typeAttr);
+      gl.vertexAttribPointer(typeAttr, 1, gl.FLOAT, false, 0, 0);
+
+      gl.uniformMatrix4fv(partMvpLoc, false, mvpMat);
+      gl.uniform1f(partEpochLoc, currentEpoch);
+      gl.uniform1f(partTimeLoc, timeSec);
+      gl.uniform1f(partInflLoc, inflationVal);
+      gl.uniform1f(partDmLoc, dmVal);
+      gl.uniform1i(partStarsLoc, showStars);
+
+      gl.drawArrays(gl.POINTS, 0, PARTICLE_COUNT);
+
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  </script>
+</body>
+</html>

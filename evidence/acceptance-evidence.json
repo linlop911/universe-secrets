@@ -1,0 +1,215 @@
+{
+  "date": "2026-11-07",
+  "passed": true,
+  "counts": {
+    "passed": 255,
+    "failed": 0,
+    "total": 255
+  },
+  "suites": [
+    {
+      "name": "原有完整回归",
+      "mode": "file",
+      "passed": 99,
+      "failed": 0,
+      "total": 99,
+      "report": "evidence/test-results.json"
+    },
+    {
+      "name": "原有完整回归",
+      "mode": "HTTP",
+      "passed": 99,
+      "failed": 0,
+      "total": 99,
+      "report": "evidence/test-results-http.json"
+    },
+    {
+      "name": "专题与导览",
+      "mode": "file",
+      "passed": 25,
+      "failed": 0,
+      "total": 25,
+      "report": "evidence/experience-results-file.json"
+    },
+    {
+      "name": "专题与导览",
+      "mode": "HTTP",
+      "passed": 25,
+      "failed": 0,
+      "total": 25,
+      "report": "evidence/experience-results-http.json"
+    },
+    {
+      "name": "单次音效",
+      "mode": "Edge",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "report": "evidence/audio-event-results.json"
+    },
+    {
+      "name": "故障自检",
+      "mode": "Edge",
+      "passed": 4,
+      "failed": 0,
+      "total": 4,
+      "report": "evidence/runner-failure-results.json"
+    }
+  ],
+  "failures": [],
+  "environment": {
+    "node": "v24.14.0",
+    "browser": {
+      "protocolVersion": "1.3",
+      "product": "Edg/157.0.4341.42",
+      "revision": "@7b1486be4607d53d9f93841b7c776bc525ca74b7",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+      "jsVersion": "15.7.11.4"
+    },
+    "executable": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "chapterIsolation": "independent browser/profile; input emulation isolated across chapter navigation"
+  },
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3060 Laptop GPU (0x00002520) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "sourceUrls": 17,
+  "scientificReferences": 12,
+  "assets": 7,
+  "tours": 6,
+  "performancePairs": 24,
+  "performance": {
+    "thresholdMs": 1,
+    "p95Regressions": 7,
+    "passed": true
+  },
+  "historicalAlerts": [
+    {
+      "file": "output/diagnostics/acceptance-http-core.log",
+      "lines": 5,
+      "samples": [
+        "FAIL bigbang pointer, pinch, cancellation and scene keyboard Touch did not rotate scene",
+        "FAIL cosmicweb pointer, pinch, cancellation and scene keyboard Touch did not rotate scene",
+        "FAIL stellar pointer, pinch, cancellation and scene keyboard Touch did not rotate scene",
+        "FAIL wormhole pointer, pinch, cancellation and scene keyboard Touch did not rotate scene",
+        "FAIL heatdeath pointer, pinch, cancellation and scene keyboard Touch did not rotate scene"
+      ]
+    },
+    {
+      "file": "output/diagnostics/touch-debug-2.log",
+      "lines": 1,
+      "samples": [
+        "Error: Must send a TouchStart first to start a new touch."
+      ]
+    },
+    {
+      "file": "evidence/asset-preparation.log",
+      "lines": 2,
+      "samples": [
+        "{\"id\":\"paper\",\"status\":202,\"url\":\"https://scixplorer.org/abs/1988AmJPh..56..395M/abstract\"}",
+        "{\"id\":\"eht\",\"status\":404,\"url\":\"https://eventhorizontelescope.org/sgra\",\"title\":\"Page not found | Event Horizon Telescope\"}"
+      ]
+    },
+    {
+      "file": "evidence/credit-inspection.log",
+      "lines": 1,
+      "samples": [
+        "sgra  8 months ago 6 min read La NASA refuerza Artemis: añade una misión y perfecciona su arquitectura general article 8 months ago APOD Science APOD APOD: 2022 May 13 – The... Today's APOD Archive Submissions Index Search Calendar RSS Education About Discuss &nbsp; APOD Astronomy Picture of the Day Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer. The Milky Way&#039;s Black Hole Explanation: There's a black hole at the center of the Milky Way. Stars are observed to orbit a very massive and compact object there known as Sgr A* (say “sadge-ay-star” ). But this just released radio image (inset) from planet Earth's Event Horizon Telescope is the first direct evidence of the Milky Way's central black hole. As predicted by Einstein's Theory of General Relativity, the four million solar mass black hole's strong gravity is bending light and creating a shadow-like dark central region surrounded by a bright ring-like structure. Supporting observations made by space-based telescopes and ground-based observatories provide a wider view of the galactic center's dynamic environment and an important context for the Event Horizon Telescope's black hole image. The main panel image shows the X-ray data from Chandra and infrared data from Hubble. While the main panel is about 7 light-years across, the Event Horizon Telescope inset image itself spans a mere 10 light- minutes at the center of our galaxy, some 27,000 light-years away . Date May 13, 2022 Credit Image Credit: X-ray - NASA/CXC/SAO , IR - NASA/HST/STScI ; Inset: Radio - Event Horizon Telescope Collaboration Authors &amp; editors: Robert Nemiroff ( MTU ) &amp; Jerry Bonnell ( UMCP ) A service of: ASD at NASA / GSFC , NASA Science Activation &amp; Michigan Tech. U. Random APOD Generator Yesterday&#039;s Image APOD: 2022 May 12 &#8211; Young Stars of NGC 346 Tomorrow&#039;s Image APOD: 2022 May 14 &#8211; Ice Halos by Moonlight National Aeronautics and Space Administration NASA explores the unknown in air and space, innovates for the benefit of humanity, and inspires the world through discovery. About NASA&#039;s Mission Join Us Home News &amp; Events Multimedia NASA+ Missions Humans in Space Earth The Sola"
+      ]
+    },
+    {
+      "file": "evidence/pdf-source-check.log",
+      "lines": 1,
+      "samples": [
+        "warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead."
+      ]
+    },
+    {
+      "file": "evidence/upgrade-performance-first-run.json",
+      "lines": 1,
+      "samples": [
+        "bigbang 1280×720 high P95 +1.80 ms; passed=false"
+      ]
+    }
+  ],
+  "scope": "自动验收覆盖本机 Edge 及四种模拟视口；没有实体手机、其他浏览器、屏幕阅读器设备或人工试听记录。叙事节奏、听感与「震撼」程度由用户观看审阅。录屏包含本项目合成声景；中文旁白以文本随导览逐幕显示，未合成口播音轨。",
+  "hashes": {
+    "app/assets/diagrams/dark-energy-model.svg": "c21e340ff4cb342529341471702707553ae7e6f8875c248739c087883265a09e",
+    "app/assets/diagrams/wormhole-section.svg": "0c48ecce09cb47d93f910a0cbeece97e417519d7c64607d5e241c23b607a90f2",
+    "app/assets/observations/bullet-composite.webp": "079dbe5f23e40ab02822c4bb39aa21fa5bf033da83127fc360da7b5495029ed7",
+    "app/assets/observations/cosmic-cliffs.webp": "d381f8af9af926e2ee326ab5a864ad32e50fe8d03476314dc6d935b4593ee219",
+    "app/assets/observations/crab-nebula.webp": "3f7c1121e404c710e038d67d20737016ccc40cf19a8098c19b8545fef68b32ef",
+    "app/assets/observations/planck-cmb.webp": "5becc9902791795f7e1e00995d9d7a75d2ae8c4b4cbe37a994b6ea13736fb34c",
+    "app/assets/observations/sgra-eht.webp": "2f9d6db36bf1efde773c346076a8bd6a367cc85a12ce31b9dc8acb155c3c0acb",
+    "app/chapters/bigbang.js": "de01ea782bbb53acb76ef5d1f0378be12fc3160374f481895ab24c4b1ce53bc3",
+    "app/chapters/cosmicweb.js": "491521bf9110b0a7e0e076ec0a43f5eaa11b4f001852d43547a630741cedfeb8",
+    "app/chapters/heatdeath.js": "b346f9d35240c7cabdc82e3b84b0ec8c52a125fdc3e91bd386e1d20e4ebdf02d",
+    "app/chapters/index.js": "511f6967136b7b267e56d7ac920a3175cafdb2f49641b61c9491b684edac0914",
+    "app/chapters/stellar.js": "fec6923d611f82aac6961d9afc8f7805f0ee428e20bdceec2d2a0d267b14fbc7",
+    "app/chapters/wormhole.js": "77e5c06122b6adaaa45331e2f156698bc541b8a4605741ff57790f5d6eca7490",
+    "app/common.js": "767aca30bf1c14af0ad5b13ba17c15716cfa57b3c8a67c43677688ca3008d4b8",
+    "app/content.js": "eb6863f25bc896cf90bc75adce3c6058fc3f65d469152325a9accd3862a09637",
+    "app/experience.js": "4358af41f2ac5662591bcddc7f54f32bdfe51ddaa2e66c35a6895880fe6f2b06",
+    "app/math.js": "7f22974acff525417b12d0ac51a50453e6d137efe18bad190ed92165bcada94c",
+    "app/runtime.js": "07633694b94db2a46439e6eeb7f5bc00e945c65be1cf7202fb809dcf2e7c89c8",
+    "app/styles/base.css": "895f04797b8fa718f233df302b403078e8eca9b3fb9c2fa84e654ca6fa7dca48",
+    "app/styles/common.css": "2a4d86457bc4bdfb44f3d3502c0c83feacca44a6946f7956d42eda003b893b3d",
+    "app/styles/design.css": "81f69ebdb8e107cf96f906ffd87c659a5314396fe8e0a8d9ba23f6082646f906",
+    "app/styles/experience.css": "8dbe26a95028b82d02882df25824f8bfdc0099d60b5d31d9bdfffe7e5bcaaf48",
+    "bigbang.html": "ed6681c5396087c11166ee7cf049e069906f8fa73554701f56af2e49580e57e3",
+    "cosmicweb.html": "767ca4c0dde20b251e440d2d125bad7b218fc620b2bcd449bb38016904652d92",
+    "data/acceptance-manifest.json": "623335e591a1316ad68e6e0d9d055c74216defde7cf411f8eaa9ff9b3ecca358",
+    "data/asset-manifest.json": "cef276da067048609f9ba2d7ca18b4cbfd4d4bf9df0cbba9ff2f8613a1017990",
+    "data/chapter-content.json": "45f5745e68d2db2cfa17231ab3f2b654f21a07b6b03ea0164b51c267376fe1a0",
+    "data/math-conversion.json": "745dd014693c507a1155b8acaaeba4c1ceeb0a063370c9826c6de0afd77fd374",
+    "data/science-content.json": "b39950dc614a2be2a1a88463d95cdd5a67e9df16f7bb13d058ab65e9bce305a1",
+    "data/voiceover.json": "bdb4f3c20fc8b80cd4dc9c54b20ff053469530c113f3e5e73a945e9269a8cfdc",
+    "evidence/acceptance-evidence.json": "dbff9472e8f7294bcb105e608b988481e70a1abc03283b2c6813fa77eda7d8f0",
+    "evidence/audio-event-results.json": "1eaff611ffc8e8aa39cf9989ce9bd5a1403e0d534f99197b6fb03fabff7ce440",
+    "evidence/benchmark-before.json": "d76277fa69328c134bd3733e757ac50e0be6992e27a3dfb1c8ccf50f8ad91c71",
+    "evidence/experience-results-file.json": "6ba35faafb21c52c50781db69e4058d9de2dd0f7ce1a98c65307e3a8b5d5cc71",
+    "evidence/experience-results-http.json": "75c5eb4262d0301e2e738b691191ff4b38cc0b37d5c142b3923f1d350f8e0b6a",
+    "evidence/runner-failure-results.json": "716248afa3854134e5e177d942201f999c2302f499ef2a76fcba2923bbe0885e",
+    "evidence/source-audit.json": "00ef2ede01f033463765a954d8180c7ba2e5ca213202be99991f48a3ae8ee0d6",
+    "evidence/test-results-http.json": "ec8e3a0121d283dabb0f8313437d5f18407c6ec97ae346de738d821ceb55e916",
+    "evidence/test-results.json": "55570b4b1286ac91c51baf2f65cae35195797eee7065b61644ecb09c13f53d64",
+    "evidence/tour-recordings.json": "a03d33a8324aa2288a1c9543eb47c48961ea3914de4ed8ce6657989051abda56",
+    "evidence/upgrade-performance-first-run.json": "532baa260d9a42ec189fb55d1ef84aa5fabb561fe25529791bbc53c194c507f3",
+    "evidence/upgrade-performance.json": "520e6a769313809f9ec564ab57519e62176a3ea09e6f4be6d17f95004fec12e1",
+    "heatdeath.html": "f4f3043b031917827727bd78337789ed431496d3ad3ce1ec4475d8ffb719614c",
+    "index.html": "1d6d208e62e1e68f63a3bc49ddc65fa7797cef59aebcfa5f5df2a6cee033e5ed",
+    "output/tours/bigbang-audio.webm": "8ed34a8812ca0aaecaa9d1be2bf4e7c65dce49e53e5aa176e12b54f8b0b0ff7c",
+    "output/tours/bigbang-poster.jpg": "de2a571af79130cf81998cbc79f45e3a9d822328bb58627bc4d7c638f3792946",
+    "output/tours/bigbang.mp4": "b74677e699e37ee08eda1d2fb2e7800da2619ce63c465ef88200c5b319ed1aa9",
+    "output/tours/cosmicweb-audio.webm": "ff74b8576827aff323b57654a95824ceb31365ff9c1e9413948bb605adcde1f9",
+    "output/tours/cosmicweb-poster.jpg": "f36360a86d5ebcdfb6f34326e9a72b7d99f94fa78d71dce20b0d93007101ff9c",
+    "output/tours/cosmicweb.mp4": "09cad99e96f806a693b9812cf756ca30d79c4dc2be255b97f4df8578a34c88dc",
+    "output/tours/heatdeath-audio.webm": "a76a3d69edb7b6e52d887ba257f62b2d35ebc43708d54b03b36319c4632d72dc",
+    "output/tours/heatdeath-poster.jpg": "dbc420fbdf056a3e6c3b20353c9c8d26d3d76b1a0aa2b94508f25267dfc58089",
+    "output/tours/heatdeath.mp4": "395c94c3d5a39547919ded5daeea0a10c4c86e9b7e458a10abfa8e0ea72feaac",
+    "output/tours/index-audio.webm": "e92b15b47b0bb6d9b8574a15ce14be82f5fe304a04bedf50ac5648d7c34dd175",
+    "output/tours/index-poster.jpg": "351ac86e070b9523553a7b5a90a7507ee4c0562c34000d35f51bde25df71295f",
+    "output/tours/index.mp4": "6ffc18787716174afe53e7650f381d14e09d16d5a655d143488d79a8183ee352",
+    "output/tours/stellar-audio.webm": "c777710eff057dc936f718c7366c94485bf9d86e79a9b1db98e9f671dd9060b0",
+    "output/tours/stellar-poster.jpg": "31bf8b1066132d70b35f6978c6b8f34be68e489d4ac1a2a379f4c7f4f1374470",
+    "output/tours/stellar.mp4": "d73db5074150befceeb04589149049ec8231603e4766156566e8aca129e80f23",
+    "output/tours/wormhole-audio.webm": "5ef7a4b9f4251471f50ed3677d8ff8732af14985ca49129c0a08c47d13996606",
+    "output/tours/wormhole-poster.jpg": "60dcdab5e0d22a4f76be3626ec382c73bbdcac62f2628a76bafdc4fbcb58e7ae",
+    "output/tours/wormhole.mp4": "97210d773955c1958b684b82bcb47ea209575dfcea3dfbd028e102781b26831a",
+    "stellar.html": "0d30e2f426f8c96f15c7a9868da55a112237d9fb8c05ce4a8356fb89543d0f2b",
+    "tools/audit_sources.cjs": "d9ff9044e189bc2b8fd7b18e27a2e0404e6e77a2766dacf46b70ba1782e61637",
+    "tools/benchmark_before.cjs": "39ee7c558593570175e2c348ecce08dfe452e78fd44e4d83946b1c90b642ec63",
+    "tools/benchmark_upgrade.cjs": "d09c169bbdcd228414d312ad83cf76165cc7e366163ed22fec0ed2217327bc15",
+    "tools/build_acceptance_report.cjs": "bfd7b4acc10f2ee0ea617b47fc20012b2e0d0f0982d37b7c9aae4c27fd8aa67f",
+    "tools/build_content.cjs": "6ce4445925c4674340fbee7fbf84407b9d53752a5590323410d4e86579a62548",
+    "tools/build_review.cjs": "1180cce28376b981780251da8c85abc27ee2fb6368a6592dbd945bd0d94b0c9f",
+    "tools/content-source.cjs": "98f487ea86e6fa3fbf01db56d1a98a36b4a5a9b5c15e09b11aa7117466b534d1",
+    "tools/format_math.cjs": "8794714813ddc4902789729442b8e1d2013f4a988842a0d01d9230c05072682f",
+    "tools/paths.cjs": "a3721e03f0306f1cb298149d480e752a93161f2b4c63f52afcfd72d234004329",
+    "tools/record_tours.cjs": "9cf45f7666621ae135bcb209604414f24efda70d41e66ca14c88455771dfb3a1",
+    "tools/test-support.cjs": "9ccc3bccb082a9a0703e1ac0fdccfa9b720e36e12295dd59ee93590158da7d16",
+    "tools/verify_all_pages.js": "09ec376e96ca0137110844ad15ad1355ce0f854e9c97cf77f79f1be6c001a644",
+    "tools/verify_audio_events.cjs": "021fb0716fc25dbaea87104baa4c4ffc72948a45dfde9024c779f6300a34d0b3",
+    "tools/verify_experience.cjs": "a1228970dae0b4901abcc494c1d5c6103765a1fd8293fb6046699cb0d55247c7",
+    "tools/verify_failure_paths.cjs": "bed96e5f21a3ff0b9e7d4af4e1a546f3ab30bfdb71f8bd9212609dee9d13ea20",
+    "tools/verify_pdf_source.py": "09aacde79ac0289990dbd065633f9b767b965446007f2605b7876f2ca521b4c3",
+    "wormhole.html": "f4f8de673713ae0c305babedf3e856f4940f734617521b34e234e3f4b19db811"
+  }
+}

@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇宙的秘密：引力深渊与时空折叠 (NASA EHT Sgr A* & JWST Lensing)</title>
+  <script src="common.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e0e8ff;
+    }
+    #glcanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+    /* HUD Overlays */
+    .hud-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      transition: opacity 0.3s;
+    }
+    .hud-hidden {
+      opacity: 0;
+      pointer-events: none !important;
+    }
+    .interactive {
+      pointer-events: auto;
+    }
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .header-title {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 12px;
+      padding: 14px 22px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), inset 0 0 16px rgba(40, 100, 255, 0.15);
+      max-width: 680px;
+    }
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .nav-tab {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      text-decoration: none;
+      color: #8faee0;
+      background: rgba(30, 60, 120, 0.35);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      transition: all 0.2s;
+    }
+    .nav-tab:hover {
+      background: rgba(40, 90, 180, 0.55);
+      color: #fff;
+    }
+    .nav-tab.active {
+      background: linear-gradient(135deg, #0d47a1, #00838f);
+      color: #fff;
+      border-color: #4dd0e1;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(0, 131, 143, 0.6);
+    }
+    .header-title h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-title h1 span.badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      background: linear-gradient(135deg, #d50000, #ff1744);
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .header-title p {
+      font-size: 12px;
+      color: #8fa7df;
+      margin-top: 5px;
+      line-height: 1.45;
+    }
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .observatory-tag {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 11.5px;
+      color: #799be4;
+      line-height: 1.5;
+      text-align: right;
+      font-family: "Courier New", monospace;
+    }
+    .pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00e5ff;
+      box-shadow: 0 0 8px #00e5ff;
+      animation: pulse 1.8s infinite;
+      margin-right: 6px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+    /* Side Panels */
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      margin: 12px 0;
+      pointer-events: none;
+    }
+    .panel {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(80, 140, 255, 0.32);
+      border-radius: 12px;
+      padding: 16px;
+      width: 320px;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75);
+    }
+    .panel h3 {
+      font-size: 13.5px;
+      color: #00e5ff;
+      margin-bottom: 10px;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .insight-card {
+      background: rgba(16, 28, 56, 0.65);
+      border-left: 3px solid #3d84ff;
+      border-radius: 0 6px 6px 0;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: #b0c4de;
+    }
+    .insight-card strong {
+      color: #fff;
+    }
+    .spectral-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .spectral-btn {
+      background: rgba(20, 40, 80, 0.5);
+      border: 1px solid rgba(80, 160, 255, 0.28);
+      border-radius: 6px;
+      color: #8faee0;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .spectral-btn:hover {
+      background: rgba(40, 80, 160, 0.65);
+      color: #fff;
+    }
+    .spectral-btn.active {
+      background: linear-gradient(135deg, #0288d1, #00acc1);
+      color: #fff;
+      border-color: #4dd0e1;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(0, 172, 193, 0.55);
+    }
+    .control-item {
+      margin-bottom: 10px;
+    }
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #8faee0;
+      margin-bottom: 4px;
+    }
+    .control-label span.val {
+      font-family: monospace;
+      color: #4fc3f7;
+      font-weight: 600;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(80, 130, 220, 0.25);
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #00e5ff;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00e5ff;
+    }
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .btn {
+      background: rgba(20, 50, 100, 0.5);
+      border: 1px solid rgba(80, 140, 255, 0.35);
+      border-radius: 6px;
+      color: #d1e0ff;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .btn:hover {
+      background: rgba(35, 75, 150, 0.7);
+      border-color: #00e5ff;
+      color: #fff;
+    }
+    .btn.active {
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+      border-color: #64b5f6;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(25, 118, 210, 0.6);
+    }
+    .btn.highlight {
+      background: linear-gradient(135deg, #7b1fa2, #ab47bc);
+      border-color: #ce93d8;
+      color: #fff;
+    }
+    .audio-box {
+      margin-top: 8px;
+      background: rgba(4, 10, 22, 0.7);
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      border-radius: 8px;
+      padding: 6px;
+    }
+    #audio-canvas {
+      width: 100%;
+      height: 38px;
+      display: block;
+      background: #02050c;
+      border-radius: 4px;
+    }
+    /* Bottom Telemetry Bar */
+    .bottom-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .telemetry-card {
+      background: rgba(8, 14, 28, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(80, 140, 255, 0.28);
+      border-radius: 10px;
+      padding: 7px 12px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+    .telemetry-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #799be4;
+      margin-bottom: 2px;
+    }
+    .telemetry-val {
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      color: #00e5ff;
+      text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+    }
+    .telemetry-val span.unit {
+      font-size: 9.5px;
+      color: #90caf9;
+      margin-left: 2px;
+    }
+    .drag-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #7c9bcf;
+      margin-top: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 16, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #081022;
+      border: 1px solid #4fc3f7;
+      border-radius: 14px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 229, 255, 0.25);
+      color: #d0e4ff;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(80, 140, 255, 0.3);
+      padding-bottom: 10px;
+    }
+    .modal-header h2 {
+      font-size: 17px;
+      color: #00e5ff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .close-modal {
+      background: none;
+      border: none;
+      color: #8faee0;
+      font-size: 22px;
+      cursor: pointer;
+    }
+    .close-modal:hover {
+      color: #fff;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 11.5px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid rgba(80, 140, 255, 0.25);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .data-table th {
+      background: rgba(30, 60, 120, 0.35);
+      color: #64b5f6;
+    }
+  </style>
+  <link rel="stylesheet" href="common.css">
+</head>
+<body>
+  <canvas id="glcanvas"></canvas>
+
+  <div class="hud-layer" id="hud-layer">
+    <!-- Top Bar -->
+    <div class="top-bar interactive">
+      <div class="header-title">
+        <div class="nav-tabs">
+          <a href="index.html" class="nav-tab active">第一章：黑洞引力透镜</a>
+          <a href="bigbang.html" class="nav-tab">第二章：大爆炸与CMB</a>
+          <a href="cosmicweb.html" class="nav-tab">第三章：宇宙网与暗物质</a>
+          <a href="stellar.html" class="nav-tab">第四章：恒星演化与超新星</a>
+          <a href="wormhole.html" class="nav-tab">第五章：虫洞与量子纠缠</a>
+          <a href="heatdeath.html" class="nav-tab">第六章：宇宙热寂与重生</a>
+        </div>
+        <h1>
+          🌌 引力深渊与克尔旋转黑洞
+          <span class="badge">NASA EHT & JWST</span>
+        </h1>
+        <p>
+          基于爱因斯坦广义相对论克尔时态度规 (Kerr Metric)，实时光线追踪极速自转黑洞的相对论光线弯曲、光子环吸积盘与彭罗斯能层过程。
+        </p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="btn-toggle-hud" title="快捷键 H 隐藏/显示 HUD">👁️ 纯净视效</button>
+        <button class="btn highlight" id="btn-modal">🔭 黑洞观测参考</button>
+        <div class="observatory-tag">
+          <span class="pulse-dot"></span><strong>LIVE EHT Sgr A* 矩阵</strong><br>
+          视界坐标：$17^{\text{h}}45^{\text{m}}40^{\text{s}}, -29^\circ00'28''$<br>
+          观测基准：EHT 1.3mm + JWST NIRCam
+        </div>
+      </div>
+    </div>
+
+    <!-- Side Panels -->
+    <div class="content-area">
+      <!-- Left: Scientific Insights -->
+      <div class="panel scientific-panel interactive">
+        <h3>🔬 天体物理机制 (Astrophysics)</h3>
+
+        <div class="insight-card" style="border-left-color: #ff9100; color: #ffe0b2;">
+          🕳️ <strong>双重爱因斯坦吸积盘镜像 (Double-Disk Wrapping)：</strong><br>
+          黑洞极限引力透镜将背面吸积盘的光线弯曲超过 $180^\circ$，使你在黑洞上方和下方同时看见原本被遮挡的吸积盘背面！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #00e5ff; color: #80d8ff;">
+          ⚡ <strong>相对论多普勒集束 (Doppler Beaming)：</strong><br>
+          吸积盘物质以接近 $0.6c$ 旋转。朝向地球运动的一侧光子被强烈蓝移增亮高达 10 倍，远离侧红移变暗，呈现剧烈不对称光晕。
+        </div>
+
+        <div class="insight-card" style="border-left-color: #76ff03; color: #ccff90;">
+          🔋 <strong>彭罗斯过程与能层旋转能提取：</strong><br>
+          静止极限面与视界之间为时空强行拖曳的能层（Ergosphere）。进入能层的粒子衰变后可将黑洞自旋能以高达 29% 效率提取至无穷远处！
+        </div>
+
+        <div class="insight-card" style="border-left-color: #e040fb; color: #f8bbd0;">
+          📻 <strong>英仙座声波与合成低音：</strong><br>
+          钱德拉观测到与星系团气体压力波有关的结构。本页 54 Hz 是受声化作品启发的合成低音，并非原始波动频率。
+        </div>
+      </div>
+
+      <!-- Right: Interactive Control Panel -->
+      <div class="panel controls-panel interactive">
+        <h3>🎛️ 传感器与物理控制台</h3>
+
+        <div style="font-size:11px; color:#8faee0; margin-bottom:5px;">多波段传感器滤镜 (Multi-Spectral Filters)：</div>
+        <div class="spectral-selector">
+          <button class="spectral-btn active" data-spec="0">👁️ 综合可见光波段</button>
+          <button class="spectral-btn" data-spec="1">🔭 JWST 近/中红外</button>
+          <button class="spectral-btn" data-spec="2">⚡ 钱德拉 X 射线</button>
+          <button class="spectral-btn" data-spec="3">🌊 LIGO 引力波场</button>
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>克尔自旋参数 ($a^* = Jc/GM^2$)</span>
+            <span class="val" id="val-spin">0.94</span>
+          </div>
+          <input type="range" id="param-spin" min="0.1" max="0.99" step="0.01" value="0.94">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>黑洞质量（太阳质量；画面按引力半径归一化）</span>
+            <span class="val" id="val-mass">35.0</span>
+          </div>
+          <input type="range" id="param-mass" min="8" max="90" step="1" value="35">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>吸积盘湍流密度与厚度</span>
+            <span class="val" id="val-disk">1.65</span>
+          </div>
+          <input type="range" id="param-disk" min="0.3" max="3.0" step="0.1" value="1.65">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn active" id="btn-doppler">✨ 多普勒集束</button>
+          <button class="btn active" id="btn-spikes">🌟 JWST 六芒星芒</button>
+          <button class="btn" id="btn-penrose">⚡ 彭罗斯能层</button>
+          <button class="btn" id="btn-director">🎥 电影导览视角</button>
+        </div>
+
+        <div class="btn-group" style="margin-top: 6px;">
+          <button class="btn" id="btn-audio">🔊 钱德拉声音化</button>
+          <button class="btn" id="btn-chirp">🌊 LIGO 啁啾声</button>
+        </div>
+
+        <!-- Real-time Audio Visualizer -->
+        <div class="audio-box">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Bar -->
+    <div class="interactive" style="width: 100%;">
+      <div class="bottom-bar">
+        <div class="telemetry-card">
+          <div class="telemetry-name">克尔事件视界 $r_+$</div>
+          <div class="telemetry-val" id="disp-rs">69.4 <span class="unit">km</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">光子球子环半径 $r_{ph}$</div>
+          <div class="telemetry-val" id="disp-rph">112.8 <span class="unit">km</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">视界磁通量密度</div>
+          <div class="telemetry-val" id="disp-bfield">3.8×10⁴ <span class="unit">Gauss</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">多普勒辐射增强比 $D^3$</div>
+          <div class="telemetry-val" id="disp-flux">1 : 9.42</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">彭罗斯能层厚度 $\Delta r$</div>
+          <div class="telemetry-val" id="disp-penrose">51.6 <span class="unit">km</span></div>
+        </div>
+      </div>
+
+      <div class="drag-hint">
+        🖱️ 鼠标左键 360° 拖拽飞行 | 滚轮无级缩放 | 点击「🎥 电影导览视角」开启全自动轨道巡航 | 按 H 键隐藏 HUD 获得 IMAX 级纯净全屏
+      </div>
+    </div>
+  </div>
+
+  <!-- NASA EHT & JWST Scientific Comparison Modal -->
+  <div class="modal-backdrop" id="modal-box">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🔭 EHT 观测背景与本页模型</h2>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+
+      <p style="line-height: 1.6; font-size: 13px; margin-bottom: 14px;">
+        本页视觉效果受事件视界望远镜对人马座 A* 和 M87* 的研究启发；未导入观测数据，也未对模型进行拟合或误差标定。
+      </p>
+
+      <div class="science-reference"><p>EHT 对人马座 A* 和 M87* 的成像为理解黑洞附近的辐射提供观测约束。</p><p>本页采用经验光线弯曲、程序生成吸积盘和合成声效。质量控制物理长度读数，画面采用归一化单位。</p><p>背景资料：<a href="https://eventhorizontelescope.org/sgra" target="_blank" rel="noopener noreferrer">查看参考来源</a>（需联网）。</p></div>
+
+      <div style="background: rgba(16, 32, 64, 0.6); padding: 12px; border-radius: 8px; font-size: 12px; line-height: 1.6;">
+        💡 <strong>致敬前沿科学</strong>：
+        2024 年 EHT 团队最新发布的偏振光人马座 A* 图像清晰揭示了类似 M87* 的强而有序的螺旋磁场。这证明了强磁场和吸积盘相对论喷流是所有超大质量黑洞的普遍物理规律。
+      </div>
+    </div>
+  </div>
+
+  <!-- WebGL Vertex Shader -->
+  <script id="vs" type="x-shader/x-vertex">
+    attribute vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.0, 1.0);
+    }
+  </script>
+
+  <!-- WebGL Fragment Shader: Cinema CG Kerr Raymarcher -->
+  <script id="fs" type="x-shader/x-fragment">
+    precision highp float;
+
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform vec3 u_cam_pos;
+    uniform vec3 u_cam_target;
+    uniform float u_mass;
+    uniform float u_spin;
+    uniform float u_disk_density;
+    uniform float u_spectral_mode;
+    uniform int u_doppler;
+    uniform int u_jwst_spikes;
+    uniform int u_penrose_mode;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise2(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    float fbm(vec2 p) {
+      float v = 0.0;
+      float a = 0.5;
+      for (int i = 0; i < 4; i++) {
+        v += a * noise2(p);
+        p = p * 2.1 + vec2(1.5, 7.3);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    // Procedural starry deep nebula sky with Milky Way galactic dust lane
+    vec3 sampleSky(vec3 dir) {
+      float u = atan(dir.z, dir.x) / (2.0 * PI) + 0.5;
+      float v = asin(clamp(dir.y, -1.0, 1.0)) / PI + 0.5;
+
+      float neb = fbm(vec2(u * 5.0, v * 3.0) + u_time * 0.012);
+      float neb2 = fbm(vec2(u * 10.0 + 1.2, v * 6.0 + 3.4));
+      vec3 col = mix(vec3(0.01, 0.015, 0.04), vec3(0.08, 0.02, 0.12), neb);
+      col = mix(col, vec3(0.02, 0.05, 0.1), neb2 * 0.5);
+
+      // Galactic core glow band
+      float band = exp(-abs(dir.y) * 4.2) * 0.45;
+      col += vec3(0.18, 0.14, 0.28) * band;
+
+      // Thousands of sharp stars with twinkle
+      float starGrid1 = pow(hash(floor(vec2(u * 220.0, v * 110.0))), 38.0) * 2.5;
+      float starGrid2 = pow(hash(floor(vec2(u * 440.0, v * 220.0))), 52.0) * 4.0;
+      float twinkle = sin(u_time * 3.0 + u * 100.0) * 0.2 + 0.8;
+      col += vec3(0.75, 0.88, 1.0) * starGrid1 * twinkle;
+      col += vec3(1.0, 0.9, 0.7) * starGrid2;
+
+      return col;
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
+
+      // Camera Ray Basis
+      vec3 camDir = normalize(u_cam_target - u_cam_pos);
+      vec3 camRight = normalize(cross(camDir, vec3(0.0, 1.0, 0.0)));
+      vec3 camUp = cross(camRight, camDir);
+      vec3 rayDir = normalize(uv.x * camRight + uv.y * camUp + 1.35 * camDir);
+
+      vec3 rayPos = u_cam_pos;
+
+      // Kerr Physical Dimensions
+      float rs = 1.35;
+      float r_isco = rs * (1.8 + (1.0 - u_spin) * 0.9);
+      float r_out = rs * 6.2;
+
+      vec3 col = vec3(0.0);
+      float opacity = 0.0;
+      bool absorbed = false;
+
+      // Geodesic raymarching: 140 steps for ultra-clean curvature
+      for (int i = 0; i < 140; i++) {
+        float r = length(rayPos);
+
+        // Event Horizon
+        if (r < rs) {
+          absorbed = true;
+          break;
+        }
+
+        // Adaptive step size
+        float stepSize = clamp(r * 0.04, 0.042, 0.15);
+
+        // General Relativity Bending Vector towards black hole center
+        float bend = (1.55 * rs / (r * r)) * stepSize;
+        rayDir = normalize(rayDir - normalize(rayPos) * bend);
+
+        // Accretion Disk in equatorial plane y ~ 0
+        float diskH = 0.065 + 0.048 * (r / rs);
+        float distY = abs(rayPos.y);
+
+        if (r > r_isco && r < r_out && distY < diskH * 2.2) {
+          float densityY = exp(-0.5 * (distY * distY) / (diskH * diskH));
+          float radialWeight = smoothstep(r_isco, r_isco + 0.35, r) * (1.0 - smoothstep(r_out - 1.4, r_out, r));
+
+          float phi = atan(rayPos.z, rayPos.x);
+          float orbitalSpeed = sqrt(rs / (2.0 * r)) * u_spin;
+          float flowAngle = phi - u_time * (orbitalSpeed * 3.2 + 0.25);
+
+          float turb = fbm(vec2(r * 2.8, flowAngle * 3.2));
+          turb = mix(turb, noise2(vec2(r * 5.5, flowAngle * 6.5)), 0.35);
+
+          // Disk temperature gradient based on Shakura-Sunyaev alpha-disk model: T ~ (r_isco / r)^0.75
+          float temp = pow(r_isco / r, 0.75);
+          vec3 diskBase = vec3(1.0);
+
+          if (u_spectral_mode < 0.5) {
+            // 0. Visible Optical: Blazing gold, white-hot ISCO, ruby edge
+            diskBase = mix(vec3(1.0, 0.22, 0.01), vec3(1.0, 0.86, 0.38), temp);
+            if (temp > 0.62) diskBase = mix(diskBase, vec3(0.85, 0.96, 1.0), (temp - 0.62) * 2.8);
+          } else if (u_spectral_mode < 1.5) {
+            // 1. JWST Infrared: Amber dust, bright infrared ISCO
+            diskBase = mix(vec3(0.85, 0.05, 0.22), vec3(1.0, 0.78, 0.12), temp);
+            if (temp > 0.58) diskBase = mix(diskBase, vec3(1.0, 0.96, 0.82), (temp - 0.58) * 2.5);
+          } else if (u_spectral_mode < 2.5) {
+            // 2. Chandra X-Ray: Cyan-blue high-energy plasma
+            diskBase = mix(vec3(0.1, 0.25, 0.98), vec3(0.0, 0.95, 0.9), temp);
+            if (temp > 0.65) diskBase = mix(diskBase, vec3(0.96, 0.98, 1.0), (temp - 0.65) * 3.0);
+          } else {
+            // 3. LIGO Strain Field
+            diskBase = mix(vec3(0.0, 0.85, 0.45), vec3(0.96, 0.18, 0.88), temp);
+          }
+
+          // Relativistic Doppler Beaming
+          float doppler = 1.0;
+          if (u_doppler == 1) {
+            vec3 orbitV = vec3(-sin(phi), 0.0, cos(phi)) * orbitalSpeed;
+            float betaCos = dot(orbitV, -rayDir);
+            float gamma = 1.0 / sqrt(max(0.02, 1.0 - orbitalSpeed * orbitalSpeed));
+            float D = 1.0 / (gamma * (1.0 - betaCos));
+            doppler = pow(clamp(D, 0.22, 3.4), 2.8);
+
+            if (betaCos > 0.0 && u_spectral_mode < 0.5) {
+              diskBase = mix(diskBase, vec3(0.38, 0.88, 1.0), betaCos * 1.25);
+            }
+          }
+
+          // Gravitational Redshift dimming as r -> rs
+          float gravRedshift = sqrt(max(0.05, 1.0 - rs / r));
+
+          float sampleA = densityY * radialWeight * turb * (0.8 * u_disk_density) * doppler * gravRedshift;
+          col += diskBase * sampleA * (1.0 - opacity);
+          opacity += sampleA * 1.45;
+
+          if (opacity >= 0.98) break;
+        }
+
+        // Razor-sharp Photon Sphere Ring at 1.5 * rs
+        float distPhoton = abs(r - rs * 1.5);
+        if (distPhoton < 0.24 * rs) {
+          float ringGlow = exp(-distPhoton * 17.0) * 0.42;
+          col += vec3(1.0, 0.96, 0.82) * ringGlow * (1.0 - opacity);
+        }
+
+        // Penrose Process Ergosphere (between rs and r_ergo)
+        if (u_penrose_mode == 1) {
+          float cosT = rayPos.y / r;
+          float r_ergo = rs * (1.0 + sqrt(max(0.01, 1.0 - u_spin * u_spin * cosT * cosT)));
+          if (r > rs && r < r_ergo) {
+            col += vec3(0.0, 1.0, 0.5) * 0.045 * (1.0 - opacity);
+          }
+        }
+
+        rayPos += rayDir * stepSize;
+        if (r > 19.0) break;
+      }
+
+      if (absorbed) {
+        // Event Horizon shadow
+        col = col * 0.08;
+      } else {
+        // Background lensed cosmos
+        vec3 bg = sampleSky(rayDir);
+        col = col + bg * (1.0 - clamp(opacity, 0.0, 1.0));
+      }
+
+      // JWST Hexagonal Diffraction Spikes
+      if (u_jwst_spikes == 1) {
+        float bright = max(0.0, col.r * 0.5 + col.g * 0.4 + col.b * 0.1 - 0.7);
+        if (bright > 0.01) {
+          float sp1 = exp(-abs(uv.y) * 45.0);
+          vec2 rot1 = vec2(uv.x * 0.5 - uv.y * 0.866, uv.x * 0.866 + uv.y * 0.5);
+          float sp2 = exp(-abs(rot1.y) * 45.0);
+          vec2 rot2 = vec2(uv.x * 0.5 + uv.y * 0.866, -uv.x * 0.866 + uv.y * 0.5);
+          float sp3 = exp(-abs(rot2.y) * 45.0);
+
+          float totalSp = (sp1 + sp2 + sp3) * 0.25 * bright;
+          col += vec3(0.92, 0.96, 1.0) * totalSp;
+        }
+      }
+
+      // Filmic ACES Tone Mapping
+      col = (col * (2.51 * col + 0.03)) / (col * (2.43 * col + 0.59) + 0.14);
+
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  </script>
+
+  <!-- Application Logic & NASA Chandra Data Sonification Engine -->
+  <script>
+    const canvas = document.getElementById('glcanvas');
+    const gl = canvas.getContext('webgl', { antialias: true, alpha: false }) || canvas.getContext('experimental-webgl');
+
+    if (!gl) throw new Error('WebGL unavailable');
+
+    function createShader(gl, type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        const message = gl.getShaderInfoLog(shader); gl.deleteShader(shader); throw new Error('Shader compile: ' + message);
+      }
+      return shader;
+    }
+
+    const vs = createShader(gl, gl.VERTEX_SHADER, document.getElementById('vs').text);
+    const fs = createShader(gl, gl.FRAGMENT_SHADER, document.getElementById('fs').text);
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error('WebGL program link: ' + gl.getProgramInfoLog(program));
+    gl.useProgram(program);
+
+    // Quad
+    const positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+      -1, -1,  1, -1, -1,  1,
+      -1,  1,  1, -1,  1,  1,
+    ]), gl.STATIC_DRAW);
+
+    const posLocation = gl.getAttribLocation(program, 'position');
+    gl.enableVertexAttribArray(posLocation);
+    gl.vertexAttribPointer(posLocation, 2, gl.FLOAT, false, 0, 0);
+
+    // Uniforms
+    const uRes = gl.getUniformLocation(program, 'u_resolution');
+    const uTime = gl.getUniformLocation(program, 'u_time');
+    const uCamPos = gl.getUniformLocation(program, 'u_cam_pos');
+    const uCamTarget = gl.getUniformLocation(program, 'u_cam_target');
+    const uMass = gl.getUniformLocation(program, 'u_mass');
+    const uSpin = gl.getUniformLocation(program, 'u_spin');
+    const uDiskDensity = gl.getUniformLocation(program, 'u_disk_density');
+    const uSpectralMode = gl.getUniformLocation(program, 'u_spectral_mode');
+    const uDoppler = gl.getUniformLocation(program, 'u_doppler');
+    const uJwstSpikes = gl.getUniformLocation(program, 'u_jwst_spikes');
+    const uPenroseMode = gl.getUniformLocation(program, 'u_penrose_mode');
+
+    // Camera State
+    let camRadius = 8.2;
+    let camTheta = 0.22;
+    let camPhi = 0.85;
+    let isDragging = false;
+    let lastMouseX = 0, lastMouseY = 0;
+    let directorMode = false;
+
+    let massVal = 35.0;
+    let spinVal = 0.94;
+    let diskVal = 1.65;
+    let spectralMode = 0.0;
+    let dopplerActive = 1;
+    let jwstSpikes = 1;
+    let penroseActive = 0;
+
+    function resize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+        gl.viewport(0, 0, width, height);
+      }
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Mouse Controls on Window
+    window.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.interactive') || e.target.closest('.modal-backdrop')) return;
+      isDragging = true;
+      directorMode = false;
+      document.getElementById('btn-director').classList.remove('active');
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastMouseX;
+      const dy = e.clientY - lastMouseY;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+
+      camPhi += dx * 0.0055;
+      camTheta = Math.max(-1.42, Math.min(1.42, camTheta + dy * 0.0055));
+    });
+    window.addEventListener('wheel', (e) => {
+      if (e.target.closest('.interactive') || e.target.closest('.modal-backdrop')) return;
+      camRadius = Math.max(3.8, Math.min(18.0, camRadius + e.deltaY * 0.012));
+    }, { passive: true });
+
+    // Touch support
+    window.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.interactive') || e.touches.length === 0) return;
+      isDragging = true;
+      directorMode = false;
+      document.getElementById('btn-director').classList.remove('active');
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
+    });
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging || e.touches.length === 0) return;
+      const dx = e.touches[0].clientX - lastMouseX;
+      const dy = e.touches[0].clientY - lastMouseY;
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
+
+      camPhi += dx * 0.0055;
+      camTheta = Math.max(-1.42, Math.min(1.42, camTheta + dy * 0.0055));
+    });
+    window.addEventListener('touchend', () => { isDragging = false; });
+
+    // Multi-spectral Filter Buttons
+    document.querySelectorAll('.spectral-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.spectral-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        spectralMode = parseFloat(e.target.dataset.spec);
+      });
+    });
+
+    // Real-time HUD Physics Calculations
+    function updatePhysicsHUD() {
+      const rsKm = (1.477 * massVal * (1.0 + Math.sqrt(Math.max(0.01, 1.0 - spinVal * spinVal)))).toFixed(1);
+      const rphKm = (1.477 * massVal * (1.0 + Math.cos(2.0/3.0 * Math.acos(-spinVal))) * 2.0).toFixed(1);
+      const dopplerFlux = (1.0 / Math.pow(Math.max(0.15, 1.0 - spinVal * 0.7), 3.0)).toFixed(2);
+      const penroseDelta = (parseFloat(rsKm) * (1.0 / Math.max(0.1, Math.sqrt(1.0 - spinVal * spinVal)) - 1.0)).toFixed(1);
+
+      document.getElementById('disp-rs').innerHTML = `${rsKm} <span class="unit">km</span>`;
+      document.getElementById('disp-rph').innerHTML = `${rphKm} <span class="unit">km</span>`;
+      document.getElementById('disp-flux').innerHTML = `1 : ${dopplerFlux}`;
+      document.getElementById('disp-penrose').innerHTML = `${penroseDelta} <span class="unit">km</span>`;
+    }
+
+    // Sliders
+    document.getElementById('param-spin').addEventListener('input', (e) => {
+      spinVal = parseFloat(e.target.value);
+      document.getElementById('val-spin').innerText = spinVal.toFixed(2);
+      updatePhysicsHUD();
+    });
+
+    document.getElementById('param-mass').addEventListener('input', (e) => {
+      massVal = parseFloat(e.target.value);
+      document.getElementById('val-mass').innerText = massVal.toFixed(1);
+      updatePhysicsHUD();
+    });
+
+    document.getElementById('param-disk').addEventListener('input', (e) => {
+      diskVal = parseFloat(e.target.value);
+      document.getElementById('val-disk').innerText = diskVal.toFixed(2);
+    });
+
+    // Buttons
+    const btnDoppler = document.getElementById('btn-doppler');
+    btnDoppler.addEventListener('click', () => {
+      dopplerActive = dopplerActive ? 0 : 1;
+      btnDoppler.classList.toggle('active', dopplerActive === 1);
+    });
+
+    const btnSpikes = document.getElementById('btn-spikes');
+    btnSpikes.addEventListener('click', () => {
+      jwstSpikes = jwstSpikes ? 0 : 1;
+      btnSpikes.classList.toggle('active', jwstSpikes === 1);
+    });
+
+    const btnPenrose = document.getElementById('btn-penrose');
+    btnPenrose.addEventListener('click', () => {
+      penroseActive = penroseActive ? 0 : 1;
+      btnPenrose.classList.toggle('active', penroseActive === 1);
+    });
+
+    const btnDirector = document.getElementById('btn-director');
+    btnDirector.addEventListener('click', () => {
+      directorMode = !directorMode;
+      btnDirector.classList.toggle('active', directorMode);
+    });
+
+    // HUD Visibility Toggle
+    const hudLayer = document.getElementById('hud-layer');
+    const btnToggleHud = document.getElementById('btn-toggle-hud');
+    function toggleHud() {
+      hudLayer.classList.toggle('hud-hidden');
+    }
+    btnToggleHud.addEventListener('click', toggleHud);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'h' || e.key === 'H') toggleHud();
+    });
+
+    // Modal Events
+    const modalBox = document.getElementById('modal-box');
+    document.getElementById('btn-modal').addEventListener('click', () => {
+      modalBox.classList.add('open');
+    });
+    document.getElementById('btn-close-modal').addEventListener('click', () => {
+      modalBox.classList.remove('open');
+    });
+    modalBox.addEventListener('click', (e) => {
+      if (e.target === modalBox) modalBox.classList.remove('open');
+    });
+
+    // NASA Chandra Universe of Sound Data Sonification Engine
+    let audioCtx = null;
+    let masterGain = null;
+    let osc1 = null, osc2 = null, osc3 = null;
+    let analyser = null;
+    let audioActive = false;
+
+    const audioCanvas = document.getElementById('audio-canvas');
+    const actx = audioCanvas.getContext('2d');
+
+    const btnAudio = document.getElementById('btn-audio');
+    btnAudio.addEventListener('click', () => {
+      audioActive = !audioActive;
+      btnAudio.classList.toggle('active', audioActive);
+      if (audioActive) {
+        initNasaChandraAudio();
+        btnAudio.innerText = '🔊 钱德拉声化中...';
+      } else {
+        if (masterGain && audioCtx) masterGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
+        btnAudio.innerText = '🔊 钱德拉声音化';
+      }
+    });
+
+    function initNasaChandraAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      if (masterGain) { masterGain.gain.cancelScheduledValues(audioCtx.currentTime); masterGain.gain.linearRampToValueAtTime(0.26, audioCtx.currentTime + 0.3); return; }
+
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0.26, audioCtx.currentTime + 1.2);
+      masterGain.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
+      // 54 Hz Perseus Black Hole Transposed Sub-bass with 3 Harmonics
+      osc1 = audioCtx.createOscillator();
+      osc1.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(54.0, audioCtx.currentTime);
+
+      osc2 = audioCtx.createOscillator();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(108.0, audioCtx.currentTime);
+
+      osc3 = audioCtx.createOscillator();
+      osc3.type = 'triangle';
+      osc3.frequency.setValueAtTime(162.0, audioCtx.currentTime);
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(180, audioCtx.currentTime);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      osc3.connect(filter);
+      filter.connect(masterGain);
+
+      osc1.start();
+      osc2.start();
+      osc3.start();
+    }
+
+    // LIGO Chirp Sound Generator
+    document.getElementById('btn-chirp').addEventListener('click', () => {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const chirpOsc = audioCtx.createOscillator();
+      const chirpGain = audioCtx.createGain();
+      const now = audioCtx.currentTime;
+
+      chirpOsc.type = 'sine';
+      chirpOsc.frequency.setValueAtTime(35, now);
+      chirpOsc.frequency.exponentialRampToValueAtTime(320, now + 1.4);
+
+      chirpGain.gain.setValueAtTime(0.001, now);
+      chirpGain.gain.exponentialRampToValueAtTime(0.35, now + 1.2);
+      chirpGain.gain.linearRampToValueAtTime(0.0001, now + 1.45);
+
+      chirpOsc.connect(chirpGain);
+      chirpGain.connect(audioCtx.destination);
+
+      chirpOsc.start(now);
+      chirpOsc.stop(now + 1.5);
+    });
+
+    // Audio Visualizer
+    function drawAudioVisualizer() {
+      requestAnimationFrame(drawAudioVisualizer);
+      actx.clearRect(0, 0, audioCanvas.width, audioCanvas.height);
+      if (!audioActive || !analyser) {
+        actx.fillStyle = 'rgba(0, 229, 255, 0.25)';
+        actx.fillRect(0, audioCanvas.height / 2 - 1, audioCanvas.width, 2);
+        return;
+      }
+
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+
+      const barWidth = (audioCanvas.width / bufferLength) * 2.2;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = (dataArray[i] / 255.0) * audioCanvas.height;
+        actx.fillStyle = `rgba(0, 229, 255, ${0.4 + dataArray[i] / 300.0})`;
+        actx.fillRect(x, audioCanvas.height - barHeight, barWidth - 1, barHeight);
+        x += barWidth;
+      }
+    }
+    drawAudioVisualizer();
+
+    updatePhysicsHUD();
+
+    // Main Render Loop
+    let startTime = performance.now();
+    function render(now) {
+      resize();
+
+      const timeSec = (window.cosmosAnimationTime(now) - startTime) * 0.001;
+
+      // Director Mode Camera Flight or gentle orbit
+      if (directorMode) {
+        camPhi = timeSec * 0.35;
+        camTheta = 0.28 + Math.sin(timeSec * 0.45) * 0.35;
+        camRadius = 7.5 + Math.cos(timeSec * 0.3) * 2.0;
+      } else if (!isDragging) {
+        camPhi += 0.0018;
+      }
+
+      const cx = camRadius * Math.cos(camTheta) * Math.sin(camPhi);
+      const cy = camRadius * Math.sin(camTheta);
+      const cz = camRadius * Math.cos(camTheta) * Math.cos(camPhi);
+
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, timeSec);
+      gl.uniform3f(uCamPos, cx, cy, cz);
+      gl.uniform3f(uCamTarget, 0.0, 0.0, 0.0);
+      gl.uniform1f(uMass, massVal);
+      gl.uniform1f(uSpin, spinVal);
+      gl.uniform1f(uDiskDensity, diskVal);
+      gl.uniform1f(uSpectralMode, spectralMode);
+      gl.uniform1i(uDoppler, dopplerActive);
+      gl.uniform1i(uJwstSpikes, jwstSpikes);
+      gl.uniform1i(uPenroseMode, penroseActive);
+
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  </script>
+</body>
+</html>

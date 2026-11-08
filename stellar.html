@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇宙的秘密：恒星演化</title>
+  <script src="app/runtime.js"></script>
+  <script src="app/math.js"></script>
+  <script src="app/common.js"></script>
+  <script src="app/content.js"></script>
+  <script src="app/experience.js"></script>
+  <link rel="stylesheet" href="app/styles/base.css">
+  <style>
+body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020205;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #e2edff;
+    }
+
+.header-box {
+      background: rgba(14, 12, 30, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 140, 60, 0.35);
+      border-radius: 12px;
+      padding: 14px 22px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), inset 0 0 16px rgba(255, 100, 40, 0.12);
+      max-width: 680px;
+    }
+
+.nav-tab.active {
+      background: linear-gradient(135deg, #d84315, #f57c00);
+      color: #fff;
+      border-color: #ffab91;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(245, 124, 0, 0.6);
+    }
+
+.header-box h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.header-box h1 span.badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      background: linear-gradient(135deg, #ff3d00, #ff9100);
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+.header-box p {
+      font-size: 12px;
+      color: #ffccbc;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+.observatory-tag {
+      background: rgba(14, 12, 30, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 140, 60, 0.35);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 11.5px;
+      color: #ffccbc;
+      line-height: 1.5;
+      text-align: right;
+      font-family: "Courier New", monospace;
+    }
+
+.pulse-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff7043;
+      box-shadow: 0 0 8px #ff7043;
+      animation: pulse 1.6s infinite;
+      margin-right: 6px;
+    }
+
+/* Side Panels */
+    .content-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      margin: 12px 0;
+      pointer-events: none;
+    }
+
+.panel {
+      background: rgba(14, 12, 28, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 140, 60, 0.32);
+      border-radius: 12px;
+      padding: 16px;
+      color: #d1e0ff;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75);
+      width: 320px;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+    }
+
+.panel h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffab91;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid rgba(255, 171, 145, 0.25);
+      padding-bottom: 6px;
+    }
+
+.insight-card {
+      background: rgba(45, 20, 20, 0.5);
+      border-left: 3px solid #ff7043;
+      border-radius: 4px;
+      padding: 8px 10px;
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: #ffccbc;
+      line-height: 1.5;
+    }
+
+.control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: #ffccbc;
+      margin-bottom: 4px;
+    }
+
+.control-label span.val {
+      font-family: monospace;
+      color: #ffab91;
+      font-weight: 600;
+    }
+
+input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255, 140, 60, 0.25);
+      outline: none;
+    }
+
+input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ff7043;
+      cursor: pointer;
+      box-shadow: 0 0 8px #ff7043;
+    }
+
+.btn {
+      background: rgba(65, 30, 30, 0.45);
+      border: 1px solid rgba(255, 140, 60, 0.3);
+      border-radius: 6px;
+      color: #ffe0b2;
+      padding: 6px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+.btn:hover {
+      background: rgba(100, 45, 30, 0.65);
+      color: #fff;
+      border-color: #ffab91;
+    }
+
+.btn.active {
+      background: linear-gradient(135deg, #d84315, #f57c00);
+      border-color: #ffab91;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(245, 124, 0, 0.55);
+    }
+
+.btn.highlight {
+      background: linear-gradient(135deg, #7b1fa2, #ab47bc);
+      border-color: #ce93d8;
+      color: #fff;
+    }
+
+.stage-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin: 8px 0;
+    }
+
+.stage-btn {
+      background: rgba(50, 25, 30, 0.5);
+      border: 1px solid rgba(255, 140, 60, 0.25);
+      border-radius: 6px;
+      color: #ffccbc;
+      padding: 5px 6px;
+      font-size: 10.5px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+.stage-btn:hover {
+      background: rgba(80, 40, 35, 0.6);
+      color: #fff;
+    }
+
+.stage-btn.active {
+      background: linear-gradient(135deg, #d84315, #f57c00);
+      color: #fff;
+      font-weight: 700;
+      border-color: #ffab91;
+      box-shadow: 0 0 8px rgba(245, 124, 0, 0.5);
+    }
+
+.audio-box {
+      margin-top: 8px;
+      background: rgba(10, 4, 10, 0.7);
+      border: 1px solid rgba(255, 140, 60, 0.25);
+      border-radius: 8px;
+      padding: 6px;
+    }
+
+#audio-canvas {
+      width: 100%;
+      height: 38px;
+      display: block;
+      background: #080205;
+      border-radius: 4px;
+    }
+
+.telemetry-card {
+      background: rgba(14, 12, 30, 0.88);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 140, 60, 0.28);
+      border-radius: 10px;
+      padding: 7px 12px;
+      text-align: center;
+      min-width: 130px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    }
+
+.telemetry-name {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #ffccbc;
+      margin-bottom: 2px;
+    }
+
+.telemetry-val {
+      font-size: 14px;
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      color: #ffab91;
+      text-shadow: 0 0 8px rgba(255, 171, 145, 0.5);
+    }
+
+.telemetry-val span.unit {
+      font-size: 9.5px;
+      color: #ffe0b2;
+      margin-left: 2px;
+    }
+
+.drag-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #ffab91;
+      margin-top: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+.modal-box {
+      background: #140810;
+      border: 1px solid #ff7043;
+      border-radius: 14px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 112, 67, 0.25);
+      color: #ffe0b2;
+    }
+
+.modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 140, 60, 0.3);
+      padding-bottom: 10px;
+    }
+
+.modal-header h2 {
+      font-size: 17px;
+      color: #ff7043;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+.close-modal {
+      background: none;
+      border: none;
+      color: #ffab91;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+.data-table th, .data-table td {
+      border: 1px solid rgba(255, 140, 60, 0.25);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+.data-table th {
+      background: rgba(70, 30, 30, 0.4);
+      color: #ffab91;
+    }
+  </style>
+  <link rel="stylesheet" href="app/styles/common.css">
+  <link rel="stylesheet" href="app/styles/experience.css">
+  <link rel="stylesheet" href="app/styles/design.css">
+</head>
+<body data-chapter="stellar">
+  <canvas id="glcanvas"></canvas>
+
+  <div class="hud-layer" id="hud-layer">
+    <!-- Top Bar -->
+    <div class="top-bar interactive">
+      <div class="header-box">
+        <div class="nav-tabs">
+          <a href="index.html" class="nav-tab">第一章：黑洞引力透镜</a>
+          <a href="bigbang.html" class="nav-tab">第二章：大爆炸与CMB</a>
+          <a href="cosmicweb.html" class="nav-tab">第三章：宇宙网与暗物质</a>
+          <a href="stellar.html" class="nav-tab active">第四章：恒星演化与超新星</a>
+          <a href="wormhole.html" class="nav-tab">第五章：假想虫洞</a>
+          <a href="heatdeath.html" class="nav-tab">第六章：宇宙热寂与重生</a>
+        </div>
+        <h1>
+          ⭐ 恒星生命全周期、超新星核爆与脉冲星
+          <span class="badge">程序化科普演示</span>
+        </h1>
+        <p>不同天体视觉特征的阶段式拼接。质量只缩放示意尺寸；它不会选择真实恒星演化轨迹或确定遗迹类型。阶段读数均为演示预设。</p>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn" id="btn-toggle-hud" title="快捷键 H 隐藏/显示 HUD">👁️ 纯净视效</button>
+        <button class="btn highlight" id="btn-modal">🔭 恒星演化参考</button>
+        <div class="observatory-tag">程序化科普演示<br>观测背景与参考资料见科学说明。</div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Left: Reviewed science -->
+      <div class="panel interactive"><h3>科学背景与模型范围</h3><div class="insight-card">NGC 3324 的气体空腔受到年轻恒星辐射和恒星风塑造。[S5]</div>
+<div class="insight-card">蟹状星云脉冲星每秒自转约 30 次。[S6]</div><div class="insight-card">不同天体视觉特征的阶段式拼接。质量只缩放示意尺寸；它不会选择真实恒星演化轨迹或确定遗迹类型。阶段读数均为演示预设。</div><div class="insight-card">自转频率控制 AudioContext 时间轴上的脉冲间隔；画面将旋转速度放慢以便观察，不是实际射电波形。</div></div>
+
+      <!-- Right: Controls -->
+      <div class="panel controls-panel interactive">
+        <h3>🎛️ 恒星演化时间轴与控制台</h3>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>生命阶段进度 (Stellar Stage)</span>
+            <span class="val" id="val-stage">0.0 (分子云)</span>
+          </div>
+          <input type="range" id="param-stage" min="0" max="4" step="0.005" value="0">
+        </div>
+
+        <div style="font-size:11px; color:#ffccbc; margin-bottom:5px;">恒星生命五大史诗阶段：</div>
+        <div class="stage-selector">
+          <button class="stage-btn active" data-step="0">0. 原恒星分子云</button>
+          <button class="stage-btn" data-step="1">1. 主序星蓝超巨</button>
+          <button class="stage-btn" data-step="2">2. 红超巨星洋葱壳</button>
+          <button class="stage-btn" data-step="3">3. 仙后座A超新星</button>
+          <button class="stage-btn" data-step="4" style="grid-column: span 2;">4. 蟹状星云脉冲星</button>
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>初始恒星质量（太阳质量；仅控制示意尺度）</span>
+            <span class="val" id="val-mass">25.0</span>
+          </div>
+          <input type="range" id="param-mass" min="8.0" max="60.0" step="1.0" value="25.0">
+        </div>
+
+        <div class="control-item">
+          <div class="control-label">
+            <span>脉冲星自转频率 (Spin Hz)</span>
+            <span class="val" id="val-spin">30.0 Hz</span>
+          </div>
+          <input type="range" id="param-spin" min="5.0" max="60.0" step="1.0" value="30.0">
+        </div>
+
+        <div class="btn-group">
+          <button class="btn" id="btn-autoplay">▶️ 生命周期循环</button>
+          <button class="btn" id="btn-director">🎥 电影导览视角</button>
+          <button class="btn" id="btn-audio">🔊 脉冲星射电时钟</button>
+          <button class="btn active" id="btn-beam">⚡ 极区光锥光束</button>
+        </div>
+
+        <div class="audio-box">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Bar -->
+    <div class="interactive" style="width: 100%;">
+      <div class="telemetry-caption">阶段预设示意读数</div><div class="bottom-bar">
+        <div class="telemetry-card">
+          <div class="telemetry-name">恒星表面有效温度</div>
+          <div class="telemetry-val" id="disp-temp">15 <span class="unit">K</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">核心聚变阶段</div>
+          <div class="telemetry-val" id="disp-core">分子云引力凝聚</div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">流体静力平衡压强</div>
+          <div class="telemetry-val" id="disp-pres">1.2×10⁴ <span class="unit">Pa</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">致密遗迹磁感应强度</div>
+          <div class="telemetry-val" id="disp-mag">0.05 <span class="unit">G</span></div>
+        </div>
+
+        <div class="telemetry-card">
+          <div class="telemetry-name">快中子捕获(r-process)</div>
+          <div class="telemetry-val" id="disp-rproc">未触发</div>
+        </div>
+      </div>
+
+      <div class="drag-hint">拖拽旋转 · 双指或滚轮缩放 · 聚焦场景后用方向键与加减键操作 · H 隐藏界面</div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal-box">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🔭 恒星观测背景与演示模型</h2>
+        <button class="close-modal" id="btn-close-modal">&times;</button>
+      </div>
+
+      <p class="science-reference">不同天体视觉特征的阶段式拼接。质量只缩放示意尺寸；它不会选择真实恒星演化轨迹或确定遗迹类型。阶段读数均为演示预设。</p>
+
+      <div class="science-reference"><p>自转频率控制 AudioContext 时间轴上的脉冲间隔；画面将旋转速度放慢以便观察，不是实际射电波形。</p><ul><li><a data-source-id="S5" href="https://science.nasa.gov/missions/webb/nasas-webb-reveals-cosmic-cliffs-glittering-landscape-of-star-birth/" target="_blank" rel="noopener noreferrer">S5 · NASA: Webb Reveals Cosmic Cliffs (2022)</a></li><li><a data-source-id="S6" href="https://science.nasa.gov/missions/hubble/the-crab-nebula/" target="_blank" rel="noopener noreferrer">S6 · NASA: The Crab Nebula</a></li></ul></div>
+    </div>
+  </div>
+
+  <!-- Pass 1: Volumetric Nebula / Core Blastwave Background Shader -->
+  <script id="vs-bg" type="x-shader/x-vertex">
+    attribute vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.999, 1.0);
+    }
+  </script>
+
+  <script id="fs-bg" type="x-shader/x-fragment">
+    precision highp float;
+    uniform vec2 u_resolution;
+    uniform float u_time;
+    uniform float u_stage;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    float fbm(vec2 p) {
+      float v = 0.0;
+      float a = 0.5;
+      for (int i = 0; i < 4; i++) {
+        v += a * noise(p);
+        p = p * 2.08 + vec2(2.3, 4.7);
+        a *= 0.5;
+      }
+      return v;
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution) / min(u_resolution.x, u_resolution.y);
+      float dist = length(uv);
+
+      vec3 col = vec3(0.012, 0.01, 0.025);
+
+      if (u_stage < 1.0) {
+        // 0. Carina Cosmic Cliffs Molecular Cloud Glow
+        float t = u_stage;
+        float dust1 = fbm(uv * 4.2 + vec2(u_time * 0.02, 0.0));
+        float dust2 = fbm(uv * 8.5);
+        vec3 dustCol = mix(vec3(0.55, 0.22, 0.05), vec3(0.1, 0.45, 0.8), dust1);
+        col = mix(col, dustCol, pow(dust1, 2.2) * 0.7);
+
+        // Central Protostellar Core Ignition
+        float coreGlow = exp(-dist * (8.0 - t * 4.0)) * (0.8 + t * 0.6);
+        col += vec3(1.0, 0.7, 0.3) * coreGlow;
+      } else if (u_stage < 2.0) {
+        // 1. Blue Supergiant Radiation Field
+        float t = u_stage - 1.0;
+        float core = exp(-dist * 4.2) * 1.5;
+        float corona = exp(-dist * 1.8) * 0.45;
+        vec3 starCol = mix(vec3(0.35, 0.75, 1.0), vec3(0.9, 0.95, 1.0), core);
+        col += starCol * (core + corona);
+      } else if (u_stage < 3.0) {
+        // 2. Red Supergiant Convective Envelope Glow
+        float t = u_stage - 2.0;
+        float core = exp(-dist * 2.2) * 1.4;
+        float pulsate = sin(u_time * 2.5) * 0.15 + 1.0;
+        vec3 redCol = mix(vec3(0.95, 0.18, 0.02), vec3(1.0, 0.65, 0.1), exp(-dist * 4.0));
+        col += redCol * core * pulsate;
+      } else if (u_stage < 3.9) {
+        // 3. Supernova Blastwave & Cas A Ring (Expanding Shockwave)
+        float t = (u_stage - 3.0) / 0.9;
+        float shockR = 0.15 + t * 0.75;
+        float shockRing = exp(-abs(dist - shockR) * 18.0) * 1.6;
+        float greenMonster = fbm(uv * 9.0 + u_time * 0.1) * exp(-abs(dist - shockR * 0.75) * 12.0);
+
+        vec3 shockCol = vec3(1.0, 0.95, 0.8) * shockRing;
+        vec3 greenCol = vec3(0.1, 0.95, 0.4) * greenMonster * 1.2;
+        float coreFlash = exp(-dist * 20.0) * exp(-t * 3.0) * 2.5;
+
+        col += shockCol + greenCol + vec3(1.0) * coreFlash;
+      } else {
+        // 4. Crab Pulsar Synchrotron Nebula & Rotating Searchlight Beams
+        float t = u_stage - 3.9;
+        float syncNeb = fbm(uv * 6.5 + u_time * 0.05);
+        vec3 crabCol = mix(vec3(0.05, 0.55, 0.95), vec3(0.75, 0.15, 0.85), syncNeb);
+        col += crabCol * pow(syncNeb, 2.0) * 0.65;
+
+        // Rotating dual beam sweep
+        float angle = atan(uv.y, uv.x);
+        float beamSweep = pow(max(0.0, cos(angle - u_time * 12.0)), 32.0) +
+                          pow(max(0.0, cos(angle - u_time * 12.0 + PI)), 32.0);
+        col += vec3(0.3, 0.85, 1.0) * beamSweep * exp(-dist * 2.5) * 1.2;
+      }
+
+      gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+    }
+  </script>
+
+  <!-- Pass 2: 130,000 GPU Particles Simulation Shader -->
+  <script id="vs-stellar" type="x-shader/x-vertex">
+    attribute vec3 a_seed;
+    attribute float a_type;
+
+    uniform mat4 u_mvp;
+    uniform float u_stage;
+    uniform float u_time;
+    uniform float u_mass;
+    uniform float u_spin;
+    uniform float u_point_scale;
+    uniform int u_show_beam;
+
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    #define PI 3.14159265359
+
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
+    }
+
+    void main() {
+      float phi = a_seed.x * 2.0 * PI;
+      float theta = acos(clamp(a_seed.y * 2.0 - 1.0, -1.0, 1.0));
+      float r_seed = a_seed.z;
+
+      vec3 pos = vec3(0.0);
+      vec3 col = vec3(1.0);
+      float alpha = 0.85;
+      float ptSize = 3.6;
+
+      if (u_stage < 1.0) {
+        // Molecular Cloud collapse to Blue Supergiant
+        float t = u_stage;
+        float spiralAngle = phi + (1.0 - t) * 6.0 * (1.0 - r_seed) + u_time * 0.15;
+        float r_cloud = mix(30.0 * r_seed + 2.0, 3.8 * pow(r_seed, 0.5), t);
+        pos = vec3(
+          r_cloud * sin(theta) * cos(spiralAngle),
+          r_cloud * cos(theta) * mix(0.4, 1.0, t),
+          r_cloud * sin(theta) * sin(spiralAngle)
+        );
+
+        if (a_type > 1.8 && t < 0.6) {
+          float jetDist = (mod(u_time * 8.0 + r_seed * 20.0, 24.0) + 1.0);
+          float jetSpread = jetDist * 0.08;
+          pos = vec3(cos(phi) * jetSpread, (r_seed > 0.5 ? 1.0 : -1.0) * jetDist, sin(phi) * jetSpread);
+          col = vec3(0.2, 0.85, 1.0);
+          ptSize = 4.2;
+          alpha = 0.9;
+        } else {
+          vec3 colNursery = mix(vec3(0.9, 0.45, 0.15), vec3(0.15, 0.7, 1.0), r_seed);
+          vec3 colBlueStar = mix(vec3(0.7, 0.85, 1.0), vec3(0.9, 0.95, 1.0), r_seed);
+          col = mix(colNursery, colBlueStar, t);
+          alpha = mix(0.65, 0.9, t);
+          ptSize = mix(3.2, 4.5, t);
+        }
+      } else if (u_stage < 2.0) {
+        // Blue Supergiant to Red Supergiant
+        float t = u_stage - 1.0;
+        float r_star = mix(3.8 * pow(r_seed, 0.5), (14.0 + sin(u_time * 2.5 + phi * 3.0) * 1.5) * pow(r_seed, 0.7), t);
+        pos = vec3(
+          r_star * sin(theta) * cos(phi + u_time * 0.2),
+          r_star * cos(theta),
+          r_star * sin(theta) * sin(phi + u_time * 0.2)
+        );
+
+        vec3 colBlue = vec3(0.65, 0.82, 1.0);
+        vec3 colRed = mix(vec3(1.0, 0.22, 0.05), vec3(1.0, 0.65, 0.1), r_seed);
+        col = mix(colBlue, colRed, t);
+        ptSize = mix(4.0, 6.0, t);
+        alpha = mix(0.85, 0.75, t);
+      } else if (u_stage < 3.0) {
+        // Red Supergiant Collapse to Supernova
+        float t = u_stage - 2.0;
+        if (t < 0.18) {
+          float collapseFrac = t / 0.18;
+          float r_implode = mix(14.0 * pow(r_seed, 0.7), 0.6 * r_seed, collapseFrac);
+          pos = vec3(r_implode * sin(theta) * cos(phi), r_implode * cos(theta), r_implode * sin(theta) * sin(phi));
+          col = vec3(1.0, 1.0, 1.0);
+          ptSize = 5.0;
+          alpha = 1.0;
+        } else {
+          float blastT = (t - 0.18) / 0.82;
+          float blastR = (0.6 + blastT * 32.0) * (0.8 + 0.4 * noise(vec2(phi * 2.0, theta * 2.0)));
+          pos = vec3(blastR * sin(theta) * cos(phi), blastR * cos(theta), blastR * sin(theta) * sin(phi));
+
+          if (a_type > 2.5) {
+            col = vec3(0.15, 0.95, 0.45); // Cas A Green Monster knot
+          } else {
+            col = mix(vec3(1.0, 0.35, 0.05), vec3(1.0, 0.95, 0.3), r_seed);
+          }
+          ptSize = 4.2;
+          alpha = 0.9;
+        }
+      } else {
+        // Pulsar & Synchrotron Nebula (Crab M1)
+        float t = u_stage - 3.0;
+        if (a_type > 1.8 && u_show_beam == 1) {
+          // Relativistic Lighthouse Light Cone
+          float beamDist = (mod(u_time * 18.0 + r_seed * 25.0, 28.0) + 0.5);
+          float beamAngle = u_time * (u_spin * 0.4);
+          vec3 beamDir = vec3(sin(beamAngle), (r_seed > 0.5 ? 1.0 : -1.0) * 1.8, cos(beamAngle));
+          beamDir = normalize(beamDir);
+          pos = beamDir * beamDist + vec3(sin(phi), 0.0, cos(phi)) * (beamDist * 0.12);
+          col = vec3(0.4, 0.95, 1.0);
+          ptSize = 4.5;
+          alpha = 1.0;
+        } else {
+          // Crab Nebula Pulsar Wind Nebula
+          float r_neb = (16.0 + sin(phi * 4.0 + u_time) * 3.5) * pow(r_seed, 0.6);
+          pos = vec3(r_neb * sin(theta) * cos(phi), r_neb * cos(theta) * 0.7, r_neb * sin(theta) * sin(phi));
+          col = mix(vec3(0.1, 0.55, 0.95), vec3(0.85, 0.2, 0.8), r_seed);
+          ptSize = 3.6;
+          alpha = 0.8;
+        }
+      }
+
+      // Visual scaling only; does not model a mass-dependent evolutionary track.
+      pos *= pow(u_mass / 25.0, 0.2);
+      v_color = col;
+      v_alpha = alpha;
+
+      gl_Position = u_mvp * vec4(pos, 1.0);
+      gl_PointSize = clamp(ptSize * (18.0 / gl_Position.w) * u_point_scale, 0.75, 6.0 * u_point_scale);
+    }
+  </script>
+
+  <script id="fs-stellar" type="x-shader/x-fragment">
+    precision highp float;
+    varying vec3 v_color;
+    varying float v_alpha;
+
+    void main() {
+      vec2 coord = gl_PointCoord - vec2(0.5);
+      float distSq = dot(coord, coord);
+      if (distSq > 0.25) discard;
+
+      float glow = exp(-distSq * 8.5);
+      gl_FragColor = vec4(v_color, v_alpha * glow * 0.25);
+    }
+  </script>
+
+  <!-- Application Logic -->
+  <script src="app/chapters/stellar.js"></script>
+</body>
+</html>

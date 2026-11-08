@@ -1,0 +1,583 @@
+{
+  "date": "2026-11-07",
+  "mode": "file",
+  "results": [
+    {
+      "page": "project",
+      "name": "content freshness, asset contract and story rhythm",
+      "passed": true,
+      "evidence": {
+        "chapters": 6,
+        "assets": 7,
+        "beats": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ],
+        "duration": 44,
+        "bytes": 1742178
+      }
+    },
+    {
+      "page": "index",
+      "name": "native official link and every local comparison",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 1280,
+          "height": 1280,
+          "url": "app/assets/observations/sgra-eht.webp",
+          "credit": "EHT Collaboration",
+          "kind": "观测影像"
+        }
+      ]
+    },
+    {
+      "page": "index",
+      "name": "new controls reachable at four viewports",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800
+        },
+        {
+          "width": 390,
+          "height": 844
+        },
+        {
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    {
+      "page": "index",
+      "name": "guide frames, voice line, beats, manual control and reduced motion",
+      "passed": true,
+      "evidence": [
+        {
+          "time": 0,
+          "title": "向银河深处靠近",
+          "voice": "先退到银河之外。黑暗，本身不发光。",
+          "evidence": false
+        },
+        {
+          "time": 6,
+          "title": "看见光，才能辨认黑暗",
+          "voice": "可它周围，有一圈物质正在发亮。",
+          "evidence": false
+        },
+        {
+          "time": 14,
+          "title": "盘背面的光，也能抵达你",
+          "voice": "把视角压低，盘背面的光绕了过来。",
+          "evidence": false
+        },
+        {
+          "time": 24,
+          "title": "亲手改变一个变量",
+          "voice": "现在，亲手改变自旋。",
+          "evidence": false
+        },
+        {
+          "time": 33,
+          "title": "光环不是事件视界的表面",
+          "voice": "光环不是视界的表面，是被弯折的辐射。",
+          "evidence": false
+        },
+        {
+          "time": 39,
+          "title": "把想象交还给观测",
+          "voice": "这是人马座 A* 的观测重建。我们看见的，始终是光。",
+          "evidence": true
+        }
+      ]
+    },
+    {
+      "page": "index",
+      "name": "guide respects runtime pause and evidence screenshot",
+      "passed": true,
+      "evidence": {
+        "pausedTime": 0.1395,
+        "uncaught": 0,
+        "externalRequests": 0,
+        "navigationScope": 1
+      }
+    },
+    {
+      "page": "bigbang",
+      "name": "native official link and every local comparison",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 1600,
+          "height": 808,
+          "url": "app/assets/observations/planck-cmb.webp",
+          "credit": "ESA/Planck Collaboration · ESA Standard Licence",
+          "kind": "观测影像"
+        }
+      ]
+    },
+    {
+      "page": "bigbang",
+      "name": "new controls reachable at four viewports",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800
+        },
+        {
+          "width": 390,
+          "height": 844
+        },
+        {
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    {
+      "page": "bigbang",
+      "name": "guide frames, voice line, beats, manual control and reduced motion",
+      "passed": true,
+      "evidence": [
+        {
+          "time": 0,
+          "title": "在光能够远行之前",
+          "voice": "在光能远行之前，宇宙炽热，而且不透明。",
+          "evidence": false
+        },
+        {
+          "time": 6,
+          "title": "空间本身在变化",
+          "voice": "空间自己在变化，尺度被迅速拉开。",
+          "evidence": false
+        },
+        {
+          "time": 14,
+          "title": "膨胀，也伴随着冷却",
+          "voice": "膨胀，也意味着冷却。",
+          "evidence": false
+        },
+        {
+          "time": 24,
+          "title": "光终于可以自由传播",
+          "voice": "某个时刻，光终于可以长途传播。",
+          "evidence": false
+        },
+        {
+          "time": 33,
+          "title": "微小差异，通向巨大的结构",
+          "voice": "那时微小的不均匀，后来长成了结构。",
+          "evidence": false
+        },
+        {
+          "time": 39,
+          "title": "最古老的光，铺满整片天空",
+          "voice": "这片冷暖斑驳的天空，就是最古老的光。",
+          "evidence": true
+        }
+      ]
+    },
+    {
+      "page": "bigbang",
+      "name": "guide respects runtime pause and evidence screenshot",
+      "passed": true,
+      "evidence": {
+        "pausedTime": 0.1273000000000002,
+        "uncaught": 0,
+        "externalRequests": 0,
+        "navigationScope": 2
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "name": "native official link and every local comparison",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 720,
+          "height": 520,
+          "url": "app/assets/observations/bullet-composite.webp",
+          "credit": "X-ray: NASA/CXC/CfA/M. Markevitch et al.; Optical: NASA/STScI; Magellan/U. Arizona/D. Clowe et al.; Lensing Map: NASA/STScI; ESO WFI; Magellan/U. Arizona/D. Clowe et al.",
+          "kind": "观测影像与质量推断图"
+        }
+      ]
+    },
+    {
+      "page": "cosmicweb",
+      "name": "new controls reachable at four viewports",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800
+        },
+        {
+          "width": 390,
+          "height": 844
+        },
+        {
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    {
+      "page": "cosmicweb",
+      "name": "guide frames, voice line, beats, manual control and reduced motion",
+      "passed": true,
+      "evidence": [
+        {
+          "time": 0,
+          "title": "宇宙并非均匀撒满星系",
+          "voice": "星系织成一张网。可最重的部分，也许看不见。",
+          "evidence": false
+        },
+        {
+          "time": 6,
+          "title": "光学：发光的星系在哪里",
+          "voice": "光学影像，只记下会发光的东西。",
+          "evidence": false
+        },
+        {
+          "time": 14,
+          "title": "X射线：热气体留下痕迹",
+          "voice": "X 射线照亮热气体，碰撞让它落在后方。",
+          "evidence": false
+        },
+        {
+          "time": 24,
+          "title": "质量：从光路弯折作推断",
+          "voice": "远方的光被弯折，质量因此留下位置。",
+          "evidence": false
+        },
+        {
+          "time": 33,
+          "title": "改变气体滞后，寻找分离",
+          "voice": "移动气体，再比较它与质量的分布。",
+          "evidence": false
+        },
+        {
+          "time": 39,
+          "title": "真正的线索，在几张图之间",
+          "voice": "证据不在一张图里，而在几张图的分离之间。",
+          "evidence": true
+        }
+      ]
+    },
+    {
+      "page": "cosmicweb",
+      "name": "guide respects runtime pause and evidence screenshot",
+      "passed": true,
+      "evidence": {
+        "pausedTime": 0.12119999999999982,
+        "uncaught": 0,
+        "externalRequests": 0,
+        "navigationScope": 3
+      }
+    },
+    {
+      "page": "stellar",
+      "name": "native official link and every local comparison",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 1280,
+          "height": 741,
+          "url": "app/assets/observations/cosmic-cliffs.webp",
+          "credit": "NASA, ESA, CSA, STScI",
+          "kind": "观测影像"
+        },
+        {
+          "width": 1600,
+          "height": 1600,
+          "url": "app/assets/observations/crab-nebula.webp",
+          "credit": "NASA, ESA, CSA, STScI",
+          "kind": "观测影像"
+        }
+      ]
+    },
+    {
+      "page": "stellar",
+      "name": "new controls reachable at four viewports",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800
+        },
+        {
+          "width": 390,
+          "height": 844
+        },
+        {
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    {
+      "page": "stellar",
+      "name": "guide frames, voice line, beats, manual control and reduced motion",
+      "passed": true,
+      "evidence": [
+        {
+          "time": 0,
+          "title": "从星云的细节开始",
+          "voice": "恒星的故事，从一片星云开始。",
+          "evidence": false
+        },
+        {
+          "time": 6,
+          "title": "让引力与压力形成对照",
+          "voice": "引力向内，能量向外，短暂的平衡出现了。",
+          "evidence": false
+        },
+        {
+          "time": 14,
+          "title": "光亮的生命，也会改变形态",
+          "voice": "形态会变，时间被写进光里。",
+          "evidence": false
+        },
+        {
+          "time": 24,
+          "title": "把爆发留在记忆中",
+          "voice": "爆发把物质送回宇宙。",
+          "evidence": false
+        },
+        {
+          "time": 33,
+          "title": "最后，一座旋转的灯塔",
+          "voice": "剩下的灯塔，仍用旋转送来节奏。",
+          "evidence": false
+        },
+        {
+          "time": 39,
+          "title": "用不同天体，读懂不同过程",
+          "voice": "不同的天体，是同一段生命史的不同章节。",
+          "evidence": true
+        }
+      ]
+    },
+    {
+      "page": "stellar",
+      "name": "guide respects runtime pause and evidence screenshot",
+      "passed": true,
+      "evidence": {
+        "pausedTime": 0.12729999999999972,
+        "uncaught": 0,
+        "externalRequests": 0,
+        "navigationScope": 4
+      }
+    },
+    {
+      "page": "wormhole",
+      "name": "native official link and every local comparison",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 250,
+          "height": 150,
+          "url": "app/assets/diagrams/wormhole-section.svg",
+          "credit": "本项目根据所引理论绘制",
+          "kind": "理论设想"
+        }
+      ]
+    },
+    {
+      "page": "wormhole",
+      "name": "new controls reachable at four viewports",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800
+        },
+        {
+          "width": 390,
+          "height": 844
+        },
+        {
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    {
+      "page": "wormhole",
+      "name": "guide frames, voice line, beats, manual control and reduced motion",
+      "passed": true,
+      "evidence": [
+        {
+          "time": 0,
+          "title": "从一个几何问题出发",
+          "voice": "先把时空，想成一段可以研究的几何。",
+          "evidence": true
+        },
+        {
+          "time": 6,
+          "title": "最窄处，叫作喉部",
+          "voice": "两端之间最窄的地方，叫喉部。",
+          "evidence": false
+        },
+        {
+          "time": 14,
+          "title": "光路改变了天空的方向",
+          "voice": "改变它，远方的天空也跟着改变。",
+          "evidence": false
+        },
+        {
+          "time": 24,
+          "title": "走近连接的两端",
+          "voice": "再近一点，只留一次连续的穿越。",
+          "evidence": false
+        },
+        {
+          "time": 33,
+          "title": "另一端，天空改变了",
+          "voice": "另一片天空打开了，这是程序，不是观测。",
+          "evidence": false
+        },
+        {
+          "time": 39,
+          "title": "把想象落在理论条件上",
+          "voice": "想象到此为止。接下来，交给理论条件。",
+          "evidence": true
+        }
+      ]
+    },
+    {
+      "page": "wormhole",
+      "name": "guide respects runtime pause and evidence screenshot",
+      "passed": true,
+      "evidence": {
+        "pausedTime": 0.12120000000000028,
+        "uncaught": 0,
+        "externalRequests": 0,
+        "navigationScope": 5
+      }
+    },
+    {
+      "page": "heatdeath",
+      "name": "native official link and every local comparison",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 250,
+          "height": 150,
+          "url": "app/assets/diagrams/dark-energy-model.svg",
+          "credit": "本项目根据所引理论绘制",
+          "kind": "理论设想"
+        }
+      ]
+    },
+    {
+      "page": "heatdeath",
+      "name": "new controls reachable at four viewports",
+      "passed": true,
+      "evidence": [
+        {
+          "width": 360,
+          "height": 800
+        },
+        {
+          "width": 390,
+          "height": 844
+        },
+        {
+          "width": 768,
+          "height": 1024
+        },
+        {
+          "width": 1920,
+          "height": 1080
+        }
+      ]
+    },
+    {
+      "page": "heatdeath",
+      "name": "guide frames, voice line, beats, manual control and reduced motion",
+      "passed": true,
+      "evidence": [
+        {
+          "time": 0,
+          "title": "从仍在发光的宇宙出发",
+          "voice": "先记住，这片仍在发光的宇宙。",
+          "evidence": false
+        },
+        {
+          "time": 6,
+          "title": "恒星的时代不会永远相同",
+          "voice": "时间向前，发光的时代会慢慢改变。",
+          "evidence": false
+        },
+        {
+          "time": 14,
+          "title": "未来取决于哪些物理条件",
+          "voice": "极远的未来，取决于尚未确定的物理。",
+          "evidence": false
+        },
+        {
+          "time": 24,
+          "title": "把注意力留给最后的余辉",
+          "voice": "把注意力，留给最后的余辉。",
+          "evidence": false
+        },
+        {
+          "time": 33,
+          "title": "让空旷与寂静成为结尾",
+          "voice": "然后是空旷，然后是寂静。",
+          "evidence": false
+        },
+        {
+          "time": 39,
+          "title": "知道什么，与想象什么",
+          "voice": "用观测认识现在，用明确的假设讨论未来。",
+          "evidence": true
+        }
+      ]
+    },
+    {
+      "page": "heatdeath",
+      "name": "guide respects runtime pause and evidence screenshot",
+      "passed": true,
+      "evidence": {
+        "pausedTime": 0.12720000000000029,
+        "uncaught": 0,
+        "externalRequests": 0,
+        "navigationScope": 6
+      }
+    }
+  ],
+  "passed": true,
+  "counts": {
+    "passed": 25,
+    "failed": 0
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "reviewed": "2026-11-07",
+  "sources": {
+    "S1": {
+      "title": "EHT: Sagittarius A*",
+      "url": "https://eventhorizontelescope.org/blog/astronomers-reveal-first-image-black-hole-heart-our-galaxy",
+      "kind": "观测背景",
+      "year": 2022,
+      "units": "无；观测结构背景",
+      "conditions": "Sgr A* / M87* 成像背景；没有将像素或偏振数据导入演示",
+      "code": [
+        "index.html:science-reference"
+      ]
+    },
+    "S2": {
+      "title": "NASA: Data Sonifications — Black Holes (2022)",
+      "url": "https://science.nasa.gov/science-research/astrophysics/data-sonifications/",
+      "kind": "声化背景",
+      "year": 2022,
+      "units": "Hz 仅用于本项目合成设置",
+      "conditions": "原始压力波不可直接听见；54/108/162 Hz 是本地振荡器设置",
+      "code": [
+        "chapters/index.js:initNasaChandraAudio"
+      ]
+    },
+    "S3": {
+      "title": "ESA: Cosmic Microwave Background radiation",
+      "url": "https://www.esa.int/articles/about-us/directorates/science/cosmic-microwave-background-cmb-radiation",
+      "kind": "观测背景",
+      "year": null,
+      "units": "年、K；页面阶段数值为展示预设",
+      "conditions": "ESA CMB 概述；网页日期未明确，不推测发表年份",
+      "code": [
+        "chapters/bigbang.js:epochTelemetry"
+      ]
+    },
+    "S4": {
+      "title": "Chandra: Bullet Cluster (2006)",
+      "url": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_hand.html",
+      "kind": "观测背景",
+      "year": 2006,
+      "units": "kpc、K；页面数值为展示预设",
+      "conditions": "暗物质证据依赖透镜和气体模型；程序节点不来自观测目录",
+      "code": [
+        "chapters/cosmicweb.js:nodeCoords",
+        "cosmicweb.html:vs-web"
+      ]
+    },
+    "S5": {
+      "title": "NASA: Webb Reveals Cosmic Cliffs (2022)",
+      "url": "https://science.nasa.gov/missions/webb/nasas-webb-reveals-cosmic-cliffs-glittering-landscape-of-star-birth/",
+      "kind": "观测背景",
+      "year": 2022,
+      "units": "无；形态背景",
+      "conditions": "NGC 3324 的辐射和恒星风；不以外观证明恒星演化轨迹",
+      "code": [
+        "stellar.html:science-reference"
+      ]
+    },
+    "S6": {
+      "title": "NASA: The Crab Nebula",
+      "url": "https://science.nasa.gov/missions/hubble/the-crab-nebula/",
+      "kind": "观测背景",
+      "year": null,
+      "units": "约 30 Hz，约 33 ms",
+      "conditions": "蟹状星云脉冲星；不是贝尔首次发现对象；网页年份未明确",
+      "code": [
+        "chapters/stellar.js:schedulePulsar",
+        "stellar.html:param-spin"
+      ]
+    },
+    "S7": {
+      "title": "Morris & Thorne, American Journal of Physics 56, 395–412 (1988)",
+      "url": "https://www.its.caltech.edu/~kip/publications.html",
+      "kind": "理论论文",
+      "year": 1988,
+      "units": "理论几何；本项目参数采用任意单位",
+      "conditions": "理论可穿越虫洞，未观测证实；当前使用经验偏折",
+      "code": [
+        "wormhole.html:fs-wormhole"
+      ],
+      "doi": "10.1119/1.15620"
+    },
+    "S8": {
+      "title": "NASA: Expand our Knowledge of Dark Energy",
+      "url": "https://science.nasa.gov/astrophysics/programs/physics-of-the-cosmos/expand-our-knowledge-of-dark-energy/",
+      "kind": "观测背景与开放问题",
+      "year": null,
+      "units": "w 无量纲",
+      "conditions": "暗能量性质开放；页面加速条件仅适用于常数 w、暗能量主导；日期未明确",
+      "code": [
+        "chapters/heatdeath.js:param-w",
+        "heatdeath.html:vs-entropy"
+      ]
+    },
+    "S9": {
+      "title": "Bardeen, Press & Teukolsky, Astrophysical Journal 178, 347–369 (1972)",
+      "url": "https://adsabs.harvard.edu/pdf/1972ApJ...178..347B",
+      "kind": "克尔几何理论",
+      "year": 1972,
+      "units": "GM/c²、km；a* 无量纲",
+      "conditions": "克尔外视界及顺行赤道光子轨道的坐标半径；不等于图像阴影半径",
+      "code": [
+        "chapters/index.js:updatePhysicsHUD"
+      ]
+    },
+    "S10": {
+      "title": "IAU 2015 Resolution B3: nominal conversion constants",
+      "url": "https://arxiv.org/abs/1510.07674",
+      "kind": "单位换算规范",
+      "year": 2015,
+      "units": "GM☉=1.3271244×10²⁰ m³/s²；c=299792458 m/s",
+      "conditions": "代码取整 GM☉/c²=1.477 km；GM☉/c³=4.9255 μs，属于显示精度",
+      "code": [
+        "chapters/index.js:updatePhysicsHUD"
+      ]
+    },
+    "S11": {
+      "title": "Carroll: The Cosmological Constant, Living Reviews in Relativity (2001)",
+      "url": "https://arxiv.org/abs/astro-ph/0004075",
+      "kind": "宇宙学理论综述",
+      "year": 2001,
+      "units": "a 与密度比无量纲",
+      "conditions": "均匀理想流体、常数 w、能量守恒；ρ∝a^[-3(1+w)]。密度比映射至画面尺寸的指数0.12为美术参数",
+      "code": [
+        "heatdeath.html:vs-entropy"
+      ]
+    },
+    "S12": {
+      "title": "Morris, Thorne & Yurtsever: Wormholes, time machines, and the weak energy condition (1988)",
+      "url": "https://authors.library.caltech.edu/records/m644f-tbz27",
+      "kind": "理论论文",
+      "year": 1988,
+      "doi": "10.1103/PhysRevLett.61.1446",
+      "units": "理论几何",
+      "conditions": "关于理论可穿越虫洞、弱能量条件和因果问题；未观测到可穿越虫洞。",
+      "code": [
+        "experience.js",
+        "assets/diagrams/wormhole-section.svg"
+      ]
+    }
+  },
+  "chapters": {
+    "index": {
+      "name": "黑洞引力透镜",
+      "facts": [
+        "事件视界望远镜研究人马座 A* 与 M87* 附近的辐射结构。[S1]",
+        "英仙座气体压力波的原始频率远低于人耳听阈；NASA 的可听声化经过频率转换。[S2]"
+      ],
+      "model": "经验偏折与程序生成吸积盘。几何读数采用克尔黑洞理论中的事件视界和顺行赤道光子轨道公式，显示画面采用归一化尺度；其余视觉系数为演示设定。[S9]",
+      "sound": "54、108、162 Hz 振荡器与啁啾声是本项目的合成音效，未导入官方音轨。",
+      "sources": [
+        "S1",
+        "S2",
+        "S9",
+        "S10"
+      ]
+    },
+    "bigbang": {
+      "name": "早期宇宙与微波背景",
+      "facts": [
+        "宇宙微波背景是早期宇宙留下的辐射，ESA 的 Planck 任务对其进行了测量。[S3]"
+      ],
+      "model": "粒子从团聚到弥散的阶段插值和程序化冷热色斑；没有导入 CMB 全天图、角功率谱或真实星系目录。纪元数值和时间标签是概念性阶段预设。",
+      "sound": "振荡器音高随演示纪元下降，属于概念性音效，不是对重子声学振荡数据的重建。",
+      "sources": [
+        "S3"
+      ]
+    },
+    "cosmicweb": {
+      "name": "宇宙网与暗物质",
+      "facts": [
+        "子弹星系团的热气体与透镜推断的质量分布发生分离，是研究暗物质的重要观测证据。[S4]"
+      ],
+      "model": "固定种子的程序节点和纤维；暗物质势、气体滞后与透镜强度控制不同的示意效果，没有求解引力 N 体运动或质量重建。",
+      "sound": "扫描可见程序节点；屏幕横坐标映射扫描时刻和声相，纵坐标映射五声音阶，节点显示强度映射响度。",
+      "sources": [
+        "S4"
+      ]
+    },
+    "stellar": {
+      "name": "恒星演化",
+      "facts": [
+        "NGC 3324 的气体空腔受到年轻恒星辐射和恒星风塑造。[S5]",
+        "蟹状星云脉冲星每秒自转约 30 次。[S6]"
+      ],
+      "model": "不同天体视觉特征的阶段式拼接。质量只缩放示意尺寸；它不会选择真实恒星演化轨迹或确定遗迹类型。阶段读数均为演示预设。",
+      "sound": "自转频率控制 AudioContext 时间轴上的脉冲间隔；画面将旋转速度放慢以便观察，不是实际射电波形。",
+      "sources": [
+        "S5",
+        "S6"
+      ]
+    },
+    "wormhole": {
+      "name": "假想虫洞",
+      "facts": [
+        "Morris–Thorne 论文讨论了一类可穿越虫洞的几何与物质条件；它是理论模型。[S7]"
+      ],
+      "model": "经验偏折与两套程序生成天球的切换；喉部半径和张力是视觉参数，未积分四维测地线。所谓保真度控制颜色饱和度，不计算量子纠缠。",
+      "sound": "两种低频振荡与穿越扫频是空间氛围音效。",
+      "sources": [
+        "S7",
+        "S12"
+      ]
+    },
+    "heatdeath": {
+      "name": "宇宙终局假设",
+      "facts": [
+        "观测表明宇宙膨胀正在加速，但暗能量的基本性质仍有开放问题。[S8]"
+      ],
+      "model": "常数 w 且暗能量主导时，w 小于 −1/3 对应加速。密度比 rho(a)/rho(1)=a^[−3(1+w)] 在 a=2 处映射为视觉尺度。霍金系数调整示意余辉；质子衰变和重生只是假设情景。",
+      "sound": "低音、扫频和重生和弦由振荡器合成。重生动画不代表已观测或必然发生的宇宙事件。",
+      "sources": [
+        "S8",
+        "S11"
+      ]
+    }
+  },
+  "claims": [
+    {
+      "id": "K1",
+      "page": "index",
+      "claim": "r+=rg(1+sqrt(1-a*²)); rph=2rg[1+cos(2acos(-a*)/3)]",
+      "source": [
+        "S9",
+        "S10"
+      ],
+      "scope": "克尔坐标半径，顺行赤道；rg=GM/c²"
+    },
+    {
+      "id": "K2",
+      "page": "index",
+      "claim": "赤道能层坐标厚度2rg-r+；引力时间单位GM/c³",
+      "source": [
+        "S9",
+        "S10"
+      ],
+      "scope": "坐标差而非测地线固有距离；不是视界处观察者的时钟读数"
+    },
+    {
+      "id": "K3",
+      "page": "heatdeath",
+      "claim": "暗能量主导、常数w时，w<-1/3加速；ρ(a)/ρ(1)=a^[-3(1+w)]",
+      "source": [
+        "S11"
+      ],
+      "scope": "仅取a=2的密度比，未积分尺度因子或计算终局"
+    },
+    {
+      "id": "K4",
+      "page": "stellar",
+      "claim": "蟹状星云脉冲星约30Hz",
+      "source": [
+        "S6"
+      ],
+      "scope": "用户设置5—60Hz是教学范围，不是对当前自转频率的测量"
+    },
+    {
+      "id": "P1",
+      "page": "bigbang/stellar/heatdeath/cosmicweb",
+      "claim": "阶段HUD全部为演示预设",
+      "source": [],
+      "scope": "temperature/age/pressure/magnetic field/entropy/mass等数值未数据标定，不作为观测测量或演化输出"
+    },
+    {
+      "id": "A1",
+      "page": "all",
+      "claim": "声化为Web Audio合成",
+      "source": [],
+      "scope": "音高、包络、旋转和扫描系数由本项目定义，不声称官方数据声化复现"
+    }
+  ]
+}

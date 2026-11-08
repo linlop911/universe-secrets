@@ -1,0 +1,138 @@
+{
+  "date": "2026-11-07",
+  "passed": true,
+  "recordings": [
+    {
+      "page": "index",
+      "path": "output/tours/index.mp4",
+      "audio": "output/tours/index-audio.webm",
+      "frames": 1113,
+      "duration": 44.35650610923767,
+      "bytes": 5115316,
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "quality": "medium",
+      "capture": "Actual CDP page screencast with timestamps, 15 fps export; recorded synthesized audio",
+      "guideStatus": {
+        "chapter": "index",
+        "status": "complete",
+        "time": 44,
+        "step": 5,
+        "duration": 44,
+        "selectedAsset": 0
+      }
+    },
+    {
+      "page": "bigbang",
+      "path": "output/tours/bigbang.mp4",
+      "audio": "output/tours/bigbang-audio.webm",
+      "frames": 1117,
+      "duration": 44.392768144607544,
+      "bytes": 16523748,
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "quality": "medium",
+      "capture": "Actual CDP page screencast with timestamps, 15 fps export; recorded synthesized audio",
+      "guideStatus": {
+        "chapter": "bigbang",
+        "status": "complete",
+        "time": 44,
+        "step": 5,
+        "duration": 44,
+        "selectedAsset": 0
+      }
+    },
+    {
+      "page": "cosmicweb",
+      "path": "output/tours/cosmicweb.mp4",
+      "audio": "output/tours/cosmicweb-audio.webm",
+      "frames": 1112,
+      "duration": 44.410966873168945,
+      "bytes": 20507633,
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "quality": "medium",
+      "capture": "Actual CDP page screencast with timestamps, 15 fps export; recorded synthesized audio",
+      "guideStatus": {
+        "chapter": "cosmicweb",
+        "status": "complete",
+        "time": 44,
+        "step": 5,
+        "duration": 44,
+        "selectedAsset": 0
+      }
+    },
+    {
+      "page": "stellar",
+      "path": "output/tours/stellar.mp4",
+      "audio": "output/tours/stellar-audio.webm",
+      "frames": 1119,
+      "duration": 44.33224701881409,
+      "bytes": 11282297,
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "quality": "medium",
+      "capture": "Actual CDP page screencast with timestamps, 15 fps export; recorded synthesized audio",
+      "guideStatus": {
+        "chapter": "stellar",
+        "status": "complete",
+        "time": 44,
+        "step": 5,
+        "duration": 44,
+        "selectedAsset": 0
+      }
+    },
+    {
+      "page": "wormhole",
+      "path": "output/tours/wormhole.mp4",
+      "audio": "output/tours/wormhole-audio.webm",
+      "frames": 1111,
+      "duration": 44.271645069122314,
+      "bytes": 6894930,
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "quality": "medium",
+      "capture": "Actual CDP page screencast with timestamps, 15 fps export; recorded synthesized audio",
+      "guideStatus": {
+        "chapter": "wormhole",
+        "status": "complete",
+        "time": 44,
+        "step": 5,
+        "duration": 44,
+        "selectedAsset": 0
+      }
+    },
+    {
+      "page": "heatdeath",
+      "path": "output/tours/heatdeath.mp4",
+      "audio": "output/tours/heatdeath-audio.webm",
+      "frames": 1116,
+      "duration": 44.38076996803284,
+      "bytes": 6008441,
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "quality": "medium",
+      "capture": "Actual CDP page screencast with timestamps, 15 fps export; recorded synthesized audio",
+      "guideStatus": {
+        "chapter": "heatdeath",
+        "status": "complete",
+        "time": 44,
+        "step": 5,
+        "duration": 44,
+        "selectedAsset": 0
+      }
+    }
+  ]
+}

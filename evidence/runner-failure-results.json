@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "fault": "browser",
+      "exit": 1,
+      "failed": 1,
+      "milliseconds": 227,
+      "leakedProfiles": 0
+    },
+    {
+      "fault": "navigation",
+      "exit": 1,
+      "failed": 1,
+      "milliseconds": 4026,
+      "leakedProfiles": 0
+    },
+    {
+      "fault": "shader",
+      "exit": 1,
+      "failed": 1,
+      "milliseconds": 4877,
+      "leakedProfiles": 0
+    },
+    {
+      "fault": "stale",
+      "exit": 1,
+      "failed": 2,
+      "milliseconds": 102,
+      "leakedProfiles": 0
+    }
+  ]
+}
